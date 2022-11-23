@@ -47,6 +47,7 @@ export default function Home() {
 
       <style jsx>{`
         header {
+          width: 100vw;
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -93,6 +94,7 @@ export default function Home() {
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
+          font-weight: bold;
         }
         main {
           padding: 5rem 0;
@@ -101,14 +103,19 @@ export default function Home() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          background: #333333;
+          color: #FFFFFF;
+          width: 100vw;
         }
         footer {
-          width: 100%;
+          width: 100vw;
           height: 100px;
           border-top: 1px solid #eaeaea;
           display: flex;
           justify-content: center;
           align-items: center;
+          background: #222222;
+          color: #FFFFFF;
         }
         footer img {
           margin-left: 0.5rem;
