@@ -35,6 +35,8 @@ async function main(){
         humi: 18.45,
       })
 
+      await deleteByHumi(client, 18.45);
+
       // Make the appropriate DB calls
       await  findall(client, "00000000000");
 
@@ -49,13 +51,20 @@ main().catch(console.error);
 
 //Post
 //to modify when actual mongo is created
-async function createOne(client, newListing)
- {
+async function createOne(client, newListing){
   const result = await client.db("ECPTEST").collection("test").insertOne(newListing)
 
   console.log(`New listing created with the following id: ${result.insertedId}`);
+ };
 
+ //Delete
+ //change function name and params + create new depending on type of delete
+ async function deleteByHumi(client, name){
+  const result = await client.db("ECPTEST").collection("test").deleteOne({humi: name});
+
+  console.log(`${result.deletedCount} document(s) were deleted.`)
  }
+
 async function listDatabases(client){
   databasesList = await client.db().admin().listDatabases();
 
@@ -69,7 +78,7 @@ async function findOne(client, listone){
  if(result) {
   console.log(`Found a listing in connection with the name '${listone}'`);
   console.log(result);
- }else{
+ } else {
   console.log("none");
  }
  };
@@ -80,11 +89,7 @@ async function findOne(client, listone){
   if(results) {
    console.log(`Found a listing in connection with the name '${listall}'`);
    console.log(results);
-  }else{
+  } else {
    console.log("none");
   }
-   
-   
   };
-   
- 
