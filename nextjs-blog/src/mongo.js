@@ -28,6 +28,13 @@ async function main(){
       // Connect to the MongoDB cluster
       await client.connect();
 
+      //try to create new listing
+      await createOne(client, { 
+        collection_id: "00000000000",
+        temp: 15.22,
+        humi: 18.45,
+      })
+
       // Make the appropriate DB calls
       await  findall(client, "00000000000");
 
@@ -40,6 +47,15 @@ async function main(){
 
 main().catch(console.error);
 
+//Post
+//to modify when actual mongo is created
+async function createOne(client, newListing)
+ {
+  const result = await client.db("ECPTEST").collection("test").insertOne(newListing)
+
+  console.log(`New listing created with the following id: ${result.insertedId}`);
+
+ }
 async function listDatabases(client){
   databasesList = await client.db().admin().listDatabases();
 
@@ -48,7 +64,7 @@ async function listDatabases(client){
 };
 
 async function findOne(client, listone){
- const result = await client.db("test").collection("roomQuality").findOne({ collection_id: listone });
+ const result = await client.db("ECPTEST").collection("test").findOne({ collection_id: listone });
 
  if(result) {
   console.log(`Found a listing in connection with the name '${listone}'`);
@@ -59,7 +75,7 @@ async function findOne(client, listone){
  };
   
  async function findall(client, listall){
-  const cursor = await client.db("test").collection("roomQuality").find({ collection_id: listall });
+  const cursor = await client.db("ECPTEST").collection("test").find({ collection_id: listall });
   const results = await cursor.toArray();
   if(results) {
    console.log(`Found a listing in connection with the name '${listall}'`);
