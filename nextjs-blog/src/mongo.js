@@ -34,15 +34,29 @@ async function main(){
         temp: 15.22,
         humi: 18.45,
       })
-
-      // Make the appropriate DB calls
-      await  findall(client, "00000000000");
-
-      await updateOne(client, { 
-        collection_id: "00000000000",
-        temp: 19.75,
-        humi: 20.45,
-      })
+                                                      //////////////
+                                                        //      //
+                                                        //      // 
+                                                        //      //
+                                                      //          //
+              ////////////////////////////////////////////////////////          
+            ///                                                       ///
+          ///                                                           ///
+        ///                                                               ///
+      ///                                                                   ///
+      /////////////////////////////////////////////////////////////////////////
+      // i wanna die and this project is really not doing anything           //
+      // why is this not working                                             //
+                                                                             //
+      // Make the appropriate DB calls                                       //
+      await  findall(client, "00000000000");                                 //
+                                                                             //
+      await updateOne(client, {                                              //
+        collection_id: "00000000000",                                        //
+        temp: 19.75,                                                         //
+        humi: 20.45,                                                         //
+      })                                                                     //
+      /////////////////////////////////////////////////////////////////////////
 
   } catch (e) {
       console.error(e);
