@@ -57,7 +57,7 @@ async function main(){
       //                                                                     //
       //                                                                     //
       //                                                                     //
-      //                                                                     //
+      //                                                                     // 
           await updateOne(client, {                                          //
            collection_id: "00000000000",                                     //
            temp: 19.75,                                                      //
@@ -84,13 +84,16 @@ async function createOne(client, newListing)
 
  }
 async function updateOne(client, listingUpdate){
+  //find existing record
   const result = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate });
 
  if(result) {
   console.log(`Found a listing in connection with the name '${listingUpdate}'`);
   console.log(result);
+  //update record
   client.db("ECPTEST").collection("test").updateOne({ collection_id: listingUpdate }, { $set: listingUpdate });
   console.log(`Listing updated`);
+  //get record with new values
   const newResult = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate });
   console.log(newResult);
  }else{
