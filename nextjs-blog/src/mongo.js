@@ -38,6 +38,12 @@ async function main(){
       // Make the appropriate DB calls
       await  findall(client, "00000000000");
 
+      await updateOne(client, { 
+        collection_id: "00000000000",
+        temp: 19.75,
+        humi: 20.45,
+      })
+
   } catch (e) {
       console.error(e);
   } finally {
@@ -56,6 +62,21 @@ async function createOne(client, newListing)
   console.log(`New listing created with the following id: ${result.insertedId}`);
 
  }
+async function updateOne(client, listingUpdate){
+  const result = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate });
+
+ if(result) {
+  console.log(`Found a listing in connection with the name '${listingUpdate}'`);
+  console.log(result);
+  client.db("ECPTEST").collection("test").updateOne({ collection_id: listingUpdate }, { $set: listingUpdate });
+  console.log(`Listing updated`);
+  const newResult = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate });
+  console.log(newResult);
+ }else{
+  console.log("No listing with matching id");
+ }
+}
+
 async function listDatabases(client){
   databasesList = await client.db().admin().listDatabases();
 
