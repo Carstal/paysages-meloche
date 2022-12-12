@@ -85,16 +85,16 @@ async function createOne(client, newListing)
  }
 async function updateOne(client, listingUpdate){
   //find existing record
-  const result = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate });
+  const result = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate.collection_id });
 
  if(result) {
   console.log(`Found a listing in connection with the name '${listingUpdate}'`);
   console.log(result);
   //update record
-  client.db("ECPTEST").collection("test").updateOne({ collection_id: listingUpdate }, { $set: listingUpdate });
+  client.db("ECPTEST").collection("test").updateOne({ collection_id: listingUpdate.collection_id }, { $set: listingUpdate });
   console.log(`Listing updated`);
   //get record with new values
-  const newResult = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate });
+  const newResult = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate.collection_id });
   console.log(newResult);
  }else{
   console.log("No listing with matching id");
