@@ -34,11 +34,37 @@ async function main(){
         temp: 15.22,
         humi: 18.45,
       })
+                                                      //////////////
+                                                        //      //
+                                                        //      // 
+                                                        //      //
+                                                      //          //
+              ////////////////////////////////////////////////////////          
+            ///                                                       ///
+          ///                                                           ///
+        ///                                                               ///
+      ///                                                                   ///
+      /////////////////////////////////////////////////////////////////////////
+      // i wanna die and this project is really not doing anything           //
+      // why is this not working                                             //
+      //                                                                     //
+      // Make the appropriate DB calls                                       //
+          await  findall(client, "00000000000");                             //
+      //                                                                     //
+      //                                                                     //
+      //                                                                     //
+      //                                                                     //
+      //                                                                     //
+      //                                                                     //
+      //                                                                     //
+      //                                                                     // 
+          await updateOne(client, {                                          //
+           collection_id: "00000000000",                                     //
+           temp: 19.75,                                                      //
+           humi: 20.45,                                                      //
+          })                                                                 //
+      /////////////////////////////////////////////////////////////////////////
 
-      await deleteByHumi(client, 18.45);
-
-      // Make the appropriate DB calls
-      await  findall(client, "00000000000");
 
   } catch (e) {
       console.error(e);
@@ -64,6 +90,23 @@ async function createOne(client, newListing){
 
   console.log(`${result.deletedCount} document(s) were deleted.`)
  }
+async function updateOne(client, listingUpdate){
+  //find existing record
+  const result = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate.collection_id });
+
+ if(result) {
+  console.log(`Found a listing in connection with the name '${listingUpdate}'`);
+  console.log(result);
+  //update record
+  client.db("ECPTEST").collection("test").updateOne({ collection_id: listingUpdate.collection_id }, { $set: listingUpdate });
+  console.log(`Listing updated`);
+  //get record with new values
+  const newResult = await client.db("ECPTEST").collection("test").findOne({ collection_id: listingUpdate.collection_id });
+  console.log(newResult);
+ }else{
+  console.log("No listing with matching id");
+ }
+}
 
 async function listDatabases(client){
   databasesList = await client.db().admin().listDatabases();
