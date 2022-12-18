@@ -39,7 +39,55 @@ export default function Home() {
         </p> */}
 
         <div id="calendar">
-          
+          <div id="month"></div>
+          <div id="weekdays"></div>
+          <div id="days">
+            <div class="week1">
+              <div id="1"></div>
+              <div id="2"></div>
+              <div id="3"></div>
+              <div id="4"></div>
+              <div id="5"></div>
+              <div id="6"></div>
+              <div id="7"></div>
+            </div>
+            <div class="week2">
+              <div id="8"></div>
+              <div id="9"></div>
+              <div id="10"></div>
+              <div id="11"></div>
+              <div id="12"></div>
+              <div id="13"></div>
+              <div id="14"></div>
+            </div>
+            <div class="week3">
+              <div id="15"></div>
+              <div id="16"></div>
+              <div id="17"></div>
+              <div id="18"></div>
+              <div id="19"></div>
+              <div id="20"></div>
+              <div id="21"></div>
+            </div>
+            <div class="week4">
+              <div id="22"></div>
+              <div id="23"></div>
+              <div id="24"></div>
+              <div id="25"></div>
+              <div id="26"></div>
+              <div id="27"></div>
+              <div id="28"></div>
+            </div>
+            <div class="week5">
+              <div id="29"></div>
+              <div id="30"></div>
+              <div id="31"></div>
+              <div id="32"></div>
+              <div id="33"></div>
+              <div id="34"></div>
+              <div id="35"></div>
+            </div>
+          </div>
         </div>
       </main>
 
