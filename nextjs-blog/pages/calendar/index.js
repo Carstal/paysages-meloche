@@ -30,62 +30,71 @@ export default function Home() {
         </div>
       </header>
       <main>
-        <h1 className={styles.title}>
-          Paysages Meloche
-        </h1>
+        <h2 className={styles.title}>
+          Master Calendar
+        </h2>
 
-        {/* <p className={styles.description}>
-          Currently Under Maintenance
-        </p> */}
 
         <div id="calendar">
-          <div id="month"></div>
-          <div id="weekdays"></div>
+          <div id="month">
+            <button value="Back" />
+            <h3>Month / 9999</h3>
+            <button value="forward"/>
+          </div>
+          <div id="weekdays">
+            <div className="weekday">Sunday</div>
+            <div className="weekday">Monday</div>
+            <div className="weekday">Tuesday</div>
+            <div className="weekday">Wednesday</div>
+            <div className="weekday">Thursday</div>
+            <div className="weekday">Friday</div>
+            <div className="weekday">Saturday</div>
+          </div>
           <div id="days">
-            <div class="week1">
-              <div id="1"></div>
-              <div id="2"></div>
-              <div id="3"></div>
-              <div id="4"></div>
-              <div id="5"></div>
-              <div id="6"></div>
-              <div id="7"></div>
+            <div className="week">
+              <div className="day">1</div>
+              <div className="day">2</div>
+              <div className="day">3</div>
+              <div className="day">4</div>
+              <div className="day">5</div>
+              <div className="day">6</div>
+              <div className="day">7</div>
             </div>
-            <div class="week2">
-              <div id="8"></div>
-              <div id="9"></div>
-              <div id="10"></div>
-              <div id="11"></div>
-              <div id="12"></div>
-              <div id="13"></div>
-              <div id="14"></div>
+            <div className="week">
+              <div className="day">8</div>
+              <div className="day">9</div>
+              <div className="day">10</div>
+              <div className="day">11</div>
+              <div className="day">12</div>
+              <div className="day">13</div>
+              <div className="day">14</div>
             </div>
-            <div class="week3">
-              <div id="15"></div>
-              <div id="16"></div>
-              <div id="17"></div>
-              <div id="18"></div>
-              <div id="19"></div>
-              <div id="20"></div>
-              <div id="21"></div>
+            <div className="week">
+              <div className="day">15</div>
+              <div className="day">16</div>
+              <div className="day">17</div>
+              <div className="day">18</div>
+              <div className="day">19</div>
+              <div className="day">20</div>
+              <div className="day">21</div>
             </div>
-            <div class="week4">
-              <div id="22"></div>
-              <div id="23"></div>
-              <div id="24"></div>
-              <div id="25"></div>
-              <div id="26"></div>
-              <div id="27"></div>
-              <div id="28"></div>
+            <div className="week">
+              <div className="day">22</div>
+              <div className="day">23</div>
+              <div className="day">24</div>
+              <div className="day">25</div>
+              <div className="day">26</div>
+              <div className="day">27</div>
+              <div className="day">28</div>
             </div>
-            <div class="week5">
-              <div id="29"></div>
-              <div id="30"></div>
-              <div id="31"></div>
-              <div id="32"></div>
-              <div id="33"></div>
-              <div id="34"></div>
-              <div id="35"></div>
+            <div className="week">
+              <div className="day">29</div>
+              <div className="day">30</div>
+              <div className="day">31</div>
+              <div className="day">32</div>
+              <div className="day">33</div>
+              <div className="day">34</div>
+              <div className="day">35</div>
             </div>
           </div>
         </div>
@@ -113,14 +122,14 @@ export default function Home() {
           align-items: center;
           margin: auto;
         }
-        .services div {
+        .services div{
           display: flex;
           justify-content: center;
           width: 18vw;
           cursor: 'pointer';
         }
-        .services div :hover {
-          background-colour: red;
+        .services div :hover{
+          background-color: red;
         }
         .logo{
           display: flex;
@@ -136,6 +145,36 @@ export default function Home() {
           display: flex;
           justify-content: center;
           width: 60vw;
+        }
+        #month{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
+        #month button{
+          width: 75px;
+          height: 50px;
+        }
+        #days{
+          display: flex;
+          flex-direction: column;
+        }
+        .week{
+          display: flex;
+          flex-direction: row;
+
+        }
+        .day{
+          display: flex;
+          width: 10vw;
+        }
+        #weekdays{
+          display: flex;
+          flex-direction: row;
+        }
+        .weekday{
+          display: flex;
+          width: 10vw;
         }
         .login button{
           height: 7vh;
