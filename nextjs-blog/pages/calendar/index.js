@@ -34,9 +34,13 @@ export default function Home() {
           Paysages Meloche
         </h1>
 
-        <p className={styles.description}>
+        {/* <p className={styles.description}>
           Currently Under Maintenance
-        </p>
+        </p> */}
+
+        <div id="calendar">
+          
+        </div>
       </main>
 
       <footer>
@@ -154,9 +158,9 @@ export default function Home() {
   )
 }
 
-export async function getServerSideProps(){
-  const req = await fetch("");
-  const data = await req.json;
+// export async function getServerSideProps(){
+//   const req = await fetch("");
+//   const data = await req.json;
 
-  return props:{"":""};
-}
+//   return props:{"":""};
+// }
