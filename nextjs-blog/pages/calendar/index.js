@@ -37,9 +37,9 @@ export default function Home() {
 
         <div id="calendar">
           <div id="month">
-            <button value="Back" />
+            <button name="Back" value="Back">Back</button>
             <h3>Month / 9999</h3>
-            <button value="forward"/>
+            <button name="forward" value="forward">Forward</button>
           </div>
           <div id="weekdays">
             <div className="weekday">Sunday</div>
@@ -146,10 +146,14 @@ export default function Home() {
           justify-content: center;
           width: 60vw;
         }
+        #calendar{
+          background-color: #D9D9D9;
+        }
         #month{
           display: flex;
           flex-direction: row;
           justify-content: center;
+          background-color: #333333;
         }
         #month button{
           width: 75px;
@@ -162,11 +166,13 @@ export default function Home() {
         .week{
           display: flex;
           flex-direction: row;
-
         }
         .day{
           display: flex;
           width: 10vw;
+          height:10vh;
+          color: #000000;
+          border: solid 1px #555555;
         }
         #weekdays{
           display: flex;
@@ -175,6 +181,9 @@ export default function Home() {
         .weekday{
           display: flex;
           width: 10vw;
+          height: 5vh;
+          color:#000000;
+          border: solid 1px #555555;
         }
         .login button{
           height: 7vh;
