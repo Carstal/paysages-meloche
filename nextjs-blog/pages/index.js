@@ -1,66 +1,107 @@
+import { useUser } from '@auth0/nextjs-auth0/client';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
+import Profile from './profile';
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <header>
+        <div className='logo'>
+          <h2>Paysages Meloche</h2>
+        </div>
+        <div className='services'>
+          <div id='paysagement'>
+            <h3>Paysagement</h3>
+          </div>
+          <div id='pelouse'>
+            <h3>Pelouse</h3>
+          </div>
+          <div id='deneigement'>
+            <h3>Deneigement</h3>
+          </div>
+        </div>
+        {Profile()}
 
+        {/* <div className='login'>
+        <a href="/api/auth/login">Login</a>
+        </div>
+        <div>
+        <a href="/api/auth/logout">Logout</a>
+        </div> */}
+
+      </header>
       <main>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Paysages Meloche
         </h1>
 
         <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
+          Currently Under Maintenance
         </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
+        <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
+        <br />
+        Champlain College ECP Final Project 2022-2023</p>
       </footer>
 
       <style jsx>{`
+        header {
+          width: 100vw;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          background: #222222;
+          color: #FFFFFF;
+        }
+        .services {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: auto;
+        }
+        .services div {
+          display: flex;
+          justify-content: center;
+          width: 18vw;
+          cursor: 'pointer';
+        }
+        .services div :hover {
+          background-colour: red;
+        }
+        .logo{
+          display: flex;
+          justify-content: center;
+          width: 15vw;
+        }
+        .login{
+          display: flex;
+          justify-content: center;
+          width: 15vw;
+        }
+        .services{
+          display: flex;
+          justify-content: center;
+          width: 60vw;
+        }
+        .login button{
+          height: 7vh;
+          width: 10vw;
+          background: #00B45D;
+          border-radius: 40px;
+          color: #FFFFFF;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+          font-weight: bold;
+        }
         main {
           padding: 5rem 0;
           flex: 1;
@@ -68,19 +109,24 @@ export default function Home() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          background: #333333;
+          color: #FFFFFF;
+          width: 100vw;
         }
         footer {
-          width: 100%;
+          width: 100vw;
           height: 100px;
           border-top: 1px solid #eaeaea;
           display: flex;
           justify-content: center;
           align-items: center;
+          background: #222222;
+          color: #FFFFFF;
         }
         footer img {
           margin-left: 0.5rem;
         }
-        footer a {
+        footer p {
           display: flex;
           justify-content: center;
           align-items: center;
