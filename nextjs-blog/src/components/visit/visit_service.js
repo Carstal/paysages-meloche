@@ -10,7 +10,7 @@
 //   client.close();
 // });
 
-import Visit from "visit.js";
+//import Visit from './visit.js';
 
 const { MongoClient } = require("mongodb");
 
@@ -19,6 +19,9 @@ async function main() {
    * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
    * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
    */
+
+  const Visit = require("./Visit");
+
   const uri =
     "mongodb+srv://Mohaned:0000@cluster0.gvkvlw9.mongodb.net/?retryWrites=true&w=majority";
   const mongouri =
@@ -32,18 +35,12 @@ async function main() {
     await client.connect();
 
     //try to create new visit
-    await createOne(client);
+    const visitOne = new Visit(5,3,[23,43,54], new Date("2023-03-12"), new Date("2023-03-20"));
+    //await createOne(client);
+    await createOne(client, visitOne);
 
-    //     collection_id: "00000000000",
-    //     temp: 15.22,
-    //     humi: 18.45,
-    // });
-    // await  findall(client, "00000000000");
-    // await updateOne(client, {
-    //     collection_id: "00000000000",
-    //     temp: 19.75,
-    //     humi: 20.45,
-    // });
+    // await  findall(client, 3);
+    // await updateOne(client, visitOne);
   } catch (e) {
     console.error(e);
   } finally {
@@ -55,25 +52,20 @@ main().catch(console.error);
 
 //Post
 //to modify when actual mongo is created
-async function createOne(client) {
+async function createOne(client, vis) {
   // async function createOne(client, data){
-  const newVisit = Visit(
-    4,
-    4,
-    [12, 21, 32, 43],
-    new Date("2015-03-25"),
-    new Date("2015-03-25")
-  );
+  //const newVisit = new Visit(4,4,[12, 21, 32, 43],new Date("2015-03-25"),new Date("2015-03-25"));
+  console.log(vis.visit_id);
   const data = {
-    visit_id: newVisit.visit_id,
-    project_id: newVisit.project_id,
-    employee_ids: newVisit.employee_ids,
-    start_date: newVisit.start_date,
-    end_date: newVisit.end_date,
+    visit_id: vis.visit_id,
+    project_id: vis.project_id,
+    employee_ids: vis.employee_ids,
+    start_date: vis.start_date,
+    end_date: vis.end_date
   };
 
   const result = await client
-    .db("ECP-CalendarDummy ")
+    .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
     .insertOne(data);
 
@@ -146,16 +138,16 @@ async function listDatabases(client) {
 //   }
 // }
 
-// async function findall(client, listall) {
-//   const cursor = await client
-//     .db("ECP-CalendarDummy ")
-//     .collection("dummy-calendar")
-//     .find({ collection_id: listall });
-//   const results = await cursor.toArray();
-//   if (results) {
-//     console.log(`Found a listing in connection with the name '${listall}'`);
-//     console.log(results);
-//   } else {
-//     console.log("none");
-//   }
-// }
+async function getAllVisits(client) {
+  const cursor = await client
+    .db("ECP-CalendarDummy ")
+    .collection("dummy-calendar")
+    .find({ collection_id: listall });
+  const results = await cursor.toArray();
+  if (results) {
+    console.log(`Found a listing in connection with the name '${listall}'`);
+    console.log(results);
+  } else {
+    console.log("none");
+  }
+}

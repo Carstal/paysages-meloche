@@ -10,3 +10,5 @@ class Visit{
         this.end_date = end_date;
     }
 }
+
+module.exports = Visit;
