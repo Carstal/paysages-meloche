@@ -180,6 +180,19 @@ export default function Home() {
           height:15vh;
           color: #000000;
           border: solid 1px #555555;
+          justify-content: center;
+          align-items: center;
+        }
+        .visit{
+          display: flex;
+          flex-direction: column;
+          background-color: #00B45D;
+          width: 90%;
+          height: auto;
+          border-radius: 5px;
+          font-size: .8em;
+          font-weight: bold;
+          justify-content: start;
         }
         #weekdays{
           display: flex;
