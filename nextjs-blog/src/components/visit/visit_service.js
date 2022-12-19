@@ -10,8 +10,6 @@
 //   client.close();
 // });
 
-//import Visit from './visit.js';
-
 const { MongoClient } = require("mongodb");
 
 async function main() {
@@ -43,7 +41,7 @@ async function main() {
       new Date("2023-03-20")
     );
 
-    console.log(getNewVisitID(client));
+    // console.log(getNewVisitID(client));
     // await addVisit(client, visitOne);
     // await getAllVisits(client);
     // await getVisitByVisitId(client, visitOne.visit_id);
@@ -64,7 +62,8 @@ async function addVisit(client, vis) {
   //const newVisit = new Visit(4,4,[12, 21, 32, 43],new Date("2015-03-25"),new Date("2015-03-25"));
   // console.log(vis.visit_id);
   const data = {
-    visit_id: getNewVisitID(client),
+    // visit_id: getNewVisitID(client),
+    visit_id: vis.visit_id,
     project_id: vis.project_id,
     employee_ids: vis.employee_ids,
     start_date: vis.start_date,
@@ -167,25 +166,25 @@ async function getAllVisits(client) {
 }
 
 //Get greatest visit id and increment for new inserted visit
-async function getNewVisitID(client){
-  const cursor = await client
-  .db("ECP-CalendarDummy")
-  .collection("dummy-calendar")
-  .aggregate([
-    {
-      '$sort': {
-        'visit_id': -1
-      }
-    }
-  ]);
+// async function getNewVisitID(client){
+//   const cursor = await client
+//   .db("ECP-CalendarDummy")
+//   .collection("dummy-calendar")
+//   .aggregate([
+//     {
+//       '$sort': {
+//         'visit_id': -1
+//       }
+//     }
+//   ]);
 
-  const resultsArr = await cursor.toArray();
-  const result = resultsArr[0];
-  if (result) {
-    console.log(`Found a listing in connection with greatest visit id: '${result}'`);
-    console.log(result);
-  } else {
-    console.log("none");
-    return ("error");
-  }
-}
+//   const resultsArr = await cursor.toArray();
+//   const result = resultsArr[0];
+//   if (result) {
+//     console.log(`Found a listing in connection with greatest visit id: '${result}'`);
+//     console.log(result);
+//   } else {
+//     console.log("none");
+//     return ("error");
+//   }
+// }

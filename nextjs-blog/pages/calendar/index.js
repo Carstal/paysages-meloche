@@ -200,10 +200,13 @@ export default function Home() {
         }
         .weekday{
           display: flex;
-          width: 10vw;
+          width: 13vw;
           height: 5vh;
           color:#000000;
           border: solid 1px #555555;
+          font-weight: bold;
+          justify-content: center;
+          align-items: center;
         }
         .login button{
           height: 7vh;
