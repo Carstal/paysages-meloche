@@ -35,11 +35,12 @@ async function main() {
     await client.connect();
 
     //try to create new visit
-    // const visitOne = new Visit(5,3,[23,43,54], new Date("2023-03-12"), new Date("2023-03-20"));
+    const visitOne = new Visit(5,3,[23,43,54], new Date("2023-03-12"), new Date("2023-03-20"));
     //await createOne(client);
     // await createOne(client, visitOne);
 
-    await  getAllVisits(client);
+    // await  getAllVisits(client);
+    await getVisitById(client, visitOne.visit_id);
     // await updateOne(client, visitOne);
   } catch (e) {
     console.error(e);
@@ -124,19 +125,19 @@ async function listDatabases(client) {
   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
 }
 
-// async function findOne(client, listone) {
-//   const result = await client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .findOne({ collection_id: listone });
+async function getVisitById(client, id) {
+  const result = await client
+    .db("ECP-CalendarDummy")
+    .collection("dummy-calendar")
+    .findOne({ visit_id: id });
 
-//   if (result) {
-//     console.log(`Found a listing in connection with the name '${listone}'`);
-//     console.log(result);
-//   } else {
-//     console.log("none");
-//   }
-// }
+  if (result) {
+    console.log(`Found a listing in connection with the id: '${id}'`);
+    console.log(result);
+  } else {
+    console.log("none");
+  }
+}
 
 async function getAllVisits(client) {
   const cursor = await client
