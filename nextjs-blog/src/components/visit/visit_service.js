@@ -58,12 +58,14 @@ main().catch(console.error);
 async function createOne(client) {
   // async function createOne(client, data){
   const newVisit = Visit(
-    "639fa87e22fbb9582bbb4155",
+    4,
+    4,
     [12, 21, 32, 43],
     new Date("2015-03-25"),
     new Date("2015-03-25")
   );
   const data = {
+    visit_id: newVisit.visit_id,
     project_id: newVisit.project_id,
     employee_ids: newVisit.employee_ids,
     start_date: newVisit.start_date,
