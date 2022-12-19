@@ -7,6 +7,13 @@
   align-items: center;
 }
 
+.profile {
+  border-radius:50%;
+  width:20%;
+  float:left;
+  margin-right: 10px;
+}
+
 .title a {
   color: #0070f3;
   text-decoration: none;
@@ -88,4 +95,22 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.loginbutton{
+  height: 7vh;
+  width: 10vw;
+  background: #00B45D;
+  border-radius: 40px;
+  color: #FFFFFF;
+}
+
+.loginbutton a {
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+  Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+  sans-serif;
+  font-weight: bold;
+  color: #FFFFFF;
+  font-size: medium;
 }
