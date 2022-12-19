@@ -26,14 +26,6 @@ export default function Home() {
           </div>
         </div>
         {Profile()}
-
-        {/* <div className='login'>
-        <a href="/api/auth/login">Login</a>
-        </div>
-        <div>
-        <a href="/api/auth/logout">Logout</a>
-        </div> */}
-
       </header>
       <main>
         <h1 className={styles.title}>
@@ -61,6 +53,7 @@ export default function Home() {
           background: #222222;
           color: #FFFFFF;
         }
+        
         .services {
           display: flex;
           flex-direction: row;
