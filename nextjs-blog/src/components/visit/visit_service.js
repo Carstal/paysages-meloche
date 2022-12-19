@@ -35,11 +35,11 @@ async function main() {
     await client.connect();
 
     //try to create new visit
-    const visitOne = new Visit(5,3,[23,43,54], new Date("2023-03-12"), new Date("2023-03-20"));
+    // const visitOne = new Visit(5,3,[23,43,54], new Date("2023-03-12"), new Date("2023-03-20"));
     //await createOne(client);
-    await createOne(client, visitOne);
+    // await createOne(client, visitOne);
 
-    // await  findall(client, 3);
+    await  getAllVisits(client);
     // await updateOne(client, visitOne);
   } catch (e) {
     console.error(e);
@@ -78,7 +78,7 @@ async function createOne(client, vis) {
 //change function name and params + create new depending on type of delete
 // async function deleteById(client, id) {
 //   const result = await client
-//     .db("ECP-CalendarDummy ")
+//     .db("ECP-CalendarDummy")
 //     .collection("dummy-calendar")
 //     .deleteOne({ "_id" : id });
 
@@ -88,7 +88,7 @@ async function createOne(client, vis) {
 // async function updateOne(client, listingUpdate) {
 //   //find existing record
 //   const result = await client
-//     .db("ECP-CalendarDummy ")
+//     .db("ECP-CalendarDummy")
 //     .collection("dummy-calendar")
 //     .findOne({ collection_id: listingUpdate.collection_id });
 
@@ -99,7 +99,7 @@ async function createOne(client, vis) {
 //     console.log(result);
 //     //update record
 //     client
-//       .db("ECP-CalendarDummy ")
+//       .db("ECP-CalendarDummy")
 //       .collection("dummy-calendar")
 //       .updateOne(
 //         { collection_id: listingUpdate.collection_id },
@@ -108,7 +108,7 @@ async function createOne(client, vis) {
 //     console.log(`Listing updated`);
 //     //get record with new values
 //     const newResult = await client
-//       .db("ECP-CalendarDummy ")
+//       .db("ECP-CalendarDummy")
 //       .collection("dummy-calendar")
 //       .findOne({ collection_id: listingUpdate.collection_id });
 //     console.log(newResult);
@@ -126,7 +126,7 @@ async function listDatabases(client) {
 
 // async function findOne(client, listone) {
 //   const result = await client
-//     .db("ECP-CalendarDummy ")
+//     .db("ECP-CalendarDummy")
 //     .collection("dummy-calendar")
 //     .findOne({ collection_id: listone });
 
@@ -140,14 +140,14 @@ async function listDatabases(client) {
 
 async function getAllVisits(client) {
   const cursor = await client
-    .db("ECP-CalendarDummy ")
+    .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
-    .find({ collection_id: listall });
+    .find();
   const results = await cursor.toArray();
   if (results) {
-    console.log(`Found a listing in connection with the name '${listall}'`);
+    console.log('Returning all listings in db');
     console.log(results);
   } else {
-    console.log("none");
+    console.log("No listings received");
   }
 }
