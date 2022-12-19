@@ -36,12 +36,12 @@ async function main() {
 
     //try to create new visit
     const visitOne = new Visit(5,3,[43,54], new Date("2023-03-12"), new Date("2023-03-20"));
-    //await createOne(client);
-    // await createOne(client, visitOne);
 
-    // await  getAllVisits(client);
+    // await createVisit(client, visitOne);
+    // await getAllVisits(client);
     // await getVisitById(client, visitOne.visit_id);
-    await updateVisit(client, visitOne);
+    // await updateVisit(client, visitOne);
+    await deleteVisitById(client, visitOne.visit_id);
   } catch (e) {
     console.error(e);
   } finally {
@@ -53,8 +53,7 @@ main().catch(console.error);
 
 //Post
 //to modify when actual mongo is created
-async function createOne(client, vis) {
-  // async function createOne(client, data){
+async function createVisit(client, vis) {
   //const newVisit = new Visit(4,4,[12, 21, 32, 43],new Date("2015-03-25"),new Date("2015-03-25"));
   console.log(vis.visit_id);
   const data = {
@@ -75,16 +74,15 @@ async function createOne(client, vis) {
   );
 }
 
-//Delete
-//change function name and params + create new depending on type of delete
-// async function deleteById(client, id) {
-//   const result = await client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .deleteOne({ "_id" : id });
+//Delete Visit
+async function deleteVisitById(client, id) {
+  const result = await client
+    .db("ECP-CalendarDummy")
+    .collection("dummy-calendar")
+    .deleteOne({ visit_id : id });
 
-//   console.log(`${result.deletedCount} document(s) were deleted.`);
-// }
+  console.log(`${result.deletedCount} document(s) has been deleted.`);
+}
 
 async function updateVisit(client, vis) {
   //find existing record
