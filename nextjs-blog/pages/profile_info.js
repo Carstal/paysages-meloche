@@ -50,7 +50,7 @@ export default function UserInfo() {
                         </div>
 
                         <div className="form-group mt-3">
-                            <button class={styles.submitbutton}>Submit</button>
+                            <button class={styles.submitbutton}>Update</button>
                         </div>
                     </form>
                 </div>
