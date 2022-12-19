@@ -39,9 +39,10 @@ async function main() {
 
     // await createVisit(client, visitOne);
     // await getAllVisits(client);
-    // await getVisitById(client, visitOne.visit_id);
+    // await getVisitByVisitId(client, visitOne.visit_id);
+    await getVisitsByProjectId(client, visitOne.project_id);
     // await updateVisit(client, visitOne);
-    await deleteVisitById(client, visitOne.visit_id);
+    // await deleteVisitById(client, visitOne.visit_id);
   } catch (e) {
     console.error(e);
   } finally {
@@ -74,7 +75,7 @@ async function createVisit(client, vis) {
   );
 }
 
-//Delete Visit
+//Delete Visit by ID
 async function deleteVisitById(client, id) {
   const result = await client
     .db("ECP-CalendarDummy")
@@ -84,6 +85,7 @@ async function deleteVisitById(client, id) {
   console.log(`${result.deletedCount} document(s) has been deleted.`);
 }
 
+//Update Visit
 async function updateVisit(client, vis) {
   //find existing record
   const result = await client
@@ -116,27 +118,39 @@ async function updateVisit(client, vis) {
   }
 }
 
-async function listDatabases(client) {
-  databasesList = await client.db().admin().listDatabases();
-
-  console.log("Databases:");
-  databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
-}
-
-async function getVisitById(client, id) {
+//Get Visit by visit_Id
+async function getVisitByVisitId(client, id) {
   const result = await client
     .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
     .findOne({ visit_id: id });
 
   if (result) {
-    console.log(`Found a listing in connection with the id: '${id}'`);
+    console.log(`Found a listing in connection with visit id: '${id}'`);
     console.log(result);
   } else {
     console.log("none");
   }
 }
 
+//Get Visits by project_id
+async function getVisitsByProjectId(client, id) {
+  const cursor = await client
+    .db("ECP-CalendarDummy")
+    .collection("dummy-calendar")
+    .find({ project_id: id });
+
+  const results = await cursor.toArray();
+
+  if (results) {
+    console.log(`Found listing(s) in connection with project id: '${id}'`);
+    console.log(results);
+  } else {
+    console.log("none");
+  }
+}
+
+//Get all Visits
 async function getAllVisits(client) {
   const cursor = await client
     .db("ECP-CalendarDummy")
