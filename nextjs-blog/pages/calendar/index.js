@@ -72,7 +72,14 @@ export default function Home() {
             <div className="week">
               <div className="day">15</div>
               <div className="day">16</div>
-              <div className="day">17</div>
+              <div className="day">
+                <div className='visit'>
+                  <div className='id'> Land-254</div>
+                  <div className='service'>Turf Install</div>
+                  <div className='clientName'>John Dover</div>
+                  <div className='address'>545 Fontainebleau Nord, Longueuil J4L 2W8</div>
+                </div>
+              </div>
               <div className="day">18</div>
               <div className="day">19</div>
               <div className="day">20</div>
@@ -169,8 +176,8 @@ export default function Home() {
         }
         .day{
           display: flex;
-          width: 10vw;
-          height:10vh;
+          width: 13vw;
+          height:15vh;
           color: #000000;
           border: solid 1px #555555;
         }
