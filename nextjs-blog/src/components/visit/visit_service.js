@@ -35,12 +35,19 @@ async function main() {
     await client.connect();
 
     //try to create new visit
-    const visitOne = new Visit(5,3,[43,54], new Date("2023-03-12"), new Date("2023-03-20"));
+    const visitOne = new Visit(
+      0,
+      3,
+      [99, 87, 31],
+      new Date("2023-03-12"),
+      new Date("2023-03-20")
+    );
 
-    // await createVisit(client, visitOne);
+    console.log(getNewVisitID(client));
+    // await addVisit(client, visitOne);
     // await getAllVisits(client);
     // await getVisitByVisitId(client, visitOne.visit_id);
-    await getVisitsByProjectId(client, visitOne.project_id);
+    // await getVisitsByProjectId(client, visitOne.project_id);
     // await updateVisit(client, visitOne);
     // await deleteVisitById(client, visitOne.visit_id);
   } catch (e) {
@@ -52,13 +59,12 @@ async function main() {
 
 main().catch(console.error);
 
-//Post
-//to modify when actual mongo is created
-async function createVisit(client, vis) {
+//Add Visit
+async function addVisit(client, vis) {
   //const newVisit = new Visit(4,4,[12, 21, 32, 43],new Date("2015-03-25"),new Date("2015-03-25"));
-  console.log(vis.visit_id);
+  // console.log(vis.visit_id);
   const data = {
-    visit_id: vis.visit_id,
+    visit_id: getNewVisitID(client),
     project_id: vis.project_id,
     employee_ids: vis.employee_ids,
     start_date: vis.start_date,
@@ -80,7 +86,7 @@ async function deleteVisitById(client, id) {
   const result = await client
     .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
-    .deleteOne({ visit_id : id });
+    .deleteOne({ visit_id: id });
 
   console.log(`${result.deletedCount} document(s) has been deleted.`);
 }
@@ -94,18 +100,13 @@ async function updateVisit(client, vis) {
     .findOne({ visit_id: vis.visit_id });
 
   if (result) {
-    console.log(
-      `Found a listing in connection with the id: '${vis.visit_id}'`
-    );
+    console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
     console.log(result);
     //update record
     client
       .db("ECP-CalendarDummy")
       .collection("dummy-calendar")
-      .updateOne(
-        { visit_id: vis.visit_id },
-        { $set: vis }
-      );
+      .updateOne({ visit_id: vis.visit_id }, { $set: vis });
     console.log(`Listing updated`);
     //get record with new values
     const newResult = await client
@@ -158,9 +159,33 @@ async function getAllVisits(client) {
     .find();
   const results = await cursor.toArray();
   if (results) {
-    console.log('Returning all listings in db');
+    console.log("Returning all listings in db");
     console.log(results);
   } else {
     console.log("No listings received");
+  }
+}
+
+//Get greatest visit id and increment for new inserted visit
+async function getNewVisitID(client){
+  const cursor = await client
+  .db("ECP-CalendarDummy")
+  .collection("dummy-calendar")
+  .aggregate([
+    {
+      '$sort': {
+        'visit_id': -1
+      }
+    }
+  ]);
+
+  const resultsArr = await cursor.toArray();
+  const result = resultsArr[0];
+  if (result) {
+    console.log(`Found a listing in connection with greatest visit id: '${result}'`);
+    console.log(result);
+  } else {
+    console.log("none");
+    return ("error");
   }
 }
