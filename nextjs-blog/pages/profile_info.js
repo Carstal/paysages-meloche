@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
 import Profile from './profile';
+import clientPromise from "../lib/mongodb";
 
-export default function UserInfo() {
+export default function UserInfo({ data }) {
     return (
         <div className={styles.container}>
         <Head>
@@ -36,17 +37,17 @@ export default function UserInfo() {
                     <form className="card-body">
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>First Name:</strong></label>
-                            <input type="text" className="form-control" />
+                            <input type="text" className="form-control" value={data.first_name}/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Last Name:</strong></label>
-                            <input type="text" className="form-control" />
+                            <input type="text" className="form-control" value={data.last_name}/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Phone Number:</strong></label>
-                            <input type="text" className="form-control" />
+                            <input type="text" className="form-control" value={data.phone_number}/>
                         </div>
 
                         <div className="form-group mt-3">
@@ -196,4 +197,23 @@ export default function UserInfo() {
       </style>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  try {
+    const client = await clientPromise;
+    const db = client.db("FinalProject");
+    //const { email } = req.query;
+
+    const post = await db.collection("Client").findOne({
+      email: "yanburton2003@gmail.com",
+    });
+    
+    return { props: { data: JSON.parse(JSON.stringify(post)) },
+  };
+
+  } catch (e) {
+    console.error(e);
+    throw new Error(e).message;
+  }
 }
