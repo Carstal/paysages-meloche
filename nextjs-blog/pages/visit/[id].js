@@ -28,33 +28,67 @@ export default function Home() {
         </div>
       </header>
       <main>
-        <h2 className={styles.title}>All Visits</h2>
-        
+        <h2 className={styles.title}>Visit Information</h2>
+
         <div className="container">
-                <div className="card mt-5">
-                    <form className="card-body" action="/api/form" method="POST">
-                    <input type="hidden" className="form-control" id="email" name="email"/>
-                        <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Employees:</strong></label>
-                            <input type="text" className="form-control" id="first_name" name="first_name"/>
-                        </div>
+          <div className="card mt-5">
+            <form className="card-body" action="/api/form" method="POST">
+              <input
+                type="hidden"
+                className="form-control"
+                id="visitId"
+                name="visitId"
+              />
+              <input
+                type="hidden"
+                className="form-control"
+                id="projectId"
+                name="projectId"
+              />
+              <div className="form-group mb-3">
+                <label className="mb-2">
+                  <strong>Employees:</strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="employees"
+                  name="employees"
+                />
+              </div>
 
-                        <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Start Date:</strong></label>
-                            <input type="text" className="form-control" id="last_name" name="last_name"/>
-                        </div>
+              <div className="form-group mb-3">
+                <label className="mb-2">
+                  <strong>Start Date:</strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="startDate"
+                  name="startDate"
+                />
+              </div>
 
-                        <div className="form-group mb-3">
-                            <label className="mb-2"><strong>End Date:</strong></label>
-                            <input type="text" className="form-control" id="phone_number" name="phone_number"/>
-                        </div>
+              <div className="form-group mb-3">
+                <label className="mb-2">
+                  <strong>End Date:</strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="endDate"
+                  name="endDate"
+                />
+              </div>
 
-                        <div className="form-group mt-3">
-                            <button type="submit" class={styles.submitbutton}>Update</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+              <div className="form-group mt-3">
+                <button type="submit" class={styles.submitbutton}>
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </main>
 
       <footer>
@@ -267,11 +301,11 @@ export default function Home() {
 // }
 
 // export async function getServerSideProps() {
-    //import { getVisits } from "../../src/components/visit/visit_controller"
-    // Fetch data from external API
-    //const res = await fetch(`https://.../data`)
-    //const data = await res.json()
+//import { getVisits } from "../../src/components/visit/visit_controller"
+// Fetch data from external API
+//const res = await fetch(`https://.../data`)
+//const data = await res.json()
 
-    // Pass data to the page via props
-    //return { props: { data } }
+// Pass data to the page via props
+//return { props: { data } }
 // }
