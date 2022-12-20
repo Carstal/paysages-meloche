@@ -1,66 +1,51 @@
 //Visit Service
 //Implements all CRUD Operations relating to visits to mongoDB
 
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://Mohaned:0000@cluster0.gvkvlw9.mongodb.net/?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-// client.connect(err => {
-//   const collection = client.db("dummy-calendar").collection("roomQuality");
-//   console.log("Connected Success");
-//   client.close();
-// });
-
 const { MongoClient } = require("mongodb");
+const Visit = require("./Visit");
 
-async function main() {
-  /**
-   * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
-   * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
-   */
+const uri =
+"mongodb+srv://Mohaned:0000@cluster0.gvkvlw9.mongodb.net/?retryWrites=true&w=majority";
+const mongouri =
+"mongodb+srv://carstaltari:Pablo__545@iot2-carlo.ijsiznf.mongodb.net/?retryWrites=true&w=majority";
 
-  const Visit = require("./Visit");
+//   const client = new MongoClient(uri);
+const client = new MongoClient(mongouri);
 
-  const uri =
-    "mongodb+srv://Mohaned:0000@cluster0.gvkvlw9.mongodb.net/?retryWrites=true&w=majority";
-  const mongouri =
-    "mongodb+srv://carstaltari:Pablo__545@iot2-carlo.ijsiznf.mongodb.net/?retryWrites=true&w=majority";
+// async function main() {
 
-  //   const client = new MongoClient(uri);
-  const client = new MongoClient(mongouri);
 
-  try {
-    // Connect to the MongoDB cluster
-    await client.connect();
+//   try {
+//     // Connect to the MongoDB cluster
+//     await client.connect();
 
-    //try to create new visit
-    const visitOne = new Visit(
-      0,
-      3,
-      [99, 87, 31],
-      new Date("2023-03-12"),
-      new Date("2023-03-20")
-    );
+//     //try to create new visit
+//     const visitOne = new Visit(
+//       20,
+//       14,
+//       [99, 87],
+//       new Date("2023-04-12"),
+//       new Date("2023-04-20")
+//     );
 
-    // console.log(getNewVisitID(client));
-    // await addVisit(client, visitOne);
-    // await getAllVisits(client);
-    // await getVisitByVisitId(client, visitOne.visit_id);
-    // await getVisitsByProjectId(client, visitOne.project_id);
-    // await updateVisit(client, visitOne);
-    // await deleteVisitById(client, visitOne.visit_id);
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await client.close();
-  }
-}
+//     // console.log(getNewVisitID(client));
+//     // await addVisit(client, visitOne);
+//     // await getAllVisits(client);
+//     // await getVisitByVisitId(client, visitOne.visit_id);
+//     // await getVisitsByProjectId(client, visitOne.project_id);
+//     // await updateVisit(client, visitOne);
+//     // await deleteVisitById(client, visitOne.visit_id);
+//   } catch (e) {
+//     console.error(e);
+//   } finally {
+//     await client.close();
+//   }
+// }
 
-main().catch(console.error);
+// main().catch(console.error);
 
 //Add Visit
-async function addVisit(client, vis) {
-  //const newVisit = new Visit(4,4,[12, 21, 32, 43],new Date("2015-03-25"),new Date("2015-03-25"));
-  // console.log(vis.visit_id);
+export function addVisit(vis) {
   const data = {
     // visit_id: getNewVisitID(client),
     visit_id: vis.visit_id,
@@ -70,7 +55,7 @@ async function addVisit(client, vis) {
     end_date: vis.end_date
   };
 
-  const result = await client
+  const result = client
     .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
     .insertOne(data);
@@ -78,22 +63,26 @@ async function addVisit(client, vis) {
   console.log(
     `New listing created with the following id: ${result.insertedId}`
   );
+
+  return result;
 }
 
 //Delete Visit by ID
-async function deleteVisitById(client, id) {
-  const result = await client
+export function deleteVisitById(id) {
+  const result = client
     .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
     .deleteOne({ visit_id: id });
 
   console.log(`${result.deletedCount} document(s) has been deleted.`);
+
+  return result;
 }
 
 //Update Visit
-async function updateVisit(client, vis) {
+export function updateVisit(vis) {
   //find existing record
-  const result = await client
+  const result = client
     .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
     .findOne({ visit_id: vis.visit_id });
@@ -108,19 +97,23 @@ async function updateVisit(client, vis) {
       .updateOne({ visit_id: vis.visit_id }, { $set: vis });
     console.log(`Listing updated`);
     //get record with new values
-    const newResult = await client
+    const newResult = client
       .db("ECP-CalendarDummy")
       .collection("dummy-calendar")
       .findOne({ visit_id: vis.visit_id });
     console.log(newResult);
+
+    return newResult;
   } else {
     console.log("No listing with matching id");
+
+    return null;
   }
 }
 
 //Get Visit by visit_Id
-async function getVisitByVisitId(client, id) {
-  const result = await client
+export function getVisitByVisitId(id) {
+  const result = client
     .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
     .findOne({ visit_id: id });
@@ -128,40 +121,52 @@ async function getVisitByVisitId(client, id) {
   if (result) {
     console.log(`Found a listing in connection with visit id: '${id}'`);
     console.log(result);
+
+    return result;
   } else {
     console.log("none");
+
+    return null;
   }
 }
 
 //Get Visits by project_id
-async function getVisitsByProjectId(client, id) {
-  const cursor = await client
+export function getVisitsByProjectId(id) {
+  const cursor = client
     .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
     .find({ project_id: id });
 
-  const results = await cursor.toArray();
+  const results = cursor.toArray();
 
   if (results) {
     console.log(`Found listing(s) in connection with project id: '${id}'`);
     console.log(results);
+
+    return results;
   } else {
     console.log("none");
+
+    return null;
   }
 }
 
 //Get all Visits
-async function getAllVisits(client) {
-  const cursor = await client
+export function getAllVisits() {
+  const cursor = client
     .db("ECP-CalendarDummy")
     .collection("dummy-calendar")
     .find();
-  const results = await cursor.toArray();
+  const results = cursor.toArray();
   if (results) {
     console.log("Returning all listings in db");
     console.log(results);
+
+    return results;
   } else {
     console.log("No listings received");
+
+    return null;
   }
 }
 
