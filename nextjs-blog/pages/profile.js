@@ -13,7 +13,9 @@ export default function Profile() {
     return (
       user && (
         <div>
-        <img class={styles.profile} src={user.picture} alt={user.name}/>
+        <a href="/profile_info">
+          <img class={styles.profile} src={user.picture} alt={user.name}/>
+        </a>
           <button class={styles.loginbutton}>
           <a href="/api/auth/logout">Logout</a>
           </button>    
