@@ -36,24 +36,25 @@ export default function UserInfo({ user, data }) {
           <br/>
           <div className="container">
                 <div className="card mt-5">
-                    <form className="card-body">
+                    <form className="card-body" action="/api/form" method="POST">
+                    <input type="text" className="form-control" value={data?.email} id="email" name="email" hidden/>
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>First Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.first_name}/>
+                            <input type="text" className="form-control" defaultValue={data?.first_name} id="first_name" name="first_name"/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Last Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.last_name}/>
+                            <input type="text" className="form-control" defaultValue={data?.last_name} id="last_name" name="last_name"/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Phone Number:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.phone_number}/>
+                            <input type="text" className="form-control" defaultValue={data?.phone_number} id="phone_number" name="phone_number"/>
                         </div>
 
                         <div className="form-group mt-3">
-                            <button class={styles.submitbutton}>Update</button>
+                            <button type="submit" class={styles.submitbutton}>Update</button>
                         </div>
                     </form>
                 </div>
