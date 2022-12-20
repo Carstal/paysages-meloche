@@ -45,6 +45,7 @@ const client = new MongoClient(mongouri);
 // main().catch(console.error);
 
 //Add Visit
+//TODO: addVisit(visit)
 export function addVisit(vis) {
   const data = {
     // visit_id: getNewVisitID(client),
@@ -68,6 +69,7 @@ export function addVisit(vis) {
 }
 
 //Delete Visit by ID
+//TODO: deleteVisitById(id)
 export function deleteVisitById(id) {
   const result = client
     .db("ECP-CalendarDummy")
@@ -80,6 +82,7 @@ export function deleteVisitById(id) {
 }
 
 //Update Visit
+//TODO: updateVisit(visit)
 export function updateVisit(vis) {
   //find existing record
   const result = client
@@ -112,6 +115,7 @@ export function updateVisit(vis) {
 }
 
 //Get Visit by visit_Id
+//TODO: getVisitByVisitId(id)
 export function getVisitByVisitId(id) {
   const result = client
     .db("ECP-CalendarDummy")
@@ -131,6 +135,7 @@ export function getVisitByVisitId(id) {
 }
 
 //Get Visits by project_id
+//TODO: getVisitsByProjectId(id)
 export function getVisitsByProjectId(id) {
   const cursor = client
     .db("ECP-CalendarDummy")
@@ -152,6 +157,7 @@ export function getVisitsByProjectId(id) {
 }
 
 //Get all Visits
+//TODO: getAllVisits()
 export function getAllVisits() {
   const cursor = client
     .db("ECP-CalendarDummy")
