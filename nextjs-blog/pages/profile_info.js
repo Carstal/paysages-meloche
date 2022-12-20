@@ -39,17 +39,17 @@ export default function UserInfo({ user, data }) {
                     <form className="card-body">
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>First Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data.first_name}/>
+                            <input type="text" className="form-control" defaultValue={data?.first_name}/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Last Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data.last_name}/>
+                            <input type="text" className="form-control" defaultValue={data?.last_name}/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Phone Number:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data.phone_number}/>
+                            <input type="text" className="form-control" defaultValue={data?.phone_number}/>
                         </div>
 
                         <div className="form-group mt-3">
@@ -206,12 +206,13 @@ export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(ctx) {
     const client = await clientPromise;
     const db = client.db("FinalProject");
+    const session = await getSession(ctx.req, ctx.res);
 
     const post = await db.collection("Client").findOne({
-      email: "yanburton2003@gmail.com"
+      email: session.user.name
     });
     // access the user session
-    const session = getSession(ctx.req, ctx.res);
+    
     return { props: { data: JSON.parse(JSON.stringify(post)) } };
   }
 });
