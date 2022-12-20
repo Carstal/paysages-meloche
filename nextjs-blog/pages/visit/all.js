@@ -255,12 +255,9 @@ export default function Home() {
 //   return props:{"":""};
 // }
 
-// export async function getServerSideProps() {
-    //import { getVisits } from "../../src/components/visit/visit_controller"
-    // Fetch data from external API
-    //const res = await fetch(`https://.../data`)
-    //const data = await res.json()
+export async function getServerSideProps() {
+    const res = await fetch("https://localhost:3000/api/visit");
+    const visit = await res.json();
 
-    // Pass data to the page via props
-    //return { props: { data } }
-// }
+    return { props: { visit } };
+}
