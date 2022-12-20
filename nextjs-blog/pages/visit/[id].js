@@ -1,7 +1,19 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
+import { useRouter } from 'next/router';
 
-export default function Home() {
+
+export async function getServerSideProps() {
+    const router = useRouter()
+    const {id} = router.query
+
+    const res = await fetch(`http://localhost:3000/api/visit/${id}`);
+    const visit = await res;
+  
+    return { props: { visit }};
+  }
+
+export default function Home({visit}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -38,12 +50,14 @@ export default function Home() {
                 className="form-control"
                 id="visitId"
                 name="visitId"
+                value={visit.visit_id}
               />
               <input
                 type="hidden"
                 className="form-control"
                 id="projectId"
                 name="projectId"
+                value={visit.project_id}
               />
               <div className="form-group mb-3">
                 <label className="mb-2">
@@ -54,6 +68,7 @@ export default function Home() {
                   className="form-control"
                   id="employees"
                   name="employees"
+                  defaultValue={visit.employee_ids}
                 />
               </div>
 
@@ -66,6 +81,7 @@ export default function Home() {
                   className="form-control"
                   id="startDate"
                   name="startDate"
+                  defaultValue={visit.start_date}
                 />
               </div>
 
@@ -78,6 +94,7 @@ export default function Home() {
                   className="form-control"
                   id="endDate"
                   name="endDate"
+                  defaultValue={"end_date"}
                 />
               </div>
 
@@ -292,20 +309,3 @@ export default function Home() {
     </div>
   );
 }
-
-// export async function getServerSideProps(){
-//   const req = await fetch("");
-//   const data = await req.json;
-
-//   return props:{"":""};
-// }
-
-// export async function getServerSideProps() {
-//import { getVisits } from "../../src/components/visit/visit_controller"
-// Fetch data from external API
-//const res = await fetch(`https://.../data`)
-//const data = await res.json()
-
-// Pass data to the page via props
-//return { props: { data } }
-// }

@@ -9,7 +9,7 @@ export async function getServerSideProps() {
   return { props: { visits }};
 }
 
-export default function Home({visit}) {
+export default function Home({visits}) {
   return (
     <div className={styles.container}>
       <Head>
