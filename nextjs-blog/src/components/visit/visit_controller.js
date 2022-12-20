@@ -23,9 +23,9 @@ const visitOne = new Visit(
     new Date("2023-03-20")
 );
 
-//TODO: Complete Visit controller
+//TODO: Test Visit controller
 
-//TODO: Create Visit
+//Create Visit
 export const createVisit = (req,res) => {
     const visitId = req.params.visitId;
     const projectId = req.params.projectId;
@@ -40,7 +40,7 @@ export const createVisit = (req,res) => {
     return res.json(dbInsert);
 };
 
-//TODO: Update Visit
+//Update Visit
 export const updateVisitInfo = (req,res) => {
     const visitId = req.params.visitId;
     const projectId = req.params.projectId;
@@ -55,7 +55,7 @@ export const updateVisitInfo = (req,res) => {
     return res.json(dbInsert);
 };
 
-//TODO: Delete Visit By Id
+//Delete Visit By Id
 export const deleteVisit = (req,res) => {
     const visitId = req.params.visitId;
     const deletedVisit = deleteVisitById(visitId);
@@ -64,7 +64,7 @@ export const deleteVisit = (req,res) => {
 };
 
 
-//TODO: Get Visit By Id
+//Get Visit By Id
 export const getVisit = (req,res) => {
     const visitId = req.params.visitId;
     const visit = getVisitByVisitId(visitId);
@@ -72,7 +72,7 @@ export const getVisit = (req,res) => {
     return res.json(visit);
 };
 
-//TODO: Get All Visits
+//Get All Visits
 export const getProjectVisits = (req,res) => {
     const projectId = req.params.projectId;
     const projectVisits = getVisitsByProjectId(projectId);
@@ -80,7 +80,7 @@ export const getProjectVisits = (req,res) => {
     return res.json(projectVisits);
 };
 
-//TODO: Get All Visits
+//Get All Visits
 export const getVisits = (req,res) => {
     const allVisits = getAllVisits();
 
