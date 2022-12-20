@@ -4,14 +4,12 @@ import styles from "../../styles/Home.module.css";
 
 export async function getServerSideProps() {
   const res = await fetch("http://localhost:3000/api/visit/all");
-  // const visits = await res;
-  const visit = await res.json();
+  const visits = await res.json();
 
-  // return { props: { visits }};
-  return { props: { visit }};
+  return { props: { visits }};
 }
 
-export default function Home({visit}) {
+export default function Home({visits}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -40,6 +38,7 @@ export default function Home({visit}) {
       <main>
         <h2 className={styles.title}>All Visits</h2>
         <div id="visitContainer">
+          {visits.map((visit) =>(
           <div className="visit">
             <div className="info">
               <div className="vrRow">Visit:{visit.visit_id} Project: {visit.project_id}</div>
@@ -53,6 +52,7 @@ export default function Home({visit}) {
               </button>
             </div>
           </div>
+          ))}
         </div>
       </main>
 
@@ -86,6 +86,7 @@ export default function Home({visit}) {
           color: #111111;
           flex-direction: row;
           border-radius: 25px;
+          margin: 15px;
         }
         .info {
           padding-left: 20px;
@@ -258,9 +259,10 @@ export default function Home({visit}) {
   );
 }
 
-// export async function getServerSideProps(){
-//   const req = await fetch("");
-//   const data = await req.json;
+// function editVisit(){
+  // const id = visit.visit_id;
+//   const id = 1;
+//   const url = "http://localhost:3000/visit/"+id;
 
-//   return props:{"":""};
+//   window.location.reload(url);
 // }

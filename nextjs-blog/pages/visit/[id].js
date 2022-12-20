@@ -1,20 +1,19 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
-import { useRouter } from 'next/router';
-
+import { useRouter } from "next/router";
 
 export async function getServerSideProps() {
-    // const router = useRouter()
-    // const {id} = router.query
+  // const router = useRouter()
+  // const {id} = router.query
 
-    // const res = await fetch(`http://localhost:3000/api/visit/${id}`);
-    const res = await fetch(`http://localhost:3000/api/visit/1`);
-    const visit = await res.json();
-  
-    return { props: { visit }};
-  }
+  // const res = await fetch(`http://localhost:3000/api/visit/${id}`);
+  const res = await fetch(`http://localhost:3000/api/visit/1`);
+  const visit = await res.json();
 
-export default function Home({visit}) {
+  return { props: { visit } };
+}
+
+export default function Home({ visit }) {
   return (
     <div className={styles.container}>
       <Head>
