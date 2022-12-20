@@ -58,7 +58,7 @@ export const updateVisitInfo = (req,res) => {
 //TODO: Delete Visit By Id
 export const deleteVisit = (req,res) => {
     const visitId = req.params.visitId;
-    const deletedVisit = deleteVisit(visitId);
+    const deletedVisit = deleteVisitById(visitId);
 
     return res.json(deleteVisit);
 };
