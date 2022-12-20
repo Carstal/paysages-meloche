@@ -1,8 +1,8 @@
-import { getVisits } from "../../../src/components/visit/visit_controller";
+// import { getVisits } from "../../../src/components/visit/visit_controller"
 
 export default function handler(req,res){
 
-    // const allVisits = getVisits();
+    // const allVisits = getVisits(req,res);
 
     // res.status(200).json(allVisits);
     res.status(200).json([{

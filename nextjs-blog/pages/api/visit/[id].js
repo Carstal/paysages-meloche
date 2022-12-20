@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router'
-// import { getVisitByVisitId } from "../../src/components/visit/visit_controller";
+// import { useRouter } from 'next/router'
+// import { getVisitByVisitId } from "../../src/components/visit/visit_controller"
 
 export default function handler(req,res){
 
@@ -14,4 +14,5 @@ export default function handler(req,res){
         start_date: "2022-12-23",
         end_date: "2022-12-23"
     });
+    // res.status(200).json(visit);
 }
