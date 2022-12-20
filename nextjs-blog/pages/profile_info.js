@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import Profile from './profile';
 import clientPromise from "../lib/mongodb";
+import Profile from './profile';
+import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
-export default function UserInfo({ data }) {
+export default function UserInfo({ user, data }) {
     return (
+      user && (
         <div className={styles.container}>
         <Head>
           <title>User Information</title>
@@ -37,17 +39,17 @@ export default function UserInfo({ data }) {
                     <form className="card-body">
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>First Name:</strong></label>
-                            <input type="text" className="form-control" value={data.first_name}/>
+                            <input type="text" className="form-control" defaultValue={data.first_name}/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Last Name:</strong></label>
-                            <input type="text" className="form-control" value={data.last_name}/>
+                            <input type="text" className="form-control" defaultValue={data.last_name}/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Phone Number:</strong></label>
-                            <input type="text" className="form-control" value={data.phone_number}/>
+                            <input type="text" className="form-control" defaultValue={data.phone_number}/>
                         </div>
 
                         <div className="form-group mt-3">
@@ -195,25 +197,21 @@ export default function UserInfo({ data }) {
         }
       `}
       </style>
-    </div>
+    </div>)
   )
 }
 
-export async function getServerSideProps() {
-  try {
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: '/index',
+  async getServerSideProps(ctx) {
     const client = await clientPromise;
     const db = client.db("FinalProject");
-    //const { email } = req.query;
 
     const post = await db.collection("Client").findOne({
-      email: "yanburton2003@gmail.com",
+      email: "yanburton2003@gmail.com"
     });
-    
-    return { props: { data: JSON.parse(JSON.stringify(post)) },
-  };
-
-  } catch (e) {
-    console.error(e);
-    throw new Error(e).message;
+    // access the user session
+    const session = getSession(ctx.req, ctx.res);
+    return { props: { data: JSON.parse(JSON.stringify(post)) } };
   }
-}
+});
