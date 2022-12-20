@@ -13,7 +13,7 @@ export default function handler(req, res) {
       },
       body: JSON.stringify(body),
     })
-    //updateClient({ email: `${body.email}`, first_name: `${body.first_name}`, last_name: `${body.last_name}`, phone_number: `${body.phone_number}`})
-
-    res.status(200).json({ data: `${body.first_name} ${body.last_name}` })
+  
+    //res.status(200).json({ data: `${body.first_name} ${body.last_name}` })
+    res.redirect('/')
   }
