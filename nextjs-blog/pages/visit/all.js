@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import styles from '../../styles/Home.module.css';
+import Head from "next/head";
+import styles from "../../styles/Home.module.css";
 
 export default function Home() {
   return (
@@ -9,50 +9,49 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <div className='logo'>
+        <div className="logo">
           <h2>Paysages Meloche</h2>
         </div>
-        <div className='services'>
-          <div id='paysagement'>
+        <div className="services">
+          <div id="paysagement">
             <h3>Paysagement</h3>
           </div>
-          <div id='pelouse'>
+          <div id="pelouse">
             <h3>Pelouse</h3>
           </div>
-          <div id='deneigement'>
+          <div id="deneigement">
             <h3>Deneigement</h3>
           </div>
         </div>
-        <div className='login'>
-          <button>
-            Login
-          </button>
+        <div className="login">
+          <button>Login</button>
         </div>
       </header>
       <main>
-        <h2 className={styles.title}>
-          All Visits
-        </h2>
-        <div id='visitContainer'>
-            <div className='visit'>
-                <div className='info'>
-                    <div className='vrRow'>Visit:1  Project: 1</div>
-                    <div className='empRow'>Employee(s): 25, 87, 99</div>
-                    <div className='startRow'>Start Date: 2022-12-23</div>
-                    <div className='endRow'>End Date: 2022-12-24</div>
-                </div>
-                <div className='editBtnDiv'>
-                    <button className='editBtn' name='edit'>Edit</button>
-                </div>
+        <h2 className={styles.title}>All Visits</h2>
+        <div id="visitContainer">
+          <div className="visit">
+            <div className="info">
+              <div className="vrRow">Visit:1 Project: 1</div>
+              <div className="empRow">Employee(s): 25, 87, 99</div>
+              <div className="startRow">Start Date: 2022-12-23</div>
+              <div className="endRow">End Date: 2022-12-24</div>
             </div>
+            <div className="editBtnDiv">
+              <button className="editBtn" name="edit">
+                Edit
+              </button>
+            </div>
+          </div>
         </div>
-
       </main>
 
       <footer>
-        <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-        <br />
-        Champlain College ECP Final Project 2022-2023</p>
+        <p>
+          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
+          <br />
+          Champlain College ECP Final Project 2022-2023
+        </p>
       </footer>
 
       <style jsx>{`
@@ -63,48 +62,48 @@ export default function Home() {
           align-items: center;
           justify-content: center;
           background: #222222;
-          color: #FFFFFF;
+          color: #ffffff;
         }
-        #visitContainer{
-            display: flex;
-            flex-direction: column;
+        #visitContainer {
+          display: flex;
+          flex-direction: column;
         }
-        .visit{
-            display: flex;
-            height: 12vh;
-            width: 40vw;
-            background-color: #FFFFFF;
-            color: #111111;
-            flex-direction: row;
-            border-radius: 25px;
+        .visit {
+          display: flex;
+          height: 12vh;
+          width: 40vw;
+          background-color: #ffffff;
+          color: #111111;
+          flex-direction: row;
+          border-radius: 25px;
         }
-        .info{
-            padding-left: 20px;
-            padding-top: 10px;
-            display: flex;
-            flex-direction: column;
-            width: 50%
+        .info {
+          padding-left: 20px;
+          padding-top: 10px;
+          display: flex;
+          flex-direction: column;
+          width: 50%;
         }
-        .info div{
-            font-weight: bold;
-            font-size: .9em;
+        .info div {
+          font-weight: bold;
+          font-size: 0.9em;
         }
-        .editBtnDiv{
-            display: flex;
-            width: 50%;
-            align-items: center;
-            justify-content: center;
+        .editBtnDiv {
+          display: flex;
+          width: 50%;
+          align-items: center;
+          justify-content: center;
         }
-        .editBtn{
-            height: 50%;
-            width: 60%;
-            background: #00B45D;
-            border-radius: 10px;
-            color: #FFFFFF;
-            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-              Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-              sans-serif;
-            font-weight: bold;
+        .editBtn {
+          height: 50%;
+          width: 60%;
+          background: #00b45d;
+          border-radius: 10px;
+          color: #ffffff;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+          font-weight: bold;
         }
         .services {
           display: flex;
@@ -112,80 +111,80 @@ export default function Home() {
           align-items: center;
           margin: auto;
         }
-        .services div{
+        .services div {
           display: flex;
           justify-content: center;
           width: 18vw;
-          cursor: 'pointer';
+          cursor: "pointer";
         }
-        .services div :hover{
+        .services div :hover {
           background-color: red;
         }
-        .logo{
+        .logo {
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .login{
+        .login {
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .services{
+        .services {
           display: flex;
           justify-content: center;
           width: 60vw;
         }
-        #calendar{
-          background-color: #D9D9D9;
+        #calendar {
+          background-color: #d9d9d9;
         }
-        #month{
+        #month {
           display: flex;
           flex-direction: row;
           justify-content: center;
           background-color: #333333;
         }
-        #month button{
+        #month button {
           width: 75px;
           height: 50px;
         }
-        #days{
+        #days {
           display: flex;
           flex-direction: column;
         }
-        .week{
+        .week {
           display: flex;
           flex-direction: row;
         }
-        .day{
+        .day {
           display: flex;
           width: 13vw;
-          height:15vh;
+          height: 15vh;
           color: #000000;
           border: solid 1px #555555;
           justify-content: center;
           align-items: center;
         }
-        #weekdays{
+        #weekdays {
           display: flex;
           flex-direction: row;
         }
-        .weekday{
+        .weekday {
           display: flex;
           width: 13vw;
           height: 5vh;
-          color:#000000;
+          color: #000000;
           border: solid 1px #555555;
           font-weight: bold;
           justify-content: center;
-          align-items:
+          align-items: ;
         }
-        .login button{
+        .login button {
           height: 7vh;
           width: 10vw;
-          background: #00B45D;
+          background: #00b45d;
           border-radius: 40px;
-          color: #FFFFFF;
+          color: #ffffff;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
@@ -199,7 +198,7 @@ export default function Home() {
           justify-content: center;
           align-items: center;
           background: #333333;
-          color: #FFFFFF;
+          color: #ffffff;
           width: 100vw;
         }
         footer {
@@ -210,7 +209,7 @@ export default function Home() {
           justify-content: center;
           align-items: center;
           background: #222222;
-          color: #FFFFFF;
+          color: #ffffff;
         }
         footer img {
           margin-left: 0.5rem;
@@ -246,7 +245,7 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
 
 // export async function getServerSideProps(){
@@ -256,16 +255,12 @@ export default function Home() {
 //   return props:{"":""};
 // }
 
-
-
-
-
 // export async function getServerSideProps() {
-//     //import { getVisits } from "../../src/components/visit/visit_controller"
-//     // Fetch data from external API
-//     //const res = await fetch(`https://.../data`)
-//     //const data = await res.json()
+    //import { getVisits } from "../../src/components/visit/visit_controller"
+    // Fetch data from external API
+    //const res = await fetch(`https://.../data`)
+    //const data = await res.json()
 
-//     // Pass data to the page via props
-//     //return { props: { data } }
+    // Pass data to the page via props
+    //return { props: { data } }
 // }
