@@ -44,7 +44,7 @@ export default function Home({ visit }) {
 
         <div className="container">
           <div className="card mt-5">
-            <form className="card-body" action="/api/form" method="POST">
+            <form className="card-body" action="/api/visit/form" method="POST">
               <input
                 type="hidden"
                 className="form-control"
