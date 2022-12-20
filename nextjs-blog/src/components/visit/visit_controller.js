@@ -6,7 +6,6 @@ import{
     getAllVisits,
     getVisitByVisitId,
     getVisitsByProjectId,
-    addVisit,
     updateVisit,
     deleteVisitById
 } from "./visit_controller";

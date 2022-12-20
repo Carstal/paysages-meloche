@@ -12,38 +12,6 @@ const mongouri =
 //   const client = new MongoClient(uri);
 const client = new MongoClient(mongouri);
 
-// async function main() {
-
-
-//   try {
-//     // Connect to the MongoDB cluster
-//     await client.connect();
-
-//     //try to create new visit
-//     const visitOne = new Visit(
-//       20,
-//       14,
-//       [99, 87],
-//       new Date("2023-04-12"),
-//       new Date("2023-04-20")
-//     );
-
-//     // console.log(getNewVisitID(client));
-//     // await addVisit(client, visitOne);
-//     // await getAllVisits(client);
-//     // await getVisitByVisitId(client, visitOne.visit_id);
-//     // await getVisitsByProjectId(client, visitOne.project_id);
-//     // await updateVisit(client, visitOne);
-//     // await deleteVisitById(client, visitOne.visit_id);
-//   } catch (e) {
-//     console.error(e);
-//   } finally {
-//     await client.close();
-//   }
-// }
-
-// main().catch(console.error);
-
 //Add Visit
 export function addVisit(vis) {
   const data = {

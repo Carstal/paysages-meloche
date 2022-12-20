@@ -1,7 +1,15 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 
-export default function Home() {
+
+export async function getServerSideProps() {
+  const res = await fetch("http://localhost:3000/api/visit");
+  const visits = await res;
+
+  return { props: { visits }};
+}
+
+export default function Home({visit}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -32,13 +40,13 @@ export default function Home() {
         <div id="visitContainer">
           <div className="visit">
             <div className="info">
-              <div className="vrRow">Visit:1 Project: 1</div>
-              <div className="empRow">Employee(s): 25, 87, 99</div>
-              <div className="startRow">Start Date: 2022-12-23</div>
-              <div className="endRow">End Date: 2022-12-24</div>
+              <div className="vrRow">Visit:{visit.visit_id} Project: {visit.project_id}</div>
+              <div className="empRow">Employee(s): {visit.employee_ids}</div>
+              <div className="startRow">Start Date: {visit.start_date}</div>
+              <div className="endRow">End Date: {visit.end_date}</div>
             </div>
             <div className="editBtnDiv">
-              <button className="editBtn" name="edit">
+              <button className="editBtn" name="edit" value={visit.visit_id}>
                 Edit
               </button>
             </div>
@@ -254,10 +262,3 @@ export default function Home() {
 
 //   return props:{"":""};
 // }
-
-export async function getServerSideProps() {
-    const res = await fetch("https://localhost:3000/api/visit");
-    const visit = await res.json();
-
-    return { props: { visit } };
-}
