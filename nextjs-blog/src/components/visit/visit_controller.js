@@ -6,10 +6,11 @@ import{
     getAllVisits,
     getVisitByVisitId,
     getVisitsByProjectId,
+    addVisit,
     updateVisit,
     deleteVisitById
-} from "./visit_controller";
-import { addVisit } from "./visit_service";
+} from "./visit_service";
+// import { addVisit } from "./visit_service";
 //Import Visit class module
 const Visit = require("./Visit");
 

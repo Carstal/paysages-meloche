@@ -3,13 +3,15 @@ import styles from "../../styles/Home.module.css";
 
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/visit");
-  const visits = await res;
+  const res = await fetch("http://localhost:3000/api/visit/all");
+  // const visits = await res;
+  const visit = await res.json();
 
-  return { props: { visits }};
+  // return { props: { visits }};
+  return { props: { visit }};
 }
 
-export default function Home({visits}) {
+export default function Home({visit}) {
   return (
     <div className={styles.container}>
       <Head>

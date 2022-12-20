@@ -4,11 +4,12 @@ import { useRouter } from 'next/router';
 
 
 export async function getServerSideProps() {
-    const router = useRouter()
-    const {id} = router.query
+    // const router = useRouter()
+    // const {id} = router.query
 
-    const res = await fetch(`http://localhost:3000/api/visit/${id}`);
-    const visit = await res;
+    // const res = await fetch(`http://localhost:3000/api/visit/${id}`);
+    const res = await fetch(`http://localhost:3000/api/visit/1`);
+    const visit = await res.json();
   
     return { props: { visit }};
   }
@@ -94,7 +95,7 @@ export default function Home({visit}) {
                   className="form-control"
                   id="endDate"
                   name="endDate"
-                  defaultValue={"end_date"}
+                  defaultValue={visit.end_date}
                 />
               </div>
 
