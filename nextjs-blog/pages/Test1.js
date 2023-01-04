@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
  
-export const ExampleComponent = () => {
+export const Test1 = () => {
 const { t } = useTranslation();
  return (
    <div>
@@ -12,3 +12,5 @@ const { t } = useTranslation();
    </div>
  );
 };
+
+export default Test1;

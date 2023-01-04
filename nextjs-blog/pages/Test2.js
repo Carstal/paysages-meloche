@@ -19,7 +19,7 @@ export default function App() {
      <button value='en' onClick={handleOnclick}>
         English
      </button>
-     <Test1 lang={language}/>
+          <Test1 lang={language}/>
 
    </div>
  );
