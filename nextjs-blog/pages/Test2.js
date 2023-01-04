@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Test1 } from "./Test1";
+import { useTranslation } from "react-i18next";
 import {i18n} from "../src/Translation/i18n";
 
  
@@ -11,6 +11,8 @@ export default function App() {
         setLanguage(e.target.value);
         i18n.changeLanguage(e.target.value);
       }
+    const { t } = useTranslation();
+
  return (
    <div className="App">
     <button value='fr' onClick={handleOnclick}>
@@ -19,8 +21,9 @@ export default function App() {
      <button value='en' onClick={handleOnclick}>
         English
      </button>
-          <Test1 lang={language}/>
-
+     <p>
+        {t("welcome")}
+      </p>
    </div>
  );
 }
