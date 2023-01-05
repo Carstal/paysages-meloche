@@ -1,11 +1,16 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import "../src/Translation/i18n";
 
-export default function Mailer() {
+export default function Project() {
+  const { t } = useTranslation();
+
     return (
         <div className={styles.container}>
         <Head>
-          <title>Project Submission</title>
+          <title>{t("ProjectSubmissionTitle")}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <header>
@@ -14,13 +19,13 @@ export default function Mailer() {
         </div>
         <div className='services'>
           <div id='paysagement'>
-            <h3>Paysagement</h3>
+            <h3>{t("Paysagement")}</h3>
           </div>
           <div id='pelouse'>
-            <h3>Pelouse</h3>
+            <h3>{t("Pelouse")}</h3>
           </div>
           <div id='deneigement'>
-            <h3>Deneigement</h3>
+            <h3>{t("Deneigement")}</h3>
           </div>
         </div>
         <div className='login'>
@@ -31,44 +36,44 @@ export default function Mailer() {
         </header>
         <main>
           <h1 className={styles.title}>
-            Project Submission
+          {t("ProjectSubmissionTitle")}
           </h1>
           <div className="container">
                 <div className="card mt-5">
                     <form className="card-body">
                         <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Project Type:</strong></label>
+                            <label className="mb-2"><strong>{t("ProjectType")}</strong></label>
                             <input type="text" className="form-control" />
                         </div>
 
                         <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Length/Height:</strong></label>
+                            <label className="mb-2"><strong>{t("Size1")}</strong></label>
                             <input type="text" className="form-control" />
                         </div>
                         <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Width:</strong></label>
+                            <label className="mb-2"><strong>{t("Size2")}</strong></label>
                             <input type="text" className="form-control" />
                         </div>
 
                         <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Project:</strong></label>
+                            <label className="mb-2"><strong>{t("Project")}</strong></label>
                             <textarea type="text" className="form-control" />
                         </div>
 
                         <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Image:</strong></label>
+                            <label className="mb-2"><strong>Image</strong></label>
                             <textarea type="text" className="form-control" />
                         </div>
 
                         <div className="d-grid mt-3">
-                            <button type="submit" className="btn btn-block btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-block btn-primary">{t("Submit")}</button>
                         </div>
                     </form>
                 </div>
             </div>
      
           <p className={styles.description}>
-            Currently Under Maintenance
+          {t("Maintenance")}
           </p>
         </main>
   
