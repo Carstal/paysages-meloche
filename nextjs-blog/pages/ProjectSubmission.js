@@ -1,14 +1,33 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import React from "react";
+import React, {useState} from "react";
 import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
+import i18n from "i18next";
+
 
 export default function Project() {
+  const [language, setLanguage] = useState('en');
+
   const { t } = useTranslation();
+
+
+  const handleOnclick=(e)=>{
+      e.preventDefault();
+      setLanguage(e.target.value);
+      if (i18n && i18n.changeLanguage) {
+          i18n.changeLanguage(e.target.value);
+        }          
+  }
 
     return (
         <div className={styles.container}>
+           <button value='fr' onClick={handleOnclick}>
+            French
+        </button>
+        <button value='en' onClick={handleOnclick}>
+            English
+        </button>
         <Head>
           <title>{t("ProjectSubmissionTitle")}</title>
           <link rel="icon" href="/favicon.ico" />
