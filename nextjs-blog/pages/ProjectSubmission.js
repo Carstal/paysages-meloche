@@ -22,12 +22,7 @@ export default function Project() {
 
     return (
         <div className={styles.container}>
-           <button value='fr' onClick={handleOnclick}>
-            French
-        </button>
-        <button value='en' onClick={handleOnclick}>
-            English
-        </button>
+           
         <Head>
           <title>{t("ProjectSubmissionTitle")}</title>
           <link rel="icon" href="/favicon.ico" />
@@ -51,6 +46,12 @@ export default function Project() {
           <button>
             Login
           </button>
+          <button value='fr' onClick={handleOnclick}>
+            French
+        </button>
+        <button value='en' onClick={handleOnclick}>
+            English
+        </button>
         </div>          
         </header>
         <main>
