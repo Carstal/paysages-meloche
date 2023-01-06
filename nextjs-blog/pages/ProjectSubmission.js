@@ -22,7 +22,6 @@ export default function Project() {
 
     return (
         <div className={styles.container}>
-           
         <Head>
           <title>{t("ProjectSubmissionTitle")}</title>
           <link rel="icon" href="/favicon.ico" />

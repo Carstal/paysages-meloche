@@ -7,6 +7,8 @@
 
     
     export default function App() {
+        
+        
         const [language, setLanguage] = useState('en');
 
         const { t } = useTranslation();
@@ -20,6 +22,7 @@
               }          
         }
     return (
+    
     <div className="App">
         <button value='fr' onClick={handleOnclick}>
             French

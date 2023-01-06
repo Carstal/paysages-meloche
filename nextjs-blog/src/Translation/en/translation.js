@@ -3,7 +3,7 @@ export const TRANSLATIONS_EN = {
     welcome:"Welcome to the tutorial",
     ProjectSubmissionTitle:"Project Submission",
     Paysagement:"Paysagement",
-    Pelouse:"lawn",
+    Pelouse:"Lawn",
     Deneigement:"Snow removal",
     ProjectType: "Project Type",
     Size1: "Length/Height",
