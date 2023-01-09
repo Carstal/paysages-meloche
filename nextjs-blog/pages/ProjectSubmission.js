@@ -78,12 +78,6 @@ export default function Project() {
                             <label className="mb-2"><strong>{t("Project")}</strong></label>
                             <textarea type="text" className="form-control" />
                         </div>
-
-                        <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Image</strong></label>
-                            <textarea type="text" className="form-control" />
-                        </div>
-
                         <div className="d-grid mt-3">
                             <button type="submit" className="btn btn-block btn-primary">{t("Submit")}</button>
                         </div>
