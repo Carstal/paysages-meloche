@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
 import i18n from "i18next";
 
-
-export default function Project() {
+ 
+export default function Projects() {
   const [language, setLanguage] = useState('en');
 
   const { t } = useTranslation();
