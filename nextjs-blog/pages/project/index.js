@@ -49,7 +49,7 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                            {data.map((val, key) => {
                              return (
                                <tr key={key} onClick={() => router.push({
-                                pathname: '/project/[id]', query: { id: val.name }})}>
+                                pathname: '/project/[id]', query: { id: val.project }})}>
                                  <td>{val.name}</td>
                                  <td>{val.project}</td>
                                  <td>{val.length}</td>
