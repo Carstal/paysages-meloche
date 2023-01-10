@@ -1,4 +1,5 @@
 import { getVisits } from "../../../src/components/visit/visit_controller"
+// import { getVisits } from "../../../src/components/visit/visit_service"
 
 export default async function handler(req,res){
 
