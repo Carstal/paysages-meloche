@@ -1,7 +1,7 @@
-//import { useUser } from '@auth0/nextjs-auth0/client';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
 import Profile from './profile';
+import { getSession } from '@auth0/nextjs-auth0';
 
 export default function Home() {
   return (
@@ -151,4 +151,29 @@ export default function Home() {
       `}</style>
     </div>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  //get session info
+  const session = await getSession(ctx.req, ctx.res);
+  var firstLogin = "";
+  //if the session was ever found, get its firstlogin variable
+  try {
+  firstLogin = session.user.firstlogin
+  if (firstLogin == "true"){
+    //if it is the user's first login, redirect to the user info screen
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/profile_info",
+      },
+      props:{},
+    };
+  }
+  } catch {
+    console.log("An error occured")
+  } 
+  return{
+    props: {}
+  }
 }

@@ -208,6 +208,7 @@ export const getServerSideProps = withPageAuthRequired({
     const client = await clientPromise;
     const db = client.db("FinalProject");
     const session = await getSession(ctx.req, ctx.res);
+    console.log(session.user.firstlogin)
 
     const post = await db.collection("Client").findOne({
       email: session.user.email
