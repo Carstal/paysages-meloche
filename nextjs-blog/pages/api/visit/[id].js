@@ -1,8 +1,8 @@
 import { getVisitByVisitId } from "../../src/components/visit/visit_controller"
 
-export default function handler(req,res){
+export default async function handler(req,res){
 
-    const visit = getVisitByVisitId({id})
+    const visit = await getVisitByVisitId({id})
 
     // res.status(200).json({
     //     visit_id: 1,
