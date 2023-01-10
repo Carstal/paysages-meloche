@@ -131,17 +131,18 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                  sans-serif;
                font-weight: bold;
            }
+           
            table {
             border: 2px solid forestgreen;
             width: 800px;
             height: 200px;
           }
             
-          th {
+           th {
             border-bottom: 1px solid black;
           }
             
-          td {
+           td {
             text-align: center;
           }
            main {
