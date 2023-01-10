@@ -40,17 +40,17 @@ export default function UserInfo({ user, data }) {
                     <input type="hidden" className="form-control" value={data?.email} id="email" name="email"/>
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>First Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.first_name} id="first_name" name="first_name"/>
+                            <input type="text" className="form-control" defaultValue={data?.first_name} id="first_name" name="first_name" required/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Last Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.last_name} id="last_name" name="last_name"/>
+                            <input type="text" className="form-control" defaultValue={data?.last_name} id="last_name" name="last_name" required/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Phone Number:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.phone_number} id="phone_number" name="phone_number"/>
+                            <input type="text" className="form-control" defaultValue={data?.phone_number} id="phone_number" name="phone_number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
                         </div>
 
                         <div className="form-group mt-3">
