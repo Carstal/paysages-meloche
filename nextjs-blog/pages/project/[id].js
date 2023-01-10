@@ -3,11 +3,10 @@ import styles from '../../styles/Home.module.css';
 import clientPromise from "../../lib/mongodb";
 import Profile from '../profile';
 import {useRouter} from "next/router";
-
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
 
-   export default function DisplayProject({data}) {
+   export default function DisplayProject( {data} ) {
     const router = useRouter()
        return (
            <div className={styles.container}>
@@ -38,7 +37,7 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
              </h1>
              <div className="container">
                    <div className="card mt-5">
-                          <table>
+                        <table>
                            <tr>
                            <th>Name</th>
                            <th>Project</th>
@@ -46,9 +45,10 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                            <th>Width</th>
                            <th>Description</th>
                            </tr>
+                           
                            {data.map((val, key) => {
                              return (
-                               <tr>
+                               <tr key={key}>
                                  <td>{val.name}</td>
                                  <td>{val.project}</td>
                                  <td>{val.length}</td>
@@ -57,8 +57,7 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                               </tr>
                             )
                          })}
-        
-                         </table>
+                        </table>
                 
                </div>
         
@@ -223,17 +222,19 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
       const db = client.db("FinalProject");
       const session = await getSession(ctx.req, ctx.res);
 
-      //Works with findOne
+      const projectName = ctx.params.id
+
   
-      const post = await db.collection("Project").find({name: session.user.name}).toArray();
+      const post = await db.collection("Project").find({project: projectName}).toArray();
       // access the user session
+
+      console.log(projectName)
 
       //console.log(post)
       
     
       const data = JSON.parse(JSON.stringify(post));
 
-      console.log(data)
     
       return { props: {data} };
       
