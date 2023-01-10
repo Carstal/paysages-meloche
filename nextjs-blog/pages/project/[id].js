@@ -46,17 +46,13 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                            <th>Description</th>
                            </tr>
                            
-                           {data.map((val, key) => {
-                             return (
-                               <tr key={key}>
-                                 <td>{val.name}</td>
-                                 <td>{val.project}</td>
-                                 <td>{val.length}</td>
-                                 <td>{val.width}</td>
-                                 <td>{val.description}</td>
+                               <tr>
+                                 <td>{data.name}</td>
+                                 <td>{data.project}</td>
+                                 <td>{data.length}</td>
+                                 <td>{data.width}</td>
+                                 <td>{data.description}</td>
                               </tr>
-                            )
-                         })}
                         </table>
                 
                </div>
@@ -225,7 +221,7 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
       const projectName = ctx.params.id
 
   
-      const post = await db.collection("Project").find({project: projectName}).toArray();
+      const post = await db.collection("Project").findOne({project: projectName});
       // access the user session
 
       console.log(projectName)
