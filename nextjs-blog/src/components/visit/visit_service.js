@@ -117,6 +117,7 @@ export async function getVisitByVisitId(id) {
 // }
 
 //Get all Visits
+//TODO:TEST FOR GET ALL
 export async function getAllVisits() {
   const cursor = await client
     .db("ECPVisitDummy")
