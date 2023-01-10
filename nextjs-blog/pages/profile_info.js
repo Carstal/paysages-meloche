@@ -50,7 +50,7 @@ export default function UserInfo({ user, data }) {
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Phone Number:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.phone_number} id="phone_number" name="phone_number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+                            <input type="text" className="form-control" defaultValue={data?.phone_number} id="phone_number" name="phone_number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title='Please enter phone number in the following format: 000-000-0000.'/>
                         </div>
 
                         <div className="form-group mt-3">
