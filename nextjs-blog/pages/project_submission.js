@@ -5,7 +5,7 @@ import Profile from './profile';
 
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
    
-   export default function Project() {
+   export default function Project({ data }) {
        return (
            <div className={styles.container}>
            <Head>
@@ -36,23 +36,30 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
              <div className="container">
                    <div className="card mt-5">
                        <form className="card-body" action="/api/projectSubmissions" method="POST">
+                       <input type="hidden" className="form-control" value={data?.email} id="email" name="email"/>
+
+                          <div className="form-group mb-3">
+                               <label className="mb-2"><strong>Name:</strong></label>
+                               <input name="name" id="name" type="text" className="form-control" required/>
+                           </div>
+
                            <div className="form-group mb-3">
                                <label className="mb-2"><strong>Project Type:</strong></label>
-                               <input name="project" id="project"  type="text" className="form-control" />
+                               <input name="project" id="project"  type="text" className="form-control" required />
                            </div>
    
                            <div className="form-group mb-3">
                                <label className="mb-2"><strong>Length/Height:</strong></label>
-                               <input name="length" id="length" type="text" className="form-control" />
+                               <input name="length" id="length" type="text" className="form-control" required/>
                            </div>
                            <div className="form-group mb-3">
                                <label className="mb-2"><strong>Width:</strong></label>
-                               <input name="width" id="width" type="text" className="form-control" />
+                               <input name="width" id="width" type="text" className="form-control" required/>
                            </div>
    
                            <div className="form-group mb-3">
                                <label className="mb-2"><strong>Project:</strong></label>
-                               <textarea name="description" id="description" type="text" className="form-control" />
+                               <textarea name="description" id="description" type="text" className="form-control" required/>
                            </div>
    
                            <div className="d-grid mt-3">
