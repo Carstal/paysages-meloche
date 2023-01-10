@@ -203,14 +203,14 @@ export default function UserInfo({ user, data }) {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  returnTo: '/index',
+  returnTo: '/',
   async getServerSideProps(ctx) {
     const client = await clientPromise;
     const db = client.db("FinalProject");
     const session = await getSession(ctx.req, ctx.res);
 
     const post = await db.collection("Client").findOne({
-      email: session.user.name
+      email: session.user.email
     });
     // access the user session
     
