@@ -33,7 +33,7 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
            </header>
            <main>
              <h1 className={styles.title}>
-               Project Submission
+               Project Details
              </h1>
              <div className="container">
                    <div className="card mt-5">
