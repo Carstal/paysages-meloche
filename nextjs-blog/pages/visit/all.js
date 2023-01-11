@@ -2,20 +2,14 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 
 
-export async function getServerSideProps(context) {
-  const projectId = context.params.id;
-  console.log("Project Id: " + projectId)
-  const api = 'http://localhost:3000/api/visit/';
-  const url = api + projectId;
-  console.log(url);
-  const res = await fetch(url);
+export async function getServerSideProps() {
+  const res = await fetch("http://localhost:3000/api/visit/all");
+  const visits = await res.json();
 
-  const visit = await res.json();
-
-  return { props: { visit } };
+  return { props: { visits }};
 }
 
-export default async function Home({ visit }) {
+export default function Home({visits}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -42,76 +36,23 @@ export default async function Home({ visit }) {
         </div>
       </header>
       <main>
-        <h2 className={styles.title}>Visit Information</h2>
-
-        <div className="container">
-          <div className="card mt-5">
-            {/* {url} */}
-              <div>
-                Visit: {visit.visit_id}
-              </div>
-            {/* <form className="card-body" action="/api/visit/form" method="POST">
-              <input
-                type="hidden"
-                className="form-control"
-                id="visitId"
-                name="visitId"
-                value={visit.visit_id}
-              />
-              <input
-                type="hidden"
-                className="form-control"
-                id="projectId"
-                name="projectId"
-                value={visit.project_id}
-              />
-              <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Employees:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="employees"
-                  name="employees"
-                  defaultValue={visit.employee_ids}
-                />
-              </div>
-
-              <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Start Date:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="startDate"
-                  name="startDate"
-                  defaultValue={visit.start_date}
-                />
-              </div>
-
-              <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>End Date:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="endDate"
-                  name="endDate"
-                  defaultValue={visit.end_date}
-                />
-              </div>
-
-              <div className="form-group mt-3">
-                <button type="submit" className={styles.submitbutton}>
-                  Update
-                </button>
-              </div>
-            </form> */}
-
+        <h2 className={styles.title}>All Visits</h2>
+        <div id="visitContainer">
+          {visits.map((visit) =>(
+          <div className="visit">
+            <div className="info">
+              <div className="vrRow">Visit:{visit.visit_id} Project: {visit.project_id}</div>
+              <div className="empRow">Employee(s): {visit.employee_ids}</div>
+              <div className="startRow">Start Date: {visit.start_date}</div>
+              <div className="endRow">End Date: {visit.end_date}</div>
+            </div>
+            <div className="editBtnDiv">
+              <button className="editBtn" name="edit" value={visit.visit_id}>
+                Edit
+              </button>
+            </div>
           </div>
+          ))}
         </div>
       </main>
 
@@ -145,6 +86,7 @@ export default async function Home({ visit }) {
           color: #111111;
           flex-direction: row;
           border-radius: 25px;
+          margin: 15px;
         }
         .info {
           padding-left: 20px;
@@ -316,3 +258,11 @@ export default async function Home({ visit }) {
     </div>
   );
 }
+
+// function editVisit(){
+  // const id = visit.visit_id;
+//   const id = 1;
+//   const url = "http://localhost:3000/visit/"+id;
+
+//   window.location.reload(url);
+// }

@@ -30,4 +30,5 @@ export default async function handler(req,res){
     //     end_date: "2022-12-23"
     // });
     res.status(200).json({visit});
+
 }

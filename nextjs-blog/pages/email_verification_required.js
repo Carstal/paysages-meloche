@@ -12,31 +12,14 @@ export default function Home() {
         <div className='logo'>
           <h2>Paysages Meloche</h2>
         </div>
-        <div className='services'>
-          <div id='paysagement'>
-            <h3>Paysagement</h3>
-          </div>
-          <div id='pelouse'>
-            <h3>Pelouse</h3>
-          </div>
-          <div id='deneigement'>
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        <div className='login'>
-          <button>
-            Login
-          </button>
-        </div>
       </header>
       <main>
         <h1 className={styles.title}>
-          Paysages Meloche
+        Email verification required to continue.
         </h1>
-
-        <p className={styles.description}>
-          Currently Under Maintenance
-        </p>
+        <button class={styles.loginbutton}>
+          <a href="/api/auth/login">Try Again</a>
+        </button> 
       </main>
 
       <footer>
@@ -55,6 +38,7 @@ export default function Home() {
           background: #222222;
           color: #FFFFFF;
         }
+        
         .services {
           display: flex;
           flex-direction: row;

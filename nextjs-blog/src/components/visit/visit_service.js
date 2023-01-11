@@ -6,6 +6,7 @@ const Visit = require("./Visit");
 
 const uri =
 "mongodb+srv://Mohaned:0000@cluster0.gvkvlw9.mongodb.net/?retryWrites=true&w=majority";
+
 // const mongouri =
 // "mongodb+srv://carstaltari:Pablo__545@iot2-carlo.ijsiznf.mongodb.net/?retryWrites=true&w=majority";
 

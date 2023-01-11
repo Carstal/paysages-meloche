@@ -13,6 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^2.0.1",
     "@sendgrid/mail": "^7.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -20,12 +21,16 @@
     "mongo": "^0.1.0",
     "mongodb": "^4.12.1",
     "mongoose": "^6.8.0",
-    "next": "latest",
+    "next": "^13.0.7",
     "nodemailer": "^6.8.0",
     "nodemon": "^2.0.20",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "source": "^0.0.3"
+    "source": "^0.0.3",
+    "body-parser": "^1.20.1",
+    "i18next": "^22.4.8",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "react-i18next": "^12.1.1",
+    "react-script": "^2.0.5"
+
   },
   "description": "",
   "devDependencies": {
