@@ -9,5 +9,5 @@ export default function handler(req, res) {
       },
       body: JSON.stringify(body),
     })
-    res.redirect('http://localhost:3000/api/auth/logout')
+    res.redirect('http://localhost:3000/api/auth/logout?returnTo=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Flogin')
   }
