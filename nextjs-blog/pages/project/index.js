@@ -36,8 +36,9 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
              <h1 className={styles.title}>
                Project Submission
              </h1>
-             <div className="container">
+             <div className="containers">
                    <div className="card mt-5">
+                    <div className="center-col">
                         <table>
                           <tr>
                            <th>Project</th>
@@ -45,15 +46,20 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                           </tr>
                            {data.map((val, key) => {
                              return (
-                               <tr key={key} onClick={() => router.push({
-                                pathname: '/project/[id]', query: { id: val.project }})}>
-                                 <td>{val.project}</td>
+                               <tr key={key}>
+                                  <nav>
+                                  <a href="#" class="hover-underline-animation">
+                                 <td onClick={() => router.push({
+                                pathname: '/project/[id]', query: { id: val.project }})}>{val.project}</td>
+                                 </a>
+                                 </nav>
                                  <td>{val.description}</td>
                               </tr>
                             )
                          })}
         
                         </table>
+                        </div>
                 
                </div>
         
@@ -120,6 +126,10 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                sans-serif;
              font-weight: bold;
            }
+           .center-col {
+            flex: 1;
+            overflow-y: scroll;
+          }
            .d-grid mt-3, button{
                height: 7vh;
                width: 10vw;
@@ -143,6 +153,23 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
             
           td {
             text-align: center;
+          }
+          nav{
+            text-align: center;
+            padding: 10px;
+          }
+          
+          .hover-underline-animation {
+            position: relative;
+            color: #FFFFFF;
+            text-decoration: none;
+          }
+          .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+          }
+          .hover-underline-animation::after{
+            ...
+            transform: scaleX(0);
           }
            main {
              padding: 5rem 0;
@@ -192,6 +219,7 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
              font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
                DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
            }
+           
          `}</style>
    
          <style jsx global>{`
