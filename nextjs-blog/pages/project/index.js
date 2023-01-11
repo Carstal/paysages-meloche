@@ -40,20 +40,14 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                    <div className="card mt-5">
                         <table>
                           <tr>
-                           <th>Name</th>
                            <th>Project</th>
-                           <th>Length</th>
-                           <th>Width</th>
                            <th>Description</th>
                           </tr>
                            {data.map((val, key) => {
                              return (
                                <tr key={key} onClick={() => router.push({
                                 pathname: '/project/[id]', query: { id: val.project }})}>
-                                 <td>{val.name}</td>
                                  <td>{val.project}</td>
-                                 <td>{val.length}</td>
-                                 <td>{val.width}</td>
                                  <td>{val.description}</td>
                               </tr>
                             )
