@@ -9,7 +9,20 @@ export const TRANSLATIONS_FR = {
     Size2: "Largeur",
     Project: "Description du Projet",
     Maintenance: "En maintenance",
-    Submit: "Envoyer"
+    Submit: "Envoyer",
+    Name: "Nom",
+    TitleProfile:"Informations d'utilisateur",
+    Update: "Sauvegarder",
+    FirstName:"Prénom",
+    LastName:"Nom",
+    PhoneNumber:"Téléphone",
+    EmailV: "Veuillez vérifier votre address courriel avant de continuer.",
+    AccountCre: "Creation De Profile",
+    Complet: "Sauvegarder"
+
+
+
+
 
 
    };
