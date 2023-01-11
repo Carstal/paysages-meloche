@@ -221,11 +221,12 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
       const projectName = ctx.params.id
 
+
   
       const post = await db.collection("Project").findOne({project: projectName});
       // access the user session
 
-      console.log(projectName)
+      console.log(post)
 
       //console.log(post)
       
