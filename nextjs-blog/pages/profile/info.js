@@ -229,7 +229,7 @@ export default function UserInfo({ user, data }) {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  returnTo: '/',
+  returnTo: '/profile/info',
   async getServerSideProps(ctx) {
     const client = await clientPromise;
     const db = client.db("FinalProject");
