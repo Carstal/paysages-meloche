@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css';
 import clientPromise from "../../lib/mongodb";
-import Profile from '../profile';
+// import Profile from '../profile';
+import Profile from '../profile/index';
 import {useRouter} from "next/router";
 
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';

@@ -1,7 +1,7 @@
 //for auth
 import React from 'react';
 import { useUser } from '@auth0/nextjs-auth0/client';
-import styles from '../styles/Home.module.css';
+import styles from '../../styles/Home.module.css';
 
 export default function Profile() {
     const { user, error, isLoading } = useUser();
@@ -13,7 +13,7 @@ export default function Profile() {
     return (
       user && (
         <div>
-        <a href="/profile_info">
+        <a href="/profile/info">
           <img class={styles.profile} src={user.picture} alt={user.name}/>
         </a>
           <button class={styles.loginbutton}>

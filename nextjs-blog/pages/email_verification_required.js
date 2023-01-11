@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import Profile from './profile';
+// import Profile from './profile';
+import Profile from './/profile/index';
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
