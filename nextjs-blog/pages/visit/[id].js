@@ -4,9 +4,10 @@ import styles from "../../styles/Home.module.css";
 
 export async function getServerSideProps(context) {
   const projectId = context.params.id;
+  console.log("Project Id: " + projectId)
   const api = 'http://localhost:3000/api/visit/';
   const url = api + projectId;
-  //console.log(url);
+  console.log(url);
   const res = await fetch(url);
   const visit = await res.json();
 

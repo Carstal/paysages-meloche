@@ -1,4 +1,4 @@
-import { getVisits } from "../../../src/components/visit/visit_controller"
+import { getVisits } from "../../../src/components/visit/visit_controller";
 // import { getVisits } from "../../../src/components/visit/visit_service"
 
 export default async function handler(req,res){
@@ -7,6 +7,7 @@ export default async function handler(req,res){
     console.log(allVisits);
 
     res.status(200).json(allVisits);
+
     // res.status(200).json([{
     //     visit_id: 1,
     //     project_id: 1,

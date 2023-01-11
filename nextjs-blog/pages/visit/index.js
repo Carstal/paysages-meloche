@@ -14,6 +14,27 @@ export async function getServerSideProps() {
 
 export default function Home({visits}) {
   const router = useRouter()
+  function formatEmployees(emp_ids){
+    var formattedEmployees = ""
+    const employees = emp_ids.map((emp) =>
+      formattedEmployees = formattedEmployees + " " + emp
+    );
+    return formattedEmployees;
+  }
+  function formatDate(date){
+
+    let newDate = new Date(date);
+    let dd = newDate.getDate()+1;
+    let mm = newDate.getMonth()+1;
+    const yyyy = newDate.getFullYear();
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+    const formattedDate = dd + '/' + mm + '/' + yyyy;
+    console.log(formattedDate);
+
+    return formattedDate;
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -42,13 +63,15 @@ export default function Home({visits}) {
       <main>
         <h2 className={styles.title}>All Visits</h2>
         <div id="visitContainer">
-          {visits.map((visit) =>(
+          {visits.map((visit) => (
+            // let sdate = visit.start_date;
+            // console.log(sdate);
           <div className="visit">
             <div className="info">
               <div className="vrRow">Visit:{visit.visit_id} Project: {visit.project_id}</div>
-              <div className="empRow">Employee(s): {visit.employee_ids}</div>
-              <div className="startRow">Start Date: {visit.start_date}</div>
-              <div className="endRow">End Date: {visit.end_date}</div>
+              <div className="empRow">Employee(s): {formatEmployees(visit.employee_ids)}</div>
+              <div className="startRow">Start Date: {formatDate(visit.start_date)}</div>
+              <div className="endRow">End Date: {formatDate(visit.end_date)}</div>
             </div>
             <div className="editBtnDiv">
               <button className="editBtn" name="edit" value={visit.visit_id} onClick={() => router.push({
@@ -58,6 +81,9 @@ export default function Home({visits}) {
             </div>
           </div>
           ))}
+        </div>
+        <div id="root">
+
         </div>
       </main>
 
