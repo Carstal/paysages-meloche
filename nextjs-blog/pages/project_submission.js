@@ -38,6 +38,12 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                        <form className="card-body" action="/api/projectSubmissions" method="POST">
                        <input type="hidden" className="form-control" value={data?.email} id="email" name="email"/>
 
+
+                       <div className="form-group mb-3">
+                               <label className="mb-2" hidden><strong>Id:</strong></label>
+                               <input name="id" id="id" type="hidden" className="form-control" required />
+                           </div>
+
                           <div className="form-group mb-3">
                                <label className="mb-2"><strong>Name:</strong></label>
                                <input name="name" id="name" type="text" className="form-control" required/>
