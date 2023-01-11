@@ -62,7 +62,7 @@ export default function UserInfo({ user, data }) {
           <br/>
           <div className="container">
                 <div className="card mt-5">
-                    <form className="card-body" action="/api/newClientForm" method="POST">
+                    <form className="card-body" action="/api/forms/newClientForm" method="POST">
                     <input type="hidden" className="form-control" value={data?.email} id="email" name="email"/>
                         <div className="form-group mb-3">
                         <label className="mb-2"><strong>{t("FirstName")}</strong></label>
