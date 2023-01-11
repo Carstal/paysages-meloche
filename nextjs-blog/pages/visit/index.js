@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/visit/all");
+  const res = await fetch("http://localhost:3000/api/visit");
   const visits = await res.json();
   console.log("--------VISITS----------");
   console.log(visits);
