@@ -129,3 +129,13 @@
   display: block;
   margin: 0 auto;
 }
+
+.note {
+  margin-top: 40px;
+  background-color: #DCFFDD;
+  border-left: 6px solid #05A96D;
+  padding: 10px;
+  color: black;
+  font-size: 12px;
+  margin-bottom: -30px;
+}
