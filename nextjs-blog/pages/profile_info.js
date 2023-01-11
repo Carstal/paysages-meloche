@@ -3,68 +3,93 @@ import styles from '../styles/Home.module.css';
 import clientPromise from "../lib/mongodb";
 import Profile from './profile';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import "../src/Translation/i18n";
+import i18n from "i18next";
 
 export default function UserInfo({ user, data }) {
-    return (
-      user && (
-        <div className={styles.container}>
+  const [language, setLanguage] = useState('en');
+
+  const { t } = useTranslation();
+
+
+  const handleOnclick = (e) => {
+    e.preventDefault();
+    setLanguage(e.target.value);
+    if (i18n && i18n.changeLanguage) {
+      i18n.changeLanguage(e.target.value);
+    }
+  }
+  return (
+    user && (
+      <div className={styles.container}>
         <Head>
-          <title>User Information</title>
+          <title>{t("TitleProfile")}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className='services'>
-          <div id='paysagement'>
-            <h3>Paysagement</h3>
+          <div className='logo'>
+            <h2>Paysages Meloche</h2>
           </div>
-          <div id='pelouse'>
-            <h3>Pelouse</h3>
+          <div className='services'>
+            <div id='paysagement'>
+              <h3>{t("Paysagement")}</h3>
+            </div>
+            <div id='pelouse'>
+              <h3>{t("Pelouse")}</h3>
+            </div>
+            <div id='deneigement'>
+              <h3>{t("Deneigement")}</h3>
+
+            </div>
           </div>
-          <div id='deneigement'>
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        {Profile()}         
+          {Profile()}
+          <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
+            French
+          </button>
+          <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
+            English
+          </button>
+
+
         </header>
         <main>
           <h1 className={styles.title}>
-            User Information
+            {t("TitleProfile")}
           </h1>
-          <br/>
+          <br />
           <div className="container">
-                <div className="card mt-5">
-                    <form className="card-body" action="/api/form" method="POST">
-                    <input type="hidden" className="form-control" value={data?.email} id="email" name="email"/>
-                        <div className="form-group mb-3">
-                            <label className="mb-2"><strong>First Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.first_name} id="first_name" name="first_name" required/>
-                        </div>
-
-                        <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Last Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.last_name} id="last_name" name="last_name" required/>
-                        </div>
-
-                        <div className="form-group mb-3">
-                            <label className="mb-2"><strong>Phone Number:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.phone_number} id="phone_number" name="phone_number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title='Please enter phone number in the following format: 000-000-0000.'/>
-                        </div>
-
-                        <div className="form-group mt-3">
-                            <button type="submit" class={styles.submitbutton}>Update</button>
-                        </div>
-                    </form>
+            <div className="card mt-5">
+              <form className="card-body" action="/api/form" method="POST">
+                <input type="hidden" className="form-control" value={data?.email} id="email" name="email" />
+                <div className="form-group mb-3">
+                  <label className="mb-2"><strong>{t("FirstName")}</strong></label>
+                  <input type="text" className="form-control" defaultValue={data?.first_name} id="first_name" name="first_name" required />
                 </div>
+
+                <div className="form-group mb-3">
+                  <label className="mb-2"><strong>{t("LastName")}</strong></label>
+                  <input type="text" className="form-control" defaultValue={data?.last_name} id="last_name" name="last_name" required />
+                </div>
+
+                <div className="form-group mb-3">
+                  <label className="mb-2"><strong>{t("PhoneNumber")}</strong></label>
+                  <input type="text" className="form-control" defaultValue={data?.phone_number} id="phone_number" name="phone_number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title='Please enter phone number in the following format: 000-000-0000.' />
+                </div>
+
+                <div className="form-group mt-3">
+                  <button type="submit" class={styles.submitbutton}>{t("Update")}</button>
+                </div>
+              </form>
             </div>
+          </div>
         </main>
-  
+
         <footer>
           <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023</p>
+            <br />
+            Champlain College ECP Final Project 2022-2023</p>
         </footer>
 
         <style jsx>{`
@@ -184,7 +209,7 @@ export default function UserInfo({ user, data }) {
         }
       `}</style>
 
-      <style jsx global>{`
+        <style jsx global>{`
         html,
         body {
           padding: 0;
@@ -197,8 +222,8 @@ export default function UserInfo({ user, data }) {
           box-sizing: border-box;
         }
       `}
-      </style>
-    </div>)
+        </style>
+      </div>)
   )
 }
 
@@ -212,7 +237,7 @@ export const getServerSideProps = withPageAuthRequired({
       email: session.user.email
     });
     // access the user session
-    
+
     return { props: { data: JSON.parse(JSON.stringify(post)) } };
   }
 });

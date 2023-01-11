@@ -1,31 +1,58 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
+import Profile from './profile';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import "../src/Translation/i18n";
+import i18n from "i18next";
+
 
 export default function Home() {
+  const [language, setLanguage] = useState('en');
+
+  const { t } = useTranslation();
+
+
+  const handleOnclick = (e) => {
+    e.preventDefault();
+    setLanguage(e.target.value);
+    if (i18n && i18n.changeLanguage) {
+      i18n.changeLanguage(e.target.value);
+    }
+  }
   return (
     <div className={styles.container}>
       <Head>
-        <title>Paysages Meloche</title>
+        <title>{t("EmailV")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
         <div className='logo'>
           <h2>Paysages Meloche</h2>
         </div>
+        {Profile()}
+        <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
+          French
+        </button>
+        <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
+          English
+        </button>
+
+
       </header>
       <main>
         <h1 className={styles.title}>
-        Email verification required to continue.
+          {t("EmailV")}
         </h1>
         <button class={styles.loginbutton}>
           <a href="/api/auth/login">Try Again</a>
-        </button> 
+        </button>
       </main>
 
       <footer>
         <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-        <br />
-        Champlain College ECP Final Project 2022-2023</p>
+          <br />
+          Champlain College ECP Final Project 2022-2023</p>
       </footer>
 
       <style jsx>{`
@@ -63,6 +90,8 @@ export default function Home() {
           display: flex;
           justify-content: center;
           width: 15vw;
+          float: right;
+
         }
         .services{
           display: flex;
@@ -79,6 +108,7 @@ export default function Home() {
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
           font-weight: bold;
+          float: right;
         }
         main {
           padding: 5rem 0;
