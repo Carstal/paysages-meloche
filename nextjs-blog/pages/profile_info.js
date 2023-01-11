@@ -238,6 +238,8 @@ export const getServerSideProps = withPageAuthRequired({
     });
     // access the user session
 
+
+
     return { props: { data: JSON.parse(JSON.stringify(post)) } };
   }
 });
