@@ -1,7 +1,6 @@
 export default function handler(req, res) {
     // Get data submitted in request's body.
     const body = req.body
-    //console.log('body: ', body)
 
     fetch('http://localhost:3000/api/updateClient', {
       method: 'PATCH',
