@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
 import clientPromise from "../lib/mongodb";
-import Profile from './profile';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
 export default function UserInfo({ user, data }) {
@@ -26,39 +25,39 @@ export default function UserInfo({ user, data }) {
           <div id='deneigement'>
             <h3>Deneigement</h3>
           </div>
-        </div>
-        {Profile()}         
+        </div>        
         </header>
         <main>
           <h1 className={styles.title}>
-            User Information
+            Account Creation
           </h1>
           <br/>
           <div className="container">
                 <div className="card mt-5">
-                    <form className="card-body" action="/api/form" method="POST">
+                    <form className="card-body" action="/api/newClientForm" method="POST">
                     <input type="hidden" className="form-control" value={data?.email} id="email" name="email"/>
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>First Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.first_name} id="first_name" name="first_name" required/>
+                            <input type="text" className="form-control" id="first_name" name="first_name" required/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Last Name:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.last_name} id="last_name" name="last_name" required/>
+                            <input type="text" className="form-control" id="last_name" name="last_name" required/>
                         </div>
 
                         <div className="form-group mb-3">
                             <label className="mb-2"><strong>Phone Number:</strong></label>
-                            <input type="text" className="form-control" defaultValue={data?.phone_number} id="phone_number" name="phone_number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title='Please enter phone number in the following format: 000-000-0000.'/>
+                            <input type="text" className="form-control" id="phone_number" name="phone_number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title='Please enter phone number in the following format: 000-000-0000.'/>
                         </div>
 
                         <div className="form-group mt-3">
-                            <button type="submit" class={styles.submitbutton}>Update</button>
+                            <button type="submit" class={styles.submitbutton}>Complete Profile</button>
                         </div>
                     </form>
                 </div>
             </div>
+            <p class={styles.note}>*Note that completing the account creation will bring you back to the log in screen.</p>
         </main>
   
         <footer>

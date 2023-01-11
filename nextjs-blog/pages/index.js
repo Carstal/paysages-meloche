@@ -165,7 +165,7 @@ export async function getServerSideProps(ctx) {
     return {
       redirect: {
         permanent: false,
-        destination: "/profile_info",
+        destination: "/create_profile",
       },
       props:{},
     };
@@ -174,6 +174,6 @@ export async function getServerSideProps(ctx) {
     console.log("An error occured")
   } 
   return{
-    props: {}
+      props:{}
   }
 }
