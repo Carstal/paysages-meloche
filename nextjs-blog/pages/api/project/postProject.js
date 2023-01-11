@@ -1,5 +1,5 @@
-import { IncrementalCache } from "next/dist/server/lib/incremental-cache";
-import clientPromise from "../../lib/mongodb";
+//import { IncrementalCache } from "next/dist/server/lib/incremental-cache";
+import clientPromise from "../../../lib/mongodb";
 
 export default async (req, res) => {
   try {

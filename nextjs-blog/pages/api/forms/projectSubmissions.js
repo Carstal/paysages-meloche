@@ -6,7 +6,7 @@ export default function handler(req, res) {
     //console.log(body + "--------------------------------------------------")
     console.log('body: ', body)
 
-    fetch('http://localhost:3000/api/postProject', {
+    fetch('http://localhost:3000/api/project/postProject', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
