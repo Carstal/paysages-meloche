@@ -65,8 +65,8 @@ export const deleteVisit = (req,res) => {
 
 
 //Get Visit By Id
-export const getVisit = (req,res) => {
-    const visitId = req.params.visitId;
+export const getVisitById = (req,res) => {
+    const visitId = req.params.id;
     const visit = getVisitByVisitId(visitId);
 
     return res.json(visit);
@@ -81,8 +81,10 @@ export const getProjectVisits = (req,res) => {
 };
 
 //Get All Visits
-export const getVisits = (req,res) => {
+export const getVisits = () => {
     const allVisits = getAllVisits();
+    console.log("--------Visits From controller--------");
+    console.log(allVisits);
 
-    return res.json(allVisits);
+    return allVisits;
 };
