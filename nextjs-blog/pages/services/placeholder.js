@@ -1,7 +1,5 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css';
-import Profile from './profile';
-import { getSession } from '@auth0/nextjs-auth0';
+import styles from '../../styles/Home.module.css';
 
 export default function Home() {
   return (
@@ -25,7 +23,11 @@ export default function Home() {
             <h3>Deneigement</h3>
           </div>
         </div>
-        {Profile()}
+        <div className='login'>
+          <button>
+            Login
+          </button>
+        </div>
       </header>
       <main>
         <h1 className={styles.title}>
@@ -53,7 +55,6 @@ export default function Home() {
           background: #222222;
           color: #FFFFFF;
         }
-        
         .services {
           display: flex;
           flex-direction: row;
@@ -151,29 +152,4 @@ export default function Home() {
       `}</style>
     </div>
   )
-}
-
-export async function getServerSideProps(ctx) {
-  //get session info
-  const session = await getSession(ctx.req, ctx.res);
-  var firstLogin = "";
-  //if the session was ever found, get its firstlogin variable
-  try {
-  firstLogin = session.user.firstlogin
-  if (firstLogin == "true"){
-    //if it is the user's first login, redirect to the user info screen
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/create_profile",
-      },
-      props:{},
-    };
-  }
-  } catch {
-    console.log("An error occured")
-  } 
-  return{
-      props:{}
-  }
 }

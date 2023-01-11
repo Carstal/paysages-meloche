@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import Profile from './profile';
-import { getSession } from '@auth0/nextjs-auth0';
 
 export default function Home() {
   return (
@@ -14,27 +12,14 @@ export default function Home() {
         <div className='logo'>
           <h2>Paysages Meloche</h2>
         </div>
-        <div className='services'>
-          <div id='paysagement'>
-            <h3>Paysagement</h3>
-          </div>
-          <div id='pelouse'>
-            <h3>Pelouse</h3>
-          </div>
-          <div id='deneigement'>
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        {Profile()}
       </header>
       <main>
         <h1 className={styles.title}>
-          Paysages Meloche
+        Email verification required to continue.
         </h1>
-
-        <p className={styles.description}>
-          Currently Under Maintenance
-        </p>
+        <button class={styles.loginbutton}>
+          <a href="/api/auth/login">Try Again</a>
+        </button> 
       </main>
 
       <footer>
@@ -151,29 +136,4 @@ export default function Home() {
       `}</style>
     </div>
   )
-}
-
-export async function getServerSideProps(ctx) {
-  //get session info
-  const session = await getSession(ctx.req, ctx.res);
-  var firstLogin = "";
-  //if the session was ever found, get its firstlogin variable
-  try {
-  firstLogin = session.user.firstlogin
-  if (firstLogin == "true"){
-    //if it is the user's first login, redirect to the user info screen
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/create_profile",
-      },
-      props:{},
-    };
-  }
-  } catch {
-    console.log("An error occured")
-  } 
-  return{
-      props:{}
-  }
 }
