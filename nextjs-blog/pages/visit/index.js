@@ -85,6 +85,12 @@ export default function Home({visits}) {
         <div id="root">
 
         </div>
+        <div className="addBtnDiv">
+          <button className="addBtn" name="addVisit" onClick={() => router.push({
+            pathname: '/visit/add'})}>
+              Add Visit
+          </button>
+        </div>
       </main>
 
       <footer>
@@ -146,6 +152,24 @@ export default function Home({visits}) {
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
           font-weight: bold;
+        }
+        .addBtnDiv {
+          display: flex;
+          width: 50%;
+          align-items: center;
+          justify-content: center;
+        }
+        .addBtn {
+          height: 100px;
+          width: 60%;
+          background: #00b45d;
+          border-radius: 10px;
+          color: #ffffff;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+          font-weight: bold;
+          font-size: 2em;
         }
         .services {
           display: flex;
