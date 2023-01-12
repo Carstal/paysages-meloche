@@ -30,7 +30,7 @@ export default function Home({visits}) {
 
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
-    const formattedDate = dd + '/' + mm + '/' + yyyy;
+    const formattedDate = yyyy + '-' + mm + '-' + dd;
     console.log(formattedDate);
 
     return formattedDate;

@@ -10,15 +10,25 @@ export async function getServerSideProps(context) {
   console.log(url);
   const res = await fetch(url);
 
-  const visit = await res.json();
+  const data = await res.json();
 
-  return { props: { visit } };
+  return { props: { data }};
 }
 
-export default function Home({visit}) {
+export default function Home({data}) {
   function dateFormat(date){
     let newDate = new Date(date);
-    return newDate;
+    let dd = newDate.getDate()+1;
+    let mm = newDate.getMonth()+1;
+    const yyyy = newDate.getFullYear();
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+    const formattedDate = yyyy + '-' + mm + '-' + dd;
+    console.log(formattedDate);
+
+    return formattedDate;
+    // return newDate;
   }
   return (
     <div className={styles.container}>
@@ -49,8 +59,8 @@ export default function Home({visit}) {
         <h2 className={styles.title}>Visit Information</h2>
         <div className="container">
           <div className="VisitNoEdit">
-            <div className="VisitId">Visit ID: {visit.visit_id}</div>
-            <div className="ProjectId">Project ID: {visit.project_id}</div>
+            <div className="VisitId">Visit ID: {data.visit.visit_id}</div>
+            <div className="ProjectId">Project ID: {data.visit.project_id}</div>
           </div>
           <div className="card mt-5">
             <form className="card-body" action="/api/visit/form" method="POST">
@@ -59,14 +69,14 @@ export default function Home({visit}) {
                 className="form-control"
                 id="visitId"
                 name="visitId"
-                value={visit.visit_id}
+                value={data.visit.visit_id}
               />
               <input
                 type="hidden"
                 className="form-control"
                 id="projectId"
                 name="projectId"
-                value={visit.project_id}
+                value={data.visit.project_id}
               />
               <div className="form-group mb-3">
                 <label className="mb-2">
@@ -77,7 +87,7 @@ export default function Home({visit}) {
                   className="form-control"
                   id="employees"
                   name="employees"
-                  defaultValue={visit.employee_ids}
+                  defaultValue={data.visit.employee_ids}
                 />
               </div>
 
@@ -90,7 +100,7 @@ export default function Home({visit}) {
                   className="form-control"
                   id="startDate"
                   name="startDate"
-                  defaultValue={dateFormat(visit.start_date)}
+                  defaultValue={dateFormat(data.visit.start_date)}
                 />
               </div>
 
@@ -103,7 +113,7 @@ export default function Home({visit}) {
                   className="form-control"
                   id="endDate"
                   name="endDate"
-                  defaultValue={dateFormat(visit.end_date)}
+                  defaultValue={dateFormat(data.visit.end_date)}
                 />
               </div>
 
