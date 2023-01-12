@@ -65,9 +65,9 @@ export default function Home({visits}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
+      <div className='logo'>
+          <h2><a href="/">Paysages Meloche</a></h2>
+</div>
         <div className='services'>
           <div id='paysagement'>
             <h3>{t("Paysagement")}</h3>
@@ -140,6 +140,10 @@ export default function Home({visits}) {
         #visitContainer {
           display: flex;
           flex-direction: column;
+        }
+        h2 a {
+          text-decoration: none;
+          color:white;
         }
         .visit {
           display: flex;

@@ -37,9 +37,9 @@ export default function Home({visits}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
+      <div className='logo'>
+          <h2><a href="/">Paysages Meloche</a></h2>
+</div>
         <div className='services'>
           <div id='paysagement'>
             <h3>{t("Paysagement")}</h3>
@@ -116,6 +116,10 @@ export default function Home({visits}) {
           flex-direction: row;
           border-radius: 25px;
           margin: 15px;
+        }
+        h2 a {
+          text-decoration: none;
+          color:white;
         }
         .info {
           padding-left: 20px;

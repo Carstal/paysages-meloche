@@ -89,7 +89,10 @@ export default function Home() {
           background: #222222;
           color: #FFFFFF;
         }
-        
+        h2 a {
+          text-decoration: none;
+          color:white;
+        }
         .services {
           display: flex;
           flex-direction: row;

@@ -36,9 +36,9 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <header>
-          <div className='logo'>
-            <h2>Paysages Meloche</h2>
-          </div>
+        <div className='logo'>
+          <h2><a href="/">Paysages Meloche</a></h2>
+</div>
           <div className='services'>
             <div id='paysagement'>
               <h3>{t("Paysagement")}</h3>
@@ -112,6 +112,10 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
              background: #222222;
              color: #FFFFFF;
            }
+           h2 a {
+            text-decoration: none;
+            color:white;
+          }
            .services {
              display: flex;
              flex-direction: row;

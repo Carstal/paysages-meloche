@@ -28,9 +28,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
+      <div className='logo'>
+          <h2><a href="/">Paysages Meloche</a></h2>
+</div>
         {Profile()}
         <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
           Français
@@ -66,7 +66,10 @@ export default function Home() {
           background: #222222;
           color: #FFFFFF;
         }
-        
+        h2 a {
+          text-decoration: none;
+          color:white;
+        }
         .services {
           display: flex;
           flex-direction: row;
