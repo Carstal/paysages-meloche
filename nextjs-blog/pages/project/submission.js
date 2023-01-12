@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css';
-import clientPromise from "../lib/mongodb";
-import Profile from './profile';
+import styles from '../../styles/Home.module.css';
+import clientPromise from "../../lib/mongodb";
+// import Profile from './profile';
+import Profile from '../profile/index';
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import "../src/Translation/i18n";
+import "../../src/Translation/i18n";
 import i18n from "i18next";
 
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
@@ -64,7 +65,7 @@ export default function Project({ data }) {
         </h1>
         <div className="container">
           <div className="card mt-5">
-            <form className="card-body" action="/api/projectSubmissions" method="POST">
+            <form className="card-body" action="/api/forms/projectSubmissions" method="POST">
               <input type="hidden" className="form-control" defaultValue={data?.email} id="email" name="email" />
 
 
@@ -245,7 +246,7 @@ export default function Project({ data }) {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  returnTo: '/index',
+  returnTo: '/project/submission',
   async getServerSideProps(ctx) {
     const client = await clientPromise;
     const db = client.db("FinalProject");

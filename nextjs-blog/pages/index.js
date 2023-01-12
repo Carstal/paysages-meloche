@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
-import Profile from './profile';
+// import Profile from './profile';
+import Profile from './/profile/index';
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default function Home() {
@@ -165,7 +166,7 @@ export async function getServerSideProps(ctx) {
     return {
       redirect: {
         permanent: false,
-        destination: "/create_profile",
+        destination: "/profile/create",
       },
       props:{},
     };

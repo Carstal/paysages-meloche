@@ -1,11 +1,12 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css';
-import clientPromise from "../lib/mongodb";
+import styles from '../../styles/Home.module.css';
+import clientPromise from "../../lib/mongodb";
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
-import Profile from './profile';
+import Profile from '../profile/index';
+//import Profile from '.';
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import "../src/Translation/i18n";
+import "../../src/Translation/i18n";
 import i18n from "i18next";
 
 
@@ -62,7 +63,7 @@ export default function UserInfo({ user, data }) {
           <br/>
           <div className="container">
                 <div className="card mt-5">
-                    <form className="card-body" action="/api/newClientForm" method="POST">
+                    <form className="card-body" action="/api/forms/newClientForm" method="POST">
                     <input type="hidden" className="form-control" value={data?.email} id="email" name="email"/>
                         <div className="form-group mb-3">
                         <label className="mb-2"><strong>{t("FirstName")}</strong></label>

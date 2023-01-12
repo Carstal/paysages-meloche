@@ -1,11 +1,12 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css';
-import clientPromise from "../lib/mongodb";
-import Profile from './profile';
+import styles from '../../styles/Home.module.css';
+import clientPromise from "../../lib/mongodb";
+// import Profile from '.';
+import Profile from '../profile/index';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import "../src/Translation/i18n";
+import "../../src/Translation/i18n";
 import i18n from "i18next";
 
 export default function UserInfo({ user, data }) {
@@ -61,7 +62,7 @@ export default function UserInfo({ user, data }) {
           <br />
           <div className="container">
             <div className="card mt-5">
-              <form className="card-body" action="/api/form" method="POST">
+              <form className="card-body" action="/api/forms/form" method="POST">
                 <input type="hidden" className="form-control" value={data?.email} id="email" name="email" />
                 <div className="form-group mb-3">
                   <label className="mb-2"><strong>{t("FirstName")}</strong></label>
@@ -228,7 +229,7 @@ export default function UserInfo({ user, data }) {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-  returnTo: '/',
+  returnTo: '/profile/info',
   async getServerSideProps(ctx) {
     const client = await clientPromise;
     const db = client.db("FinalProject");
@@ -237,6 +238,8 @@ export const getServerSideProps = withPageAuthRequired({
       email: session.user.email
     });
     // access the user session
+
+
 
     return { props: { data: JSON.parse(JSON.stringify(post)) } };
   }
