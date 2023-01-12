@@ -61,12 +61,7 @@ export default function Home({data}) {
       <main>
         <h2 className={styles.title}>New Visit</h2>
         <div className="container">
-          {/* <div className="VisitNoEdit">
-            <div className="VisitId">Visit ID: {data.visit.visit_id}</div>
-            <div className="ProjectId">Project ID: {data.visit.project_id}</div>
-          </div> */}
           <div className="card mt-5">
-            {/* <form className="card-body" action="/api/visit/form" method="POST"> */}
             <form className="card-body" action="/api/visit/add" method="POST">
               <div className="form-group mb-3">
                 <label className="mb-2">
