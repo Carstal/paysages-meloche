@@ -51,7 +51,7 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                                   <nav>
                                   <a href="#" class="hover-underline-animation">
                                  <td onClick={() => router.push({
-                                pathname: '/project/[id]', query: { id: val.project }})}>{val.project}</td>
+                                pathname: '/project/[id]', query: { id: val._id }})}>{val.project}</td>
                                  </a>
                                  </nav>
                                  <td>{val.description}</td>
