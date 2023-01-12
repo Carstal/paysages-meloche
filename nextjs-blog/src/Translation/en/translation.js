@@ -19,7 +19,10 @@ export const TRANSLATIONS_EN = {
     PhoneNumber:"Phone Number",
     EmailV: " Email verification required to continue.",
     AccountCre: "Account Creation",
-    Complet: "Account Creation"
+    Complet: "Account Creation",
+    CompProf: "Complete Profile",
+    Note: "*Note that completing the account creation will bring you back to the log in screen.",
+    TryAgain: "Try Again"
 
 
 

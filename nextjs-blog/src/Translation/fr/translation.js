@@ -3,7 +3,7 @@ export const TRANSLATIONS_FR = {
     ProjectSubmissionTitle:"Soumission de project",
     Paysagement:"Paysagement",
     Pelouse: "Pelouse",
-    Deneigement:"Deneigement",
+    Deneigement:"Déneigement",
     ProjectType: "Type de Project",
     Size1: "Longeur/Hauteur",
     Size2: "Largeur",
@@ -11,14 +11,17 @@ export const TRANSLATIONS_FR = {
     Maintenance: "En maintenance",
     Submit: "Envoyer",
     Name: "Nom",
-    TitleProfile:"Informations d'utilisateur",
+    TitleProfile:"Information d'utilisateur",
     Update: "Sauvegarder",
     FirstName:"Prénom",
     LastName:"Nom",
     PhoneNumber:"Téléphone",
-    EmailV: "Veuillez vérifier votre address courriel avant de continuer.",
-    AccountCre: "Creation De Profile",
-    Complet: "Sauvegarder"
+    EmailV: "Veuillez vérifier votre addresse courriel avant de continuer.",
+    AccountCre: "Creation du Profil",
+    Complet: "Sauvegarder",
+    CompProf: "Compléter Profil",
+    Note: "*Veuillez notez que la complétion du compte vous ramènera à l'écran de connexion.",
+    TryAgain: "Réessayer"
 
 
 

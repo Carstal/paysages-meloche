@@ -35,18 +35,7 @@ export default function UserInfo({ user, data }) {
             <h2>Paysages Meloche</h2>
           </div>
           <div className='services'>
-            <div id='paysagement'>
-              <h3>{t("Paysagement")}</h3>
-            </div>
-            <div id='pelouse'>
-              <h3>{t("Pelouse")}</h3>
-            </div>
-            <div id='deneigement'>
-              <h3>{t("Deneigement")}</h3>
-
-            </div>
           </div>
-          {Profile()}
           <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
             French
           </button>
@@ -81,12 +70,12 @@ export default function UserInfo({ user, data }) {
                         </div>
 
                         <div className="form-group mt-3">
-                            <button type="submit" class={styles.submitbutton}>{t("Complet")}</button>
+                            <button type="submit" class={styles.submitbutton}>{t("CompProf")}</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <p class={styles.note}>*Note that completing the account creation will bring you back to the log in screen.</p>
+            <p class={styles.note}>{t("Note")}</p>
         </main>
   
         <footer>
