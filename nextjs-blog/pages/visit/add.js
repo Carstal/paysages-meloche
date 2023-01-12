@@ -1,15 +1,38 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
+import { useRouter } from "next/router";
 
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/visit");
-  const visits = await res.json();
 
-  return { props: { visits }};
+export async function getServerSideProps(context) {
+  const projectId = context.params.id;
+  console.log("Project Id: " + projectId)
+  const api = 'http://localhost:3000/api/visit/';
+  const url = api + projectId;
+  console.log(url);
+  const res = await fetch(url);
+
+  const data = await res.json();
+
+  return { props: { data }};
 }
 
-export default function Home({visits}) {
+export default function Home({data}) {
+  // const router = useRouter()
+  // function dateFormat(date){
+  //   let newDate = new Date(date);
+  //   let dd = newDate.getDate()+1;
+  //   let mm = newDate.getMonth()+1;
+  //   const yyyy = newDate.getFullYear();
+
+  //   if (dd < 10) dd = '0' + dd;
+  //   if (mm < 10) mm = '0' + mm;
+  //   const formattedDate = yyyy + '-' + mm + '-' + dd;
+  //   console.log(formattedDate);
+
+  //   return formattedDate;
+    // return newDate;
+    // }
   return (
     <div className={styles.container}>
       <Head>
@@ -36,23 +59,81 @@ export default function Home({visits}) {
         </div>
       </header>
       <main>
-        <h2 className={styles.title}>All Visits</h2>
-        <div id="visitContainer">
-          {visits.map((visit) =>(
-          <div className="visit">
-            <div className="info">
-              <div className="vrRow">Visit:{visit.visit_id} Project: {visit.project_id}</div>
-              <div className="empRow">Employee(s): {visit.employee_ids}</div>
-              <div className="startRow">Start Date: {visit.start_date}</div>
-              <div className="endRow">End Date: {visit.end_date}</div>
-            </div>
-            <div className="editBtnDiv">
-              <button className="editBtn" name="edit" value={visit.visit_id}>
-                Edit
-              </button>
-            </div>
+        <h2 className={styles.title}>New Visit</h2>
+        <div className="container">
+          {/* <div className="VisitNoEdit">
+            <div className="VisitId">Visit ID: {data.visit.visit_id}</div>
+            <div className="ProjectId">Project ID: {data.visit.project_id}</div>
+          </div> */}
+          <div className="card mt-5">
+            {/* <form className="card-body" action="/api/visit/form" method="POST"> */}
+            <form className="card-body" action="/api/visit/add" method="POST">
+              <div className="form-group mb-3">
+                <label className="mb-2">
+                  <strong>Visit Id:</strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="visitId"
+                  name="visitId"
+                />
+              </div>
+              <div className="form-group mb-3">
+                <label className="mb-2">
+                  <strong>Project Id:</strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="projectId"
+                  name="projectId"
+                />
+              </div>
+              <div className="form-group mb-3">
+                <label className="mb-2">
+                  <strong>Employees:</strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="employees"
+                  name="employees"
+                  defaultValue={data.visit.employee_ids}
+                />
+              </div>
+
+              <div className="form-group mb-3">
+                <label className="mb-2">
+                  <strong>Start Date:</strong>
+                </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="startDate"
+                  name="startDate"
+                />
+              </div>
+
+              <div className="form-group mb-3">
+                <label className="mb-2">
+                  <strong>End Date:</strong>
+                </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="endDate"
+                  name="endDate"
+                />
+              </div>
+
+              <div className="form-group mt-3">
+                <button type="submit" className={styles.submitButton}>
+                  Create Visit
+                </button>
+              </div>
+            </form>
           </div>
-          ))}
         </div>
       </main>
 
@@ -86,7 +167,6 @@ export default function Home({visits}) {
           color: #111111;
           flex-direction: row;
           border-radius: 25px;
-          margin: 15px;
         }
         .info {
           padding-left: 20px;
@@ -212,6 +292,15 @@ export default function Home({visits}) {
           color: #ffffff;
           width: 100vw;
         }
+        .form-group mb-3, textarea, input{
+          display: block;
+          width: 100%;
+          padding: .5rem .8rem .5rem .8rem;
+          margin: .9vw 0 ;
+          border:0;
+          border-radius: 5px;
+          font-size: 20px;
+      }
         footer {
           width: 100vw;
           height: 100px;
@@ -258,11 +347,3 @@ export default function Home({visits}) {
     </div>
   );
 }
-
-// function editVisit(){
-  // const id = visit.visit_id;
-//   const id = 1;
-//   const url = "http://localhost:3000/visit/"+id;
-
-//   window.location.reload(url);
-// }
