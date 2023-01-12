@@ -3,6 +3,7 @@ import styles from '../../styles/Home.module.css';
 import clientPromise from "../../lib/mongodb";
 import Profile from '../profile';
 import {useRouter} from "next/router";
+var mongoose = require('mongoose');
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
 
@@ -220,10 +221,12 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
       const session = await getSession(ctx.req, ctx.res);
 
       const projectName = ctx.params.id
+      
 
+      var objectId = mongoose.Types.ObjectId(projectName);
 
   
-      const post = await db.collection("Project").findOne({project: projectName});
+      const post = await db.collection("Project").findOne({_id: objectId});
       // access the user session
 
       console.log(post)
