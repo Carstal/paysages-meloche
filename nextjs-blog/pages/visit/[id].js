@@ -2,6 +2,16 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 
 
+function updateVisit(){
+  // TODO: grab form values and pass to api
+  return null;
+}
+function deleteVisit(id){
+  // TODO: pass id to api
+  return null;
+}
+
+
 export async function getServerSideProps(context) {
   const projectId = context.params.id;
   console.log("Project Id: " + projectId)

@@ -1,12 +1,14 @@
 import { deleteVisit } from "../../../src/components/visit/visit_controller"
 
-export default function handler(req, res) {
-    // Get data submitted in request's body.
-    const body = req.body
-    //console.log(body + "--------------------------------------------------")
-    console.log('body: ', body)
+export default async function handler(req, res) {
 
-    const updated = deleteVisit(req, res)
+    const { id } = req.query
+    const visit_id = { id }.id;
+
+    console.log("Request value");
+    console.log(visit_id);
+
+    const visit = await deleteVisit(visit_id);
 
     // fetch('http://localhost:3000/api/updateClient', {
     //   method: 'PATCH',
@@ -17,5 +19,6 @@ export default function handler(req, res) {
     // })
 
     //res.status(200).json({ data: `${body.first_name} ${body.last_name}` })
-    res.redirect('/')
+
+    res.status(200).json({visit});
 }
