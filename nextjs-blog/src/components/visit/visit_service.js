@@ -52,33 +52,35 @@ export async function deleteVisitById(id) {
 }
 
 //Update Visit
-// export function updateVisit(vis) {
-//   const result = client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .findOne({ visit_id: vis.visit_id });
+export async function updateVisit(vis) {
+  console.log("----SERVICE UpdateVisit STARTED-----");
+  const intId = parseInt(vis.visit_id);
+  const result = client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .findOne({ visit_id: intId });
 
-//   if (result) {
-//     console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
-//     console.log(result);
-//     client
-//       .db("ECP-CalendarDummy")
-//       .collection("dummy-calendar")
-//       .updateOne({ visit_id: vis.visit_id }, { $set: vis });
-//     console.log(`Listing updated`);
-//     const newResult = client
-//       .db("ECP-CalendarDummy")
-//       .collection("dummy-calendar")
-//       .findOne({ visit_id: vis.visit_id });
-//     console.log(newResult);
+  if (result) {
+    console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
+    console.log(result);
+    client
+      .db("ECP-CalendarDummy")
+      .collection("dummy-calendar")
+      .updateOne({ visit_id: intId }, { $set: vis });
+    console.log(`Listing updated`);
+    const newResult = client
+      .db("ECP-CalendarDummy")
+      .collection("dummy-calendar")
+      .findOne({ visit_id: intId });
+    console.log(newResult);
 
-//     return newResult;
-//   } else {
-//     console.log("No listing with matching id");
+    return newResult;
+  } else {
+    console.log("No listing with matching id");
 
-//     return null;
-//   }
-// }
+    return null;
+  }
+}
 
 //Get Visit by visit_Id
 export async function getVisitByVisitId(id) {

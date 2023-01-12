@@ -90,7 +90,7 @@ export default function Home({data}) {
           </div>
           <div className="card mt-5">
             {/* <form className="card-body" action="/api/visit/form" method="POST"> */}
-            <form className="card-body" method="POST">
+            <form className="card-body" action="/api/visit/form" method="POST">
               <input
                 type="hidden"
                 className="form-control"
@@ -145,7 +145,7 @@ export default function Home({data}) {
               </div>
 
               <div className="form-group mt-3">
-                <button className={styles.submitButton} onClick="">
+                <button type="submit" className={styles.submitButton}>
                   Update
                 </button>
               </div>

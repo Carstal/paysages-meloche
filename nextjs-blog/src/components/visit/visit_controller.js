@@ -43,12 +43,20 @@ export const createVisit = (req,res) => {
 };
 
 //Update Visit
-export const updateVisitInfo = (req,res) => {
-    const visitId = req.params.visitId;
-    const projectId = req.params.projectId;
-    const employeeIds = req.params.employeeIds;
-    const startDate = req.params.startDate;
-    const endDate = req.params.endDate;
+export const updateVisit = (req,res) => {
+    console.log("-------CONTROLLER UpdateVisit STARTED-------");
+
+    console.log("----CONTROLLER - Values Provided-----");
+    const visitId = req.body.visitId;
+    console.log(visitId);
+    const projectId = req.body.projectId;
+    console.log(projectId);
+    const employeeIds = req.body.employeeIds;
+    console.log(employeeIds);
+    const startDate = req.body.startDate;
+    console.log(startDate);
+    const endDate = req.body.endDate;
+    console.log(endDate);
 
     const newVisit = new Visit(visitId, projectId, employeeIds, startDate, endDate);
 
@@ -59,7 +67,7 @@ export const updateVisitInfo = (req,res) => {
 
 //Delete Visit By Id
 export const deleteVisit = (req,res) => {
-    console.log("passed")
+    console.log("-------CONTROLLER DeleteVisit STARTED-------");
     // console.log(req.params);
     // const data = req.body;
     // console.log(data);
@@ -88,6 +96,7 @@ export const deleteVisit = (req,res) => {
 
 //Get Visit By Id
 export const getVisit = (req,res) => {
+    console.log("-------CONTROLLER GetVisit STARTED-------");
     const visitId = req.params.id;
     console.log("----CONTROLLER - ID Provided-----");
     console.log(visitId);
