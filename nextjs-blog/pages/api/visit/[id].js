@@ -3,13 +3,13 @@ import { getVisitByVisitId } from "../../../src/components/visit/visit_service";
 export default async function handler(req,res){
 
     const { id } = req.query;
-    const project_id = { id }.id;
+    const visit_id = { id }.id;
 
     console.log("Request value");
-    console.log(project_id);
+    console.log(visit_id);
     // console.log({id});
 
-    const visit = await getVisitByVisitId(project_id);
+    const visit = await getVisitByVisitId(visit_id);
     // const visit = await getVisitByVisitId(req.params.id);
 
     // res.status(200).json({
