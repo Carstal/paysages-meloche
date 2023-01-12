@@ -33,7 +33,7 @@ export default function Home() {
         </div>
         {Profile()}
         <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-          French
+          Français
         </button>
         <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
           English

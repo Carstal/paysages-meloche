@@ -13,11 +13,14 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 export default function Project({ data }) {
   const [language, setLanguage] = useState('en');
 
+
   const { t } = useTranslation();
 
 
   const handleOnclick = (e) => {
     e.preventDefault();
+    
+  
     setLanguage(e.target.value);
     if (i18n && i18n.changeLanguage) {
       i18n.changeLanguage(e.target.value);
@@ -49,10 +52,11 @@ export default function Project({ data }) {
         {Profile()}
         <div className='login'>
           <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-            French
+          Français
           </button>
           <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-            English
+          English
+
           </button>
 
         </div>
@@ -94,7 +98,7 @@ export default function Project({ data }) {
               </div>
 
               <div className="form-group mb-3">
-                <label className="mb-2"><strong>{t("Project")}</strong></label>
+                <label className="mb-2"><strong>{t("Description")}</strong></label>
                 <textarea name="description" id="description" type="text" className="form-control" required />
               </div>
 

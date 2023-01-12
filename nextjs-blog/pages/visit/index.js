@@ -1,6 +1,12 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
+// import Profile from './profile';
+import Profile from '../profile/index';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import "../../src/Translation/i18n";
+import i18n from "i18next";
 
 
 export async function getServerSideProps() {
@@ -13,6 +19,22 @@ export async function getServerSideProps() {
 }
 
 export default function Home({visits}) {
+  const [language, setLanguage] = useState('en');
+
+
+  const { t } = useTranslation();
+
+
+  const handleOnclick = (e) => {
+    e.preventDefault();
+    
+  
+    setLanguage(e.target.value);
+    if (i18n && i18n.changeLanguage) {
+      i18n.changeLanguage(e.target.value);
+    }
+  }
+
   const router = useRouter()
   function formatEmployees(emp_ids){
     var formattedEmployees = ""
@@ -35,29 +57,39 @@ export default function Home({visits}) {
 
     return formattedDate;
   }
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Paysages Meloche</title>
+        <title>{t("ProjectSubmissionTitle")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <div className="logo">
+        <div className='logo'>
           <h2>Paysages Meloche</h2>
         </div>
-        <div className="services">
-          <div id="paysagement">
-            <h3>Paysagement</h3>
+        <div className='services'>
+          <div id='paysagement'>
+            <h3>{t("Paysagement")}</h3>
           </div>
-          <div id="pelouse">
-            <h3>Pelouse</h3>
+          <div id='pelouse'>
+            <h3>{t("Pelouse")}</h3>
           </div>
-          <div id="deneigement">
-            <h3>Deneigement</h3>
+          <div id='deneigement'>
+            <h3>{t("Deneigement")}</h3>
+
           </div>
         </div>
-        <div className="login">
-          <button>Login</button>
+        {Profile()}
+        <div className='login'>
+          <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
+          Français
+          </button>
+          <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
+          English
+
+          </button>
+
         </div>
       </header>
       <main>

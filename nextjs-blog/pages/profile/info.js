@@ -46,12 +46,16 @@ export default function UserInfo({ user, data }) {
             </div>
           </div>
           {Profile()}
+          <div className='login'>
           <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-            French
+          Français
           </button>
           <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-            English
+          English
+
           </button>
+
+        </div>
 
 
         </header>

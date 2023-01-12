@@ -3,47 +3,79 @@ import styles from '../../styles/Home.module.css';
 import clientPromise from "../../lib/mongodb";
 // import Profile from '../profile';
 import Profile from '../profile/index';
+import React, { useState } from "react";
 import {useRouter} from "next/router";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
+import "../../src/Translation/i18n";
 
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
 
    export default function DisplayProject({data}) {
     const router = useRouter()
+
+    const [language, setLanguage] = useState('en');
+
+
+    const { t } = useTranslation();
+  
+  
+    const handleOnclick = (e) => {
+      e.preventDefault();
+      
+    
+      setLanguage(e.target.value);
+      if (i18n && i18n.changeLanguage) {
+        i18n.changeLanguage(e.target.value);
+      }
+    }
        return (
-           <div className={styles.container}>
-           <Head>
-             <title>Projects</title>
-             <link rel="icon" href="/favicon.ico" />
-           </Head>
-           <header>
-           <div className='logo'>
-             <h2>Paysages Meloche</h2>
-           </div>
-           <div className='services'>
-             <div id='paysagement'>
-               <h3>Paysagement</h3>
-             </div>
-             <div id='pelouse'>
-               <h3>Pelouse</h3>
-             </div>
-             <div id='deneigement'>
-               <h3>Deneigement</h3>
-             </div>
-           </div>
-           {Profile()}  
-           </header>
+        <div className={styles.container}>
+        <Head>
+          <title>{t("ProjectSubmissionTitle")}</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <header>
+          <div className='logo'>
+            <h2>Paysages Meloche</h2>
+          </div>
+          <div className='services'>
+            <div id='paysagement'>
+              <h3>{t("Paysagement")}</h3>
+            </div>
+            <div id='pelouse'>
+              <h3>{t("Pelouse")}</h3>
+            </div>
+            <div id='deneigement'>
+              <h3>{t("Deneigement")}</h3>
+  
+            </div>
+          </div>
+          {Profile()}
+          <div className='login'>
+            <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
+            Français
+            </button>
+            <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
+            English
+  
+            </button>
+  
+          </div>
+  
+        </header>
            <main>
              <h1 className={styles.title}>
-               Project Proposal
+             {t("ProjectP")}
              </h1>
              <div className="containers">
                    <div className="card mt-5">
                     <div className="center-col">
                         <table>
                           <tr>
-                           <th>Project</th>
-                           <th>Description</th>
+                           <th>{t("Project")}</th>
+                           <th>{t("Description")}</th>
                           </tr>
                            {data.map((val, key) => {
                              return (
