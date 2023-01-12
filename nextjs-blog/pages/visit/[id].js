@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
+import { useRouter } from "next/router";
 
 
 function updateVisit(){
@@ -40,6 +41,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home({data}) {
+  const router = useRouter()
   function dateFormat(date){
     let newDate = new Date(date);
     let dd = newDate.getDate()+1;
@@ -150,7 +152,7 @@ export default function Home({data}) {
               <div className="form-group mt-3">
                 {/* <button className={styles.deleteButton} onClick={deleteVisit(data.visit.visit_id)}> */}
                 <button className={styles.deleteButton} onClick={() => router.push({
-                pathname: 'api/visit/delete/[id]', query: { id: data.visit.visit_id }})}>
+                pathname: '/api/visit/delete/[id]', query: { id: data.visit.visit_id }})}>
                   Delete
                 </button>
               </div>

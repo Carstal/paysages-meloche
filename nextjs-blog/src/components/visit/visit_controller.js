@@ -1,5 +1,7 @@
 //Visit Controller
 //Handles all requests and methods for the visit service & class
+import { useRouter } from "next/router";
+
 
 //Import Visit controller
 import{
@@ -57,21 +59,35 @@ export const updateVisitInfo = (req,res) => {
 
 //Delete Visit By Id
 export const deleteVisit = (req,res) => {
+    console.log("passed")
     // console.log(req.params);
+    // const data = req.body;
+    // console.log(data);
     const visitId = req.params.id;
+    // const router = useRouter();
+    // const { id } = router.query;
+    // const visit_id = { id }.id;
+
+
+    // console.log(fullUrl);
+    // const { id } = req.query;
+    // const visit_id = { id }.id;
     console.log("----CONTROLLER - ID Provided-----");
     console.log(visitId);
+    // console.log(visit_id);
 
-    const deletedVisit = deleteVisitById(visitId);
+    // const deletedVisit = deleteVisitById(visitId);
+    // const deletedVisit = deleteVisitById(visit_id);
     console.log("----CONTROLLER - Object Returned-----");
-    console.log(deletedVisit);
+    // console.log(deletedVisit);
 
-    return res.json(deletedVisit);
+    return res.json(visitId);
+    // return res.json(deletedVisit);
 };
 
 
 //Get Visit By Id
-export const getVisitById = (req,res) => {
+export const getVisit = (req,res) => {
     const visitId = req.params.id;
     console.log("----CONTROLLER - ID Provided-----");
     console.log(visitId);
