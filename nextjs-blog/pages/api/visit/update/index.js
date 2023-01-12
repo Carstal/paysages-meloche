@@ -9,9 +9,9 @@ export default async function handler(req, res) {
     let data = req.body;
     console.log(data);
     console.log("----CONTROLLER - Values Provided-----");
-    const visitId = data.visitId;
+    const visitId = parseInt(data.visitId);
     console.log(visitId);
-    const projectId = data.projectId;
+    const projectId = parseInt(data.projectId);
     console.log(projectId);
     const employees = data.employees.split(",");
     const employeeIds = employees.map(Number);
