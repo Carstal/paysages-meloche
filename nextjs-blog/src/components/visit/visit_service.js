@@ -52,10 +52,10 @@ export async function deleteVisitById(id) {
 }
 
 //Update Visit
-export async function updateVisit(vis) {
+export async function updateVisitInfo(vis) {
   console.log("----SERVICE UpdateVisit STARTED-----");
   const intId = parseInt(vis.visit_id);
-  const result = client
+  const result = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
     .findOne({ visit_id: intId });
@@ -63,14 +63,18 @@ export async function updateVisit(vis) {
   if (result) {
     console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
     console.log(result);
-    client
-      .db("ECP-CalendarDummy")
-      .collection("dummy-calendar")
-      .updateOne({ visit_id: intId }, { $set: vis });
+    const update = await client
+      .db("ECPVisitDummy")
+      .collection("DummyVisits")
+      .updateOne({ visit_id: intId },
+        { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
+        // { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
     console.log(`Listing updated`);
-    const newResult = client
-      .db("ECP-CalendarDummy")
-      .collection("dummy-calendar")
+    console.log(update);
+    console.log("find by id");
+    const newResult = await client
+      .db("ECPVisitDummy")
+      .collection("DummyVisits")
       .findOne({ visit_id: intId });
     console.log(newResult);
 

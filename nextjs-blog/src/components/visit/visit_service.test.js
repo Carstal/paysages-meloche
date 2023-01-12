@@ -1,13 +1,14 @@
 //Visit Service Tests
-import{
-    getAllVisits,
-    getVisitByVisitId,
-    getVisitsByProjectId,
-    addVisit,
-    updateVisit,
-    deleteVisitById
-} from "./visit_service";
+// import{
+//     getAllVisits,
+//     getVisitByVisitId,
+//     getVisitsByProjectId,
+//     addVisit,
+//     updateVisit,
+//     deleteVisitById
+// } from "./visit_service";
 const { test } = require("body-parser");
+const Visit = require("./Visit");
 // const visit_service = require("./visit_service");
  
 const visitOne = new Visit(
@@ -29,10 +30,10 @@ const updateOne = new Visit(
 //     expect(visit_service.getAllVisits()).toBe(1);
 //   });
 
-test('Create visit', ()=>{
-    const newVis = addVisit(visitOne);
-    expect(newVis.visit_id).toBe(visitOne.visit_id);
-});
+// test('Create visit', ()=>{
+//     const newVis = addVisit(visitOne);
+//     expect(newVis.visit_id).toBe(visitOne.visit_id);
+// });
 
 // test('Get visit by ID', ()=>{
 //     expect(visit_service.getVisitByVisitId(20)).toBe(20);

@@ -3,10 +3,10 @@ import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 
 
-function updateVisit(){
-  // TODO: grab form values and pass to api
-  return null;
-}
+// function updateVisit(){
+//   // TODO: grab form values and pass to api
+//   return null;
+// }
 // function deleteVisit(id){
 //   // TODO: pass id to api
 //   console.log("-------deleteVisit function------");
@@ -90,7 +90,7 @@ export default function Home({data}) {
           </div>
           <div className="card mt-5">
             {/* <form className="card-body" action="/api/visit/form" method="POST"> */}
-            <form className="card-body" action="/api/visit/form" method="POST">
+            <form className="card-body" action="/api/visit/update" method="POST">
               <input
                 type="hidden"
                 className="form-control"
@@ -149,6 +149,8 @@ export default function Home({data}) {
                   Update
                 </button>
               </div>
+            </form>
+              <br/>
               <div className="form-group mt-3">
                 {/* <button className={styles.deleteButton} onClick={deleteVisit(data.visit.visit_id)}> */}
                 <button className={styles.deleteButton} onClick={() => router.push({
@@ -156,7 +158,6 @@ export default function Home({data}) {
                   Delete
                 </button>
               </div>
-            </form>
           </div>
         </div>
       </main>

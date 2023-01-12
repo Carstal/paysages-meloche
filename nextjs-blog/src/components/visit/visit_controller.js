@@ -9,7 +9,7 @@ import{
     getVisitByVisitId,
     getVisitsByProjectId,
     addVisit,
-    updateVisit,
+    updateVisitInfo,
     deleteVisitById
 } from "./visit_service";
 // import { addVisit } from "./visit_service";
@@ -45,7 +45,8 @@ export const createVisit = (req,res) => {
 //Update Visit
 export const updateVisit = (req,res) => {
     console.log("-------CONTROLLER UpdateVisit STARTED-------");
-
+    let data = req.body;
+    console.log(data);
     console.log("----CONTROLLER - Values Provided-----");
     const visitId = req.body.visitId;
     console.log(visitId);
@@ -60,10 +61,10 @@ export const updateVisit = (req,res) => {
 
     const newVisit = new Visit(visitId, projectId, employeeIds, startDate, endDate);
 
-    // const dbInsert = updateVisit(newVisit);
+    const dbInsert = updateVisitInfo(newVisit);
 
-    // return res.json(dbInsert);
-    return res.json(newVisit);
+    return res.json(dbInsert);
+    // return res.json(newVisit);
 };
 
 //Delete Visit By Id

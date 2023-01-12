@@ -1,6 +1,13 @@
 //Visit Service
 //Implements all CRUD Operations relating to visits to mongoDB
-
+// import {
+//     // getAllVisits,
+//     // getVisitsByProjectId,
+//     getVisitByVisitId,
+//     addVisit,
+//     updateVisit,
+//     deleteVisitById
+// } from "./visit_service";
 const { MongoClient } = require("mongodb");
 const Visit = require("./Visit");
 
@@ -106,7 +113,7 @@ async function getVisitByVisitId(id) {
   }
 }
 
-//Delete Visit by ID
+// Delete Visit by ID
 async function deleteVisitById(id) {
   console.log("----SERVICE - ID Provided-----");
   console.log(id);

@@ -1,4 +1,4 @@
-import { deleteVisit } from "../../../../src/components/visit/visit_controller"
+import { deleteVisitById } from "../../../../src/components/visit/visit_service"
 
 export default async function handler(req, res) {
 
@@ -11,18 +11,19 @@ export default async function handler(req, res) {
     console.log("Request - DELETE value");
     console.log(visit_id);
 
-    const visit = await deleteVisit(visit_id);
+    const visit = await deleteVisitById(visit_id);
     // const visit = await deleteVisit();
 
-    fetch('http://localhost:3000/api/visit/delete/', {
-        method: 'PATCH',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    })
+    // fetch('http://localhost:3000/api/visit/delete/', {
+    //     method: 'PATCH',
+    //     headers: {
+    //     'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(body),
+    // })
 
     //res.status(200).json({ data: `${body.first_name} ${body.last_name}` })
 
-    res.status(200).json({visit});
+    // res.status(200).json({visit});
+    res.redirect('../../../visit');
 }
