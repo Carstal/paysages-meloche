@@ -69,10 +69,7 @@ export default function Project({ data }) {
               <input type="hidden" className="form-control" defaultValue={data?.email} id="email" name="email" />
 
 
-              <div className="form-group mb-3">
-                <label className="mb-2" hidden><strong>Id:</strong></label>
-                <input name="id" id="id" type="hidden" className="form-control" required />
-              </div>
+            
 
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("Name")}</strong></label>
