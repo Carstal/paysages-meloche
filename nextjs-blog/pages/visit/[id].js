@@ -6,17 +6,24 @@ function updateVisit(){
   // TODO: grab form values and pass to api
   return null;
 }
-async function deleteVisit(id){
-  // TODO: pass id to api
-  const api = 'http://localhost:3000/api/visit/delete/';
-  const url = api + id;
-  console.log(url);
-  const res = await fetch(url);
+// function deleteVisit(id){
+//   // TODO: pass id to api
+//   console.log("-------deleteVisit function------");
+//   console.log(id);
+//   if(id){
+//     const api = 'http://localhost:3000/api/visit/delete/';
+//     const url = api + id;
+//     console.log(url);
+//     const res = fetch(url);
 
-  const data = await res.json();
+//     const data = res.json();
 
-  return data;
-}
+//     return data;
+//   }
+//   else{
+//     return null;
+//   }
+// }
 
 
 export async function getServerSideProps(context) {
@@ -141,7 +148,9 @@ export default function Home({data}) {
                 </button>
               </div>
               <div className="form-group mt-3">
-                <button className={styles.deleteButton} onClick={deleteVisit(data.visit.visit_id)}>
+                {/* <button className={styles.deleteButton} onClick={deleteVisit(data.visit.visit_id)}> */}
+                <button className={styles.deleteButton} onClick={() => router.push({
+                pathname: 'api/visit/delete/[id]', query: { id: data.visit.visit_id }})}>
                   Delete
                 </button>
               </div>

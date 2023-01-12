@@ -57,6 +57,7 @@ export const updateVisitInfo = (req,res) => {
 
 //Delete Visit By Id
 export const deleteVisit = (req,res) => {
+    // console.log(req.params);
     const visitId = req.params.id;
     console.log("----CONTROLLER - ID Provided-----");
     console.log(visitId);
