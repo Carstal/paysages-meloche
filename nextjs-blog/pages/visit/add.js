@@ -4,18 +4,18 @@ import { useRouter } from "next/router";
 
 
 
-export async function getServerSideProps(context) {
-  const projectId = context.params.id;
-  console.log("Project Id: " + projectId)
-  const api = 'http://localhost:3000/api/visit/';
-  const url = api + projectId;
-  console.log(url);
-  const res = await fetch(url);
+// export async function getServerSideProps(context) {
+//   const projectId = context.params.id;
+//   console.log("Project Id: " + projectId)
+//   const api = 'http://localhost:3000/api/visit/';
+//   const url = api + projectId;
+//   console.log(url);
+//   const res = await fetch(url);
 
-  const data = await res.json();
+//   const data = await res.json();
 
-  return { props: { data }};
-}
+//   return { props: { data }};
+// }
 
 export default function Home({data}) {
   // const router = useRouter()
@@ -94,7 +94,6 @@ export default function Home({data}) {
                   className="form-control"
                   id="employees"
                   name="employees"
-                  defaultValue={data.visit.employee_ids}
                 />
               </div>
 
