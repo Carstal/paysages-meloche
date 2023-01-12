@@ -31,6 +31,8 @@ export default function Home() {
         <div className='logo'>
           <h2>Paysages Meloche</h2>
         </div>
+        <div className='services'>
+        </div>
         {Profile()}
         <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
           French
@@ -38,15 +40,15 @@ export default function Home() {
         <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
           English
         </button>
-
-
       </header>
       <main>
         <h1 className={styles.title}>
           {t("EmailV")}
         </h1>
+        <br></br>
+        <br></br>
         <button class={styles.loginbutton}>
-          <a href="/api/auth/login">Try Again</a>
+          <a href="/api/auth/login">{t("TryAgain")}</a>
         </button>
       </main>
 
