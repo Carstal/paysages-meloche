@@ -1,5 +1,30 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
+import { useRouter } from "next/router";
+
+
+// function updateVisit(){
+//   // TODO: grab form values and pass to api
+//   return null;
+// }
+// function deleteVisit(id){
+//   // TODO: pass id to api
+//   console.log("-------deleteVisit function------");
+//   console.log(id);
+//   if(id){
+//     const api = 'http://localhost:3000/api/visit/delete/';
+//     const url = api + id;
+//     console.log(url);
+//     const res = fetch(url);
+
+//     const data = res.json();
+
+//     return data;
+//   }
+//   else{
+//     return null;
+//   }
+// }
 
 
 export async function getServerSideProps(context) {
@@ -10,12 +35,27 @@ export async function getServerSideProps(context) {
   console.log(url);
   const res = await fetch(url);
 
-  const visit = await res.json();
+  const data = await res.json();
 
-  return { props: { visit } };
+  return { props: { data }};
 }
 
-export default async function Home({ visit }) {
+export default function Home({data}) {
+  const router = useRouter()
+  function dateFormat(date){
+    let newDate = new Date(date);
+    let dd = newDate.getDate()+1;
+    let mm = newDate.getMonth()+1;
+    const yyyy = newDate.getFullYear();
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+    const formattedDate = yyyy + '-' + mm + '-' + dd;
+    console.log(formattedDate);
+
+    return formattedDate;
+    // return newDate;
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -43,27 +83,27 @@ export default async function Home({ visit }) {
       </header>
       <main>
         <h2 className={styles.title}>Visit Information</h2>
-
         <div className="container">
+          <div className="VisitNoEdit">
+            <div className="VisitId">Visit ID: {data.visit.visit_id}</div>
+            <div className="ProjectId">Project ID: {data.visit.project_id}</div>
+          </div>
           <div className="card mt-5">
-            {/* {url} */}
-              <div>
-                Visit: {visit.visit_id}
-              </div>
-            {/* <form className="card-body" action="/api/visit/form" method="POST">
+            {/* <form className="card-body" action="/api/visit/form" method="POST"> */}
+            <form className="card-body" action="/api/visit/update" method="POST">
               <input
                 type="hidden"
                 className="form-control"
                 id="visitId"
                 name="visitId"
-                value={visit.visit_id}
+                value={data.visit.visit_id}
               />
               <input
                 type="hidden"
                 className="form-control"
                 id="projectId"
                 name="projectId"
-                value={visit.project_id}
+                value={data.visit.project_id}
               />
               <div className="form-group mb-3">
                 <label className="mb-2">
@@ -74,7 +114,7 @@ export default async function Home({ visit }) {
                   className="form-control"
                   id="employees"
                   name="employees"
-                  defaultValue={visit.employee_ids}
+                  defaultValue={data.visit.employee_ids}
                 />
               </div>
 
@@ -83,11 +123,11 @@ export default async function Home({ visit }) {
                   <strong>Start Date:</strong>
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   id="startDate"
                   name="startDate"
-                  defaultValue={visit.start_date}
+                  defaultValue={dateFormat(data.visit.start_date)}
                 />
               </div>
 
@@ -96,21 +136,28 @@ export default async function Home({ visit }) {
                   <strong>End Date:</strong>
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   id="endDate"
                   name="endDate"
-                  defaultValue={visit.end_date}
+                  defaultValue={dateFormat(data.visit.end_date)}
                 />
               </div>
 
               <div className="form-group mt-3">
-                <button type="submit" className={styles.submitbutton}>
+                <button type="submit" className={styles.submitButton}>
                   Update
                 </button>
               </div>
-            </form> */}
-
+            </form>
+              <br/>
+              <div className="form-group mt-3">
+                {/* <button className={styles.deleteButton} onClick={deleteVisit(data.visit.visit_id)}> */}
+                <button className={styles.deleteButton} onClick={() => router.push({
+                pathname: '/api/visit/delete/[id]', query: { id: data.visit.visit_id }})}>
+                  Delete
+                </button>
+              </div>
           </div>
         </div>
       </main>
@@ -270,6 +317,15 @@ export default async function Home({ visit }) {
           color: #ffffff;
           width: 100vw;
         }
+        .form-group mb-3, textarea, input{
+          display: block;
+          width: 100%;
+          padding: .5rem .8rem .5rem .8rem;
+          margin: .9vw 0 ;
+          border:0;
+          border-radius: 5px;
+          font-size: 20px;
+      }
         footer {
           width: 100vw;
           height: 100px;

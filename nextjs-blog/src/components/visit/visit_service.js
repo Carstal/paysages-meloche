@@ -14,7 +14,7 @@ const client = new MongoClient(uri);
 // const client = new MongoClient(mongouri);
 
 //Add Visit
-// export function addVisit(vis) {
+export async function addVisit(vis) {
 //   const data = {
 //     // visit_id: getNewVisitID(client),
 //     visit_id: vis.visit_id,
@@ -24,65 +24,77 @@ const client = new MongoClient(uri);
 //     end_date: vis.end_date
 //   };
 
-//   const result = client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .insertOne(data);
+  const result = await client
+  .db("ECPVisitDummy")
+  .collection("DummyVisits")
+  .insertOne(vis);
 
-//   console.log(
-//     `New listing created with the following id: ${result.insertedId}`
-//   );
+  console.log(
+    `New listing created with the following id: ${result.insertedId}`
+  );
 
-//   return result;
-// }
+  return result;
+}
 
 //Delete Visit by ID
-// export function deleteVisitById(id) {
-//   const result = client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .deleteOne({ visit_id: id });
-
-//   console.log(`${result.deletedCount} document(s) has been deleted.`);
-
-//   return result;
-// }
-
-//Update Visit
-// export function updateVisit(vis) {
-//   const result = client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .findOne({ visit_id: vis.visit_id });
-
-//   if (result) {
-//     console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
-//     console.log(result);
-//     client
-//       .db("ECP-CalendarDummy")
-//       .collection("dummy-calendar")
-//       .updateOne({ visit_id: vis.visit_id }, { $set: vis });
-//     console.log(`Listing updated`);
-//     const newResult = client
-//       .db("ECP-CalendarDummy")
-//       .collection("dummy-calendar")
-//       .findOne({ visit_id: vis.visit_id });
-//     console.log(newResult);
-
-//     return newResult;
-//   } else {
-//     console.log("No listing with matching id");
-
-//     return null;
-//   }
-// }
-
-//Get Visit by visit_Id
-export async function getVisitByVisitId(id) {
+export async function deleteVisitById(id) {
+  console.log("----SERVICE - ID Provided-----");
+  console.log(id);
+  const intId = parseInt(id);
   const result = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
-    .findOne({ visit_id: id });
+    .deleteOne({ visit_id: intId });
+
+  console.log(`${result.deletedCount} document(s) has been deleted.`);
+
+  return result;
+}
+
+//Update Visit
+export async function updateVisitInfo(vis) {
+  console.log("----SERVICE UpdateVisit STARTED-----");
+  const intId = parseInt(vis.visit_id);
+  const result = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .findOne({ visit_id: intId });
+
+  if (result) {
+    console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
+    console.log(result);
+    const update = await client
+      .db("ECPVisitDummy")
+      .collection("DummyVisits")
+      .updateOne({ visit_id: intId },
+        { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
+        // { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
+    console.log(`Listing updated`);
+    console.log(update);
+    console.log("find by id");
+    const newResult = await client
+      .db("ECPVisitDummy")
+      .collection("DummyVisits")
+      .findOne({ visit_id: intId });
+    console.log(newResult);
+
+    return newResult;
+  } else {
+    console.log("No listing with matching id");
+
+    return null;
+  }
+}
+
+//Get Visit by visit_Id
+export async function getVisitByVisitId(id) {
+  console.log("----SERVICE - ID Provided-----");
+  console.log(id);
+  const intId = parseInt(id);
+  const result = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .findOne({ visit_id: intId });
 
   if (result) {
     console.log(`Found a listing in connection with visit id: '${id}'`);

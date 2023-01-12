@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/visit/all");
+  const res = await fetch("http://localhost:3000/api/visit");
   const visits = await res.json();
   console.log("--------VISITS----------");
   console.log(visits);
@@ -30,7 +30,7 @@ export default function Home({visits}) {
 
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
-    const formattedDate = dd + '/' + mm + '/' + yyyy;
+    const formattedDate = yyyy + '-' + mm + '-' + dd;
     console.log(formattedDate);
 
     return formattedDate;
