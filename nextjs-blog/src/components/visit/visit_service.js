@@ -14,7 +14,7 @@ const client = new MongoClient(uri);
 // const client = new MongoClient(mongouri);
 
 //Add Visit
-// export async function addVisit(vis) {
+export async function addVisit(vis) {
 //   const data = {
 //     // visit_id: getNewVisitID(client),
 //     visit_id: vis.visit_id,
@@ -24,17 +24,17 @@ const client = new MongoClient(uri);
 //     end_date: vis.end_date
 //   };
 
-//   const result = client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .insertOne(data);
+  const result = await client
+  .db("ECPVisitDummy")
+  .collection("DummyVisits")
+  .insertOne(vis);
 
-//   console.log(
-//     `New listing created with the following id: ${result.insertedId}`
-//   );
+  console.log(
+    `New listing created with the following id: ${result.insertedId}`
+  );
 
-//   return result;
-// }
+  return result;
+}
 
 //Delete Visit by ID
 export async function deleteVisitById(id) {
