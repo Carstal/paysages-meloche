@@ -63,7 +63,8 @@ export default function Home({data}) {
             <div className="ProjectId">Project ID: {data.visit.project_id}</div>
           </div>
           <div className="card mt-5">
-            <form className="card-body" action="/api/visit/form" method="POST">
+            {/* <form className="card-body" action="/api/visit/form" method="POST"> */}
+            <form className="card-body" method="POST">
               <input
                 type="hidden"
                 className="form-control"
@@ -118,8 +119,13 @@ export default function Home({data}) {
               </div>
 
               <div className="form-group mt-3">
-                <button type="submit" className={styles.submitbutton}>
+                <button className={styles.submitButton} onClick="">
                   Update
+                </button>
+              </div>
+              <div className="form-group mt-3">
+                <button className={styles.deleteButton} onClick="">
+                  Delete
                 </button>
               </div>
             </form>
@@ -282,6 +288,15 @@ export default function Home({data}) {
           color: #ffffff;
           width: 100vw;
         }
+        .form-group mb-3, textarea, input{
+          display: block;
+          width: 100%;
+          padding: .5rem .8rem .5rem .8rem;
+          margin: .9vw 0 ;
+          border:0;
+          border-radius: 5px;
+          font-size: 20px;
+      }
         footer {
           width: 100vw;
           height: 100px;
