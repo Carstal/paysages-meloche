@@ -238,9 +238,6 @@ export const getServerSideProps = withPageAuthRequired({
       email: session.user.email
     });
     // access the user session
-
-
-
     return { props: { data: JSON.parse(JSON.stringify(post)) } };
   }
 });
