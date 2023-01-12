@@ -97,7 +97,6 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                </div>
         
              <p className={styles.description}>
-               Currently Under Maintenance
              </p>
              </div>
            </main>

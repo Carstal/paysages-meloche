@@ -72,7 +72,7 @@ export default async function Home({ visit }) {
         </div>
       </header>
       <main>
-        <h2 className={styles.title}>Visit Information</h2>
+        <h2 className={styles.title}>{t("VisitInfo")}</h2>
 
         <div className="container">
           <div className="card mt-5">

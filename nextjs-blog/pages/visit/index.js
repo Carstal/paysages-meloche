@@ -93,17 +93,17 @@ export default function Home({visits}) {
         </div>
       </header>
       <main>
-        <h2 className={styles.title}>All Visits</h2>
+        <h2 className={styles.title}>{t("AllVisit")}</h2>
         <div id="visitContainer">
           {visits.map((visit) => (
             // let sdate = visit.start_date;
             // console.log(sdate);
           <div className="visit">
             <div className="info">
-              <div className="vrRow">Visit:{visit.visit_id} Project: {visit.project_id}</div>
-              <div className="empRow">Employee(s): {formatEmployees(visit.employee_ids)}</div>
-              <div className="startRow">Start Date: {formatDate(visit.start_date)}</div>
-              <div className="endRow">End Date: {formatDate(visit.end_date)}</div>
+              <div className="vrRow">{t("Visit")}:{visit.visit_id} {t("Project")}: {visit.project_id}</div>
+              <div className="empRow">{t("Employee")}: {formatEmployees(visit.employee_ids)}</div>
+              <div className="startRow">{t("Start")}: {formatDate(visit.start_date)}</div>
+              <div className="endRow">{t("End")}: {formatDate(visit.end_date)}</div>
             </div>
             <div className="editBtnDiv">
               <button className="editBtn" name="edit" value={visit.visit_id} onClick={() => router.push({
