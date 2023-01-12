@@ -24,7 +24,13 @@ export const TRANSLATIONS_EN = {
     English:"English",
     ProjectP:"Projects Proposal",
     ProjectD:"Project Details",
-    Project:"Project"
+    Project:"Project",
+    AllVisit:"All Visits",
+    VisitInfo:"Visit Information",
+    Start:"Start Date",
+    End:"End Date",
+    Visit:"Visit",
+    Employee:"Employee(s)"
 
     
 

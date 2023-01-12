@@ -23,7 +23,15 @@ export const TRANSLATIONS_FR = {
     English:"Anglais",
     ProjectP: "Projets en Attente",
     ProjectD:"Détails du Project",
-    Project:"Projet"
+    Project:"Projet",
+    AllVisit:"Toutes les Visites",
+    VisitInfo:"Informations des Visites",
+    Start:"Début",
+    End:"Fin",
+    Visit:"Visite",
+    Employee:"Employé(s)"
+
+
 
 
 
