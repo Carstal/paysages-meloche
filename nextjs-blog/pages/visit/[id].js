@@ -16,6 +16,10 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home({visit}) {
+  function dateFormat(date){
+    let newDate = new Date(date);
+    return newDate;
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -43,13 +47,12 @@ export default function Home({visit}) {
       </header>
       <main>
         <h2 className={styles.title}>Visit Information</h2>
-
         <div className="container">
+          <div className="VisitNoEdit">
+            <div className="VisitId">Visit ID: {visit.visit_id}</div>
+            <div className="ProjectId">Project ID: {visit.project_id}</div>
+          </div>
           <div className="card mt-5">
-            {/* {url} */}
-              <div>
-                Visit: {visit.visit_id}
-              </div>
             <form className="card-body" action="/api/visit/form" method="POST">
               <input
                 type="hidden"
@@ -83,11 +86,11 @@ export default function Home({visit}) {
                   <strong>Start Date:</strong>
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   id="startDate"
                   name="startDate"
-                  defaultValue={visit.start_date}
+                  defaultValue={dateFormat(visit.start_date)}
                 />
               </div>
 
@@ -96,11 +99,11 @@ export default function Home({visit}) {
                   <strong>End Date:</strong>
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   id="endDate"
                   name="endDate"
-                  defaultValue={visit.end_date}
+                  defaultValue={dateFormat(visit.end_date)}
                 />
               </div>
 
@@ -110,7 +113,6 @@ export default function Home({visit}) {
                 </button>
               </div>
             </form>
-
           </div>
         </div>
       </main>

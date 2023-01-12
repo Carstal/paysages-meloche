@@ -65,7 +65,7 @@ export const deleteVisit = (req,res) => {
 
 
 //Get Visit By Id
-export const getVisitById = (req) => {
+export const getVisitById = (req,res) => {
     const visitId = req.params.id;
     console.log("----CONTROLLER - ID Provided-----");
     console.log(visitId);

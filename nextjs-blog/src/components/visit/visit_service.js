@@ -81,10 +81,11 @@ const client = new MongoClient(uri);
 export async function getVisitByVisitId(id) {
   console.log("----SERVICE - ID Provided-----");
   console.log(id);
+  const intId = parseInt(id);
   const result = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
-    .findOne({ visit_id: id });
+    .findOne({ visit_id: intId });
 
   if (result) {
     console.log(`Found a listing in connection with visit id: '${id}'`);
