@@ -60,9 +60,10 @@ export const updateVisit = (req,res) => {
 
     const newVisit = new Visit(visitId, projectId, employeeIds, startDate, endDate);
 
-    const dbInsert = updateVisit(newVisit);
+    // const dbInsert = updateVisit(newVisit);
 
-    return res.json(dbInsert);
+    // return res.json(dbInsert);
+    return res.json(newVisit);
 };
 
 //Delete Visit By Id

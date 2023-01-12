@@ -14,7 +14,7 @@ const client = new MongoClient(uri);
 // const client = new MongoClient(mongouri);
 
 //Add Visit
-// export function addVisit(vis) {
+// export async function addVisit(vis) {
 //   const data = {
 //     // visit_id: getNewVisitID(client),
 //     visit_id: vis.visit_id,
