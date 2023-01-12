@@ -1,4 +1,4 @@
-import { deleteVisit } from "../../../src/components/visit/visit_controller"
+import { deleteVisit } from "../../../../src/components/visit/visit_controller"
 
 export default async function handler(req, res) {
 

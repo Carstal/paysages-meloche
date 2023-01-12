@@ -6,9 +6,16 @@ function updateVisit(){
   // TODO: grab form values and pass to api
   return null;
 }
-function deleteVisit(id){
+async function deleteVisit(id){
   // TODO: pass id to api
-  return null;
+  const api = 'http://localhost:3000/api/visit/delete/';
+  const url = api + id;
+  console.log(url);
+  const res = await fetch(url);
+
+  const data = await res.json();
+
+  return data;
 }
 
 
@@ -134,7 +141,7 @@ export default function Home({data}) {
                 </button>
               </div>
               <div className="form-group mt-3">
-                <button className={styles.deleteButton} onClick="">
+                <button className={styles.deleteButton} onClick={deleteVisit(data.visit.visit_id)}>
                   Delete
                 </button>
               </div>

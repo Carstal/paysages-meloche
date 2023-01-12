@@ -57,10 +57,15 @@ export const updateVisitInfo = (req,res) => {
 
 //Delete Visit By Id
 export const deleteVisit = (req,res) => {
-    const visitId = req.params.visitId;
-    const deletedVisit = deleteVisitById(visitId);
+    const visitId = req.params.id;
+    console.log("----CONTROLLER - ID Provided-----");
+    console.log(visitId);
 
-    return res.json(deleteVisit);
+    const deletedVisit = deleteVisitById(visitId);
+    console.log("----CONTROLLER - Object Returned-----");
+    console.log(deletedVisit);
+
+    return res.json(deletedVisit);
 };
 
 

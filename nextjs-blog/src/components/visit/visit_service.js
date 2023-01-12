@@ -37,16 +37,19 @@ const client = new MongoClient(uri);
 // }
 
 //Delete Visit by ID
-// export function deleteVisitById(id) {
-//   const result = client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .deleteOne({ visit_id: id });
+export async function deleteVisitById(id) {
+  console.log("----SERVICE - ID Provided-----");
+  console.log(id);
+  const intId = parseInt(id);
+  const result = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .deleteOne({ visit_id: intId });
 
-//   console.log(`${result.deletedCount} document(s) has been deleted.`);
+  console.log(`${result.deletedCount} document(s) has been deleted.`);
 
-//   return result;
-// }
+  return result;
+}
 
 //Update Visit
 // export function updateVisit(vis) {

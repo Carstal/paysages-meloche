@@ -19,6 +19,11 @@ console.log("GET VISIT 12")
 const visit = getVisitByVisitId(12);
 console.log(visit);
 
+
+console.log("DELETE VISIT 10")
+const delVisit = deleteVisitById(10);
+console.log(delVisit);
+
 //Get all Visits
 async function getAllVisits() {
 //   const cursor = client
@@ -59,4 +64,19 @@ async function getVisitByVisitId(id) {
 
     return null;
   }
+}
+
+//Delete Visit by ID
+async function deleteVisitById(id) {
+  console.log("----SERVICE - ID Provided-----");
+  console.log(id);
+  const intId = parseInt(id);
+  const result = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .deleteOne({ visit_id: intId });
+
+  console.log(`${result.deletedCount} document(s) has been deleted.`);
+
+  return result;
 }
