@@ -65,9 +65,14 @@ export const deleteVisit = (req,res) => {
 
 
 //Get Visit By Id
-export const getVisitById = (req,res) => {
+export const getVisitById = (req) => {
     const visitId = req.params.id;
+    console.log("----CONTROLLER - ID Provided-----");
+    console.log(visitId);
     const visit = getVisitByVisitId(visitId);
+
+    console.log("----CONTROLLER - Object Returned-----");
+    console.log(visit);
 
     return res.json(visit);
 };
@@ -77,7 +82,7 @@ export const getProjectVisits = (req,res) => {
     const projectId = req.params.projectId;
     const projectVisits = getVisitsByProjectId(projectId);
 
-    return res.json(projectVisits);
+    return projectVisits;
 };
 
 //Get All Visits

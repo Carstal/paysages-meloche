@@ -79,6 +79,8 @@ const client = new MongoClient(uri);
 
 //Get Visit by visit_Id
 export async function getVisitByVisitId(id) {
+  console.log("----SERVICE - ID Provided-----");
+  console.log(id);
   const result = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")

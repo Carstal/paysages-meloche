@@ -1,23 +1,12 @@
 import { getVisitByVisitId } from "../../../src/components/visit/visit_service";
-import { useRouter } from "next/router";
-
-const id = () => {
-    const router = useRouter();
-    const id = router.query.id;
-
-    return id;
-};
 
 export default async function handler(req,res){
 
-    // const router = useRouter();
-    const project_id = id;
+    const { id } = req.query;
+    const project_id = { id };
 
-    console.log("Router value");
+    console.log("Request value");
     console.log(project_id);
-
-    // console.log("Request value");
-    // console.log(req.params.id)
 
     const visit = await getVisitByVisitId(project_id);
     // const visit = await getVisitByVisitId(req.params.id);

@@ -15,7 +15,7 @@ export async function getServerSideProps(context) {
   return { props: { visit } };
 }
 
-export default async function Home({ visit }) {
+export default function Home({visit}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -50,7 +50,7 @@ export default async function Home({ visit }) {
               <div>
                 Visit: {visit.visit_id}
               </div>
-            {/* <form className="card-body" action="/api/visit/form" method="POST">
+            <form className="card-body" action="/api/visit/form" method="POST">
               <input
                 type="hidden"
                 className="form-control"
@@ -109,7 +109,7 @@ export default async function Home({ visit }) {
                   Update
                 </button>
               </div>
-            </form> */}
+            </form>
 
           </div>
         </div>
