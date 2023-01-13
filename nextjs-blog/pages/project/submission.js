@@ -65,7 +65,7 @@ export default function Project({ data }) {
         </h1>
         <div className="container">
           <div className="card mt-5">
-            <form className="card-body" action="/api/forms/projectSubmissions" method="POST">
+            <form className="card-body" action="/api/project/submission_controller" method="POST">
               <input type="hidden" className="form-control" defaultValue={data?.email} id="email" name="email" />
 
 
