@@ -130,6 +130,8 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
            .center-col {
             flex: 1;
             overflow-y: scroll;
+            width: 800px;
+            height: 800px;
           }
            .d-grid mt-3, button{
                height: 7vh;
