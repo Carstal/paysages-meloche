@@ -65,14 +65,11 @@ export default function Project({ data }) {
         </h1>
         <div className="container">
           <div className="card mt-5">
-            <form className="card-body" action="/api/forms/projectSubmissions" method="POST">
+            <form className="card-body" action="/api/project/submission" method="POST">
               <input type="hidden" className="form-control" defaultValue={data?.email} id="email" name="email" />
 
 
-              <div className="form-group mb-3">
-                <label className="mb-2" hidden><strong>Id:</strong></label>
-                <input name="id" id="id" type="hidden" className="form-control" required />
-              </div>
+            
 
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("Name")}</strong></label>
@@ -87,7 +84,7 @@ export default function Project({ data }) {
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("Size1")}</strong></label>
                 <input name="length" id="length" type="text" className="form-control" required />
-              </div>
+              </div>  
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("Size2")}</strong></label>
                 <input name="width" id="width" type="text" className="form-control" required />
