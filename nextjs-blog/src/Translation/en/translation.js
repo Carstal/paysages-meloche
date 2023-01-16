@@ -22,7 +22,13 @@ export const TRANSLATIONS_EN = {
     Complet: "Account Creation",
     CompProf: "Complete Profile",
     Note: "*Note that completing the account creation will bring you back to the log in screen.",
-    TryAgain: "Try Again"
+    TryAgain: "Try Again",
+    Mailer: "Mailer",
+    Email: "Email",
+    Subject: "Subject",
+    FullName:"Full Name",
+    Attach: "Attach a File"
+
 
 
 
