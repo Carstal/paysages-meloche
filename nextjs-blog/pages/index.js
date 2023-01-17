@@ -158,9 +158,20 @@ export async function getServerSideProps(ctx) {
   //get session info
   const session = await getSession(ctx.req, ctx.res);
   var firstLogin = "";
+  var role = "";
   //if the session was ever found, get its firstlogin variable
   try {
   firstLogin = session.user.firstlogin
+  role = session.user.userRoles
+  console.log("Role:")
+  console.log(role)
+  if(role == "Admin"){
+    console.log("Role:")
+    console.log(role)
+  }
+  else{
+    console.log("log error")
+  }
   if (firstLogin == "true"){
     //if it is the user's first login, redirect to the user info screen
     return {
@@ -173,7 +184,7 @@ export async function getServerSideProps(ctx) {
   }
   } catch {
     console.log("An error occured")
-  } 
+  }
   return{
       props:{}
   }

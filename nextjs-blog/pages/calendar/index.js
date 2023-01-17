@@ -1,7 +1,60 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css';
+// import Profile from './/profile/index';
+import { getSession } from '@auth0/nextjs-auth0';
+
+export async function getServerSideProps(ctx) {
+  //get session info
+  const session = await getSession(ctx.req, ctx.res);
+  var role = "";
+  //if the session was ever found, get its firstlogin variable
+  try {
+  role = session.user.userRoles
+  // console.log("Role:")
+  // console.log(role)
+  if(role == "Admin"){
+    console.log("Admin")
+  }
+  else if(role == "Employee"){
+
+  }
+  else{
+    console.log("Regular Use")
+  }
+  } catch {
+    console.log("An error occured")
+  }
+  return{
+      props:{}
+  }
+}
+
+import React, {useState} from 'react'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
+import moment from 'moment'
+
+// export default function App() {
+//   const [dateState, setDateState] = useState(new Date())
+//   const changeDate = (e) => {
+//     setDateState(e)
+//   }
+//   return (
+//     <>
+//       <Calendar
+//       value={dateState}
+//       onChange={changeDate}
+//       />
+//     <p>Current selected date is <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
+//     </>
+//   )
+// }
 
 export default function Home() {
+  const [dateState, setDateState] = useState(new Date())
+  const changeDate = (e) => {
+    setDateState(e)
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -34,8 +87,15 @@ export default function Home() {
           Master Calendar
         </h2>
 
+    <>
+      <Calendar
+      value={dateState}
+      onChange={changeDate}
+      />
+      <p>Current selected date is <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
+    </>
 
-        <div id="calendar">
+        {/* <div id="calendar">
           <div id="month">
             <button name="Back" value="Back">Back</button>
             <h3>Month / 9999</h3>
@@ -103,8 +163,8 @@ export default function Home() {
               <div className="day">34</div>
               <div className="day">35</div>
             </div>
-          </div>
-        </div>
+          </div> 
+        </div>*/}
       </main>
 
       <footer>
