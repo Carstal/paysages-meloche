@@ -83,9 +83,9 @@ export default function Project({ data }) {
           <div className="card mt-5">
             <form className="card-body" action="/api/project/submission" method="POST"  ref={form} onSubmit={sendemail} >
                 
-            <div className="form-group mb-3">
-            <label className="mb-2"><strong>{t("Attach")}</strong></label>
-              <input type="file" name="my_file"/> 
+            <div >
+            <label ><strong>{t("Attach")}</strong></label>
+              <input className="mb-6" type="file" name="my_file"/> 
               </div>
               
               <div className="form-group mb-3">
@@ -96,7 +96,7 @@ export default function Project({ data }) {
 
              
               <div className="form-group mb-3">
-                <label className="mb-2"><strong>{t("Email")}</strong></label>
+                <label className="mb-6"><strong>{t("Email")}</strong></label>
                 <input name="email" id="email" type="text" className="form-control" required />
               </div>
 
@@ -145,6 +145,7 @@ export default function Project({ data }) {
              align-items: center;
              margin: auto;
            }
+           
            .services div {
              display: flex;
              justify-content: center;
@@ -159,6 +160,27 @@ export default function Project({ data }) {
              justify-content: center;
              width: 15vw;
            }
+           .label {
+            cursor: pointer;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 5px 15px;
+            margin: 5px;
+            background: #dddddd;
+            display: inline-block;
+          }
+          .mb-6:hover {
+            background: #5cbd95;
+          }
+          .mb-6:active {
+            background: #9fa1a0;
+          }
+          .mb-6:invalid+span {
+            color: #000000;
+          }
+          .mb-6:valid+span {
+            color: #ffffff;
+          }
            .login{
              display: flex;
              justify-content: center;
@@ -191,6 +213,18 @@ export default function Project({ data }) {
                  sans-serif;
                font-weight: bold;
            }
+           
+           .mb-5 {
+            height: 7vh;
+            width: 10vw;
+            background: #00B45D;
+            border-radius: 40px;
+            color: #FFFFFF;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+              Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+              sans-serif;
+            font-weight: bold;
+          }
            main {
              padding: 5rem 0;
              flex: 1;
