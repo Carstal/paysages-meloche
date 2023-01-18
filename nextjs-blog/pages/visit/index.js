@@ -22,7 +22,6 @@ export default function Home({visits}) {
     return formattedEmployees;
   }
   function formatDate(date){
-
     let newDate = new Date(date);
     let dd = newDate.getDate()+1;
     let mm = newDate.getMonth()+1;

@@ -3,8 +3,10 @@ import styles from '../styles/Home.module.css';
 // import Profile from './profile';
 import Profile from './/profile/index';
 import { getSession } from '@auth0/nextjs-auth0';
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter()
   return (
     <div className={styles.container}>
       <Head>
@@ -24,6 +26,10 @@ export default function Home() {
           </div>
           <div id='deneigement'>
             <h3>Deneigement</h3>
+          </div>
+          <div id='visit'
+          onClick={() => router.push({pathname: '/visit'})}>
+            <h3>Visits</h3>
           </div>
         </div>
         {Profile()}
@@ -54,7 +60,7 @@ export default function Home() {
           background: #222222;
           color: #FFFFFF;
         }
-        
+
         .services {
           display: flex;
           flex-direction: row;
