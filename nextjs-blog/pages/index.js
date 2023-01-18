@@ -31,6 +31,10 @@ export default function Home() {
           onClick={() => router.push({pathname: '/visit'})}>
             <h3>Visits</h3>
           </div>
+          <div id='calendar'
+          onClick={() => router.push({pathname: '/calendar'})}>
+            <h3>Visits</h3>
+          </div>
         </div>
         {Profile()}
       </header>
