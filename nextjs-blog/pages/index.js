@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 import Profile from './/profile/index';
 import { getSession } from '@auth0/nextjs-auth0';
 import { useRouter } from "next/router";
+import AdminNav from '../src/components/website/nav/Nav';
 
 export default function Home() {
   const router = useRouter()
@@ -33,11 +34,12 @@ export default function Home() {
           </div>
           <div id='calendar'
           onClick={() => router.push({pathname: '/calendar'})}>
-            <h3>Visits</h3>
+            <h3>Calendar</h3>
           </div>
         </div>
         {Profile()}
       </header>
+      {/* <AdminNav></AdminNav> */}
       <main>
         <h1 className={styles.title}>
           Paysages Meloche
