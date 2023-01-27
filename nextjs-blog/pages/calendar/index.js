@@ -1,56 +1,91 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css';
 // import Profile from './/profile/index';
-import { getSession } from '@auth0/nextjs-auth0';
+// import { getSession } from '@auth0/nextjs-auth0';
 
-export async function getServerSideProps(ctx) {
-  //get session info
-  const session = await getSession(ctx.req, ctx.res);
-  var role = "";
-  //if the session was ever found, get its firstlogin variable
-  try {
-  role = session.user.userRoles
-  // console.log("Role:")
-  // console.log(role)
-  if(role == "Admin"){
-    console.log("Admin")
-  }
-  else if(role == "Employee"){
+// export async function getServerSideProps(ctx) {
+//   //get session info
+//   const session = await getSession(ctx.req, ctx.res);
+//   var role = "";
+//   //if the session was ever found, get its firstlogin variable
+//   try {
+//   role = session.user.userRoles
+//   // console.log("Role:")
+//   // console.log(role)
+//   if(role == "Admin"){
+//     console.log("Admin")
+//   }
+//   else if(role == "Employee"){
 
-  }
-  else{
-    console.log("Regular Use")
-  }
-  } catch {
-    console.log("An error occured")
-  }
-  return{
-      props:{}
-  }
+//   }
+//   else{
+//     console.log("Regular Use")
+//   }
+//   } catch {
+//     console.log("An error occured")
+//   }
+//   return{
+//       props:{}
+//   }
+// }
+export async function getServerSideProps() {
+  const res = await fetch("http://localhost:3000/api/visit");
+  const visits = await res.json();
+  // console.log("--------VISITS----------");
+  // console.log(visits[data]);
+
+  return { props: { visits }};
 }
 
-import React, {useState} from 'react'
-import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css';
-import moment from 'moment'
+// Using react-big-calendar, an open-source alternative to Full Calendar
+// Using react-datepicker, for small calendar date selection
+import React, {useState} from 'react';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
+import getDay from 'date-fns/getDay';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import DatePicker from 'react-datepicker';
 
-// export default function App() {
-//   const [dateState, setDateState] = useState(new Date())
-//   const changeDate = (e) => {
-//     setDateState(e)
-//   }
-//   return (
-//     <>
-//       <Calendar
-//       value={dateState}
-//       onChange={changeDate}
-//       />
-//     <p>Current selected date is <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
-//     </>
-//   )
-// }
+const locales = {
+  'en-CA': require('date-fns/locale/en-CA')
+}
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales
+})
 
-export default function Home() {
+const dummyVisits = [
+  {
+    title: "Landscaping",
+    allDay: true,
+    start: new Date(2023,2,2),
+    end: new Date(2023,2,2),
+  },
+  {
+    title: "Terrace",
+    start: new Date(2023,2,4),
+    end: new Date(2023,2,4),
+  },
+  {
+    title: "Paving",
+    start: new Date(2023,2,5),
+    end: new Date(2023,2,5),
+  }
+]
+export default function Home({visits}) {
+  var allVisits = []
+  visits.forEach((visit) => (
+    allVisits.push({
+      title: 'Project ',
+      start: new Date(visit.start_date),
+      end: new Date(visit.end_date)
+    })
+  ))
   const [dateState, setDateState] = useState(new Date())
   const changeDate = (e) => {
     setDateState(e)
@@ -86,85 +121,11 @@ export default function Home() {
         <h2 className={styles.title}>
           Master Calendar
         </h2>
-
-    <>
-      <Calendar
-      value={dateState}
-      onChange={changeDate}
-      />
-      <p>Current selected date is <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
-    </>
-
-        {/* <div id="calendar">
-          <div id="month">
-            <button name="Back" value="Back">Back</button>
-            <h3>Month / 9999</h3>
-            <button name="forward" value="forward">Forward</button>
-          </div>
-          <div id="weekdays">
-            <div className="weekday">Sunday</div>
-            <div className="weekday">Monday</div>
-            <div className="weekday">Tuesday</div>
-            <div className="weekday">Wednesday</div>
-            <div className="weekday">Thursday</div>
-            <div className="weekday">Friday</div>
-            <div className="weekday">Saturday</div>
-          </div>
-          <div id="days">
-            <div className="week">
-              <div className="day">1</div>
-              <div className="day">2</div>
-              <div className="day">3</div>
-              <div className="day">4</div>
-              <div className="day">5</div>
-              <div className="day">6</div>
-              <div className="day">7</div>
-            </div>
-            <div className="week">
-              <div className="day">8</div>
-              <div className="day">9</div>
-              <div className="day">10</div>
-              <div className="day">11</div>
-              <div className="day">12</div>
-              <div className="day">13</div>
-              <div className="day">14</div>
-            </div>
-            <div className="week">
-              <div className="day">15</div>
-              <div className="day">16</div>
-              <div className="day">
-                <div className='visit'>
-                  <div className='id'> Land-254</div>
-                  <div className='service'>Turf Install</div>
-                  <div className='clientName'>John Dover</div>
-                  <div className='address'>545 Fontainebleau Nord, Longueuil J4L 2W8</div>
-                </div>
-              </div>
-              <div className="day">18</div>
-              <div className="day">19</div>
-              <div className="day">20</div>
-              <div className="day">21</div>
-            </div>
-            <div className="week">
-              <div className="day">22</div>
-              <div className="day">23</div>
-              <div className="day">24</div>
-              <div className="day">25</div>
-              <div className="day">26</div>
-              <div className="day">27</div>
-              <div className="day">28</div>
-            </div>
-            <div className="week">
-              <div className="day">29</div>
-              <div className="day">30</div>
-              <div className="day">31</div>
-              <div className="day">32</div>
-              <div className="day">33</div>
-              <div className="day">34</div>
-              <div className="day">35</div>
-            </div>
-          </div> 
-        </div>*/}
+        <div>
+          <Calendar localizer={localizer} events={allVisits}
+            startAccessor='start' endAccessor='end'
+            style={{width:'80vw', height:'50vh'}}/>
+        </div>
       </main>
 
       <footer>
