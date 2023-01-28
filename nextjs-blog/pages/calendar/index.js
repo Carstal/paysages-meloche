@@ -59,24 +59,6 @@ const localizer = dateFnsLocalizer({
   locales
 })
 
-const dummyVisits = [
-  {
-    title: "Landscaping",
-    allDay: true,
-    start: new Date(2023,2,2),
-    end: new Date(2023,2,2),
-  },
-  {
-    title: "Terrace",
-    start: new Date(2023,2,4),
-    end: new Date(2023,2,4),
-  },
-  {
-    title: "Paving",
-    start: new Date(2023,2,5),
-    end: new Date(2023,2,5),
-  }
-]
 export default function Home({visits}) {
   var allVisits = []
   visits.forEach((visit) => (
