@@ -1,16 +1,21 @@
 import { updateClient } from "../../../src/components/client/client_service"
+import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function handler(req, res) {
     // Get data submitted in request's body.
     const body = req.body
-    const updated = await updateClient(body);
+    const session = await getSession(req, res);
 
-    // fetch('http://localhost:3000/api/client/updateClient', {
-    //   method: 'PATCH',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(body),
-    // })
-    res.redirect('/')
+    try{
+        const email = session.user.email
+        if(email == body.email){
+            console.log("authorized")
+            const updated = await updateClient(body);
+            res.redirect('/')
+        }
+        
+    } catch {
+        console.log("not authenticated")
+        res.redirect("/access_denied")
+    }
   }
