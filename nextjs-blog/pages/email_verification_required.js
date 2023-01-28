@@ -21,6 +21,15 @@ export default function Home() {
       i18n.changeLanguage(e.target.value);
     }
   }
+
+  var lang
+
+  if(language == "en"){
+      lang = <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
+  } else {
+      lang = <button class={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -34,12 +43,7 @@ export default function Home() {
         <div className='services'>
         </div>
         {Profile()}
-        <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-          French
-        </button>
-        <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-          English
-        </button>
+        {lang}
       </header>
       <main>
         <h1 className={styles.title}>

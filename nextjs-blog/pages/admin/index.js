@@ -24,6 +24,14 @@ export default function Home({users}) {
       }
     }
 
+    var lang
+
+    if(language == "en"){
+        lang = <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
+    } else {
+        lang = <button class={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
+    }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -46,12 +54,7 @@ export default function Home({users}) {
           </div>
         </div>
         {Profile()}
-        <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-            French
-        </button>
-        <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-            English
-        </button>
+        {lang}
       </header>
       <main>
         <h2 className={styles.title}>{t("AllUsers")}</h2>

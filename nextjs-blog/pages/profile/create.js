@@ -23,9 +23,18 @@ export default function UserInfo({ user, data }) {
       i18n.changeLanguage(e.target.value);
     }
   }
-    return (
+
+  var lang
+
+  if(language == "en"){
+      lang = <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
+  } else {
+      lang = <button class={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
+  }
+
+  return (
       user && (
-<div className={styles.container}>
+      <div className={styles.container}>
         <Head>
           <title>{t("TitleProfile")}</title>
           <link rel="icon" href="/favicon.ico" />
@@ -36,14 +45,7 @@ export default function UserInfo({ user, data }) {
           </div>
           <div className='services'>
           </div>
-          <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-            French
-          </button>
-          <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-            English
-          </button>
-
-
+          {lang}
         </header>
         <main>
           <h1 className={styles.title}>
