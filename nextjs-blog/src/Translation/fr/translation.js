@@ -22,11 +22,10 @@ export const TRANSLATIONS_FR = {
     CompProf: "Compléter Profil",
     Note: "*Veuillez notez que la complétion du compte vous ramènera à l'écran de connexion.",
     TryAgain: "Réessayer",
-    Access: "Accès interdit"
-
-
-
-
-
-
-   };
+    Access: "Accès interdit",
+    User: "Utilisateur",
+    Email: "Courriel",
+    Employee: "Employé",
+    AllUsers: "Utilisateurs",
+    Edit: "Modifier"
+};

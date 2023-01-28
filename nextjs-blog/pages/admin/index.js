@@ -4,9 +4,25 @@ import { useRouter } from "next/router";
 import { getAllClients } from "../../src/components/client/client_service"
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import Profile from '../profile/index';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import "../../src/Translation/i18n";
+import i18n from "i18next";
 
 export default function Home({users}) {
-  const router = useRouter()
+    const router = useRouter()
+    const [language, setLanguage] = useState('en');
+    console.log(language)
+  
+    const { t } = useTranslation();
+  
+    const handleOnclick = (e) => {
+      e.preventDefault();
+      setLanguage(e.target.value);
+      if (i18n && i18n.changeLanguage) {
+        i18n.changeLanguage(e.target.value);
+      }
+    }
 
   return (
     <div className={styles.container}>
@@ -30,22 +46,28 @@ export default function Home({users}) {
           </div>
         </div>
         {Profile()}
+        <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
+            French
+        </button>
+        <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
+            English
+        </button>
       </header>
       <main>
-        <h2 className={styles.title}>All Users</h2>
+        <h2 className={styles.title}>{t("AllUsers")}</h2>
         <div id="visitContainer">
           {users.map((user) => (
           <div className="visit">
             <div className="info">
-              <div className="vrRow">User: {user.first_name} {user.last_name}</div>
-              <div className="vrRow">Email: {user.email}</div>
-              <div className="vrRow">Phone Number: {user.phone_number}</div>
-              <div className="vrRow">Employee?: {user.first_name}</div>
+              <div className="vrRow">{t("User")}: {user.first_name} {user.last_name}</div>
+              <div className="vrRow">{t("Email")}: {user.email}</div>
+              <div className="vrRow">{t("PhoneNumber")}: {user.phone_number}</div>
+              <div className="vrRow">{t("Employee")}?: {user.first_name}</div>
             </div>
             <div className="editBtnDiv">
               <button className="editBtn" name="edit" value={user.email} onClick={() => router.push({
                 pathname: '/admin/[email]', query: { email: user.email }})}>
-                Edit
+                {t("Edit")}
               </button>
             </div>
           </div>
@@ -285,7 +307,6 @@ export const getServerSideProps = withPageAuthRequired({
 
         if(roles == "Admin") {
             const list = await getAllClients();
-            console.log(JSON.parse(JSON.stringify(list)))
             return { props: { users: JSON.parse(JSON.stringify(list)) } };
         } else {
             return {
