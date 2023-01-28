@@ -81,7 +81,7 @@ export default function Home({visits}) {
   var allVisits = []
   visits.forEach((visit) => (
     allVisits.push({
-      title: 'Project ',
+      title: 'Project '+ visit.project_id,
       start: new Date(visit.start_date),
       end: new Date(visit.end_date)
     })
