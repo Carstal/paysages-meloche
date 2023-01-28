@@ -21,7 +21,8 @@ export const TRANSLATIONS_FR = {
     Complet: "Sauvegarder",
     CompProf: "Compléter Profil",
     Note: "*Veuillez notez que la complétion du compte vous ramènera à l'écran de connexion.",
-    TryAgain: "Réessayer"
+    TryAgain: "Réessayer",
+    Access: "Accès interdit"
 
 
 

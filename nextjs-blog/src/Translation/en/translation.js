@@ -22,7 +22,8 @@ export const TRANSLATIONS_EN = {
     Complet: "Account Creation",
     CompProf: "Complete Profile",
     Note: "*Note that completing the account creation will bring you back to the log in screen.",
-    TryAgain: "Try Again"
+    TryAgain: "Try Again",
+    Access: "Access denied"
 
 
 
