@@ -11,8 +11,7 @@ import i18n from "i18next";
 
 export default function Home({users}) {
     const router = useRouter()
-    const [language, setLanguage] = useState('en');
-    console.log(language)
+    const [language, setLanguage] = useState('en');4
   
     const { t } = useTranslation();
   
