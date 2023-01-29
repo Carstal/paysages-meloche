@@ -21,6 +21,14 @@ export default function UserInfo({ data }) {
       }
     }
 
+    var emp
+
+    if(data?.is_employee){
+      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value="true" selected>Yes</option><option value="false">No</option></select>
+    } else {
+      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value="true">Yes</option><option value="false" selected>No</option></select>
+    }
+
     var lang
 
     if(language == "en"){
@@ -80,11 +88,7 @@ export default function UserInfo({ data }) {
 
                   <div className="form-group mb-3">
                     <label className="mb-2"><strong>Employee?</strong></label>
-                    <select name="is_employee" id="is_employee" class={styles.selectEmp}>
-                      <option value="true">Yes</option>
-                      <option value="false">No</option>
-                    </select>
-                    {/* <input type="text" className="form-control" defaultValue={data?.is_employee} id="is_employee" name="is_employee" required /> */}
+                    {emp}
                   </div>
   
                   <div className="form-group mt-3">
