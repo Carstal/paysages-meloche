@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css';
-// import Profile from './/profile/index';
-// import { getSession } from '@auth0/nextjs-auth0';
+import Profile from '../profile/index';
+import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 // export async function getServerSideProps(ctx) {
 //   //get session info
@@ -28,14 +28,16 @@ import styles from '../../styles/Home.module.css';
 //       props:{}
 //   }
 // }
-export async function getServerSideProps() {
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: '/',
+  async getServerSideProps(ctx) {
+    const session = await getSession(ctx.req, ctx.res);
   const res = await fetch("http://localhost:3000/api/visit");
   const visits = await res.json();
-  // console.log("--------VISITS----------");
-  // console.log(visits[data]);
 
   return { props: { visits }};
-}
+  }
+});
 
 // Using react-big-calendar, an open-source alternative to Full Calendar
 // Using react-datepicker, for small calendar date selection
@@ -105,11 +107,7 @@ export default function Home({visits}) {
             <h3>Deneigement</h3>
           </div>
         </div>
-        <div className='login'>
-          <button>
-            Login
-          </button>
-        </div>
+        {Profile()}
       </header>
       <main>
         <h2 className={styles.title}>
