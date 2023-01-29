@@ -39,14 +39,17 @@ export async function getServerSideProps() {
 
 // Using react-big-calendar, an open-source alternative to Full Calendar
 // Using react-datepicker, for small calendar date selection
-import React, {useState} from 'react';
+// import DatePicker from 'react-datepicker';
+import React, {useState, useCallback} from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import DatePicker from 'react-datepicker';
+import { useRouter } from "next/router";
+// import 'react-big-calendar/lib/sass';
+// import 'react-big-calendar/lib/sass/styles';
 
 const locales = {
   'en-CA': require('date-fns/locale/en-CA')
@@ -60,10 +63,12 @@ const localizer = dateFnsLocalizer({
 })
 
 export default function Home({visits}) {
+  const router = useRouter()
   var allVisits = []
   visits.forEach((visit) => (
     allVisits.push({
       title: 'Project '+ visit.project_id,
+      visit: visit.visit_id,
       start: new Date(visit.start_date),
       end: new Date(visit.end_date)
     })
@@ -72,6 +77,12 @@ export default function Home({visits}) {
   const changeDate = (e) => {
     setDateState(e)
   }
+
+  const handleSelectVisit = useCallback(
+    (event) => window.alert(event.visit),
+    []
+  )
+
   return (
     <div className={styles.container}>
       <Head>
@@ -106,7 +117,8 @@ export default function Home({visits}) {
         <div>
           <Calendar localizer={localizer} events={allVisits}
             startAccessor='start' endAccessor='end'
-            style={{width:'80vw', height:'50vh'}}/>
+            style={{width:'80vw', height:'55vh'}}
+            onSelectEvent={handleSelectVisit}/>
         </div>
       </main>
 
