@@ -26,9 +26,9 @@ export default function Home({users}) {
     var lang
 
     if(language == "en"){
-        lang = <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
+        lang = <button className={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
     } else {
-        lang = <button class={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
+        lang = <button className={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
     }
 
     const [searchTerm, setSearchTerm] = useState('');
