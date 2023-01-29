@@ -107,7 +107,7 @@ export default function Project({ data }) {
     
     
               <div className="d-grid mt-3">
-                <button type="submit" className="btn btn-block btn-primary">{t("Submit")}</button>
+                <button type="submit" className="btn btn-block btn-primary">Send</button>
               </div>
             </form>
           </div>
