@@ -3,6 +3,7 @@ import styles from '../../styles/Home.module.css';
 
 // Using react-big-calendar, an open-source alternative to Full Calendar
 // Using react-datepicker, for small calendar date selection
+// import DatePicker from 'react-datepicker';
 import React, {useState} from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
@@ -10,11 +11,13 @@ import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import DatePicker from 'react-datepicker';
 import { Router } from 'next/router';
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/visit");
+export async function getServerSideProps(context) {
+  const userId = context.params.id;
+  const api = 'http://localhost:3000/api/visit/user/';
+  const url = api + projectId;
+  const res = await fetch(url);
   const visits = await res.json();
 
   return { props: { visits }};
