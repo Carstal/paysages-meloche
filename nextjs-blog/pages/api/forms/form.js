@@ -8,7 +8,8 @@ export default async function handler(req, res) {
 
     try{
         const email = session.user.email
-        if(email == body.email){
+        const role = session.user.userRoles
+        if(email == body.email || role == "Admin"){
             console.log("authorized")
             const updated = await updateClient(body);
             res.redirect('/')

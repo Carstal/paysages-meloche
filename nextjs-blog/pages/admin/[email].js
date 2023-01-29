@@ -80,7 +80,11 @@ export default function UserInfo({ data }) {
 
                   <div className="form-group mb-3">
                     <label className="mb-2"><strong>Employee?</strong></label>
-                    <input type="text" className="form-control" defaultValue={data?.is_employee} id="is_employee" name="is_employee" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title='Please enter phone number in the following format: 000-000-0000.' />
+                    <select name="is_employee" id="is_employee" class={styles.selectEmp}>
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                    {/* <input type="text" className="form-control" defaultValue={data?.is_employee} id="is_employee" name="is_employee" required /> */}
                   </div>
   
                   <div className="form-group mt-3">
