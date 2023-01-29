@@ -64,12 +64,7 @@ export default function Project({ data }) {
         </div>
         {Profile()}
         <div className='login'>
-          <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-            French
-          </button>
-          <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-            English
-          </button>
+  
 
         </div>
 
