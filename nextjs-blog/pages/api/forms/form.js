@@ -3,8 +3,15 @@ import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function handler(req, res) {
     // Get data submitted in request's body.
-    const body = req.body
+    var body = req.body
     const session = await getSession(req, res);
+
+    // converts is_employee to boolean
+    if(body.is_employee != undefined){
+        var value = body.is_employee
+        var fix = (value === "true")
+        body = {email: body.email, first_name: body.first_name, last_name: body.last_name, phone_number: body.phone_number, is_employee: fix}
+    }
 
     try{
         const email = session.user.email

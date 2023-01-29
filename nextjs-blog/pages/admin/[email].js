@@ -27,9 +27,9 @@ export default function UserInfo({ data }) {
     var emp
 
     if(data?.is_employee){
-      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value="true" selected>Yes</option><option value="false">No</option></select>
+      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value={true} selected>Yes</option><option value={false}>No</option></select>
     } else {
-      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value="true">Yes</option><option value="false" selected>No</option></select>
+      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value={true}>Yes</option><option value={false} selected>No</option></select>
     }
 
     var lang
