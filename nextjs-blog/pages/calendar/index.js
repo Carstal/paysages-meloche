@@ -79,7 +79,8 @@ export default function Home({visits}) {
   }
 
   const handleSelectVisit = useCallback(
-    (event) => window.alert(event.visit),
+    (event) => router.push({
+      pathname: '/visit/[id]', query: { id: event.visit }}),
     []
   )
 
