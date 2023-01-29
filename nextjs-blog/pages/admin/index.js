@@ -31,6 +31,21 @@ export default function Home({users}) {
         lang = <button class={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
     }
 
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState(users);
+    
+    const handleSearch = event => {
+      const searchTerm = event.target.value;
+      setSearchTerm(searchTerm);
+    
+      const filteredList = users.filter(item =>
+        Object.values(item).some(field =>
+          typeof field === 'string' && field.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      )
+      setSearchResults(filteredList);
+    }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -57,8 +72,12 @@ export default function Home({users}) {
       </header>
       <main>
         <h2 className={styles.title}>{t("AllUsers")}</h2>
+        <div className={styles.search_container}>
+          <i className="fas fa-search search-icon"></i>
+          <input type="text" value={searchTerm} onChange={handleSearch} className={styles.search_input} placeholder="Search"/>
+        </div>     
         <div id="visitContainer">
-          {users.map((user) => (
+          {searchResults.map((user) => (
           <div className="visit">
             <div className="info">
               <div className="vrRow">{t("User")}: {user.first_name} {user.last_name}</div>
