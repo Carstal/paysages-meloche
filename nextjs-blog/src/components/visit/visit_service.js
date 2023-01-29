@@ -109,14 +109,33 @@ export async function getVisitByVisitId(id) {
 }
 
 export async function getVisitsByUserId(id) {
-  const result = await client
+  const cursor = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
     .find({ user_id: id });
 
-  if (result) {
+  const results = cursor.toArray();
 
-    return result;
+  if (results) {
+
+    return results;
+  } else {
+
+    return null;
+  }
+}
+
+export async function getVisitsByEmpId(id) {
+  const cursor = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .find({ employee_ids: id });
+
+  const results = cursor.toArray();
+
+  if (results) {
+
+    return results;
   } else {
 
     return null;
