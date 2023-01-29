@@ -108,6 +108,21 @@ export async function getVisitByVisitId(id) {
   }
 }
 
+export async function getVisitsByUserId(id) {
+  const result = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .find({ user_id: id });
+
+  if (result) {
+
+    return result;
+  } else {
+
+    return null;
+  }
+}
+
 //Get Visits by project_id
 // export function getVisitsByProjectId(id) {
 //   const cursor = client

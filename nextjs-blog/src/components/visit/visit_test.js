@@ -13,6 +13,7 @@ const Visit = require("./Visit");
 
 const visitOne = new Visit(
   2255,
+  234333,
   2255,
   [99, 87, 31],
   new Date("2023-03-12"),
@@ -20,6 +21,7 @@ const visitOne = new Visit(
 );
 const updateOne = new Visit(
   2255,
+  234333,
   2255,
   [99],
   new Date("2023-05-12"),
@@ -28,8 +30,8 @@ const updateOne = new Visit(
 
 const uri =
 "mongodb+srv://Mohaned:0000@cluster0.gvkvlw9.mongodb.net/?retryWrites=true&w=majority";
-const mongouri =
-"mongodb+srv://carstaltari:Pablo__545@iot2-carlo.ijsiznf.mongodb.net/?retryWrites=true&w=majority";
+// const mongouri =
+// "mongodb+srv://carstaltari:Pablo__545@iot2-carlo.ijsiznf.mongodb.net/?retryWrites=true&w=majority";
 
 //   const client = new MongoClient(uri);
 const client = new MongoClient(uri);
@@ -47,6 +49,10 @@ async function runAllTests(){
   console.log("GET VISIT 2255")
   const readVis = await getVisitByVisitId(2255);
   console.log(readVis);
+
+  console.log("GET VISITS FOR USER 234333")
+  const userVis = await getVisitsByUserId(234333);
+  console.log(userVis);
 
   console.log("UPDATE VISIT 2255")
   const updatedVis = await updateVisit(updateOne);
@@ -83,8 +89,8 @@ async function getAllVisits() {
     .collection("DummyVisits")
     .find({}).toArray();
   if (results) {
-    console.log("Returning all listings in db");
-    console.log(results);
+    // console.log("Returning all listings in db");
+    // console.log(results);
 
     return results;
   } else {
@@ -102,12 +108,28 @@ async function getVisitByVisitId(id) {
     .findOne({ visit_id: id });
 
   if (result) {
-    console.log(`Found a listing in connection with visit id: '${id}'`);
-    console.log(result);
+    // console.log(`Found a listing in connection with visit id: '${id}'`);
+    // console.log(result);
 
     return result;
   } else {
     console.log("none");
+
+    return null;
+  }
+}
+
+
+async function getVisitsByUserId(id) {
+  const result = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .find({ user_id: id }).toArray();
+
+  if (result) {
+
+    return result;
+  } else {
 
     return null;
   }
@@ -138,8 +160,8 @@ async function updateVisit(vis) {
     .findOne({ visit_id: intId });
 
   if (result) {
-    console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
-    console.log(result);
+    // console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
+    // console.log(result);
     const update = await client
       .db("ECPVisitDummy")
       .collection("DummyVisits")
