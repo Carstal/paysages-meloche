@@ -164,9 +164,7 @@ export default function Project({ data }) {
             background: #dddddd;
             display: inline-block;
           }
-          .mb-6:hover {
-            background: #5cbd95;
-          }
+        
           .mb-6:active {
             background: #9fa1a0;
           }

@@ -24,7 +24,7 @@ export const TRANSLATIONS_EN = {
     Note: "*Note that completing the account creation will bring you back to the log in screen.",
     TryAgain: "Try Again",
     Mailer: "Mailer",
-    Email: "Email",
+    Email: "Email Address",
     Subject: "Subject",
     FullName:"Full Name",
     Attach: "Attach a File"
