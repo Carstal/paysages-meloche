@@ -64,7 +64,7 @@ export default function Home({users}) {
               <div className="vrRow">{t("User")}: {user.first_name} {user.last_name}</div>
               <div className="vrRow">{t("Email")}: {user.email}</div>
               <div className="vrRow">{t("PhoneNumber")}: {user.phone_number}</div>
-              <div className="vrRow">{t("Employee")}?: {user.first_name}</div>
+              <div className="vrRow">{t("Employee")}: {user.is_employee.toString()}</div>
             </div>
             <div className="editBtnDiv">
               <button className="editBtn" name="edit" value={user.email} onClick={() => router.push({
