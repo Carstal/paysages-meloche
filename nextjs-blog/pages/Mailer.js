@@ -16,6 +16,7 @@ export default function Project({ data }) {
 
   const form = useRef()
 
+
   const sendemail = (f) => {
     f.preventDefault();
 
@@ -40,6 +41,13 @@ export default function Project({ data }) {
     }
   }
 
+
+if(language == "en"){
+  var lang = <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
+} else {
+ lang = <button class={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
+}
+
   return (
     <div className={styles.container}>
       <Head>
@@ -62,7 +70,11 @@ export default function Project({ data }) {
 
           </div>
         </div>
+        
         {Profile()}
+        {lang}
+
+
         <div className='login'>
   
 
@@ -85,7 +97,7 @@ export default function Project({ data }) {
               
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("FullName")}</strong></label>
-                <input name="name" id="name" type="text" className="form-control" required />
+                <input name="name" id="name" type="text" className="form-control" />
               </div>
 
 
@@ -107,7 +119,7 @@ export default function Project({ data }) {
     
     
               <div className="d-grid mt-3">
-                <button type="submit" className="btn btn-block btn-primary">Send</button>
+                <button type="submit" className="btn btn-block btn-primary">{t("Send")}</button>
               </div>
             </form>
           </div>

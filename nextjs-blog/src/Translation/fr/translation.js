@@ -26,7 +26,9 @@ export const TRANSLATIONS_FR = {
     Email: "Address Courriel",
     Subject: "Sujet",
     FullName:"Nom Complet",
-    Attach: "Attacher un ficher"
+    Attach: "Attacher un ficher",
+    Send: "Envoyer"
+
 
 
 
