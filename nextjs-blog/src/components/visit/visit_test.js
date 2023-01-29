@@ -55,7 +55,7 @@ async function runAllTests(){
   console.log(userVis);
 
   console.log("GET VISITS FOR EMPLOYEE 99")
-  const empVis = await getVisitsByUserId(99);
+  const empVis = await getVisitsByEmpId(99);
   console.log(empVis);
 
   console.log("UPDATE VISIT 2255")
@@ -140,11 +140,11 @@ async function getVisitsByUserId(id) {
 }
 
 //Get Visits by emp_id
-async function getVisitsByUserId(id) {
+async function getVisitsByEmpId(id) {
   const result = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
-    .find({ user_id: id }).toArray();
+    .find({ employee_ids: id }).toArray();
 
   if (result) {
 
