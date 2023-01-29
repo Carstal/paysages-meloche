@@ -109,10 +109,12 @@ export async function getVisitByVisitId(id) {
 }
 
 export async function getVisitsByUserId(id) {
+
+  const intId = parseInt(id);
   const cursor = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
-    .find({ user_id: id });
+    .find({ user_id: intId });
 
   const results = cursor.toArray();
 
@@ -126,10 +128,12 @@ export async function getVisitsByUserId(id) {
 }
 
 export async function getVisitsByEmpId(id) {
+
+  const intId = parseInt(id);
   const cursor = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
-    .find({ employee_ids: id });
+    .find({ employee_ids: intId });
 
   const results = cursor.toArray();
 

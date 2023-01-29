@@ -2,14 +2,14 @@ import Head from 'next/head'
 import styles from '../../styles/Home.module.css';
 
 // Using react-big-calendar, an open-source alternative to Full Calendar
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { Router } from 'next/router';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context) {
   const userId = context.params.id;
@@ -17,6 +17,8 @@ export async function getServerSideProps(context) {
   const url = api + userId;
   const res = await fetch(url);
   const visits = await res.json();
+
+  console.log(visits)
 
   return { props: { visits }};
 }
@@ -34,24 +36,29 @@ const localizer = dateFnsLocalizer({
 })
 
 export default function Home({visits}) {
-    const router = new Router;
-    const userId = router.id;
-    var empVisits = []
-
-    // visits.forEach((visit) => (
-    //     if (visit.employees_ids.includes(userId)) {
-    //         empVisits.push({
-    //         title: 'Project '+ visit.project_id,
-    //         start: new Date(visit.start_date),
-    //         end: new Date(visit.end_date)
-    //         })
-    //     }
-    // ))
+  const router = useRouter()
+  var allVisits = []
+  //idk why but this is how it's being returned
+  visits.visits.forEach((visit) => (
+    allVisits.push({
+      title: 'Project '+ visit.project_id,
+      visit: visit.visit_id,
+      start: new Date(visit.start_date),
+      end: new Date(visit.end_date)
+    })
+  ))
 
   const [dateState, setDateState] = useState(new Date())
   const changeDate = (e) => {
     setDateState(e)
   }
+
+  const handleSelectVisit = useCallback(
+    (event) => router.push({
+      pathname: '/visit/[id]', query: { id: event.visit }}),
+    []
+  )
+
   return (
     <div className={styles.container}>
       <Head>
@@ -81,12 +88,13 @@ export default function Home({visits}) {
       </header>
       <main>
         <h2 className={styles.title}>
-          Master Calendar
+          User Calendar
         </h2>
         <div>
-          <Calendar localizer={localizer} events={empVisits}
+          <Calendar localizer={localizer} events={allVisits}
             startAccessor='start' endAccessor='end'
-            style={{width:'80vw', height:'50vh'}}/>
+            style={{width:'80vw', height:'55vh'}}
+            onSelectEvent={handleSelectVisit}/>
         </div>
       </main>
 
