@@ -75,7 +75,6 @@ export default function Home({users}) {
         <div className={styles.search_container}>
           <input type="text" value={searchTerm} onChange={handleSearch} className={styles.search_input} placeholder="Search"/>
         </div>
-        <br></br>
         <div style={{height: '350px', overflowY: 'auto'}}>
           {searchResults.map((user) => (
           <div className="visit">
