@@ -54,6 +54,10 @@ async function runAllTests(){
   const userVis = await getVisitsByUserId(234333);
   console.log(userVis);
 
+  console.log("GET VISITS FOR EMPLOYEE 99")
+  const empVis = await getVisitsByUserId(99);
+  console.log(empVis);
+
   console.log("UPDATE VISIT 2255")
   const updatedVis = await updateVisit(updateOne);
   console.log(updatedVis);
@@ -119,7 +123,23 @@ async function getVisitByVisitId(id) {
   }
 }
 
+//Get visits by user_id
+async function getVisitsByUserId(id) {
+  const result = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .find({ user_id: id }).toArray();
 
+  if (result) {
+
+    return result;
+  } else {
+
+    return null;
+  }
+}
+
+//Get Visits by emp_id
 async function getVisitsByUserId(id) {
   const result = await client
     .db("ECPVisitDummy")
