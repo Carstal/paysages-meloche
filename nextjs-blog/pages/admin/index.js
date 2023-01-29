@@ -73,10 +73,10 @@ export default function Home({users}) {
       <main>
         <h2 className={styles.title}>{t("AllUsers")}</h2>
         <div className={styles.search_container}>
-          <i className="fas fa-search search-icon"></i>
           <input type="text" value={searchTerm} onChange={handleSearch} className={styles.search_input} placeholder="Search"/>
-        </div>     
-        <div id="visitContainer">
+        </div>
+        <br></br>
+        <div style={{height: '350px', overflowY: 'auto'}}>
           {searchResults.map((user) => (
           <div className="visit">
             <div className="info">
@@ -95,7 +95,6 @@ export default function Home({users}) {
           ))}
         </div>
         <div id="root">
-
         </div>
       </main>
 
