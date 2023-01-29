@@ -4,7 +4,7 @@ import { getVisits } from "../../../src/components/visit/visit_controller";
 export default async function handler(req,res){
 
     const allVisits = await getVisits();
-    console.log(allVisits);
+    // console.log(allVisits);
 
     res.status(200).json(allVisits);
 

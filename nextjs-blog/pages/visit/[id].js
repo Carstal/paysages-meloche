@@ -29,10 +29,10 @@ import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
   const projectId = context.params.id;
-  console.log("Project Id: " + projectId)
+  // console.log("Project Id: " + projectId)
   const api = 'http://localhost:3000/api/visit/';
   const url = api + projectId;
-  console.log(url);
+  // console.log(url);
   const res = await fetch(url);
 
   const data = await res.json();
@@ -51,7 +51,7 @@ export default function Home({data}) {
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
     const formattedDate = yyyy + '-' + mm + '-' + dd;
-    console.log(formattedDate);
+    // console.log(formattedDate);
 
     return formattedDate;
     // return newDate;

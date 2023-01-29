@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 export async function getServerSideProps() {
   const res = await fetch("http://localhost:3000/api/visit");
   const visits = await res.json();
-  console.log("--------VISITS----------");
-  console.log(visits);
+  // console.log("--------VISITS----------");
+  // console.log(visits[data]);
 
   return { props: { visits }};
 }
@@ -22,7 +22,6 @@ export default function Home({visits}) {
     return formattedEmployees;
   }
   function formatDate(date){
-
     let newDate = new Date(date);
     let dd = newDate.getDate()+1;
     let mm = newDate.getMonth()+1;
@@ -31,7 +30,7 @@ export default function Home({visits}) {
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
     const formattedDate = yyyy + '-' + mm + '-' + dd;
-    console.log(formattedDate);
+    // console.log(formattedDate);
 
     return formattedDate;
   }
