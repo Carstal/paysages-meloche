@@ -43,13 +43,13 @@ export default function Home({users}) {
         </div>
         <div className="services">
           <div id="paysagement">
-            <h3>Paysagement</h3>
+            <h3>{t("Paysagement")}</h3>
           </div>
           <div id="pelouse">
-            <h3>Pelouse</h3>
+            <h3>{t("Pelouse")}</h3>
           </div>
           <div id="deneigement">
-            <h3>Deneigement</h3>
+            <h3>{t("Deneigement")}</h3>
           </div>
         </div>
         {Profile()}
