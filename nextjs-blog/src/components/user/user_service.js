@@ -6,11 +6,14 @@ import clientPromise from "../../../lib/mongodb";
 export async function getUserById(id) {
     try {
         const client = await clientPromise;
+        console.log("----User ID Promise-----");
+        console.log(id)
         const db = client.db("FinalProject");
 
-        const result = await db.collection("User").findOne({
-        user_id: id,
-        });
+        const result = await db.collection("User")
+        .findOne({ user_id: id });
+        console.log("---user retrieved----")
+        console.log(result);
         return result
     } catch (e) {
         console.error(e);
@@ -20,10 +23,14 @@ export async function getUserById(id) {
 
 export async function isEmployee(id){
     try{
-        const user = await getUserById(id)
-        const employee = user.isEmployee
+        const user = await getUserById(id);
+        console.log("----USER Retrieved----");
+        console.log(user);
+        const employee = user.isEmployee;
+        console.log("----Is Employee?----");
+        console.log(employee);
 
-        return employee
+        return employee;
     }
     catch(e){
         console.error(e);
