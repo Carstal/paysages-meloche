@@ -153,7 +153,7 @@ export default function Home({data}) {
               </div>
 
               <div className="form-group mt-3">
-                <button type="submit" className={styles.submitButton}>
+                <button type="submit" className={styles.submitbutton}>
                   Update
                 </button>
               </div>

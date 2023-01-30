@@ -121,8 +121,8 @@ export const getProjectVisits = (req,res) => {
 //Get All Visits
 export const getVisits = () => {
     const allVisits = getAllVisits();
-    console.log("--------Visits From controller--------");
-    console.log(allVisits);
+    // console.log("--------Visits From controller--------");
+    // console.log(allVisits);
 
     return allVisits;
 };
