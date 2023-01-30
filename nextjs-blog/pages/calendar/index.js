@@ -35,6 +35,7 @@ export const getServerSideProps = withPageAuthRequired({
   const res = await fetch("http://localhost:3000/api/visit");
   const visits = await res.json();
 
+  console.log(visits)
   return { props: { visits }};
   }
 });

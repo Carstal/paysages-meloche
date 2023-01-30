@@ -76,6 +76,17 @@ export default function Home({data}) {
               </div>
               <div className="form-group mb-3">
                 <label className="mb-2">
+                  <strong>User Id:</strong>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="userId"
+                  name="userId"
+                />
+              </div>
+              <div className="form-group mb-3">
+                <label className="mb-2">
                   <strong>Project Id:</strong>
                 </label>
                 <input

@@ -1,17 +1,9 @@
 //Visit Service
 //Implements all CRUD Operations relating to visits to mongoDB
 
-const { MongoClient } = require("mongodb");
+import clientPromise from "../../../lib/mongodb";
+
 const Visit = require("./Visit");
-
-const uri =
-"mongodb+srv://Mohaned:0000@cluster0.gvkvlw9.mongodb.net/?retryWrites=true&w=majority";
-
-// const mongouri =
-// "mongodb+srv://carstaltari:Pablo__545@iot2-carlo.ijsiznf.mongodb.net/?retryWrites=true&w=majority";
-
-const client = new MongoClient(uri);
-// const client = new MongoClient(mongouri);
 
 //Add Visit
 export async function addVisit(vis) {
@@ -23,6 +15,7 @@ export async function addVisit(vis) {
 //     start_date: vis.start_date,
 //     end_date: vis.end_date
 //   };
+const client = await clientPromise;
 
   const result = await client
   .db("ECPVisitDummy")
@@ -40,6 +33,7 @@ export async function addVisit(vis) {
 export async function deleteVisitById(id) {
   // console.log("----SERVICE - ID Provided-----");
   // console.log(id);
+  const client = await clientPromise;
   const intId = parseInt(id);
   const result = await client
     .db("ECPVisitDummy")
@@ -53,6 +47,7 @@ export async function deleteVisitById(id) {
 
 //Update Visit
 export async function updateVisitInfo(vis) {
+  const client = await clientPromise;
   // console.log("----SERVICE UpdateVisit STARTED-----");
   const intId = parseInt(vis.visit_id);
   const result = await client
@@ -88,6 +83,7 @@ export async function updateVisitInfo(vis) {
 
 //Get Visit by visit_Id
 export async function getVisitByVisitId(id) {
+  const client = await clientPromise;
   // console.log("----SERVICE - ID Provided-----");
   // console.log(id);
   const intId = parseInt(id);
@@ -103,6 +99,46 @@ export async function getVisitByVisitId(id) {
     return result;
   } else {
     // console.log("none");
+
+    return null;
+  }
+}
+
+export async function getVisitsByUserId(id) {
+  const client = await clientPromise;
+
+  const intId = parseInt(id);
+  const cursor = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .find({ user_id: intId });
+
+  const results = cursor.toArray();
+
+  if (results) {
+
+    return results;
+  } else {
+
+    return null;
+  }
+}
+
+export async function getVisitsByEmpId(id) {
+  const client = await clientPromise;
+
+  const intId = parseInt(id);
+  const cursor = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .find({ employee_ids: intId });
+
+  const results = cursor.toArray();
+
+  if (results) {
+
+    return results;
+  } else {
 
     return null;
   }
@@ -132,6 +168,7 @@ export async function getVisitByVisitId(id) {
 //Get all Visits
 //TODO:TEST FOR GET ALL
 export async function getAllVisits() {
+  const client = await clientPromise;
   const cursor = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")

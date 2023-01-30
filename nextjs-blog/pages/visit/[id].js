@@ -86,6 +86,7 @@ export default function Home({data}) {
         <div className="container">
           <div className="VisitNoEdit">
             <div className="VisitId">Visit ID: {data.visit.visit_id}</div>
+            <div className="UserId">User ID: {data.visit.user_id}</div>
             <div className="ProjectId">Project ID: {data.visit.project_id}</div>
           </div>
           <div className="card mt-5">
@@ -97,6 +98,13 @@ export default function Home({data}) {
                 id="visitId"
                 name="visitId"
                 value={data.visit.visit_id}
+              />
+              <input
+                type="hidden"
+                className="form-control"
+                id="userId"
+                name="userId"
+                value={data.visit.user_id}
               />
               <input
                 type="hidden"

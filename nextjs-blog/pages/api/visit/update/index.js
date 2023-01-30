@@ -11,6 +11,7 @@ export default async function handler(req, res) {
     // console.log("----CONTROLLER - Values Provided-----");
     const visitId = parseInt(data.visitId);
     // console.log(visitId);
+    const userId = parseInt(data.userId);
     const projectId = parseInt(data.projectId);
     // console.log(projectId);
     const employees = data.employees.split(",");
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
     // console.log("Request - UPDATE value");
     // console.log(data.visitId);
 
-    const newVisit = new Visit(visitId, projectId, employeeIds, startDate, endDate);
+    const newVisit = new Visit(visitId, userId, projectId, employeeIds, startDate, endDate);
 
     // const visitInfo = fetch('http://localhost:3000/api/visit/update', {
     //     method: 'PATCH',
