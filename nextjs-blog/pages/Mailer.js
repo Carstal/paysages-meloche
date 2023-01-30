@@ -162,10 +162,16 @@ if(language == "en"){
            .services div :hover {
              background-colour: red;
            }
+
+           .h2{
+            padding-left: 30px;
+          }
            .logo{
              display: flex;
              justify-content: center;
              width: 15vw;
+             padding-left: 30px;
+
            }
            .label {
             cursor: pointer;
