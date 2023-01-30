@@ -11,6 +11,7 @@ export default async function handler(req, res) {
     // console.log("----CONTROLLER - Values Provided-----");
     const visitId = parseInt(data.visitId);
     // console.log(visitId);
+    const userId = parseInt(data.userId);
     const projectId = parseInt(data.projectId);
     // console.log(projectId);
     const employees = data.employees.split(",");
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
     // console.log("Request - Create visit");
     // console.log(data.visitId);
 
-    const newVisit = new Visit(visitId, projectId, employeeIds, startDate, endDate);
+    const newVisit = new Visit(visitId, userId, projectId, employeeIds, startDate, endDate);
 
     const visit = await addVisit(newVisit);
 
