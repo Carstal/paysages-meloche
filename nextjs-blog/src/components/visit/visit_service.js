@@ -209,3 +209,11 @@ export async function getAllVisits() {
 //     return ("error");
 //   }
 // }
+module.exports = {
+  addVisit,
+  getVisitByVisitId,
+  getVisitsByEmpId,
+  getVisitsByUserId,
+  updateVisitInfo,
+  deleteVisitById
+}
