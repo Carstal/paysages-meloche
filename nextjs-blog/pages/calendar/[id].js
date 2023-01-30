@@ -10,9 +10,26 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useRouter } from 'next/router';
+import Profile from '../profile/index';
+import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export async function getServerSideProps(context) {
-  const userId = context.params.id;
+// export async function getServerSideProps(context) {
+//   const userId = context.params.id;
+//   const api = 'http://localhost:3000/api/visit/user/';
+//   const url = api + userId;
+//   const res = await fetch(url);
+//   const visits = await res.json();
+
+//   console.log(visits)
+
+//   return { props: { visits }};
+// }
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: '/',
+  async getServerSideProps(ctx) {
+    const session = await getSession(ctx.req, ctx.res);
+
+  const userId = ctx.params.id;
   const api = 'http://localhost:3000/api/visit/user/';
   const url = api + userId;
   const res = await fetch(url);
@@ -21,7 +38,9 @@ export async function getServerSideProps(context) {
   console.log(visits)
 
   return { props: { visits }};
-}
+  }
+});
+
 
 
 const locales = {
@@ -80,11 +99,7 @@ export default function Home({visits}) {
             <h3>Deneigement</h3>
           </div>
         </div>
-        <div className='login'>
-          <button>
-            Login
-          </button>
-        </div>
+        {Profile()}
       </header>
       <main>
         <h2 className={styles.title}>
