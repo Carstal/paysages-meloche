@@ -1,4 +1,3 @@
-
 export const TRANSLATIONS_EN = {
     welcome:"Welcome to the tutorial",
     ProjectSubmissionTitle:"Project Submission",
@@ -23,16 +22,16 @@ export const TRANSLATIONS_EN = {
     CompProf: "Complete Profile",
     Note: "*Note that completing the account creation will bring you back to the log in screen.",
     TryAgain: "Try Again",
+    Access: "Access denied",
+    User: "User",
+    Email: "Email",
+    Employee: "Employee",
+    AllUsers: "All Users",
+    Edit: "Edit"
     Mailer: "Mailer",
     Email: "Email Address",
     Subject: "Subject",
     FullName:"Full Name",
     Attach: "Attach a File",
     Send: "Send"
-
-
-
-
-
    };
-

@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{t("EmailV")}</title>
+        <title>{t("Access")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
@@ -47,13 +47,8 @@ export default function Home() {
       </header>
       <main>
         <h1 className={styles.title}>
-          {t("EmailV")}
+        {t("Access")}
         </h1>
-        <br></br>
-        <br></br>
-        <button class={styles.loginbutton}>
-          <a href="/api/auth/login">{t("TryAgain")}</a>
-        </button>
       </main>
 
       <footer>

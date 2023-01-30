@@ -22,6 +22,15 @@ export default function UserInfo({ user, data }) {
       i18n.changeLanguage(e.target.value);
     }
   }
+
+  var lang
+
+  if(language == "en"){
+      lang = <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
+  } else {
+      lang = <button class={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
+  }
+
   return (
     user && (
       <div className={styles.container}>
@@ -46,14 +55,7 @@ export default function UserInfo({ user, data }) {
             </div>
           </div>
           {Profile()}
-          <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-            French
-          </button>
-          <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-            English
-          </button>
-
-
+          {lang}
         </header>
         <main>
           <h1 className={styles.title}>
