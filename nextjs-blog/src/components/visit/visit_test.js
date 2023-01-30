@@ -15,7 +15,7 @@ const visitOne = new Visit(
   2255,
   234333,
   2255,
-  [99, 87, 31],
+  [99, 234322, 31],
   new Date("2023-03-12"),
   new Date("2023-03-20")
 );
@@ -66,24 +66,11 @@ async function runAllTests(){
   const deletedVis = await deleteVisitById(2255);
   console.log(deletedVis);
 
+  // console.log("CREATE ten visits")
+  // const bulkCreate = await createTenVisits();
+
   return null;
 }
-// console.log("CREATE VISIT 2255")
-// const createdVis = addVisit(visitOne);
-// console.log(createdVis);
-
-// console.log("GET VISIT 2255")
-// const readVis = getVisitByVisitId(2255);
-// console.log(readVis);
-
-
-// console.log("UPDATE VISIT 2255")
-// const updatedVis = updateVisit(updateOne);
-// console.log(updatedVis);
-
-// console.log("DELETE VISIT 2255")
-// const deletedVis = deleteVisitById(2255);
-// console.log(deletedVis);
 
 
 //Get all Visits
@@ -214,4 +201,79 @@ async function addVisit(vis) {
   );
 
   return result;
+}
+
+
+// const visitTwo = new Visit(
+//   2255,
+//   234333,
+//   2255,
+//   [99, 234322, 31],
+//   new Date("2023-03-12"),
+//   new Date("2023-03-20")
+// );
+
+async function createTenVisits() {
+  console.log("----SERVICE CreateTenVisits STARTED-----");
+  //default parameters
+  let visitId = 1000;
+  let userId = 234333;
+  let projectId = 1000;
+  let emps1 = [99, 234322, 31];
+  let emps2 = [99, 31];
+  let day = 1
+  let month = 3
+  let year = 2023
+
+  for (let i = 0; i < 10; i++){
+    let dd = day;
+    let mm = month;
+    let yyyy = year;
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+    const formattedDate = yyyy + '-' + mm + '-' + dd;
+    var vis = null
+    if(i%2 == 0){
+      vis = new Visit(
+        visitId,
+        userId,
+        projectId,
+        emps1,
+        new Date(formattedDate),
+        new Date(formattedDate)
+      );
+    }
+    else{
+      vis = new Visit(
+        visitId,
+        userId,
+        projectId,
+        emps2,
+        new Date(formattedDate),
+        new Date(formattedDate)
+      );
+    }
+
+  const result = await client
+  .db("ECPVisitDummy")
+  .collection("DummyVisits")
+  .insertOne(vis);
+
+  console.log(
+  `New listing created with the following id: ${result.insertedId}`
+  );
+    day++;
+  }
+
+  // const result = await client
+  //   .db("ECPVisitDummy")
+  //   .collection("DummyVisits")
+  //   .insertOne(vis);
+
+  // console.log(
+  //   `New listing created with the following id: ${result.insertedId}`
+  // );
+
+  return "All listings created";
 }
