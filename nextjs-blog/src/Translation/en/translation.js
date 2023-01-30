@@ -1,4 +1,3 @@
-
 export const TRANSLATIONS_EN = {
     welcome:"Welcome to the tutorial",
     ProjectSubmissionTitle:"Project Submission",
@@ -29,5 +28,10 @@ export const TRANSLATIONS_EN = {
     Employee: "Employee",
     AllUsers: "All Users",
     Edit: "Edit"
-};
-
+    Mailer: "Mailer",
+    Email: "Email Address",
+    Subject: "Subject",
+    FullName:"Full Name",
+    Attach: "Attach a File",
+    Send: "Send"
+   };

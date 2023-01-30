@@ -5,8 +5,8 @@ export default async function handler(req,res){
     const { id } = req.query;
     const visit_id = { id }.id;
 
-    console.log("Request - GET value");
-    console.log(visit_id);
+    // console.log("Request - GET value");
+    // console.log(visit_id);
     // console.log({id});
 
     const visit = await getVisitByVisitId(visit_id);

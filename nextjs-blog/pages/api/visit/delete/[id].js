@@ -8,8 +8,8 @@ export default async function handler(req, res) {
 
     // const idk = "id="+visit_id;
 
-    console.log("Request - DELETE value");
-    console.log(visit_id);
+    // console.log("Request - DELETE value");
+    // console.log(visit_id);
 
     const visit = await deleteVisitById(visit_id);
     // const visit = await deleteVisit();

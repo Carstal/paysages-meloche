@@ -28,4 +28,10 @@ export const TRANSLATIONS_FR = {
     Employee: "Employé",
     AllUsers: "Utilisateurs",
     Edit: "Modifier"
-};
+    Mailer: "Email",
+    Email: "Addresse Courriel",
+    Subject: "Sujet",
+    FullName:"Nom Complet",
+    Attach: "Attacher un ficher",
+    Send: "Envoyer"
+   };

@@ -44,18 +44,18 @@ export const createVisit = (req,res) => {
 
 //Update Visit
 export const updateVisit = (req,res) => {
-    console.log("-------CONTROLLER UpdateVisit STARTED-------");
+    // console.log("-------CONTROLLER UpdateVisit STARTED-------");
     let data = req.body;
-    console.log(data);
-    console.log("----CONTROLLER - Values Provided-----");
+    // console.log(data);
+    // console.log("----CONTROLLER - Values Provided-----");
     const visitId = req.body.visitId;
-    console.log(visitId);
+    // console.log(visitId);
     const projectId = req.body.projectId;
-    console.log(projectId);
+    // console.log(projectId);
     const employeeIds = req.body.employeeIds;
-    console.log(employeeIds);
+    // console.log(employeeIds);
     const startDate = req.body.startDate;
-    console.log(startDate);
+    // console.log(startDate);
     const endDate = req.body.endDate;
     console.log(endDate);
 
@@ -69,7 +69,7 @@ export const updateVisit = (req,res) => {
 
 //Delete Visit By Id
 export const deleteVisit = (req,res) => {
-    console.log("-------CONTROLLER DeleteVisit STARTED-------");
+    // console.log("-------CONTROLLER DeleteVisit STARTED-------");
     // console.log(req.params);
     // const data = req.body;
     // console.log(data);
@@ -82,13 +82,13 @@ export const deleteVisit = (req,res) => {
     // console.log(fullUrl);
     // const { id } = req.query;
     // const visit_id = { id }.id;
-    console.log("----CONTROLLER - ID Provided-----");
-    console.log(visitId);
+    // console.log("----CONTROLLER - ID Provided-----");
+    // console.log(visitId);
     // console.log(visit_id);
 
     // const deletedVisit = deleteVisitById(visitId);
     // const deletedVisit = deleteVisitById(visit_id);
-    console.log("----CONTROLLER - Object Returned-----");
+    // console.log("----CONTROLLER - Object Returned-----");
     // console.log(deletedVisit);
 
     return res.json(visitId);
@@ -98,14 +98,14 @@ export const deleteVisit = (req,res) => {
 
 //Get Visit By Id
 export const getVisit = (req,res) => {
-    console.log("-------CONTROLLER GetVisit STARTED-------");
+    // console.log("-------CONTROLLER GetVisit STARTED-------");
     const visitId = req.params.id;
-    console.log("----CONTROLLER - ID Provided-----");
-    console.log(visitId);
+    // console.log("----CONTROLLER - ID Provided-----");
+    // console.log(visitId);
     const visit = getVisitByVisitId(visitId);
 
-    console.log("----CONTROLLER - Object Returned-----");
-    console.log(visit);
+    // console.log("----CONTROLLER - Object Returned-----");
+    // console.log(visit);
 
     return res.json(visit);
 };

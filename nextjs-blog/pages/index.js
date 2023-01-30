@@ -3,8 +3,11 @@ import styles from '../styles/Home.module.css';
 // import Profile from './profile';
 import Profile from './/profile/index';
 import { getSession } from '@auth0/nextjs-auth0';
+import { useRouter } from "next/router";
+import AdminNav from '../src/components/website/nav/Nav';
 
 export default function Home() {
+  const router = useRouter()
   return (
     <div className={styles.container}>
       <Head>
@@ -25,9 +28,18 @@ export default function Home() {
           <div id='deneigement'>
             <h3>Deneigement</h3>
           </div>
+          <div id='visit'
+          onClick={() => router.push({pathname: '/visit'})}>
+            <h3>Visits</h3>
+          </div>
+          <div id='calendar'
+          onClick={() => router.push({pathname: '/calendar'})}>
+            <h3>Calendar</h3>
+          </div>
         </div>
         {Profile()}
       </header>
+      {/* <AdminNav></AdminNav> */}
       <main>
         <h1 className={styles.title}>
           Paysages Meloche
@@ -54,7 +66,7 @@ export default function Home() {
           background: #222222;
           color: #FFFFFF;
         }
-        
+
         .services {
           display: flex;
           flex-direction: row;
@@ -158,9 +170,20 @@ export async function getServerSideProps(ctx) {
   //get session info
   const session = await getSession(ctx.req, ctx.res);
   var firstLogin = "";
+  var role = "";
   //if the session was ever found, get its firstlogin variable
   try {
   firstLogin = session.user.firstlogin
+  role = session.user.userRoles
+  console.log("Role:")
+  console.log(role)
+  if(role == "Admin"){
+    console.log("Role:")
+    console.log(role)
+  }
+  else{
+    console.log("log error")
+  }
   if (firstLogin == "true"){
     //if it is the user's first login, redirect to the user info screen
     return {
@@ -173,7 +196,7 @@ export async function getServerSideProps(ctx) {
   }
   } catch {
     console.log("An error occured")
-  } 
+  }
   return{
       props:{}
   }
