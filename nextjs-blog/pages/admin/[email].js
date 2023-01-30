@@ -27,9 +27,9 @@ export default function UserInfo({ data }) {
     var emp
 
     if(data?.is_employee){
-      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value={true} selected>Yes</option><option value={false}>No</option></select>
+      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value={true} selected>{t("Yes")}</option><option value={false}>{t("No")}</option></select>
     } else {
-      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value={true}>Yes</option><option value={false} selected>No</option></select>
+      emp = <select name="is_employee" id="is_employee" class={styles.selectEmp}><option value={true}>{t("Yes")}</option><option value={false} selected>{t("No")}</option></select>
     }
 
     var lang
@@ -90,7 +90,7 @@ export default function UserInfo({ data }) {
                   </div>
 
                   <div className="form-group mb-3">
-                    <label className="mb-2"><strong>Employee?</strong></label>
+                    <label className="mb-2"><strong>{t("Employee")}?</strong></label>
                     {emp}
                   </div>
                   {submit}            

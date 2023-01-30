@@ -27,11 +27,12 @@ export const TRANSLATIONS_EN = {
     Email: "Email",
     Employee: "Employee",
     AllUsers: "All Users",
-    Edit: "Edit"
+    Edit: "Edit",
     Mailer: "Mailer",
-    Email: "Email Address",
     Subject: "Subject",
     FullName:"Full Name",
     Attach: "Attach a File",
-    Send: "Send"
+    Send: "Send",
+    Yes: "Yes",
+    No: "No"
    };
