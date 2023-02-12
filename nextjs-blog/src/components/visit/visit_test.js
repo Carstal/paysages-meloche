@@ -39,57 +39,57 @@ const client = new MongoClient(uri);
 // const allVisits = getAllVisits();
 // console.log(allVisits);
 
-const voidRun = runAllTests();
+// const voidRun = runAllTests();
 
-async function runAllTests(){
-  console.log("CREATE VISIT 2255")
-  const createdVis = await addVisit(visitOne);
-  console.log(createdVis);
+// async function runAllTests(){
+//   console.log("CREATE VISIT 2255")
+//   const createdVis = await addVisit(visitOne);
+//   console.log(createdVis);
 
-  console.log("GET VISIT 2255")
-  const readVis = await getVisitByVisitId(2255);
-  console.log(readVis);
+//   console.log("GET VISIT 2255")
+//   const readVis = await getVisitByVisitId(2255);
+//   console.log(readVis);
 
-  console.log("GET VISITS FOR USER 234333")
-  const userVis = await getVisitsByUserId(234333);
-  console.log(userVis);
+//   console.log("GET VISITS FOR USER 234333")
+//   const userVis = await getVisitsByUserId(234333);
+//   console.log(userVis);
 
-  console.log("GET VISITS FOR EMPLOYEE 99")
-  const empVis = await getVisitsByEmpId(99);
-  console.log(empVis);
+//   console.log("GET VISITS FOR EMPLOYEE 99")
+//   const empVis = await getVisitsByEmpId(99);
+//   console.log(empVis);
 
-  console.log("UPDATE VISIT 2255")
-  const updatedVis = await updateVisit(updateOne);
-  console.log(updatedVis);
+//   console.log("UPDATE VISIT 2255")
+//   const updatedVis = await updateVisit(updateOne);
+//   console.log(updatedVis);
 
-  console.log("DELETE VISIT 2255")
-  const deletedVis = await deleteVisitById(2255);
-  console.log(deletedVis);
+//   console.log("DELETE VISIT 2255")
+//   const deletedVis = await deleteVisitById(2255);
+//   console.log(deletedVis);
 
   // console.log("CREATE ten visits")
   // const bulkCreate = await createTenVisits();
 
-  return null;
-}
+//   return null;
+// }
 
 
 //Get all Visits
-async function getAllVisits() {
-    const results = await client
-    .db("ECPVisitDummy")
-    .collection("DummyVisits")
-    .find({}).toArray();
-  if (results) {
-    // console.log("Returning all listings in db");
-    // console.log(results);
+// async function getAllVisits() {
+//     const results = await client
+//     .db("ECPVisitDummy")
+//     .collection("DummyVisits")
+//     .find({}).toArray();
+//   if (results) {
+//     console.log("Returning all listings in db");
+//     console.log(results);
 
-    return results;
-  } else {
-    console.log("No listings received");
+//     return results;
+//   } else {
+//     console.log("No listings received");
 
-    return null;
-  }
-}
+//     return null;
+//   }
+// }
 
 //Get Visit by visit_Id
 async function getVisitByVisitId(id) {
@@ -104,7 +104,7 @@ async function getVisitByVisitId(id) {
 
     return result;
   } else {
-    console.log("none");
+    // console.log("none");
 
     return null;
   }
@@ -144,22 +144,23 @@ async function getVisitsByEmpId(id) {
 
 // Delete Visit by ID
 async function deleteVisitById(id) {
-  console.log("----SERVICE - ID Provided-----");
-  console.log(id);
+  // console.log("----SERVICE - ID Provided-----");
+  // console.log(id);
   const intId = parseInt(id);
   const result = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
     .deleteOne({ visit_id: intId });
 
-  console.log(`${result.deletedCount} document(s) has been deleted.`);
+  // console.log(result);
+  // console.log(`${result.deletedCount} document(s) has been deleted.`);
 
   return result;
 }
 
 //Update Visit
 async function updateVisit(vis) {
-  console.log("----SERVICE UpdateVisit STARTED-----");
+  // console.log("----SERVICE UpdateVisit STARTED-----");
   const intId = parseInt(vis.visit_id);
   const result = await client
     .db("ECPVisitDummy")
@@ -173,16 +174,16 @@ async function updateVisit(vis) {
       .db("ECPVisitDummy")
       .collection("DummyVisits")
       .updateOne({ visit_id: intId }, { $set: vis });
-    console.log(`Listing updated`);
+    // console.log(`Listing updated`);
     const newResult = await client
       .db("ECPVisitDummy")
       .collection("DummyVisits")
       .findOne({ visit_id: intId });
-    console.log(newResult);
+    // console.log(newResult);
 
     return newResult;
   } else {
-    console.log("No listing with matching id");
+    // console.log("No listing with matching id");
 
     return null;
   }
@@ -190,15 +191,15 @@ async function updateVisit(vis) {
 
 //Create Visit
 async function addVisit(vis) {
-  console.log("----SERVICE UpdateVisit STARTED-----");
+  // console.log("----SERVICE AddVisit STARTED-----");
   const result = await client
     .db("ECPVisitDummy")
     .collection("DummyVisits")
     .insertOne(vis);
 
-  console.log(
-    `New listing created with the following id: ${result.insertedId}`
-  );
+  // console.log(
+  //   `New listing created with the following id: ${result.insertedId}`
+  // );
 
   return result;
 }
@@ -213,58 +214,58 @@ async function addVisit(vis) {
 //   new Date("2023-03-20")
 // );
 
-async function createTenVisits() {
-  console.log("----SERVICE CreateTenVisits STARTED-----");
+// async function createTenVisits() {
+  // console.log("----SERVICE CreateTenVisits STARTED-----");
   //default parameters
-  let visitId = 1000;
-  let userId = 234333;
-  let projectId = 1000;
-  let emps1 = [99, 234322, 31];
-  let emps2 = [99, 31];
-  let day = 1
-  let month = 3
-  let year = 2023
+  // let visitId = 1000;
+  // let userId = 234333;
+  // let projectId = 1000;
+  // let emps1 = [99, 234322, 31];
+  // let emps2 = [99, 31];
+  // let day = 1
+  // let month = 3
+  // let year = 2023
 
-  for (let i = 0; i < 10; i++){
-    let dd = day;
-    let mm = month;
-    let yyyy = year;
+  // for (let i = 0; i < 10; i++){
+  //   let dd = day;
+  //   let mm = month;
+  //   let yyyy = year;
 
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-    const formattedDate = yyyy + '-' + mm + '-' + dd;
-    var vis = null
-    if(i%2 == 0){
-      vis = new Visit(
-        visitId,
-        userId,
-        projectId,
-        emps1,
-        new Date(formattedDate),
-        new Date(formattedDate)
-      );
-    }
-    else{
-      vis = new Visit(
-        visitId,
-        userId,
-        projectId,
-        emps2,
-        new Date(formattedDate),
-        new Date(formattedDate)
-      );
-    }
+  //   if (dd < 10) dd = '0' + dd;
+  //   if (mm < 10) mm = '0' + mm;
+  //   const formattedDate = yyyy + '-' + mm + '-' + dd;
+  //   var vis = null
+  //   if(i%2 == 0){
+  //     vis = new Visit(
+  //       visitId,
+  //       userId,
+  //       projectId,
+  //       emps1,
+  //       new Date(formattedDate),
+  //       new Date(formattedDate)
+  //     );
+  //   }
+  //   else{
+  //     vis = new Visit(
+  //       visitId,
+  //       userId,
+  //       projectId,
+  //       emps2,
+  //       new Date(formattedDate),
+  //       new Date(formattedDate)
+  //     );
+  //   }
 
-  const result = await client
-  .db("ECPVisitDummy")
-  .collection("DummyVisits")
-  .insertOne(vis);
+  // const result = await client
+  // .db("ECPVisitDummy")
+  // .collection("DummyVisits")
+  // .insertOne(vis);
 
-  console.log(
-  `New listing created with the following id: ${result.insertedId}`
-  );
-    day++;
-  }
+  // console.log(
+  // `New listing created with the following id: ${result.insertedId}`
+  // );
+  //   day++;
+  // }
 
   // const result = await client
   //   .db("ECPVisitDummy")
@@ -275,5 +276,14 @@ async function createTenVisits() {
   //   `New listing created with the following id: ${result.insertedId}`
   // );
 
-  return "All listings created";
+//   return "All listings created";
+// }
+
+module.exports = {
+  addVisit,
+  deleteVisitById,
+  getVisitByVisitId,
+  getVisitsByEmpId,
+  getVisitsByUserId,
+  updateVisit
 }

@@ -175,8 +175,8 @@ export async function getAllVisits() {
     .find();
   const results = cursor.toArray();
   if (results) {
-    // console.log("Returning all listings in db");
-    // console.log(results);
+    console.log("Returning all listings in db");
+    console.log(results);
 
     return results;
   } else {
@@ -209,3 +209,12 @@ export async function getAllVisits() {
 //     return ("error");
 //   }
 // }
+module.exports = {
+  addVisit,
+  getAllVisits,
+  getVisitByVisitId,
+  getVisitsByEmpId,
+  getVisitsByUserId,
+  updateVisitInfo,
+  deleteVisitById
+}

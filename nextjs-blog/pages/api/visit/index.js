@@ -1,9 +1,9 @@
-import { getVisits } from "../../../src/components/visit/visit_controller";
-// import { getVisits } from "../../../src/components/visit/visit_service"
+// import { getVisits } from "../../../src/components/visit/visit_controller";
+import { getAllVisits } from "../../../src/components/visit/visit_service"
 
 export default async function handler(req,res){
 
-    const allVisits = await getVisits();
+    const allVisits = await getAllVisits();
     // console.log(allVisits);
 
     res.status(200).json(allVisits);

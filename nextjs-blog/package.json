@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "node src/EmailSys.js",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.0.1",
