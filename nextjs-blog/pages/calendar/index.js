@@ -55,9 +55,8 @@ export default function Home({ visits }) {
   var [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
-  const [visitType, setVisitType] = useState("");
-
   const router = useRouter();
+
   var allVisits = [];
   visits.forEach((visit) =>
     allVisits.push({
@@ -67,20 +66,11 @@ export default function Home({ visits }) {
       end: new Date(visit.end_date),
     })
   );
+  events = allVisits;
   const [dateState, setDateState] = useState(new Date());
   const changeDate = (e) => {
     setDateState(e);
   };
-  events = allVisits;
-
-  const handleSelectVisit = useCallback(
-    (event) =>
-      router.push({
-        pathname: "/visit/[id]",
-        query: { id: event.visit },
-      }),
-    []
-  );
 
   useEffect(() => {
     setFilteredEvents(
@@ -89,6 +79,15 @@ export default function Home({ visits }) {
       })
     );
   }, [events, startDate]);
+
+  const handleSelectVisit = useCallback(
+    (event) => (window.location.href = "/visit/" + event.visit),
+    // router.push({
+    //   pathname: "/visit/[id]",
+    //   query: { id: event.visit },
+    // }),
+    []
+  );
 
   return (
     <div className={styles.container}>
@@ -120,14 +119,6 @@ export default function Home({ visits }) {
           value={moment(startDate).format("YYYY-MM-DD")}
           onChange={(e) => setStartDate(e.target.value)}
         />
-        <select
-          value={visitType}
-          onChange={(e) => setVisitType(e.target.value)}
-        >
-          <option value="">All</option>
-          <option value="type1">Type 1</option>
-          <option value="type2">Type 2</option>
-        </select>
         <div>
           <Calendar
             localizer={localizer}
