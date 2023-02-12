@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import Profile from "../profile/index";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import clientPromise from "../../lib/mongodb";
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/calendar",
@@ -14,10 +15,15 @@ export const getServerSideProps = withPageAuthRequired({
       const visits = await res.json();
       return { props: { visits } };
     } else {
+      const client = await clientPromise;
+      const db = client.db("FinalProject");
+      const user = await db.collection("Client").findOne({
+        email: session.user.email,
+      });
       return {
         redirect: {
           permanent: false,
-          destination: "/access_denied",
+          destination: "/calendar/" + user.user_id,
         },
         props: {},
       };
