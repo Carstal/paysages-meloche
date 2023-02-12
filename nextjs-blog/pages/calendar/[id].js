@@ -28,7 +28,6 @@ export const getServerSideProps = withPageAuthRequired({
   returnTo: "/",
   async getServerSideProps(ctx) {
     const session = await getSession(ctx.req, ctx.res);
-
     const userId = ctx.params.id;
     var visits = null;
     try {

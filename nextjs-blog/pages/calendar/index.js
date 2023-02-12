@@ -60,7 +60,8 @@ const localizer = dateFnsLocalizer({
 export default function Home({ visits }) {
   var [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const router = useRouter();
 
   var allVisits = [];
@@ -79,12 +80,21 @@ export default function Home({ visits }) {
   };
 
   useEffect(() => {
-    setFilteredEvents(
-      events.filter((event) => {
-        return moment(event.start).isSameOrAfter(moment(startDate));
-      })
-    );
-  }, [events, startDate]);
+    if (!startDate && !endDate) {
+      setFilteredEvents(events);
+    } else {
+      setFilteredEvents(
+        events.filter((event) => {
+          return (
+            (startDate
+              ? moment(event.start).isSameOrAfter(moment(startDate))
+              : true) &&
+            (endDate ? moment(event.end).isSameOrBefore(moment(endDate)) : true)
+          );
+        })
+      );
+    }
+  }, [events, startDate, endDate]);
 
   const handleSelectVisit = useCallback(
     (event) => (window.location.href = "/visit/" + event.visit),
@@ -124,6 +134,11 @@ export default function Home({ visits }) {
           type="date"
           value={moment(startDate).format("YYYY-MM-DD")}
           onChange={(e) => setStartDate(e.target.value)}
+        />
+        <input
+          type="date"
+          value={moment(endDate).format("YYYY-MM-DD")}
+          onChange={(e) => setEndDate(e.target.value)}
         />
         <div>
           <Calendar
