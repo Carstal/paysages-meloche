@@ -98,10 +98,6 @@ export default function Home({ visits }) {
 
   const handleSelectVisit = useCallback(
     (event) => (window.location.href = "/visit/" + event.visit),
-    // router.push({
-    //   pathname: "/visit/[id]",
-    //   query: { id: event.visit },
-    // }),
     []
   );
 
@@ -130,16 +126,26 @@ export default function Home({ visits }) {
       </header>
       <main>
         <h2 className={styles.title}>Master Calendar</h2>
-        <input
-          type="date"
-          value={moment(startDate).format("YYYY-MM-DD")}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        <input
-          type="date"
-          value={moment(endDate).format("YYYY-MM-DD")}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
+        <div className="filter-container">
+          <div className="filter-item">
+            <label htmlFor="start-date">Start Date:</label>
+            <input
+              id="start-date"
+              type="date"
+              value={startDate ? moment(startDate).format("YYYY-MM-DD") : ""}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
+          <div className="filter-item">
+            <label htmlFor="end-date">End Date:</label>
+            <input
+              id="end-date"
+              type="date"
+              value={endDate ? moment(endDate).format("YYYY-MM-DD") : ""}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
+        </div>
         <div>
           <Calendar
             localizer={localizer}
@@ -181,6 +187,21 @@ export default function Home({ visits }) {
           justify-content: center;
           width: 18vw;
           cursor: "pointer";
+        }
+        .filter-container {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 20px;
+        }
+
+        .filter-item {
+          display: flex;
+          align-items: center;
+          margin: 20px;
+        }
+
+        .filter-item label {
+          margin-right: 10px;
         }
         .services div :hover {
           background-color: red;
