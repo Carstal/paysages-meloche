@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
+import VisitTable from "../../components/visit/VisitTable";
 
 
 export async function getServerSideProps() {
@@ -62,9 +63,7 @@ export default function Home({visits}) {
       <main>
         <h2 className={styles.title}>All Visits</h2>
         <div id="visitContainer">
-          {visits.map((visit) => (
-            // let sdate = visit.start_date;
-            // console.log(sdate);
+          {/* {visits.map((visit) => (
             <div className="visit">
               <div className="info">
                 <div className="vrRow">
@@ -96,46 +95,10 @@ export default function Home({visits}) {
                 </button>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
 
-        <div className="card mt-5">
-          <div className="center-col">
-            <table>
-              <tr>
-                <th>Visit ID</th>
-                <th>Project ID</th>
-                <th>Client</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-              </tr>
-              {visits.map((visit, key) => {
-                return (
-                  <tr key={key}>
-                    <nav>
-                      <a href="#" class="hover-underline-animation">
-                        <td
-                          onClick={() =>
-                            router.push({
-                              pathname: "/visit/[id]",
-                              query: { id: visit.visit_id },
-                            })
-                          }
-                        >
-                          {visit.visit_id}
-                        </td>
-                      </a>
-                    </nav>
-                    <td>{visit.project_id}</td>
-                    <td>{visit.user_id}</td>
-                    <td>{formatDate(visit.start_date)}</td>
-                    <td>{formatDate(visit.end_date)}</td>
-                  </tr>
-                );
-              })}
-            </table>
-          </div>
-        </div>
+        <VisitTable visits={visits}/>
 
         <div id="root"></div>
         <div className="addBtnDiv">
