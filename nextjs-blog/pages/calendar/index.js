@@ -1,76 +1,93 @@
-import Head from 'next/head'
-import styles from '../../styles/Home.module.css';
-import Profile from '../profile/index';
-import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import Head from "next/head";
+import styles from "../../styles/Home.module.css";
+import Profile from "../profile/index";
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 export const getServerSideProps = withPageAuthRequired({
-  returnTo: '/calendar',
+  returnTo: "/calendar",
   async getServerSideProps(ctx) {
     const session = await getSession(ctx.req, ctx.res);
-    const roles = session.user.userRoles
+    const roles = session.user.userRoles;
 
-    if(roles == "Admin") {
+    if (roles == "Admin") {
       const res = await fetch("http://localhost:3000/api/visit");
       const visits = await res.json();
-      return { props: { visits }};
+      return { props: { visits } };
     } else {
-        return {
-            redirect: {
-              permanent: false,
-              destination: "/access_denied",
-            },
-            props:{},
-          };
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/access_denied",
+        },
+        props: {},
+      };
     }
-  }
+  },
 });
 
 // Using react-big-calendar, an open-source alternative to Full Calendar
 // Using react-datepicker, for small calendar date selection
 // import DatePicker from 'react-datepicker';
-import React, {useState, useCallback} from 'react';
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import startOfWeek from 'date-fns/startOfWeek';
-import getDay from 'date-fns/getDay';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import React, { useState, useCallback, useEffect } from "react";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import format from "date-fns/format";
+import parse from "date-fns/parse";
+import startOfWeek from "date-fns/startOfWeek";
+import getDay from "date-fns/getDay";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useRouter } from "next/router";
 // import 'react-big-calendar/lib/sass';
 // import 'react-big-calendar/lib/sass/styles';
+import moment from "moment";
 
 const locales = {
-  'en-CA': require('date-fns/locale/en-CA')
-}
+  "en-CA": require("date-fns/locale/en-CA"),
+};
 const localizer = dateFnsLocalizer({
   format,
   parse,
   startOfWeek,
   getDay,
-  locales
-})
+  locales,
+});
 
-export default function Home({visits}) {
-  const router = useRouter()
-  var allVisits = []
-  visits.forEach((visit) => (
+export default function Home({ visits }) {
+  var [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+
+  const router = useRouter();
+  var allVisits = [];
+  visits.forEach((visit) =>
     allVisits.push({
-      title: 'Project '+ visit.project_id,
+      title: "Project " + visit.project_id,
       visit: visit.visit_id,
       start: new Date(visit.start_date),
-      end: new Date(visit.end_date)
+      end: new Date(visit.end_date),
     })
-  ))
-  const [dateState, setDateState] = useState(new Date())
+  );
+  const [dateState, setDateState] = useState(new Date());
   const changeDate = (e) => {
-    setDateState(e)
-  }
+    setDateState(e);
+  };
+  events = allVisits;
 
   const handleSelectVisit = useCallback(
-    (event) => router.push({
-      pathname: '/visit/[id]', query: { id: event.visit }}),
+    (event) =>
+      router.push({
+        pathname: "/visit/[id]",
+        query: { id: event.visit },
+      }),
     []
-  )
+  );
+
+  useEffect(() => {
+    setFilteredEvents(
+      events.filter((event) => {
+        return moment(event.start).isSameOrAfter(moment(startDate));
+      })
+    );
+  }, [events, startDate]);
 
   return (
     <div className={styles.container}>
@@ -79,38 +96,47 @@ export default function Home({visits}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <div className='logo'>
+        <div className="logo">
           <h2>Paysages Meloche</h2>
         </div>
-        <div className='services'>
-          <div id='paysagement'>
+        <div className="services">
+          <div id="paysagement">
             <h3>Paysagement</h3>
           </div>
-          <div id='pelouse'>
+          <div id="pelouse">
             <h3>Pelouse</h3>
           </div>
-          <div id='deneigement'>
+          <div id="deneigement">
             <h3>Deneigement</h3>
           </div>
         </div>
         {Profile()}
       </header>
       <main>
-        <h2 className={styles.title}>
-          Master Calendar
-        </h2>
+        <h2 className={styles.title}>Master Calendar</h2>
+        <input
+          type="date"
+          value={moment(startDate).format("YYYY-MM-DD")}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
         <div>
-          <Calendar localizer={localizer} events={allVisits}
-            startAccessor='start' endAccessor='end'
-            style={{width:'80vw', height:'55vh'}}
-            onSelectEvent={handleSelectVisit}/>
+          <Calendar
+            localizer={localizer}
+            events={filteredEvents}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ width: "80vw", height: "55vh" }}
+            onSelectEvent={handleSelectVisit}
+          />
         </div>
       </main>
 
       <footer>
-        <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-        <br />
-        Champlain College ECP Final Project 2022-2023</p>
+        <p>
+          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
+          <br />
+          Champlain College ECP Final Project 2022-2023
+        </p>
       </footer>
 
       <style jsx>{`
@@ -121,7 +147,7 @@ export default function Home({visits}) {
           align-items: center;
           justify-content: center;
           background: #222222;
-          color: #FFFFFF;
+          color: #ffffff;
         }
         .services {
           display: flex;
@@ -129,91 +155,91 @@ export default function Home({visits}) {
           align-items: center;
           margin: auto;
         }
-        .services div{
+        .services div {
           display: flex;
           justify-content: center;
           width: 18vw;
-          cursor: 'pointer';
+          cursor: "pointer";
         }
-        .services div :hover{
+        .services div :hover {
           background-color: red;
         }
-        .logo{
+        .logo {
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .login{
+        .login {
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .services{
+        .services {
           display: flex;
           justify-content: center;
           width: 60vw;
         }
-        #calendar{
-          background-color: #D9D9D9;
+        #calendar {
+          background-color: #d9d9d9;
         }
-        #month{
+        #month {
           display: flex;
           flex-direction: row;
           justify-content: center;
           background-color: #333333;
         }
-        #month button{
+        #month button {
           width: 75px;
           height: 50px;
         }
-        #days{
+        #days {
           display: flex;
           flex-direction: column;
         }
-        .week{
+        .week {
           display: flex;
           flex-direction: row;
         }
-        .day{
+        .day {
           display: flex;
           width: 13vw;
-          height:15vh;
+          height: 15vh;
           color: #000000;
           border: solid 1px #555555;
           justify-content: center;
           align-items: center;
         }
-        .visit{
+        .visit {
           display: flex;
           flex-direction: column;
-          background-color: #00B45D;
+          background-color: #00b45d;
           width: 90%;
           height: auto;
           border-radius: 5px;
-          font-size: .8em;
+          font-size: 0.8em;
           font-weight: bold;
           justify-content: start;
         }
-        #weekdays{
+        #weekdays {
           display: flex;
           flex-direction: row;
         }
-        .weekday{
+        .weekday {
           display: flex;
           width: 13vw;
           height: 5vh;
-          color:#000000;
+          color: #000000;
           border: solid 1px #555555;
           font-weight: bold;
           justify-content: center;
           align-items: center;
         }
-        .login button{
+        .login button {
           height: 7vh;
           width: 10vw;
-          background: #00B45D;
+          background: #00b45d;
           border-radius: 40px;
-          color: #FFFFFF;
+          color: #ffffff;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
@@ -227,7 +253,7 @@ export default function Home({visits}) {
           justify-content: center;
           align-items: center;
           background: #333333;
-          color: #FFFFFF;
+          color: #ffffff;
           width: 100vw;
         }
         footer {
@@ -238,7 +264,7 @@ export default function Home({visits}) {
           justify-content: center;
           align-items: center;
           background: #222222;
-          color: #FFFFFF;
+          color: #ffffff;
         }
         footer img {
           margin-left: 0.5rem;
@@ -274,5 +300,5 @@ export default function Home({visits}) {
         }
       `}</style>
     </div>
-  )
+  );
 }
