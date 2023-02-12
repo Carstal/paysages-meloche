@@ -7,9 +7,7 @@ export default async (req, res) => {
     const db = client.db("FinalProject");
     let data = req.body;
 
-    
-
-   const create = await db.collection("Project").insertOne(data)
+    const create = await db.collection("Project").insertOne(data)
 
     res.json(create);
   } catch (e) {
