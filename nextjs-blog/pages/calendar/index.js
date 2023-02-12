@@ -29,14 +29,29 @@ import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 //   }
 // }
 export const getServerSideProps = withPageAuthRequired({
-  returnTo: '/',
+  returnTo: '/calendar',
   async getServerSideProps(ctx) {
     const session = await getSession(ctx.req, ctx.res);
-  const res = await fetch("http://localhost:3000/api/visit");
-  const visits = await res.json();
+    const roles = session.user.userRoles
+
+    if(roles == "Admin") {
+      const res = await fetch("http://localhost:3000/api/visit");
+      const visits = await res.json();
+      return { props: { visits }};
+    } else {
+        return {
+            redirect: {
+              permanent: false,
+              destination: "/access_denied",
+            },
+            props:{},
+          };
+    }
+  
+  
 
   // console.log(visits)
-  return { props: { visits }};
+  
   }
 });
 
