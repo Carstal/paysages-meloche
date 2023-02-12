@@ -65,29 +65,90 @@ export default function Home({visits}) {
           {visits.map((visit) => (
             // let sdate = visit.start_date;
             // console.log(sdate);
-          <div className="visit">
-            <div className="info">
-              <div className="vrRow">Visit:{visit.visit_id} Project: {visit.project_id}</div>
-              <div className="empRow">Employee(s): {formatEmployees(visit.employee_ids)}</div>
-              <div className="startRow">Start Date: {formatDate(visit.start_date)}</div>
-              <div className="endRow">End Date: {formatDate(visit.end_date)}</div>
+            <div className="visit">
+              <div className="info">
+                <div className="vrRow">
+                  Visit:{visit.visit_id} Project: {visit.project_id}
+                </div>
+                <div className="empRow">
+                  Employee(s): {formatEmployees(visit.employee_ids)}
+                </div>
+                <div className="startRow">
+                  Start Date: {formatDate(visit.start_date)}
+                </div>
+                <div className="endRow">
+                  End Date: {formatDate(visit.end_date)}
+                </div>
+              </div>
+              <div className="editBtnDiv">
+                <button
+                  className="editBtn"
+                  name="edit"
+                  value={visit.visit_id}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/visit/[id]",
+                      query: { id: visit.visit_id },
+                    })
+                  }
+                >
+                  Edit
+                </button>
+              </div>
             </div>
-            <div className="editBtnDiv">
-              <button className="editBtn" name="edit" value={visit.visit_id} onClick={() => router.push({
-                pathname: '/visit/[id]', query: { id: visit.visit_id }})}>
-                Edit
-              </button>
-            </div>
-          </div>
           ))}
         </div>
-        <div id="root">
 
+        <div className="card mt-5">
+          <div className="center-col">
+            <table>
+              <tr>
+                <th>Visit ID</th>
+                <th>Project ID</th>
+                <th>Client</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+              </tr>
+              {visits.map((visit, key) => {
+                return (
+                  <tr key={key}>
+                    <nav>
+                      <a href="#" class="hover-underline-animation">
+                        <td
+                          onClick={() =>
+                            router.push({
+                              pathname: "/visit/[id]",
+                              query: { id: visit.visit_id },
+                            })
+                          }
+                        >
+                          {visit.visit_id}
+                        </td>
+                      </a>
+                    </nav>
+                    <td>{visit.project_id}</td>
+                    <td>{visit.user_id}</td>
+                    <td>{formatDate(visit.start_date)}</td>
+                    <td>{formatDate(visit.end_date)}</td>
+                  </tr>
+                );
+              })}
+            </table>
+          </div>
         </div>
+
+        <div id="root"></div>
         <div className="addBtnDiv">
-          <button className="addBtn" name="addVisit" onClick={() => router.push({
-            pathname: '/visit/add'})}>
-              Add Visit
+          <button
+            className="addBtn"
+            name="addVisit"
+            onClick={() =>
+              router.push({
+                pathname: "/visit/add",
+              })
+            }
+          >
+            Add Visit
           </button>
         </div>
       </main>
