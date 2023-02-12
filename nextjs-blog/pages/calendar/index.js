@@ -3,31 +3,6 @@ import styles from '../../styles/Home.module.css';
 import Profile from '../profile/index';
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-// export async function getServerSideProps(ctx) {
-//   //get session info
-//   const session = await getSession(ctx.req, ctx.res);
-//   var role = "";
-//   //if the session was ever found, get its firstlogin variable
-//   try {
-//   role = session.user.userRoles
-//   // console.log("Role:")
-//   // console.log(role)
-//   if(role == "Admin"){
-//     console.log("Admin")
-//   }
-//   else if(role == "Employee"){
-
-//   }
-//   else{
-//     console.log("Regular Use")
-//   }
-//   } catch {
-//     console.log("An error occured")
-//   }
-//   return{
-//       props:{}
-//   }
-// }
 export const getServerSideProps = withPageAuthRequired({
   returnTo: '/calendar',
   async getServerSideProps(ctx) {
