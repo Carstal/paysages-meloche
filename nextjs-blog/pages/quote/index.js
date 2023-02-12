@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 //   return { props: { data }};
 // }
 
-export default function Home({data}) {
+export default function Home() {
   // const router = useRouter()
   // function dateFormat(date){
   //   let newDate = new Date(date);
@@ -32,6 +32,22 @@ export default function Home({data}) {
 
   //   return formattedDate;
     // return newDate;
+    // }
+    var items = []
+
+    // function addItem(){
+    //     let item = document.getElementById('itemName').value;
+    //     let price = parseFloat(document.getElementById('price'));
+    //     if(isNaN(price)){
+    //         document.getElementById("error").innerHTML = 'Invalid number: '+price;
+    //     }
+    //     else if(price <= 0){
+    //         document.getElementById("error").innerHTML = price+' is smaller than 0';
+    //     }
+    //     else{
+    //         price = parseFloat(price);
+    //         items.push({item, price});
+    //     }
     // }
   return (
     <div className={styles.container}>
@@ -61,8 +77,17 @@ export default function Home({data}) {
       <main>
         <h2 className={styles.title}>New Quote</h2>
         <div className="container">
+            <div id="error"></div>
           <div className="card mt-5">
-            <form className="card-body" action="/api/visit/add" method="POST">
+            <div>ITEMS</div>
+            <ul>
+            {items.map((item) => (
+                <li>
+                    {item[0]} - {item[1]}$
+                </li>
+            ))}
+            </ul>
+            <div className="card-body">
               {/* <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>Visit Id:</strong>
@@ -74,7 +99,7 @@ export default function Home({data}) {
                   name="visitId"
                 />
               </div> */}
-              <div className="form-group mb-3">
+              {/* <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>User Id:</strong>
                 </label>
@@ -84,8 +109,8 @@ export default function Home({data}) {
                   id="userId"
                   name="userId"
                 />
-              </div>
-              <div className="form-group mb-3">
+              </div> */}
+              {/* <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>Project Id:</strong>
                 </label>
@@ -95,7 +120,7 @@ export default function Home({data}) {
                   id="projectId"
                   name="projectId"
                 />
-              </div>
+              </div> */}
               {/* <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>Employees:</strong>
@@ -125,7 +150,7 @@ export default function Home({data}) {
                   <strong>Price:</strong>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   id="price"
                   name="price"
@@ -133,11 +158,12 @@ export default function Home({data}) {
               </div>
 
               <div className="form-group mt-3">
-                <button type="submit" className={styles.submitbutton}>
-                  Create Quote
+                <button onClick={addItem()} className={styles.submitbutton}>
+                {/* <button type="submit" className={styles.submitbutton}> */}
+                  Add Item
                 </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </main>
