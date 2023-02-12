@@ -47,11 +47,6 @@ export const getServerSideProps = withPageAuthRequired({
             props:{},
           };
     }
-  
-  
-
-  // console.log(visits)
-  
   }
 });
 
@@ -306,10 +301,3 @@ export default function Home({visits}) {
     </div>
   )
 }
-
-// export async function getServerSideProps(){
-//   const req = await fetch("");
-//   const data = await req.json;
-
-//   return props:{"":""};
-// }
