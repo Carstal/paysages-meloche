@@ -5,6 +5,9 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../../src/Translation/i18n";
 import i18n from "i18next";
+import Link from "next/link";
+import Image from "next/image";
+import meloche from "../../public/paysagesMeloche.jpg";
 
 const nav_no_auth = () => {
   const router = useRouter();
@@ -40,14 +43,39 @@ const nav_no_auth = () => {
     <div>
       <header>
         <div className="logo">
-          <h2>Paysages Meloche</h2>
+          <Link
+            href="/"
+            style={{
+              textDecoration: "none",
+              color: "white",
+            }}
+          >
+            {/* <Image src={meloche} alt="/" /> */}
+            <h3>Paysages Meloche</h3>
+          </Link>
         </div>
         <div className="services">
           <div id="services">
-            <h3>Services</h3>
+            <Link
+              href="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              <h3>Services</h3>
+            </Link>
           </div>
           <div id="contact">
-            <h3>Contact</h3>
+            <Link
+              href="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              <h3>Contact</h3>
+            </Link>
           </div>
         </div>
         {Profile()}
@@ -75,9 +103,6 @@ const nav_no_auth = () => {
           justify-content: center;
           width: 18vw;
           cursor: "pointer";
-        }
-        .services div :hover {
-          background-color: red;
         }
         .logo {
           display: flex;

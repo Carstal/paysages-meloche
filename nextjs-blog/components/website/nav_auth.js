@@ -6,6 +6,9 @@ import { useTranslation } from "react-i18next";
 import "../../src/Translation/i18n";
 import i18n from "i18next";
 import cookie from "js-cookie";
+import Link from "next/link";
+import meloche from "../../public/paysagesMeloche.jpg";
+import Image from "next/image";
 
 const nav_auth = (user) => {
   const router = useRouter();
@@ -51,20 +54,61 @@ const nav_auth = (user) => {
     <div>
       <header>
         <div className="logo">
-          <h2>Paysages Meloche</h2>
+          <Link
+            href="/"
+            style={{
+              textDecoration: "none",
+              color: "white",
+            }}
+          >
+            {/* <Image src={meloche} alt="/" /> */}
+            <h3>Paysages Meloche</h3>
+          </Link>
         </div>
         <div className="services">
           <div id="service">
-            <h3>Services</h3>
+            <Link
+              href="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              <h3>Services</h3>
+            </Link>
           </div>
           <div id="contact">
-            <h3>Contact</h3>
+            <Link
+              href="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              <h3>Contact</h3>
+            </Link>
           </div>
           <div id="projects">
-            <h3>{t("navProject")}</h3>
+            <Link
+              href="/project"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              <h3>{t("navProject")}</h3>
+            </Link>
           </div>
           <div id="calendar">
-            <h3>{t("calendar")}</h3>
+            <Link
+              href="/calendar"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              <h3>{t("calendar")}</h3>
+            </Link>
           </div>
         </div>
         {Profile()}
@@ -93,9 +137,6 @@ const nav_auth = (user) => {
           width: 18vw;
           cursor: "pointer";
         }
-        .services div :hover {
-          background-color: red;
-        }
         .logo {
           display: flex;
           justify-content: center;
@@ -115,17 +156,50 @@ const nav_auth = (user) => {
       <div>
         <header>
           <div className="logo">
-            <h2>Paysages Meloche</h2>
+            <Link
+              href="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              {/* <Image src={meloche} alt="/"/> */}
+              <h3>Paysages Meloche</h3>
+            </Link>
           </div>
           <div className="services">
             <div id="projects">
-              <h3>{t("navProject")}</h3>
+              <Link
+                href="/project"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                }}
+              >
+                <h3>{t("navProject")}</h3>
+              </Link>
             </div>
             <div id="calendar">
-              <h3>{t("calendar")}</h3>
+              <Link
+                href="/calendar"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                }}
+              >
+                <h3>{t("calendar")}</h3>
+              </Link>
             </div>
             <div id="users">
-              <h3>{t("AllUsers")}</h3>
+              <Link
+                href="/admin"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                }}
+              >
+                <h3>{t("AllUsers")}</h3>
+              </Link>
             </div>
           </div>
           {Profile()}
@@ -153,9 +227,6 @@ const nav_auth = (user) => {
             justify-content: center;
             width: 18vw;
             cursor: "pointer";
-          }
-          .services div :hover {
-            background-color: red;
           }
           .logo {
             display: flex;
