@@ -63,7 +63,7 @@ export default function Home({data}) {
         <div className="container">
           <div className="card mt-5">
             <form className="card-body" action="/api/visit/add" method="POST">
-              <div className="form-group mb-3">
+              {/* <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>Visit Id:</strong>
                 </label>
@@ -73,27 +73,31 @@ export default function Home({data}) {
                   id="visitId"
                   name="visitId"
                 />
-              </div>
+              </div> */}
               <div className="form-group mb-3">
-                <label className="mb-2">
+                {/* <label className="mb-2">
                   <strong>User Id:</strong>
-                </label>
+                </label> */}
                 <input
                   type="text"
                   className="form-control"
                   id="userId"
                   name="userId"
+                  value={user_id}
+                  hidden
                 />
               </div>
               <div className="form-group mb-3">
-                <label className="mb-2">
+                {/* <label className="mb-2">
                   <strong>Project Id:</strong>
-                </label>
+                </label> */}
                 <input
                   type="text"
                   className="form-control"
                   id="projectId"
                   name="projectId"
+                  value={project_id}
+                  hidden
                 />
               </div>
               <div className="form-group mb-3">

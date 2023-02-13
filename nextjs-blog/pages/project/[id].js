@@ -62,6 +62,10 @@ export default function DisplayProject({ data }) {
                   <div>{project.project_id}</div>
                 </div>
                 <div>
+                  <div>User</div>
+                  <div>{project.user_id}</div>
+                </div>
+                <div>
                   <div>Address</div>
                   <div>{project.address}</div>
                 </div>
@@ -81,7 +85,24 @@ export default function DisplayProject({ data }) {
 
         <h3 className={styles.title}>Visits</h3>
         {/* <VisitCardView visits={visits}/> */}
-        <div>Add Visit</div>
+        <div className="addBtnDiv">
+          <button
+            className="addBtn"
+            name="addVisit"
+            onClick={() =>
+              fetch('/visit/add', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: {"project": project.project_id,
+                        "user": project.user_id},
+              })
+            }
+          >
+            Add Visit
+          </button>
+        </div>
         <h3 className={styles.title}>Quote</h3>
 
         <h3 className={styles.title}>Invoice</h3>
