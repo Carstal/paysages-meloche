@@ -111,6 +111,9 @@ const nav_auth = (user) => {
             </Link>
           </div>
         </div>
+        <Link href="/profile/info">
+          <img className={styles.profile} src={user.picture} alt={user.name} />
+        </Link>
         {Profile()}
         {lang}
       </header>
@@ -202,6 +205,13 @@ const nav_auth = (user) => {
               </Link>
             </div>
           </div>
+          <Link href="/profile/info">
+            <img
+              className={styles.profile}
+              src={user.picture}
+              alt={user.name}
+            />
+          </Link>
           {Profile()}
           {lang}
         </header>

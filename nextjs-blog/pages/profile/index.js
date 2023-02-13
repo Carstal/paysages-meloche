@@ -15,26 +15,27 @@ export default function Profile() {
   if (user) {
     return (
       user && (
-        <div>
-          <a href="/profile/info">
-            <img class={styles.profile} src={user.picture} alt={user.name} />
-          </a>
-          <Link
-            class={styles.loginbutton}
-            href="/api/auth/logout"
+        <Link
+          href="/api/auth/logout"
+          style={{
+            textDecoration: "none",
+            borderStyle: "solid",
+            borderColor: "black",
+            height: "7vh",
+            width: "10vw",
+            backgroundColor: "#00B45D",
+            borderRadius: "40px",
+            color: "#FFFFFF",
+          }}
+        >
+          <p
             style={{
-              textDecoration: "none",
+              textAlign: "center",
             }}
           >
-            <p
-              style={{
-                textAlign: "center",
-              }}
-            >
-              {t("logout")}
-            </p>
-          </Link>
-        </div>
+            {t("logout")}
+          </p>
+        </Link>
       )
     );
   } else {
