@@ -9,7 +9,6 @@ import i18n from "i18next";
 const nav_no_auth = () => {
   const router = useRouter();
   const [language, setLanguage] = useState("en");
-  4;
 
   const { t } = useTranslation();
 
