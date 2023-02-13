@@ -6,17 +6,20 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../../src/Translation/i18n";
 import i18n from "i18next";
-import { getUserByEmail } from '../../src/components/user/user_service';
+// import { getUserByEmail } from '../../src/components/user/user_service';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
-
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: '/project/submission',
   async getServerSideProps(ctx) {
     const session = await getSession(ctx.req, ctx.res);
-
+    const email = session.user.name;
     // access the user session
-    const user = await getUserByEmail(session.user.name);
+    // const user = await getUserByEmail(session.user.name);
+    const api = 'http://localhost:3000/api/user/';
+    const url = api + email;
+    const res = await fetch(url);
+    const user = await res.json();
 
     // const newProject = await getNewProjectId();
 
@@ -26,9 +29,7 @@ export const getServerSideProps = withPageAuthRequired({
 
 
 export default function Project({user}){
-
   const user_id  = user.user_id;
-  const project_id = 0;
   const [language, setLanguage] = useState('en');
 
   const { t } = useTranslation();
@@ -83,9 +84,9 @@ export default function Project({user}){
         </h1>
         <div className="container">
           <div className="card mt-5">
+            <div>User ID: {user_id}</div>
             <form className="card-body" action="/api/project/submission" method="POST">
               <input type="hidden" className="form-control" defaultValue={user_id} id="userId" name="userId" />
-              <input type="hidden" className="form-control" defaultValue={project_id} id="projectId" name="projectId" />
 
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("Name")}</strong></label>
