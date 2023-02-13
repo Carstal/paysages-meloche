@@ -68,7 +68,7 @@ const nav_auth = (user) => {
         <div className="services">
           <div id="service">
             <Link
-              href="/"
+              href="/services"
               style={{
                 textDecoration: "none",
                 color: "white",

@@ -10,20 +10,10 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useRouter } from "next/router";
-import Profile from "../profile/index";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import NavDynamic from "../../components/website/NavDynamic";
+import { useTranslation } from "react-i18next";
 
-// export async function getServerSideProps(context) {
-//   const userId = context.params.id;
-//   const api = 'http://localhost:3000/api/visit/user/';
-//   const url = api + userId;
-//   const res = await fetch(url);
-//   const visits = await res.json();
-
-//   console.log(visits)
-
-//   return { props: { visits }};
-// }
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/",
   async getServerSideProps(ctx) {
@@ -81,6 +71,7 @@ export default function Home({ visits }) {
       }),
     []
   );
+  const { t } = useTranslation();
 
   return (
     <div className={styles.container}>
@@ -88,23 +79,7 @@ export default function Home({ visits }) {
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className="logo">
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className="services">
-          <div id="paysagement">
-            <h3>Paysagement</h3>
-          </div>
-          <div id="pelouse">
-            <h3>Pelouse</h3>
-          </div>
-          <div id="deneigement">
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        {Profile()}
-      </header>
+      <NavDynamic />
       <main>
         <h2 className={styles.title}>User Calendar</h2>
         <div>

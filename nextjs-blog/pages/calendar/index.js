@@ -1,8 +1,18 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
-import Profile from "../profile/index";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import clientPromise from "../../lib/mongodb";
+import NavDynamic from "../../components/website/NavDynamic";
+import { useTranslation } from "react-i18next";
+import React, { useState, useCallback, useEffect } from "react";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import format from "date-fns/format";
+import parse from "date-fns/parse";
+import startOfWeek from "date-fns/startOfWeek";
+import getDay from "date-fns/getDay";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import { useRouter } from "next/router";
+import moment from "moment";
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/calendar",
@@ -31,21 +41,6 @@ export const getServerSideProps = withPageAuthRequired({
   },
 });
 
-// Using react-big-calendar, an open-source alternative to Full Calendar
-// Using react-datepicker, for small calendar date selection
-// import DatePicker from 'react-datepicker';
-import React, { useState, useCallback, useEffect } from "react";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
-import format from "date-fns/format";
-import parse from "date-fns/parse";
-import startOfWeek from "date-fns/startOfWeek";
-import getDay from "date-fns/getDay";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useRouter } from "next/router";
-// import 'react-big-calendar/lib/sass';
-// import 'react-big-calendar/lib/sass/styles';
-import moment from "moment";
-
 const locales = {
   "en-CA": require("date-fns/locale/en-CA"),
 };
@@ -58,6 +53,7 @@ const localizer = dateFnsLocalizer({
 });
 
 export default function Home({ visits }) {
+  const { t } = useTranslation();
   var [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [startDate, setStartDate] = useState(null);
@@ -107,23 +103,7 @@ export default function Home({ visits }) {
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className="logo">
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className="services">
-          <div id="paysagement">
-            <h3>Paysagement</h3>
-          </div>
-          <div id="pelouse">
-            <h3>Pelouse</h3>
-          </div>
-          <div id="deneigement">
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        {Profile()}
-      </header>
+      <NavDynamic />
       <main>
         <h2 className={styles.title}>Master Calendar</h2>
         <div className="filter-container">

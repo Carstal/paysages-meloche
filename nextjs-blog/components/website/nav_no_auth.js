@@ -57,7 +57,7 @@ const nav_no_auth = () => {
         <div className="services">
           <div id="services">
             <Link
-              href="/"
+              href="/services"
               style={{
                 textDecoration: "none",
                 color: "white",
