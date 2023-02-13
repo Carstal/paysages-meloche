@@ -105,14 +105,12 @@
   color: #FFFFFF;
 }
 
-.loginbutton a {
+.loginbutton p {
   text-decoration: none;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
   Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
   sans-serif;
-  font-weight: bold;
   color: #FFFFFF;
-  font-size: medium;
 }
 
 .submitbutton{

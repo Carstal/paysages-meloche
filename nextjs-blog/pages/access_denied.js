@@ -1,60 +1,29 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css';
-// import Profile from './profile';
-import Profile from './/profile/index';
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
-import i18n from "i18next";
-
+import NavDynamic from "../components/website/NavDynamic";
 
 export default function Home() {
-  const [language, setLanguage] = useState('en');
-
   const { t } = useTranslation();
-
-
-  const handleOnclick = (e) => {
-    e.preventDefault();
-    setLanguage(e.target.value);
-    if (i18n && i18n.changeLanguage) {
-      i18n.changeLanguage(e.target.value);
-    }
-  }
-
-  var lang
-
-  if(language == "en"){
-      lang = <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
-  } else {
-      lang = <button class={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
-  }
-
   return (
     <div className={styles.container}>
       <Head>
         <title>{t("Access")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className='services'>
-        </div>
-        {Profile()}
-        {lang}
-      </header>
+      <NavDynamic />
       <main>
-        <h1 className={styles.title}>
-        {t("Access")}
-        </h1>
+        <h1 className={styles.title}>{t("Access")}</h1>
       </main>
 
       <footer>
-        <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
+        <p>
+          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
           <br />
-          Champlain College ECP Final Project 2022-2023</p>
+          Champlain College ECP Final Project 2022-2023
+        </p>
       </footer>
 
       <style jsx>{`
@@ -65,9 +34,9 @@ export default function Home() {
           align-items: center;
           justify-content: center;
           background: #222222;
-          color: #FFFFFF;
+          color: #ffffff;
         }
-        
+
         .services {
           display: flex;
           flex-direction: row;
@@ -78,34 +47,33 @@ export default function Home() {
           display: flex;
           justify-content: center;
           width: 18vw;
-          cursor: 'pointer';
+          cursor: "pointer";
         }
         .services div :hover {
           background-colour: red;
         }
-        .logo{
+        .logo {
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .login{
+        .login {
           display: flex;
           justify-content: center;
           width: 15vw;
           float: right;
-
         }
-        .services{
+        .services {
           display: flex;
           justify-content: center;
           width: 60vw;
         }
-        .login button{
+        .login button {
           height: 7vh;
           width: 10vw;
-          background: #00B45D;
+          background: #00b45d;
           border-radius: 40px;
-          color: #FFFFFF;
+          color: #ffffff;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
@@ -120,7 +88,7 @@ export default function Home() {
           justify-content: center;
           align-items: center;
           background: #333333;
-          color: #FFFFFF;
+          color: #ffffff;
           width: 100vw;
         }
         footer {
@@ -131,7 +99,7 @@ export default function Home() {
           justify-content: center;
           align-items: center;
           background: #222222;
-          color: #FFFFFF;
+          color: #ffffff;
         }
         footer img {
           margin-left: 0.5rem;
@@ -167,5 +135,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }

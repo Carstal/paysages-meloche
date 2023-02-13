@@ -1,59 +1,33 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css';
-// import Profile from './profile';
-import Profile from './/profile/index';
-import { getSession } from '@auth0/nextjs-auth0';
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import { getSession } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
-import AdminNav from '../src/components/website/nav/Nav';
+import NavDynamic from "../components/website/NavDynamic";
+import { useTranslation } from "react-i18next";
+import "../src/Translation/i18n";
 
-export default function Home() {
-  const router = useRouter()
+export default function Home({}) {
+  const router = useRouter();
+  const { t } = useTranslation();
   return (
     <div className={styles.container}>
       <Head>
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className='services'>
-          <div id='paysagement'>
-            <h3>Paysagement</h3>
-          </div>
-          <div id='pelouse'>
-            <h3>Pelouse</h3>
-          </div>
-          <div id='deneigement'>
-            <h3>Deneigement</h3>
-          </div>
-          <div id='visit'
-          onClick={() => router.push({pathname: '/visit'})}>
-            <h3>Visits</h3>
-          </div>
-          <div id='calendar'
-          onClick={() => router.push({pathname: '/calendar'})}>
-            <h3>Calendar</h3>
-          </div>
-        </div>
-        {Profile()}
-      </header>
-      {/* <AdminNav></AdminNav> */}
+      <NavDynamic />
       <main>
-        <h1 className={styles.title}>
-          Paysages Meloche
-        </h1>
+        <h1 className={styles.title}>Paysages Meloche</h1>
 
-        <p className={styles.description}>
-          Currently Under Maintenance
-        </p>
+        <p className={styles.description}>Currently Under Maintenance</p>
       </main>
 
       <footer>
-        <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-        <br />
-        Champlain College ECP Final Project 2022-2023</p>
+        <p>
+          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
+          <br />
+          Champlain College ECP Final Project 2022-2023
+        </p>
       </footer>
 
       <style jsx>{`
@@ -64,7 +38,7 @@ export default function Home() {
           align-items: center;
           justify-content: center;
           background: #222222;
-          color: #FFFFFF;
+          color: #ffffff;
         }
 
         .services {
@@ -77,32 +51,32 @@ export default function Home() {
           display: flex;
           justify-content: center;
           width: 18vw;
-          cursor: 'pointer';
+          cursor: "pointer";
         }
         .services div :hover {
           background-colour: red;
         }
-        .logo{
+        .logo {
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .login{
+        .login {
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .services{
+        .services {
           display: flex;
           justify-content: center;
           width: 60vw;
         }
-        .login button{
+        .login button {
           height: 7vh;
           width: 10vw;
-          background: #00B45D;
+          background: #00b45d;
           border-radius: 40px;
-          color: #FFFFFF;
+          color: #ffffff;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
@@ -116,7 +90,7 @@ export default function Home() {
           justify-content: center;
           align-items: center;
           background: #333333;
-          color: #FFFFFF;
+          color: #ffffff;
           width: 100vw;
         }
         footer {
@@ -127,7 +101,7 @@ export default function Home() {
           justify-content: center;
           align-items: center;
           background: #222222;
-          color: #FFFFFF;
+          color: #ffffff;
         }
         footer img {
           margin-left: 0.5rem;
@@ -163,41 +137,30 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps(ctx) {
   //get session info
   const session = await getSession(ctx.req, ctx.res);
   var firstLogin = "";
-  var role = "";
   //if the session was ever found, get its firstlogin variable
   try {
-  firstLogin = session.user.firstlogin
-  role = session.user.userRoles
-  console.log("Role:")
-  console.log(role)
-  if(role == "Admin"){
-    console.log("Role:")
-    console.log(role)
-  }
-  else{
-    console.log("log error")
-  }
-  if (firstLogin == "true"){
-    //if it is the user's first login, redirect to the user info screen
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/profile/create",
-      },
-      props:{},
-    };
-  }
+    firstLogin = session.user.firstlogin;
+    if (firstLogin == "true") {
+      //if it is the user's first login, redirect to the user info screen
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/profile/create",
+        },
+        props: {},
+      };
+    }
   } catch {
-    console.log("An error occured")
+    console.log("An error occured");
   }
-  return{
-      props:{}
-  }
+  return {
+    props: {},
+  };
 }
