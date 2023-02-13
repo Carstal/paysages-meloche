@@ -6,6 +6,7 @@ import styles from "../../styles/Home.module.css";
 import Profile from "../profile/index";
 import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
+import VisitCardView from '../../components/visit/VisitCardView';
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/index",
@@ -56,24 +57,35 @@ export default function DisplayProject({ data }) {
         <h1 className={styles.title}>Project Details</h1>
         <div className="container">
           <div className="card mt-5">
-            <table>
-              <tr>
-                <th>Address</th>
-                <th>Project</th>
-                <th>Length</th>
-                <th>Width</th>
-                <th>Description</th>
-              </tr>
-              <tr>
-                <td>{project.address}</td>
-                <td>{project.project_id}</td>
-                <td>{dimensions[0]}</td>
-                <td>{dimensions[1]}</td>
-                <td>{project.description}</td>
-              </tr>
-            </table>
+                <div>
+                  <div>Project</div>
+                  <div>{project.project_id}</div>
+                </div>
+                <div>
+                  <div>Address</div>
+                  <div>{project.address}</div>
+                </div>
+                <div>
+                  <div>Length</div>
+                  <div>{dimensions[0]}</div>
+                </div>
+                <div>
+                  <div>Width</div>
+                  <div>{dimensions[0]}</div>
+                </div>
+                <div>
+                  <div>Description</div>
+                  <div>{project.description}</div>
+                </div>
           </div>
 
+        <h3 className={styles.title}>Visits</h3>
+        {/* <VisitCardView visits={visits}/> */}
+
+        <h3 className={styles.title}>Quote</h3>
+
+        <h3 className={styles.title}>Invoice</h3>
+        {/* <VisitCardView visits={visits}/> */}
           {/* <p className={styles.description}>Currently Under Maintenance</p> */}
         </div>
       </main>
