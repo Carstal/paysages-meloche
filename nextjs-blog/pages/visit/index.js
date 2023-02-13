@@ -43,8 +43,8 @@ export default function Home({visits}) {
       </header>
       <main>
         <h2 className={styles.title}>All Visits</h2>
-        {/* <VisitCardView visits={visits}/> */}
-        <VisitTable visits={visits}/>
+        <VisitCardView visits={visits}/>
+        {/* <VisitTable visits={visits}/> */}
 
         <div id="root"></div>
         <div className="addBtnDiv">

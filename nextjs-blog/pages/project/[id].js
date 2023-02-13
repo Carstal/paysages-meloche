@@ -81,7 +81,7 @@ export default function DisplayProject({ data }) {
 
         <h3 className={styles.title}>Visits</h3>
         {/* <VisitCardView visits={visits}/> */}
-
+        <div>Add Visit</div>
         <h3 className={styles.title}>Quote</h3>
 
         <h3 className={styles.title}>Invoice</h3>
