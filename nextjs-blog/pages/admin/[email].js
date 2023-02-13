@@ -15,7 +15,7 @@ export default function UserInfo({ data }) {
   // for some reason, doing this will disable the bug that makes the submit button not centered on first load.
   var submit = (
     <div className="form-group mt-3">
-      <button type="submit" class={styles.submitbutton}>
+      <button type="submit" className={styles.submitbutton}>
         {t("Update")}
       </button>
     </div>

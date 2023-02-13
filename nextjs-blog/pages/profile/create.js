@@ -80,7 +80,7 @@ export default function UserInfo({ user, data }) {
                 </div>
 
                 <div className="form-group mt-3">
-                  <button type="submit" class={styles.submitbutton}>
+                  <button type="submit" className={styles.submitbutton}>
                     {t("CompProf")}
                   </button>
                 </div>
