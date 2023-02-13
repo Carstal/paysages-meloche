@@ -50,6 +50,29 @@ export async function createProject (project_data) {
   return null
 }
 
+//Get Project by project_Id
+export async function getProjectByProjectId(id) {
+  const client = await clientPromise;
+  // console.log("----SERVICE - ID Provided-----");
+  // console.log(id);
+  const intId = parseInt(id);
+  const result = await client
+    .db("FinalProject")
+    .collection("Project")
+    .findOne({ project_id: intId });
+
+  if (result) {
+    // console.log(`Found a listing in connection with visit id: '${id}'`);
+    // console.log(result);
+
+    return result;
+  } else {
+    // console.log("none");
+
+    return null;
+  }
+}
+
 export async function getNewProjectId(){
   var newId = 0;
   try {
