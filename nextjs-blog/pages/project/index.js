@@ -62,7 +62,19 @@ export default function DisplayProject({ data }) {
             </div>
           </div>
 
-          {/* <p className={styles.description}>Currently Under Maintenance</p> */}
+        <div className="addBtnDiv">
+          <button
+            className="addBtn"
+            name="addProject"
+            onClick={() =>
+              router.push({
+                pathname: "/project/submission",
+              })
+            }
+          >
+            Add Project
+          </button>
+        </div>
         </div>
       </main>
 
@@ -75,6 +87,25 @@ export default function DisplayProject({ data }) {
       </footer>
 
       <style jsx>{`
+
+.addBtnDiv {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.addBtn {
+  height: 100px;
+  width: 60%;
+  background: #00b45d;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+  font-weight: bold;
+  font-size: 2em;
+}
            header {
              width: 100vw;
              display: flex;
@@ -127,9 +158,6 @@ export default function DisplayProject({ data }) {
            }
            .center-col {
             flex: 1;
-            overflow-y: scroll;
-            width: 800px;
-            height: 800px;
           }
            .d-grid mt-3, button{
                height: 7vh;
@@ -142,6 +170,7 @@ export default function DisplayProject({ data }) {
                  sans-serif;
                font-weight: bold;
            }
+
            table {
             border: 2px solid forestgreen;
             width: 800px;
@@ -159,7 +188,7 @@ export default function DisplayProject({ data }) {
             text-align: center;
             padding: 10px;
           }
-          
+
           .hover-underline-animation {
             position: relative;
             color: #FFFFFF;
