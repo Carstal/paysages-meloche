@@ -8,7 +8,9 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../../src/Translation/i18n";
 import i18n from "i18next";
+
 import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
 
 export default function UserInfo({ user, data }) {
   const { t } = useTranslation();
@@ -92,13 +94,7 @@ export default function UserInfo({ user, data }) {
           </div>
         </main>
 
-        <footer>
-          <p>
-            Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-            <br />
-            Champlain College ECP Final Project 2022-2023
-          </p>
-        </footer>
+        <Footer/>
 
         <style jsx>{`
           header {

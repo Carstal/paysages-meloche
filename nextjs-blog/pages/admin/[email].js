@@ -5,7 +5,9 @@ import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../../src/Translation/i18n";
+
 import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
 
 export default function UserInfo({ data }) {
   const { t } = useTranslation();
@@ -13,7 +15,7 @@ export default function UserInfo({ data }) {
   // for some reason, doing this will disable the bug that makes the submit button not centered on first load.
   var submit = (
     <div className="form-group mt-3">
-      <button type="submit" class={styles.submitbutton}>
+      <button type="submit" className={styles.submitbutton}>
         {t("Update")}
       </button>
     </div>
@@ -117,13 +119,7 @@ export default function UserInfo({ data }) {
         </div>
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         header {

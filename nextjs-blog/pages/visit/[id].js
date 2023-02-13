@@ -2,6 +2,8 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
 
 // function updateVisit(){
 //   // TODO: grab form values and pass to api
@@ -62,25 +64,7 @@ export default function Home({data}) {
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className="logo">
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className="services">
-          <div id="paysagement">
-            <h3>Paysagement</h3>
-          </div>
-          <div id="pelouse">
-            <h3>Pelouse</h3>
-          </div>
-          <div id="deneigement">
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        <div className="login">
-          <button>Login</button>
-        </div>
-      </header>
+      <NavDynamic />
       <main>
         <h2 className={styles.title}>Visit Information</h2>
         <div className="container">
@@ -170,13 +154,7 @@ export default function Home({data}) {
         </div>
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         header {

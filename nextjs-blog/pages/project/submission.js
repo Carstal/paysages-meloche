@@ -8,7 +8,9 @@ import "../../src/Translation/i18n";
 import i18n from "i18next";
 // import { getUserByEmail } from '../../src/components/user/user_service';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
-import Footer from '../../components/website/Footer'
+
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: '/project/submission',
@@ -53,34 +55,7 @@ export default function Project({user}){
         <title>{t("ProjectSubmissionTitle")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className='services'>
-          <div id='paysagement'>
-            <h3>{t("Paysagement")}</h3>
-          </div>
-          <div id='pelouse'>
-            <h3>{t("Pelouse")}</h3>
-          </div>
-          <div id='deneigement'>
-            <h3>{t("Deneigement")}</h3>
-
-          </div>
-        </div>
-        {Profile()}
-        <div className='login'>
-          <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-            French
-          </button>
-          <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-            English
-          </button>
-
-        </div>
-
-      </header>
+      <NavDynamic />
       <main>
         <h1 className={styles.title}>
           {t("ProjectSubmissionTitle")}

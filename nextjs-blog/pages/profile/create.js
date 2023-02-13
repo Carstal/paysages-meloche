@@ -2,11 +2,13 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import clientPromise from "../../lib/mongodb";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
-import NavDynamic from "../../components/website/NavDynamic";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../../src/Translation/i18n";
 import i18n from "i18next";
+
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
 
 export default function UserInfo({ user, data }) {
   const { t } = useTranslation();
@@ -78,7 +80,7 @@ export default function UserInfo({ user, data }) {
                 </div>
 
                 <div className="form-group mt-3">
-                  <button type="submit" class={styles.submitbutton}>
+                  <button type="submit" className={styles.submitbutton}>
                     {t("CompProf")}
                   </button>
                 </div>
@@ -88,13 +90,7 @@ export default function UserInfo({ user, data }) {
           <p class={styles.note}>{t("Note")}</p>
         </main>
 
-        <footer>
-          <p>
-            Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-            <br />
-            Champlain College ECP Final Project 2022-2023
-          </p>
-        </footer>
+        <Footer/>
 
         <style jsx>{`
           header {

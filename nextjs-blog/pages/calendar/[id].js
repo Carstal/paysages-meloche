@@ -11,8 +11,10 @@ import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useRouter } from "next/router";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import NavDynamic from "../../components/website/NavDynamic";
 import { useTranslation } from "react-i18next";
+
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/",
@@ -94,13 +96,7 @@ export default function Home({ visits }) {
         </div>
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer/>
 
       <style jsx>{`
         header {
