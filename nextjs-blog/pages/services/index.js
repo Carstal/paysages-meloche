@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css';
 
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -8,27 +11,7 @@ export default function Home() {
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className='services'>
-          <div id='paysagement'>
-            <h3>Paysagement</h3>
-          </div>
-          <div id='pelouse'>
-            <h3>Pelouse</h3>
-          </div>
-          <div id='deneigement'>
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        <div className='login'>
-          <button>
-            Login
-          </button>
-        </div>
-      </header>
+      <NavDynamic />
       <main>
         <h1 className={styles.title}>
           Paysages Meloche
@@ -39,11 +22,7 @@ export default function Home() {
         </p>
       </main>
 
-      <footer>
-        <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-        <br />
-        Champlain College ECP Final Project 2022-2023</p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         header {
