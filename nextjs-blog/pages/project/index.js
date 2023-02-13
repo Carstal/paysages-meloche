@@ -1,82 +1,80 @@
-import Head from 'next/head'
-import styles from '../../styles/Home.module.css';
+import Head from "next/head";
+import styles from "../../styles/Home.module.css";
 import clientPromise from "../../lib/mongodb";
 // import Profile from '../profile';
-import Profile from '../profile/index';
-import {useRouter} from "next/router";
+import Profile from "../profile/index";
+import { useRouter } from "next/router";
 
-import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
+export default function DisplayProject({ data }) {
+  const router = useRouter();
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Projects</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <header>
+        <div className="logo">
+          <h2>Paysages Meloche</h2>
+        </div>
+        <div className="services">
+          <div id="paysagement">
+            <h3>Paysagement</h3>
+          </div>
+          <div id="pelouse">
+            <h3>Pelouse</h3>
+          </div>
+          <div id="deneigement">
+            <h3>Deneigement</h3>
+          </div>
+        </div>
+        {Profile()}
+      </header>
+      <main>
+        <h1 className={styles.title}>Project Proposal</h1>
+        <div className="containers">
+          <div className="card mt-5">
+            <div className="center-col">
+              <table>
+                <tr>
+                  <th>Project Type</th>
+                  <th>Description</th>
+                </tr>
+                {data.map((project, key) => {
+                  return (
+                    <tr
+                      key={key}
+                      onClick={() =>
+                        router.push({
+                          pathname: "/project/[id]",
+                          query: { id: project.project_id },
+                        })
+                      }
+                    >
+                      <td>{project.service}</td>
+                      <td>{project.description}</td>
+                    </tr>
+                  );
+                })}
+              </table>
+            </div>
+          </div>
 
-   export default function DisplayProject({data}) {
-    const router = useRouter()
-       return (
-           <div className={styles.container}>
-           <Head>
-             <title>Projects</title>
-             <link rel="icon" href="/favicon.ico" />
-           </Head>
-           <header>
-           <div className='logo'>
-             <h2>Paysages Meloche</h2>
-           </div>
-           <div className='services'>
-             <div id='paysagement'>
-               <h3>Paysagement</h3>
-             </div>
-             <div id='pelouse'>
-               <h3>Pelouse</h3>
-             </div>
-             <div id='deneigement'>
-               <h3>Deneigement</h3>
-             </div>
-           </div>
-           {Profile()}  
-           </header>
-           <main>
-             <h1 className={styles.title}>
-               Project Proposal
-             </h1>
-             <div className="containers">
-                   <div className="card mt-5">
-                    <div className="center-col">
-                        <table>
-                          <tr>
-                           <th>Project</th>
-                           <th>Description</th>
-                          </tr>
-                           {data.map((val, key) => {
-                             return (
-                               <tr key={key}>
-                                  <nav>
-                                  <a href="#" class="hover-underline-animation">
-                                 <td onClick={() => router.push({
-                                pathname: '/project/[id]', query: { id: val._id }})}>{val.project}</td>
-                                 </a>
-                                 </nav>
-                                 <td>{val.description}</td>
-                              </tr>
-                            )
-                         })}
-        
-                        </table>
-                        </div>
-                
-               </div>
-        
-             <p className={styles.description}>
-               Currently Under Maintenance
-             </p>
-             </div>
-           </main>
-     
-           <footer>
-             <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-             <br />
-             Champlain College ECP Final Project 2022-2023</p>
-           </footer>
-   
-           <style jsx>{`
+          <p className={styles.description}>Currently Under Maintenance</p>
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
+          <br />
+          Champlain College ECP Final Project 2022-2023
+        </p>
+      </footer>
+
+      <style jsx>{`
            header {
              width: 100vw;
              display: flex;
@@ -149,11 +147,11 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
             width: 800px;
             height: 200px;
           }
-            
+
           th {
             border-bottom: 1px solid black;
           }
-            
+
           td {
             text-align: center;
           }
@@ -222,50 +220,44 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
              font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
                DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
            }
-           
+
          `}</style>
-   
-         <style jsx global>{`
-           html,
-           body {
-             padding: 0;
-             margin: 0;
-             font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-               Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-               sans-serif;
-           }
-           * {
-             box-sizing: border-box;
-           }
-         `}</style>
-       </div>
-     )
-   }
 
-   export const getServerSideProps = withPageAuthRequired({
-    returnTo: '/index',
-    async getServerSideProps(ctx) {
-      const client = await clientPromise;
-      const db = client.db("FinalProject");
-      const session = await getSession(ctx.req, ctx.res);
+      <style jsx global>{`
+        html,
+        body {
+          padding: 0;
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+        }
+        * {
+          box-sizing: border-box;
+        }
+      `}</style>
+    </div>
+  );
+}
 
-      //Works with findOne
-  
-      const post = await db.collection("Project").find({}).toArray();
-      // access the user session
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: "/index",
+  async getServerSideProps(ctx) {
+    const client = await clientPromise;
+    const db = client.db("FinalProject");
+    const session = await getSession(ctx.req, ctx.res);
 
-      //console.log(post)
-      
-    
-      const data = JSON.parse(JSON.stringify(post));
+    //Works with findOne
 
-      console.log(data)
-    
-      return { props: {data} }
-      
+    const post = await db.collection("Project").find({}).toArray();
+    // access the user session
 
-    
-    }
-    
-  })
+    //console.log(post)
 
+    const data = JSON.parse(JSON.stringify(post));
+
+    console.log(data);
+
+    return { props: { data } };
+  },
+});
