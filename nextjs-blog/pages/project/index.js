@@ -7,6 +7,9 @@ import { useRouter } from "next/router";
 
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
+
 export default function DisplayProject({ data }) {
   const router = useRouter();
   return (
@@ -15,23 +18,7 @@ export default function DisplayProject({ data }) {
         <title>Projects</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className="logo">
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className="services">
-          <div id="paysagement">
-            <h3>Paysagement</h3>
-          </div>
-          <div id="pelouse">
-            <h3>Pelouse</h3>
-          </div>
-          <div id="deneigement">
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        {Profile()}
-      </header>
+      <NavDynamic />
       <main>
         <h1 className={styles.title}>Project Proposal</h1>
         <div className="containers">
@@ -78,13 +65,7 @@ export default function DisplayProject({ data }) {
         </div>
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
 
