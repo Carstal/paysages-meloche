@@ -62,7 +62,7 @@ export default function DisplayProject({ data }) {
             </div>
           </div>
 
-          <p className={styles.description}>Currently Under Maintenance</p>
+          {/* <p className={styles.description}>Currently Under Maintenance</p> */}
         </div>
       </main>
 
