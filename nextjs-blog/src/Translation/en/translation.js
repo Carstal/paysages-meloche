@@ -37,4 +37,7 @@ export const TRANSLATIONS_EN = {
   No: "No",
   navProject: "Projects",
   calendar: "Calendar",
+  masterCalendar: "Master Calendar",
+  startD: "Start Date",
+  endD: "End Date",
 };

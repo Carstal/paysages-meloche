@@ -105,10 +105,10 @@ export default function Home({ visits }) {
       </Head>
       <NavDynamic />
       <main>
-        <h2 className={styles.title}>Master Calendar</h2>
+        <h2 className={styles.title}>{t("masterCalendar")}</h2>
         <div className="filter-container">
           <div className="filter-item">
-            <label htmlFor="start-date">Start Date:</label>
+            <label htmlFor="start-date">{t("startD")}</label>
             <input
               id="start-date"
               type="date"
@@ -117,7 +117,7 @@ export default function Home({ visits }) {
             />
           </div>
           <div className="filter-item">
-            <label htmlFor="end-date">End Date:</label>
+            <label htmlFor="end-date">{t("endD")}</label>
             <input
               id="end-date"
               type="date"
