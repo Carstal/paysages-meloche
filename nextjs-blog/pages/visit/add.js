@@ -2,37 +2,27 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 
-
-
 // export async function getServerSideProps(context) {
-//   const projectId = context.params.id;
-//   console.log("Project Id: " + projectId)
-//   const api = 'http://localhost:3000/api/visit/';
-//   const url = api + projectId;
-//   console.log(url);
-//   const res = await fetch(url);
-
-//   const data = await res.json();
+//   const data = context.body;
+//   console.log(data)
 
 //   return { props: { data }};
 // }
 
+export async function handler(req, res) {
+  // Get data submitted in request's body.
+  const data = req.body
+  console.log(data)
+
+  return { props: { data }};
+}
 export default function Home({data}) {
   // const router = useRouter()
-  // function dateFormat(date){
-  //   let newDate = new Date(date);
-  //   let dd = newDate.getDate()+1;
-  //   let mm = newDate.getMonth()+1;
-  //   const yyyy = newDate.getFullYear();
-
-  //   if (dd < 10) dd = '0' + dd;
-  //   if (mm < 10) mm = '0' + mm;
-  //   const formattedDate = yyyy + '-' + mm + '-' + dd;
-  //   console.log(formattedDate);
-
-  //   return formattedDate;
-    // return newDate;
-    // }
+  // const body = JSON.parse(req.body)
+  // const body = req.body
+  // console.log(body)
+  const user_id = 1
+  const project_id = 1
   return (
     <div className={styles.container}>
       <Head>
@@ -74,32 +64,28 @@ export default function Home({data}) {
                   name="visitId"
                 />
               </div> */}
-              <div className="form-group mb-3">
+              {/* <div className="form-group mb-3"> */}
                 {/* <label className="mb-2">
                   <strong>User Id:</strong>
                 </label> */}
                 <input
-                  type="text"
-                  className="form-control"
+                  type="hidden"
                   id="userId"
                   name="userId"
-                  value={user_id}
-                  hidden
+                  defaultValue={user_id}
                 />
-              </div>
-              <div className="form-group mb-3">
+              {/* </div> */}
+              {/* <div className="form-group mb-3"> */}
                 {/* <label className="mb-2">
                   <strong>Project Id:</strong>
                 </label> */}
                 <input
-                  type="text"
-                  className="form-control"
+                  type="hidden"
                   id="projectId"
                   name="projectId"
-                  value={project_id}
-                  hidden
+                  defaultValue={project_id}
                 />
-              </div>
+              {/* </div> */}
               <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>Employees:</strong>

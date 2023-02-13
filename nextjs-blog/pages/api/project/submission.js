@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     // Get data submitted in request's body.
     const body = req.body
     //console.log(body + "--------------------------------------------------")
-    console.log('body: ', body)
+    // console.log('body: ', body)
 
     const create = await createProject(body);
 

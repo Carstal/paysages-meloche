@@ -86,22 +86,17 @@ export default function DisplayProject({ data }) {
         <h3 className={styles.title}>Visits</h3>
         {/* <VisitCardView visits={visits}/> */}
         <div className="addBtnDiv">
+          <form action="/visit/add" method="POST">
+          <input type="hidden" className="form-control" defaultValue={project.project_id} id="projectId" name="projectId" />
+          <input type="hidden" className="form-control" defaultValue={project.user_id} id="userId" name="userId" />
           <button
             className="addBtn"
             name="addVisit"
-            onClick={() =>
-              fetch('/visit/add', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: {"project": project.project_id,
-                        "user": project.user_id},
-              })
-            }
+            type="submit"
           >
             Add Visit
           </button>
+          </form>
         </div>
         <h3 className={styles.title}>Quote</h3>
 
