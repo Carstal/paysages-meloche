@@ -23,6 +23,25 @@ export async function getUserById(id) {
     }
 };
 
+
+export async function getUserByEmail(email) {
+    try {
+        const client = await clientPromise;
+        // console.log("----User ID Promise-----");
+        // console.log(id)
+        const db = client.db("FinalProject");
+
+        const result = await db.collection("User")
+        .findOne({ email: email });
+        // console.log("---user retrieved----")
+        // console.log(result);
+        return result
+    } catch (e) {
+        console.error(e);
+        throw new Error(e).message;
+    }
+};
+
 export async function isEmployee(id){
     try{
         const user = await getUserById(id);

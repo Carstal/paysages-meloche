@@ -5,10 +5,10 @@ import styles from '../../styles/Home.module.css';
 
 export default function Profile() {
     const { user, error, isLoading } = useUser();
-  
+
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>{error.message}</div>;
-  
+
     if (user) {
     return (
       user && (
@@ -18,15 +18,15 @@ export default function Profile() {
         </a>
           <button class={styles.loginbutton}>
           <a href="/api/auth/logout">Logout</a>
-          </button>    
-        </div>    
+          </button>
+        </div>
       )
     );
     } else {
         return (
         <button class={styles.loginbutton}>
           <a href="/api/auth/login">Login</a>
-        </button> 
+        </button>
         )
     }
   }

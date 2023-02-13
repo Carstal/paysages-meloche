@@ -47,7 +47,6 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                            <th>Width</th>
                            <th>Description</th>
                            </tr>
-                           
                                <tr>
                                  <td>{data.name}</td>
                                  <td>{data.project}</td>
@@ -196,7 +195,6 @@ import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
                DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
            }
          `}</style>
-   
          <style jsx global>{`
            html,
            body {

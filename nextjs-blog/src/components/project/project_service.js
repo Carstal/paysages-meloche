@@ -15,3 +15,21 @@ export async function createProject (data) {
   }
   return null
 }
+
+export async function getNewProjectId(){
+  var newId = 0;
+  try {
+    const client = await clientPromise;
+    const db = client.db("FinalProject");
+
+    const greatestId = await db.collection("Project").max(project_id)
+
+    newId = greatestId + 1;
+    
+    return newId;
+  } catch (e) {
+    console.error(e);
+    throw new Error(e).message;
+    return e;
+  }
+}

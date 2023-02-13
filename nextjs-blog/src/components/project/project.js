@@ -16,8 +16,8 @@ class Project {
         this.invoice_id = null;
     }
 
-    getType() {
-        return this.type;
+    getService() {
+        return this.service;
     }
     getWidth() {
         return this.width;
