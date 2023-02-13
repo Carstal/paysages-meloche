@@ -1,14 +1,19 @@
 //Project Class
 //Model class to create instances of projects
 
-
 class Project {
-
-    constructor(type,width,length,description) {
-      this.type = type;
-      this.width = width;
-      this.length = length;
-      this.description = description;
+    constructor(project_id,user_id,address,service,dimensions,status) {
+        this.project_id = project_id;
+        this.user_id = user_id;
+        this.address = address;
+        this.service = service;
+        this.dimensions = dimensions;
+        this.status = status;
+        this.quote_id = null;
+        this.visits = null;
+        this.start_date = null;
+        this.end_date = null;
+        this.invoice_id = null;
     }
 
     getType() {
@@ -23,6 +28,4 @@ class Project {
     getDescription() {
         return this.description;
     }
-
-
-  }
+}

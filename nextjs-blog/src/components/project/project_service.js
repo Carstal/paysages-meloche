@@ -7,10 +7,7 @@ export async function createProject (data) {
     const client = await clientPromise;
     const db = client.db("FinalProject");
 
-
-    
-
-   const create = await db.collection("Project").insertOne(data)
+    const create = await db.collection("Project").insertOne(data)
 
   } catch (e) {
     console.error(e);
