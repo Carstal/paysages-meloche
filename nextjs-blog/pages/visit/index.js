@@ -97,7 +97,7 @@ export default function Home({visits}) {
         <VisitCardView visits={filteredEvents}/>
         {/* <VisitTable visits={visits}/> */}
 
-        <div id="root"></div>
+        {/* <div id="root"></div>
         <div className="addBtnDiv">
           <button
             className="addBtn"
@@ -110,7 +110,7 @@ export default function Home({visits}) {
           >
             Add Visit
           </button>
-        </div>
+        </div> */}
       </main>
 
       <Footer/>
