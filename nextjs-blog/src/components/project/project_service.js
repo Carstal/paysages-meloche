@@ -1,23 +1,47 @@
 //Project Service
 //Implements all CRUD Operations relating to projects to mongoDB
 import clientPromise from "../../../lib/mongodb";
-import Project from "./project";
+// import Project from "./project";
+
+const Project = require("./Project");
 
 export async function createProject (project_data) {
   try {
     const project_id  = await getNewProjectId();
-    console.log('-----New Project ID-----');
-    console.log(project_id)
+    // console.log('-----New Project ID-----');
+    // console.log(project_id)
 
-    console.log('-----New Project Info-----');
-    console.log(project_data)
+    // console.log('-----New Project Info-----');
+    // console.log(project_data)
 
-    // const newProject = new Project(project_id)
+    //TODO: Project Validation
 
-    // const client = await clientPromise;
-    // const db = client.db("FinalProject");
+    // const newProject = new Project(project_id,
+    //   project_data.user_id,
+    //   project_data.address,
+    //   project_data.service,
+    //   [project_data.length, project_data.width],
+    //   project_data.description);
 
-    // const create = await db.collection("Project").insertOne(data)
+  const newProject = {
+      project_id: project_id,
+      user_id: project_data.userId,
+      address: project_data.address,
+      service: project_data.service,
+      dimensions: [project_data.length, project_data.width],
+      status: "Awaiting Approval",
+      description: project_data.description,
+      quote_id: 0,
+      visits:[],
+      start_date: new Date(),
+      end_date: new Date(),
+      invoice_id: 0
+  };
+
+    const client = await clientPromise;
+    const db = client.db("FinalProject");
+
+    const create = await db.collection("Project").insertOne(newProject)
 
   } catch (e) {
     console.error(e);
