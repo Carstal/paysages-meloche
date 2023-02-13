@@ -81,7 +81,7 @@ export default function Home({ visits }) {
       </Head>
       <NavDynamic />
       <main>
-        <h2 className={styles.title}>User Calendar</h2>
+        <h2 className={styles.title}>{t("calendar")}</h2>
         <div>
           <Calendar
             localizer={localizer}
