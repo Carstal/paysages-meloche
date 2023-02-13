@@ -40,4 +40,6 @@ export const TRANSLATIONS_EN = {
   masterCalendar: "Master Calendar",
   startD: "Start Date",
   endD: "End Date",
+  login: "Log in",
+  logout: "Log out",
 };

@@ -2,8 +2,10 @@
 import React from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import styles from "../../styles/Home.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function Profile() {
+  const { t } = useTranslation();
   const { user, error, isLoading } = useUser();
 
   if (isLoading) return <div>Loading...</div>;
@@ -17,7 +19,7 @@ export default function Profile() {
             <img class={styles.profile} src={user.picture} alt={user.name} />
           </a>
           <button class={styles.loginbutton}>
-            <a href="/api/auth/logout">Logout</a>
+            <a href="/api/auth/logout">{t("logout")}</a>
           </button>
         </div>
       )
@@ -25,7 +27,7 @@ export default function Profile() {
   } else {
     return (
       <button class={styles.loginbutton}>
-        <a href="/api/auth/login">Login</a>
+        <a href="/api/auth/login">{t("login")}</a>
       </button>
     );
   }
