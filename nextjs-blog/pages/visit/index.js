@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import VisitTable from "../../components/visit/VisitTable";
 import VisitCardView from "../../components/visit/VisitCardView";
 import Footer from "../../components/website/Footer";
+import moment from "moment";
+import { useState, useEffect} from "react";
+import { useTranslation } from "react-i18next";
 
 
 export async function getServerSideProps() {
@@ -22,7 +25,7 @@ export default function Home({visits}) {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const router = useRouter();
-
+  events = visits;
   const [dateState, setDateState] = useState(new Date());
   const changeDate = (e) => {
     setDateState(e);
@@ -36,9 +39,9 @@ export default function Home({visits}) {
         events.filter((event) => {
           return (
             (startDate
-              ? moment(event.start).isSameOrAfter(moment(startDate))
+              ? moment(event.start_date).isSameOrAfter(moment(startDate))
               : true) &&
-            (endDate ? moment(event.end).isSameOrBefore(moment(endDate)) : true)
+            (endDate ? moment(event.end_date).isSameOrBefore(moment(endDate)) : true)
           );
         })
       );
@@ -91,7 +94,7 @@ export default function Home({visits}) {
             />
           </div>
         </div>
-        <VisitCardView visits={visits}/>
+        <VisitCardView visits={filteredEvents}/>
         {/* <VisitTable visits={visits}/> */}
 
         <div id="root"></div>
