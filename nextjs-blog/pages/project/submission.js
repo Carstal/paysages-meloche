@@ -8,6 +8,7 @@ import "../../src/Translation/i18n";
 import i18n from "i18next";
 // import { getUserByEmail } from '../../src/components/user/user_service';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
+import Footer from '../../components/website/Footer'
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: '/project/submission',
@@ -21,6 +22,8 @@ export const getServerSideProps = withPageAuthRequired({
     const res = await fetch(url);
     const user = await res.json();
 
+    // console.log("------FE USER RECEIVED-----")
+    // console.log(user);
     // const newProject = await getNewProjectId();
 
     return {props: { user }};
@@ -29,7 +32,8 @@ export const getServerSideProps = withPageAuthRequired({
 
 
 export default function Project({user}){
-  const user_id  = user.user_id;
+  const currentUser = user.user
+  const user_id  = currentUser.user_id;
   const [language, setLanguage] = useState('en');
 
   const { t } = useTranslation();
@@ -89,7 +93,7 @@ export default function Project({user}){
               <input type="hidden" className="form-control" defaultValue={user_id} id="userId" name="userId" />
 
               <div className="form-group mb-3">
-                <label className="mb-2"><strong>{t("Name")}</strong></label>
+                <label className="mb-2"><strong>{t("Address")}</strong></label>
                 <input name="address" id="address" type="text" className="form-control" required />
               </div>
 
@@ -123,16 +127,12 @@ export default function Project({user}){
           </div>
         </div>
 
-        <p className={styles.description}>
+        {/* <p className={styles.description}>
           {t("Maintenance")}
-        </p>
+        </p> */}
       </main>
 
-      <footer>
-        <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023</p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
            header {

@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     console.log('body: ', body)
 
     const create = await createProject(body);
-  
+
     //res.status(200).json({ data: `${body.first_name} ${body.last_name}` })
     res.redirect('/')
   }
