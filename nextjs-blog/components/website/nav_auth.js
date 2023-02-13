@@ -61,10 +61,10 @@ const nav_auth = (user) => {
             <h3>Contact</h3>
           </div>
           <div id="projects">
-            <h3>Projects</h3>
+            <h3>{t("navProject")}</h3>
           </div>
           <div id="calendar">
-            <h3>Calendar</h3>
+            <h3>{t("calendar")}</h3>
           </div>
         </div>
         {Profile()}
@@ -119,13 +119,13 @@ const nav_auth = (user) => {
           </div>
           <div className="services">
             <div id="projects">
-              <h3>Projects</h3>
+              <h3>{t("navProject")}</h3>
             </div>
             <div id="calendar">
-              <h3>Calendar</h3>
+              <h3>{t("calendar")}</h3>
             </div>
             <div id="users">
-              <h3>Users</h3>
+              <h3>{t("AllUsers")}</h3>
             </div>
           </div>
           {Profile()}
