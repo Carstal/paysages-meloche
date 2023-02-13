@@ -1,38 +1,33 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
+import { parseBody } from "next/dist/server/api-utils/node"
 
+export async function getServerSideProps(context) {
+  let data = null;
+  let project_id = null
+  let user_id = null
+  if (context.req.method === "POST") {
+    const body = await parseBody(context.req, '1mb');
+    console.log(body);
 
+    data = body;
+  }
 
-// export async function getServerSideProps(context) {
-//   const projectId = context.params.id;
-//   console.log("Project Id: " + projectId)
-//   const api = 'http://localhost:3000/api/visit/';
-//   const url = api + projectId;
-//   console.log(url);
-//   const res = await fetch(url);
+  // console.log(data);
+  // console.log(project_id);
+  // console.log(user_id);
 
-//   const data = await res.json();
-
-//   return { props: { data }};
-// }
+  return { props: { data }};
+}
 
 export default function Home({data}) {
   // const router = useRouter()
-  // function dateFormat(date){
-  //   let newDate = new Date(date);
-  //   let dd = newDate.getDate()+1;
-  //   let mm = newDate.getMonth()+1;
-  //   const yyyy = newDate.getFullYear();
-
-  //   if (dd < 10) dd = '0' + dd;
-  //   if (mm < 10) mm = '0' + mm;
-  //   const formattedDate = yyyy + '-' + mm + '-' + dd;
-  //   console.log(formattedDate);
-
-  //   return formattedDate;
-    // return newDate;
-    // }
+  // const body = JSON.parse(req.body)
+  // const body = req.body
+  // console.log(body)
+  const user_id = data.userId
+  const project_id = data.projectId
   return (
     <div className={styles.container}>
       <Head>
@@ -63,7 +58,7 @@ export default function Home({data}) {
         <div className="container">
           <div className="card mt-5">
             <form className="card-body" action="/api/visit/add" method="POST">
-              <div className="form-group mb-3">
+              {/* <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>Visit Id:</strong>
                 </label>
@@ -73,29 +68,29 @@ export default function Home({data}) {
                   id="visitId"
                   name="visitId"
                 />
-              </div>
-              <div className="form-group mb-3">
-                <label className="mb-2">
+              </div> */}
+              {/* <div className="form-group mb-3"> */}
+                {/* <label className="mb-2">
                   <strong>User Id:</strong>
-                </label>
+                </label> */}
                 <input
-                  type="text"
-                  className="form-control"
+                  type="hidden"
                   id="userId"
                   name="userId"
+                  defaultValue={user_id}
                 />
-              </div>
-              <div className="form-group mb-3">
-                <label className="mb-2">
+              {/* </div> */}
+              {/* <div className="form-group mb-3"> */}
+                {/* <label className="mb-2">
                   <strong>Project Id:</strong>
-                </label>
+                </label> */}
                 <input
-                  type="text"
-                  className="form-control"
+                  type="hidden"
                   id="projectId"
                   name="projectId"
+                  defaultValue={project_id}
                 />
-              </div>
+              {/* </div> */}
               <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>Employees:</strong>
