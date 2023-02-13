@@ -79,7 +79,7 @@ export default function UserInfo({ user, data }) {
             </div>
             <p class={styles.note}>{t("Note")}</p>
         </main>
-  
+
         <footer>
           <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
           <br />

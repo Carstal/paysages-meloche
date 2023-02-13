@@ -1,28 +1,33 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
+import { parseBody } from "next/dist/server/api-utils/node"
 
-// export async function getServerSideProps(context) {
-//   const data = context.body;
-//   console.log(data)
+export async function getServerSideProps(context) {
+  let data = null;
+  let project_id = null
+  let user_id = null
+  if (context.req.method === "POST") {
+    const body = await parseBody(context.req, '1mb');
+    console.log(body);
 
-//   return { props: { data }};
-// }
+    data = body;
+  }
 
-export async function handler(req, res) {
-  // Get data submitted in request's body.
-  const data = req.body
-  console.log(data)
+  // console.log(data);
+  // console.log(project_id);
+  // console.log(user_id);
 
   return { props: { data }};
 }
+
 export default function Home({data}) {
   // const router = useRouter()
   // const body = JSON.parse(req.body)
   // const body = req.body
   // console.log(body)
-  const user_id = 1
-  const project_id = 1
+  const user_id = data.userId
+  const project_id = data.projectId
   return (
     <div className={styles.container}>
       <Head>

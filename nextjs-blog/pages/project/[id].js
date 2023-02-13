@@ -91,7 +91,6 @@ export default function DisplayProject({ data }) {
           <input type="hidden" className="form-control" defaultValue={project.user_id} id="userId" name="userId" />
           <button
             className="addBtn"
-            name="addVisit"
             type="submit"
           >
             Add Visit

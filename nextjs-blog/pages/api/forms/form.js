@@ -19,15 +19,15 @@ export default async function handler(req, res) {
     }
 
     try{
-        const email = session.user.email     
+        const email = session.user.email
         if(email == body.email || role == "Admin"){
             console.log("authorized")
             const updated = await updateClient(body);
             res.redirect('/')
         }
-        
+
     } catch {
         console.log("not authenticated")
         res.redirect("/access_denied")
     }
-  }
+}
