@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-// import Profile from ".//profile/index";
 import { getSession } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import NavDynamic from "../components/website/NavDynamic";
