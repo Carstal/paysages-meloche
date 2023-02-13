@@ -34,7 +34,7 @@ const nav_auth = (user) => {
         value="fr"
         onClick={handleLanguageChange}
       >
-        Français
+        <p>Français</p>
       </button>
     );
   } else {
@@ -44,7 +44,7 @@ const nav_auth = (user) => {
         value="en"
         onClick={handleLanguageChange}
       >
-        English
+        <p>English</p>
       </button>
     );
   }

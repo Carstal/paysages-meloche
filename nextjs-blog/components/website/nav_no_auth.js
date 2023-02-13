@@ -28,13 +28,13 @@ const nav_no_auth = () => {
   if (language == "en") {
     lang = (
       <button className={styles.loginbutton} value="fr" onClick={handleOnclick}>
-        Français
+        <p>Français</p>
       </button>
     );
   } else {
     lang = (
       <button className={styles.loginbutton} value="en" onClick={handleOnclick}>
-        English
+        <p>English</p>
       </button>
     );
   }
