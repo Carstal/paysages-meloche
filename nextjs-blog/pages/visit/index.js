@@ -16,6 +16,34 @@ export async function getServerSideProps() {
 }
 
 export default function Home({visits}) {
+  const { t } = useTranslation();
+  var [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const router = useRouter();
+
+  const [dateState, setDateState] = useState(new Date());
+  const changeDate = (e) => {
+    setDateState(e);
+  };
+
+  useEffect(() => {
+    if (!startDate && !endDate) {
+      setFilteredEvents(events);
+    } else {
+      setFilteredEvents(
+        events.filter((event) => {
+          return (
+            (startDate
+              ? moment(event.start).isSameOrAfter(moment(startDate))
+              : true) &&
+            (endDate ? moment(event.end).isSameOrBefore(moment(endDate)) : true)
+          );
+        })
+      );
+    }
+  }, [events, startDate, endDate]);
   return (
     <div className={styles.container}>
       <Head>
@@ -43,6 +71,26 @@ export default function Home({visits}) {
       </header>
       <main>
         <h2 className={styles.title}>All Visits</h2>
+        <div className="filter-container">
+          <div className="filter-item">
+            <label htmlFor="start-date">{t("startD")}</label>
+            <input
+              id="start-date"
+              type="date"
+              value={startDate ? moment(startDate).format("YYYY-MM-DD") : ""}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
+          <div className="filter-item">
+            <label htmlFor="end-date">{t("endD")}</label>
+            <input
+              id="end-date"
+              type="date"
+              value={endDate ? moment(endDate).format("YYYY-MM-DD") : ""}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
+        </div>
         <VisitCardView visits={visits}/>
         {/* <VisitTable visits={visits}/> */}
 
