@@ -3,17 +3,20 @@ import styles from "../styles/Home.module.css";
 // import Profile from ".//profile/index";
 import { getSession } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
-import nav from "../components/website/nav";
+import NavDynamic from "../components/website/NavDynamic";
+import { useTranslation } from "react-i18next";
+import "../src/Translation/i18n";
 
 export default function Home({}) {
   const router = useRouter();
+  const { t } = useTranslation();
   return (
     <div className={styles.container}>
       <Head>
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {nav()}
+      <NavDynamic />
       <main>
         <h1 className={styles.title}>Paysages Meloche</h1>
 
