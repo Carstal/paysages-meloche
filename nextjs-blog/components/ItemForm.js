@@ -17,24 +17,28 @@ const ItemForm = ({ addItem }) => {
         setPrice('');
     }
     else{
-        var errMsg = "Invalid entry in price field: ";
+        var errMsg = "Invalid entry: <ul>";
+        if(name.length == 0){
+            errMsg += "<li>Please enter an item name</li>";
+        }
         if(isNaN(parsedPrice) == true){
-            errMsg += "Please enter a number";
+            errMsg += "<li>Please enter a number in price field</li>";
         }
         else if(parsedPrice < 0){
-            errMsg += "Please enter a positive number";
+            errMsg += "<li>Please enter a positive number</li>";
         }
         else{
-            errMsg += "Field was left empty";
+            errMsg += "<li>Field was left empty</li>";
         }
-        document.getElementById("error").innerText = errMsg;
+        errMsg += "</ul>";
+        document.getElementById("error").innerHTML = errMsg;
         document.getElementById("error").style.display = "block";
     }
     };
 
     return (
     <form onSubmit={handleSubmit}>
-        <div id="error" hidden>Invalid entry in price field:</div>
+        <div id="error" hidden></div>
         <input
         type="text"
         id='itemName'
