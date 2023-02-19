@@ -16,7 +16,20 @@ import { useRouter } from "next/router";
 
 //   return { props: { data }};
 // }
-
+// function addItem(){
+//   let item = document.getElementById('itemName').value;
+//   let price = parseFloat(document.getElementById('price'));
+//   if(isNaN(price)){
+//     document.getElementById("error").innerHTML = 'Invalid number: '+price;
+//   }
+//   else if(price <= 0){
+//     document.getElementById("error").innerHTML = price+' is smaller than 0';
+//   }
+//   else{
+//     price = parseFloat(price);
+//     items.push({item, price});
+//   }
+// }
 export default function Home() {
   // const router = useRouter()
   // function dateFormat(date){
@@ -158,7 +171,7 @@ export default function Home() {
               </div>
 
               <div className="form-group mt-3">
-                <button onClick={addItem()} className={styles.submitbutton}>
+                <button className={styles.submitbutton}>
                 {/* <button type="submit" className={styles.submitbutton}> */}
                   Add Item
                 </button>
