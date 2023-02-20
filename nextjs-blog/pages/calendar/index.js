@@ -12,9 +12,10 @@ import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useRouter } from "next/router";
 import moment from "moment";
+import CalendarExportButton from "../../components/calendar/CalendarExportButton";
 
 import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
+import Footer from "../../components/website/Footer";
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/calendar",
@@ -118,6 +119,7 @@ export default function Home({ visits }) {
               onChange={(e) => setStartDate(e.target.value)}
             />
           </div>
+          <CalendarExportButton events={events} />
           <div className="filter-item">
             <label htmlFor="end-date">{t("endD")}</label>
             <input
@@ -140,7 +142,7 @@ export default function Home({ visits }) {
         </div>
       </main>
 
-      <Footer/>
+      <Footer />
 
       <style jsx>{`
         header {

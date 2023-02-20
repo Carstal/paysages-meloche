@@ -12,9 +12,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useRouter } from "next/router";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useTranslation } from "react-i18next";
-
 import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
+import Footer from "../../components/website/Footer";
+import CalendarExportButton from "../../components/calendar/CalendarExportButton";
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/",
@@ -84,6 +84,8 @@ export default function Home({ visits }) {
       <NavDynamic />
       <main>
         <h2 className={styles.title}>{t("calendar")}</h2>
+        <CalendarExportButton events={allVisits} />
+        <br></br>
         <div>
           <Calendar
             localizer={localizer}
@@ -96,7 +98,7 @@ export default function Home({ visits }) {
         </div>
       </main>
 
-      <Footer/>
+      <Footer />
 
       <style jsx>{`
         header {
