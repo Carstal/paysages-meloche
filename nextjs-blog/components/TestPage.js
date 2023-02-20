@@ -6,12 +6,17 @@ const TestPage = () => {
 const [items, setItems] = useState([]);
 
 const addItem = (name, price) => {
-setItems([...items, { id: items.length + 1, name, price }]);
+setItems([...items, { name, price }]);
 };
 
 const deleteItem = (id) => {
 setItems(items.filter((item) => item.id !== id));
 };
+
+const pairs = {}
+items.forEach((item)=>(
+    pairs[item.name] = item.price
+))
 
 return (
 <div>
@@ -21,7 +26,7 @@ return (
 <form action="/api/quote/newQuote" method="POST">
             <input name="userID" value="24" hidden/>
             <input name="projectID" value="24" hidden/>
-            <input name="items" value={items} hidden/>
+            <input name="items" value={JSON.stringify(pairs)} hidden/>\
             <button type="submit">Submit Invoice</button>
         </form>
 </div>
