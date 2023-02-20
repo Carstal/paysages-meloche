@@ -25,7 +25,6 @@ export default async function handler(req, res) {
             const updated = await updateClient(body);
             res.redirect('/')
         }
-
     } catch {
         console.log("not authenticated")
         res.redirect("/access_denied")

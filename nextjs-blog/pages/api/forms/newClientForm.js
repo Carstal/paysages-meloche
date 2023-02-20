@@ -6,6 +6,6 @@ export default async function handler(req, res) {
 
     //map to object if necessary later
     const updated = await updateClient(body);
-    
+
     res.redirect('http://localhost:3000/api/auth/logout?returnTo=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Flogin')
-  }
+}
