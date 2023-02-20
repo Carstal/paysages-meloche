@@ -1,6 +1,6 @@
 
 export default function Home(req){
-     const invoice = req.body;
+    const invoice = req.body;
     return (
     <div>
         {invoice}
