@@ -5,7 +5,7 @@ const ItemList = ({items}) => {
         <ul>
             {items.map((item) => (
                 <li>
-                    {item.name} - {item.price}
+                    {item.name} | {item.price}$
                 </li>
             ))}
         </ul>

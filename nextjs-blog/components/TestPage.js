@@ -26,7 +26,7 @@ return (
 <form action="/api/quote/newQuote" method="POST">
             <input name="userID" value="24" hidden/>
             <input name="projectID" value="24" hidden/>
-            <input name="items" value={JSON.stringify(pairs)} hidden/>\
+            <input name="items" value={JSON.stringify(pairs)} hidden/>
             <button type="submit">Submit Invoice</button>
         </form>
 </div>
