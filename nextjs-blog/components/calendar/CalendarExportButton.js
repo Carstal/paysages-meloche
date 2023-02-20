@@ -20,6 +20,10 @@ const CalendarExportButton = ({ events }) => {
     end_time: DateTime.fromJSDate(end).toISOTime(),
   }));
 
+  if (events.length === 0) {
+    return null;
+  }
+
   return (
     <CSVLink
       data={csvData}
