@@ -1,50 +1,35 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
-import { getAllClients } from "../../src/components/client/client_service"
-import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
-import Profile from '../profile/index';
+import { getAllClients } from "../../src/components/client/client_service";
+import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../../src/Translation/i18n";
-import i18n from "i18next";
 
-export default function Home({users}) {
-    const router = useRouter()
-    const [language, setLanguage] = useState('en');4
-  
-    const { t } = useTranslation();
-  
-    const handleOnclick = (e) => {
-      e.preventDefault();
-      setLanguage(e.target.value);
-      if (i18n && i18n.changeLanguage) {
-        i18n.changeLanguage(e.target.value);
-      }
-    }
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
 
-    var lang
+export default function Home({ users }) {
+  const router = useRouter();
+  const { t } = useTranslation();
 
-    if(language == "en"){
-        lang = <button className={styles.loginbutton} value='fr' onClick={handleOnclick}>Français</button>
-    } else {
-        lang = <button className={styles.loginbutton} value='en' onClick={handleOnclick}>English</button>
-    }
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState(users);
 
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState(users);
-    
-    const handleSearch = event => {
-      const searchTerm = event.target.value;
-      setSearchTerm(searchTerm);
-    
-      const filteredList = users.filter(item =>
-        Object.values(item).some(field =>
-          typeof field === 'string' && field.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+  const handleSearch = (event) => {
+    const searchTerm = event.target.value;
+    setSearchTerm(searchTerm);
+
+    const filteredList = users.filter((item) =>
+      Object.values(item).some(
+        (field) =>
+          typeof field === "string" &&
+          field.toLowerCase().includes(searchTerm.toLowerCase())
       )
-      setSearchResults(filteredList);
-    }
+    );
+    setSearchResults(filteredList);
+  };
 
   return (
     <div className={styles.container}>
@@ -52,58 +37,57 @@ export default function Home({users}) {
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className="logo">
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className="services">
-          <div id="paysagement">
-            <h3>{t("Paysagement")}</h3>
-          </div>
-          <div id="pelouse">
-            <h3>{t("Pelouse")}</h3>
-          </div>
-          <div id="deneigement">
-            <h3>{t("Deneigement")}</h3>
-          </div>
-        </div>
-        {Profile()}
-        {lang}
-      </header>
+      <NavDynamic />
       <main>
         <h2 className={styles.title}>{t("AllUsers")}</h2>
         <div className={styles.search_container}>
-          <input type="text" value={searchTerm} onChange={handleSearch} className={styles.search_input} placeholder="Search"/>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearch}
+            className={styles.search_input}
+            placeholder="Search"
+          />
         </div>
-        <div style={{height: '350px', overflowY: 'auto'}}>
+        <div style={{ height: "350px", overflowY: "auto" }}>
           {searchResults.map((user) => (
-          <div className="visit">
-            <div className="info">
-              <div className="vrRow">{t("User")}: {user.first_name} {user.last_name}</div>
-              <div className="vrRow">{t("Email")}: {user.email}</div>
-              <div className="vrRow">{t("PhoneNumber")}: {user.phone_number}</div>
-              <div className="vrRow">{t("Employee")}: {user.is_employee.toString()}</div>
+            <div className="visit">
+              <div className="info">
+                <div className="vrRow">
+                  {t("User")}: {user.first_name} {user.last_name}
+                </div>
+                <div className="vrRow">
+                  {t("Email")}: {user.email}
+                </div>
+                <div className="vrRow">
+                  {t("PhoneNumber")}: {user.phone_number}
+                </div>
+                <div className="vrRow">
+                  {t("Employee")}: {user.is_employee.toString()}
+                </div>
+              </div>
+              <div className="editBtnDiv">
+                <button
+                  className="editBtn"
+                  name="edit"
+                  value={user.email}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/admin/[email]",
+                      query: { email: user.email },
+                    })
+                  }
+                >
+                  {t("Edit")}
+                </button>
+              </div>
             </div>
-            <div className="editBtnDiv">
-              <button className="editBtn" name="edit" value={user.email} onClick={() => router.push({
-                pathname: '/admin/[email]', query: { email: user.email }})}>
-                {t("Edit")}
-              </button>
-            </div>
-          </div>
           ))}
         </div>
-        <div id="root">
-        </div>
+        <div id="root"></div>
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         header {
@@ -319,22 +303,22 @@ export default function Home({users}) {
 }
 
 export const getServerSideProps = withPageAuthRequired({
-    returnTo: '/',
-    async getServerSideProps(ctx) {
-        const session = await getSession(ctx.req, ctx.res);
-        const roles = session.user.userRoles
+  returnTo: "/",
+  async getServerSideProps(ctx) {
+    const session = await getSession(ctx.req, ctx.res);
+    const roles = session.user.userRoles;
 
-        if(roles == "Admin") {
-            const list = await getAllClients();
-            return { props: { users: JSON.parse(JSON.stringify(list)) } };
-        } else {
-            return {
-                redirect: {
-                  permanent: false,
-                  destination: "/access_denied",
-                },
-                props:{},
-              };
-        }
+    if (roles == "Admin") {
+      const list = await getAllClients();
+      return { props: { users: JSON.parse(JSON.stringify(list)) } };
+    } else {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/access_denied",
+        },
+        props: {},
+      };
     }
-  });
+  },
+});

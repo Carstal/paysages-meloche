@@ -209,6 +209,29 @@ export async function getAllVisits() {
 //     return ("error");
 //   }
 // }
+
+export async function getNewVisitId(){
+  var newId = 0;
+  try {
+    const client = await clientPromise;
+    const db = client.db("ECPVisitDummy");
+
+    const greatestVisits = await db.collection("DummyVisits").find().sort({"visit_id":-1}).toArray();
+    const greatestId = greatestVisits[0].visit_id;
+
+    // console.log('-----GreatestID-----');
+    // console.log(greatestId)
+
+    newId = greatestId + 1;
+
+    return newId;
+  } catch (e) {
+    console.error(e);
+    throw new Error(e).message;
+    return e;
+  }
+}
+
 module.exports = {
   addVisit,
   getAllVisits,
@@ -216,5 +239,6 @@ module.exports = {
   getVisitsByEmpId,
   getVisitsByUserId,
   updateVisitInfo,
-  deleteVisitById
+  deleteVisitById,
+  getNewVisitId
 }

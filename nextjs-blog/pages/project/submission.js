@@ -1,16 +1,41 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css';
-import clientPromise from "../../lib/mongodb";
 // import Profile from './profile';
 import Profile from '../profile/index';
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../../src/Translation/i18n";
 import i18n from "i18next";
-
+// import { getUserByEmail } from '../../src/components/user/user_service';
 import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
-export default function Project({ data }) {
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
+
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: '/project/submission',
+  async getServerSideProps(ctx) {
+    const session = await getSession(ctx.req, ctx.res);
+    const email = session.user.name;
+    // access the user session
+    // const user = await getUserByEmail(session.user.name);
+    const api = 'http://localhost:3000/api/user/';
+    const url = api + email;
+    const res = await fetch(url);
+    const user = await res.json();
+
+    // console.log("------FE USER RECEIVED-----")
+    // console.log(user);
+    // const newProject = await getNewProjectId();
+
+    return {props: { user }};
+  }
+});
+
+
+export default function Project({user}){
+  const currentUser = user.user
+  const user_id  = currentUser.user_id;
   const [language, setLanguage] = useState('en');
 
   const { t } = useTranslation();
@@ -30,34 +55,7 @@ export default function Project({ data }) {
         <title>{t("ProjectSubmissionTitle")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className='logo'>
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className='services'>
-          <div id='paysagement'>
-            <h3>{t("Paysagement")}</h3>
-          </div>
-          <div id='pelouse'>
-            <h3>{t("Pelouse")}</h3>
-          </div>
-          <div id='deneigement'>
-            <h3>{t("Deneigement")}</h3>
-
-          </div>
-        </div>
-        {Profile()}
-        <div className='login'>
-          <button class={styles.loginbutton} value='fr' onClick={handleOnclick}>
-            French
-          </button>
-          <button class={styles.loginbutton} value='en' onClick={handleOnclick}>
-            English
-          </button>
-
-        </div>
-
-      </header>
+      <NavDynamic />
       <main>
         <h1 className={styles.title}>
           {t("ProjectSubmissionTitle")}
@@ -65,26 +63,28 @@ export default function Project({ data }) {
         </h1>
         <div className="container">
           <div className="card mt-5">
+            <div>User ID: {user_id}</div>
             <form className="card-body" action="/api/project/submission" method="POST">
-              <input type="hidden" className="form-control" defaultValue={data?.email} id="email" name="email" />
-
-
-            
+              <input type="hidden" className="form-control" defaultValue={user_id} id="userId" name="userId" />
 
               <div className="form-group mb-3">
-                <label className="mb-2"><strong>{t("Name")}</strong></label>
-                <input name="name" id="name" type="text" className="form-control" required />
+                <label className="mb-2"><strong>{t("Address")}</strong></label>
+                <input name="address" id="address" type="text" className="form-control" required />
               </div>
 
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("ProjectType")}</strong></label>
-                <input name="project" id="project" type="text" className="form-control" required />
+                <select name="service" id="service" type="text" className="form-control" required>
+                  <option value="Landscaping">Landscaping</option>
+                  <option value="Paving">Paving</option>
+                  <option value="Maintenance">Maintenance</option>
+                </select>
               </div>
 
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("Size1")}</strong></label>
                 <input name="length" id="length" type="text" className="form-control" required />
-              </div>  
+              </div>
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("Size2")}</strong></label>
                 <input name="width" id="width" type="text" className="form-control" required />
@@ -102,16 +102,12 @@ export default function Project({ data }) {
           </div>
         </div>
 
-        <p className={styles.description}>
+        {/* <p className={styles.description}>
           {t("Maintenance")}
-        </p>
+        </p> */}
       </main>
 
-      <footer>
-        <p>Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023</p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
            header {
@@ -241,19 +237,3 @@ export default function Project({ data }) {
     </div>
   )
 }
-
-export const getServerSideProps = withPageAuthRequired({
-  returnTo: '/project/submission',
-  async getServerSideProps(ctx) {
-    const client = await clientPromise;
-    const db = client.db("FinalProject");
-    const session = await getSession(ctx.req, ctx.res);
-
-    const post = await db.collection("Client").findOne({
-      email: session.user.name
-    });
-    // access the user session
-
-    return { props: { data: JSON.parse(JSON.stringify(post)) } };
-  }
-});

@@ -1,128 +1,58 @@
-import Head from "next/head";
-import styles from "../../styles/Home.module.css";
+import React from 'react';
 import { useRouter } from "next/router";
-import { parseBody } from "next/dist/server/api-utils/node";
 
-import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
+const VisitCard = ({visit}) => {
+    const router = useRouter()
+    function formatEmployees(emp_ids){
+      var formattedEmployees = ""
+      const employees = emp_ids.map((emp) =>
+        formattedEmployees = formattedEmployees + " " + emp
+      );
+      return formattedEmployees;
+    }
+    function formatDate(date){
+      let newDate = new Date(date);
+      let dd = newDate.getDate()+1;
+      let mm = newDate.getMonth()+1;
+      const yyyy = newDate.getFullYear();
 
-export async function getServerSideProps(context) {
-  let data = null;
-  let project_id = null
-  let user_id = null
-  if (context.req.method === "POST") {
-    const body = await parseBody(context.req, '1mb');
-    console.log(body);
+      if (dd < 10) dd = '0' + dd;
+      if (mm < 10) mm = '0' + mm;
+      const formattedDate = yyyy + '-' + mm + '-' + dd;
 
-    data = body;
-  }
-
-  // console.log(data);
-  // console.log(project_id);
-  // console.log(user_id);
-
-  return { props: { data }};
-}
-
-export default function Home({data}) {
-  // const router = useRouter()
-  // const body = JSON.parse(req.body)
-  // const body = req.body
-  // console.log(body)
-  const user_id = data.userId
-  const project_id = data.projectId
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Paysages Meloche</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <NavDynamic />
-      <main>
-        <h2 className={styles.title}>New Visit</h2>
-        <div className="container">
-          <div className="card mt-5">
-            <form className="card-body" action="/api/visit/add" method="POST">
-              {/* <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Visit Id:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="visitId"
-                  name="visitId"
-                />
-              </div> */}
-              {/* <div className="form-group mb-3"> */}
-                {/* <label className="mb-2">
-                  <strong>User Id:</strong>
-                </label> */}
-                <input
-                  type="hidden"
-                  id="userId"
-                  name="userId"
-                  defaultValue={user_id}
-                />
-              {/* </div> */}
-              {/* <div className="form-group mb-3"> */}
-                {/* <label className="mb-2">
-                  <strong>Project Id:</strong>
-                </label> */}
-                <input
-                  type="hidden"
-                  id="projectId"
-                  name="projectId"
-                  defaultValue={project_id}
-                />
-              {/* </div> */}
-              <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Employees:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="employees"
-                  name="employees"
-                />
+      return formattedDate;
+    }
+    return (
+            <div className="visit">
+              <div className="info">
+                <div className="vrRow">
+                  Visit:{visit.visit_id} Project: {visit.project_id}
+                </div>
+                <div className="empRow">
+                  Employee(s): {formatEmployees(visit.employee_ids)}
+                </div>
+                <div className="startRow">
+                  Start Date: {formatDate(visit.start_date)}
+                </div>
+                <div className="endRow">
+                  End Date: {formatDate(visit.end_date)}
+                </div>
               </div>
-
-              <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Start Date:</strong>
-                </label>
-                <input
-                  type="date"
-                  className="form-control"
-                  id="startDate"
-                  name="startDate"
-                />
-              </div>
-
-              <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>End Date:</strong>
-                </label>
-                <input
-                  type="date"
-                  className="form-control"
-                  id="endDate"
-                  name="endDate"
-                />
-              </div>
-
-              <div className="form-group mt-3">
-                <button type="submit" className={styles.submitButton}>
-                  Create Visit
+              <div className="editBtnDiv">
+                <button
+                  className="editBtn"
+                  name="edit"
+                  value={visit.visit_id}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/visit/[id]",
+                      query: { id: visit.visit_id },
+                    })
+                  }
+                >
+                  Edit
                 </button>
               </div>
-            </form>
-          </div>
-        </div>
-      </main>
-
-      <Footer />
 
       <style jsx>{`
         header {
@@ -146,6 +76,7 @@ export default function Home({data}) {
           color: #111111;
           flex-direction: row;
           border-radius: 25px;
+          margin: 15px;
         }
         .info {
           padding-left: 20px;
@@ -174,6 +105,24 @@ export default function Home({data}) {
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
           font-weight: bold;
+        }
+        .addBtnDiv {
+          display: flex;
+          width: 50%;
+          align-items: center;
+          justify-content: center;
+        }
+        .addBtn {
+          height: 100px;
+          width: 60%;
+          background: #00b45d;
+          border-radius: 10px;
+          color: #ffffff;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+          font-weight: bold;
+          font-size: 2em;
         }
         .services {
           display: flex;
@@ -271,15 +220,6 @@ export default function Home({data}) {
           color: #ffffff;
           width: 100vw;
         }
-        .form-group mb-3, textarea, input{
-          display: block;
-          width: 100%;
-          padding: .5rem .8rem .5rem .8rem;
-          margin: .9vw 0 ;
-          border:0;
-          border-radius: 5px;
-          font-size: 20px;
-      }
         footer {
           width: 100vw;
           height: 100px;
@@ -323,6 +263,7 @@ export default function Home({data}) {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
-  );
-}
+            </div>
+    )}
+
+export default VisitCard;

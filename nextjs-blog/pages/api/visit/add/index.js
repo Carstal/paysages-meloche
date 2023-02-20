@@ -1,5 +1,5 @@
 // import { updateVisit } from "../../../../src/components/visit/visit_controller";
-import { addVisit } from "../../../../src/components/visit/visit_service";
+import { addVisit, getNewVisitId } from "../../../../src/components/visit/visit_service";
 const Visit = require("../../../../src/components/visit/Visit");
 
 export default async function handler(req, res) {
@@ -9,7 +9,8 @@ export default async function handler(req, res) {
     let data = req.body;
     // console.log(data);
     // console.log("----CONTROLLER - Values Provided-----");
-    const visitId = parseInt(data.visitId);
+    // const visitId = parseInt(data.visitId);
+    const visitId = await getNewVisitId();
     // console.log(visitId);
     const userId = parseInt(data.userId);
     const projectId = parseInt(data.projectId);

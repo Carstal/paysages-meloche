@@ -39,6 +39,9 @@ const client = new MongoClient(uri);
 // const allVisits = getAllVisits();
 // console.log(allVisits);
 
+// const user_id = getNewUserId();
+// console.log(user_id);
+
 // const voidRun = runAllTests();
 
 // async function runAllTests(){
@@ -277,6 +280,22 @@ async function addVisit(vis) {
   // );
 
 //   return "All listings created";
+// }
+
+
+// async function getNewUserId(){
+//   var newId = 0;
+
+//     const client = await MongoClient.connect("mongodb+srv://Mohaned:0000@cluster0.gvkvlw9.mongodb.net/?retryWrites=true&w=majority");
+//     const db = client.db("FinalProject");
+
+//     const greatestVisits = await db.collection("Client").find().sort({"user_id":-1}).toArray();
+//     const greatestId = greatestVisits[0].user_id;
+
+//     newId = greatestId + 1;
+//     console.log(newId)
+
+//     return newId;
 // }
 
 module.exports = {

@@ -12,8 +12,27 @@ export async function getUserById(id) {
 
         const intId = parseInt(id);
 
-        const result = await db.collection("User")
+        const result = await db.collection("Client")
         .findOne({ user_id: intId });
+        // console.log("---user retrieved----")
+        // console.log(result);
+        return result
+    } catch (e) {
+        console.error(e);
+        throw new Error(e).message;
+    }
+};
+
+
+export async function getUserByEmail(email) {
+    try {
+        const client = await clientPromise;
+        // console.log("----User ID Promise-----");
+        // console.log(id)
+        const db = client.db("FinalProject");
+
+        const result = await db.collection("Client")
+        .findOne({ email: email });
         // console.log("---user retrieved----")
         // console.log(result);
         return result

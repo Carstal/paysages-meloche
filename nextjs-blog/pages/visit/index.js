@@ -1,6 +1,14 @@
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
+import moment from "moment";
+import { useState, useEffect} from "react";
+import { useTranslation } from "react-i18next";
+
+import VisitTable from "../../components/visit/VisitTable";
+import VisitCardView from "../../components/visit/VisitCardView";
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
 
 
 export async function getServerSideProps() {
@@ -13,92 +21,83 @@ export async function getServerSideProps() {
 }
 
 export default function Home({visits}) {
-  const router = useRouter()
-  function formatEmployees(emp_ids){
-    var formattedEmployees = ""
-    const employees = emp_ids.map((emp) =>
-      formattedEmployees = formattedEmployees + " " + emp
-    );
-    return formattedEmployees;
-  }
-  function formatDate(date){
-    let newDate = new Date(date);
-    let dd = newDate.getDate()+1;
-    let mm = newDate.getMonth()+1;
-    const yyyy = newDate.getFullYear();
+  const { t } = useTranslation();
+  var [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const router = useRouter();
+  events = visits;
+  const [dateState, setDateState] = useState(new Date());
+  const changeDate = (e) => {
+    setDateState(e);
+  };
 
-    if (dd < 10) dd = '0' + dd;
-    if (mm < 10) mm = '0' + mm;
-    const formattedDate = yyyy + '-' + mm + '-' + dd;
-    // console.log(formattedDate);
-
-    return formattedDate;
-  }
+  useEffect(() => {
+    if (!startDate && !endDate) {
+      setFilteredEvents(events);
+    } else {
+      setFilteredEvents(
+        events.filter((event) => {
+          return (
+            (startDate
+              ? moment(event.start_date).isSameOrAfter(moment(startDate))
+              : true) &&
+            (endDate ? moment(event.end_date).isSameOrBefore(moment(endDate)) : true)
+          );
+        })
+      );
+    }
+  }, [events, startDate, endDate]);
   return (
     <div className={styles.container}>
       <Head>
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div className="logo">
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className="services">
-          <div id="paysagement">
-            <h3>Paysagement</h3>
-          </div>
-          <div id="pelouse">
-            <h3>Pelouse</h3>
-          </div>
-          <div id="deneigement">
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        <div className="login">
-          <button>Login</button>
-        </div>
-      </header>
+      <NavDynamic />
       <main>
         <h2 className={styles.title}>All Visits</h2>
-        <div id="visitContainer">
-          {visits.map((visit) => (
-            // let sdate = visit.start_date;
-            // console.log(sdate);
-          <div className="visit">
-            <div className="info">
-              <div className="vrRow">Visit:{visit.visit_id} Project: {visit.project_id}</div>
-              <div className="empRow">Employee(s): {formatEmployees(visit.employee_ids)}</div>
-              <div className="startRow">Start Date: {formatDate(visit.start_date)}</div>
-              <div className="endRow">End Date: {formatDate(visit.end_date)}</div>
-            </div>
-            <div className="editBtnDiv">
-              <button className="editBtn" name="edit" value={visit.visit_id} onClick={() => router.push({
-                pathname: '/visit/[id]', query: { id: visit.visit_id }})}>
-                Edit
-              </button>
-            </div>
+        <div className="filter-container">
+          <div className="filter-item">
+            <label htmlFor="start-date">{t("startD")}</label>
+            <input
+              id="start-date"
+              type="date"
+              value={startDate ? moment(startDate).format("YYYY-MM-DD") : ""}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
           </div>
-          ))}
+          <div className="filter-item">
+            <label htmlFor="end-date">{t("endD")}</label>
+            <input
+              id="end-date"
+              type="date"
+              value={endDate ? moment(endDate).format("YYYY-MM-DD") : ""}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
         </div>
-        <div id="root">
+        <VisitCardView visits={filteredEvents}/>
+        {/* <VisitTable visits={visits}/> */}
 
-        </div>
+        {/* <div id="root"></div>
         <div className="addBtnDiv">
-          <button className="addBtn" name="addVisit" onClick={() => router.push({
-            pathname: '/visit/add'})}>
-              Add Visit
+          <button
+            className="addBtn"
+            name="addVisit"
+            onClick={() =>
+              router.push({
+                pathname: "/visit/add",
+              })
+            }
+          >
+            Add Visit
           </button>
-        </div>
+        </div> */}
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         header {
