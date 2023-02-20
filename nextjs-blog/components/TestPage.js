@@ -18,7 +18,7 @@ return (
 <ItemForm addItem={addItem} />
 <ItemList items={items} deleteItem={deleteItem} />
 
-<form action="/api/quote/newInvoice" method="POST">
+<form action="/api/quote/newQuote" method="POST">
             <input name="userID" value="24" hidden/>
             <input name="projectID" value="24" hidden/>
             <input name="items" value={items} hidden/>
