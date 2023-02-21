@@ -68,7 +68,7 @@ export default function Home({ visits }) {
   const handleSelectVisit = useCallback(
     (event) =>
       router.push({
-        pathname: "/visit/[id]",
+        pathname: "https://paysages-meloche.vercel.app/visit/[id]",
         query: { id: event.visit },
       }),
     []

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
 import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
+import Footer from "../../components/website/Footer";
 
 export default function DisplayProject({ data }) {
   const router = useRouter();
@@ -49,19 +49,19 @@ export default function DisplayProject({ data }) {
             </div>
           </div>
 
-        <div className="addBtnDiv">
-          <button
-            className="addBtn"
-            name="addProject"
-            onClick={() =>
-              router.push({
-                pathname: "/project/submission",
-              })
-            }
-          >
-            Add Project
-          </button>
-        </div>
+          <div className="addBtnDiv">
+            <button
+              className="addBtn"
+              name="addProject"
+              onClick={() =>
+                router.push({
+                  pathname: "/project/submission",
+                })
+              }
+            >
+              Add Project
+            </button>
+          </div>
         </div>
       </main>
 
