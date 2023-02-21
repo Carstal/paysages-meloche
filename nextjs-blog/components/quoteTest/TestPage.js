@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ItemList from '../components/ItemList';
-import ItemForm from '../components/ItemForm';
+import ItemList from '../quoteTest/ItemList';
+import ItemForm from '../quoteTest/ItemForm';
 
 const TestPage = () => {
 const [items, setItems] = useState([]);

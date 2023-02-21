@@ -1,193 +1,125 @@
-import Head from "next/head";
 import styles from "../../styles/Home.module.css";
-import { useRouter } from "next/router";
+import React, { useState } from 'react';
 
-
-
-// export async function getServerSideProps(context) {
-//   const projectId = context.params.id;
-//   console.log("Project Id: " + projectId)
-//   const api = 'http://localhost:3000/api/visit/';
-//   const url = api + projectId;
-//   console.log(url);
-//   const res = await fetch(url);
-
-//   const data = await res.json();
-
-//   return { props: { data }};
-// }
-// function addItem(){
-//   let item = document.getElementById('itemName').value;
-//   let price = parseFloat(document.getElementById('price'));
-//   if(isNaN(price)){
-//     document.getElementById("error").innerHTML = 'Invalid number: '+price;
-//   }
-//   else if(price <= 0){
-//     document.getElementById("error").innerHTML = price+' is smaller than 0';
-//   }
-//   else{
-//     price = parseFloat(price);
-//     items.push({item, price});
-//   }
-// }
 export default function Home() {
-  // const router = useRouter()
-  // function dateFormat(date){
-  //   let newDate = new Date(date);
-  //   let dd = newDate.getDate()+1;
-  //   let mm = newDate.getMonth()+1;
-  //   const yyyy = newDate.getFullYear();
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
 
-  //   if (dd < 10) dd = '0' + dd;
-  //   if (mm < 10) mm = '0' + mm;
-  //   const formattedDate = yyyy + '-' + mm + '-' + dd;
-  //   console.log(formattedDate);
+  const [items, setItems] = useState([]);
 
-  //   return formattedDate;
-    // return newDate;
-    // }
-    var items = []
+  const addItem = (name, price) => {
+  setItems([...items, { name, price }]);
+  };
 
-    // function addItem(){
-    //     let item = document.getElementById('itemName').value;
-    //     let price = parseFloat(document.getElementById('price'));
-    //     if(isNaN(price)){
-    //         document.getElementById("error").innerHTML = 'Invalid number: '+price;
-    //     }
-    //     else if(price <= 0){
-    //         document.getElementById("error").innerHTML = price+' is smaller than 0';
-    //     }
-    //     else{
-    //         price = parseFloat(price);
-    //         items.push({item, price});
-    //     }
-    // }
+  const deleteItem = (id) => {
+  setItems(items.filter((item) => item.id !== id));
+  };
+
+  const pairs = {}
+  items.forEach((item)=>(
+      pairs[item.name] = item.price
+  ))
+
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  const parsedPrice = parseFloat(price).toFixed(2);
+  const subName = document.getElementById('itemName').value;
+  const subPrice = document.getElementById('itemPrice').value;
+  if (name.length > 0 && isNaN(parsedPrice) != true && parsedPrice >= 0){
+      // const parsedPrice = parseFloat(price).toFixed(2);
+      document.getElementById("error").style.display="none";
+      addItem(name,parsedPrice);
+      setName('');
+      setPrice('');
+      document.getElementById("itemTable").style.display = "block";
+  }
+  else{
+      var errMsg = "Invalid entry: <ul>";
+      if(name.length == 0){
+          errMsg += "<li>Please enter an item name</li>";
+      }
+      if(isNaN(parsedPrice) == true){
+          errMsg += "<li>Please enter a number in price field</li>";
+      }
+      else if(parsedPrice < 0){
+          errMsg += "<li>Please enter a positive number</li>";
+      }
+      else{
+          errMsg += "<li>Field was left empty</li>";
+      }
+      errMsg += "</ul>";
+      document.getElementById("error").innerHTML = errMsg;
+      document.getElementById("error").style.display = "block";
+  }
+  };
+  function SplitName(text){
+    const splitArr = text.split("-");
+    var exportHTML = "<div>";
+    for(let i = 0; i < splitArr.length; i++){
+      if(i > 0){
+        exportHTML += "<li>"+splitArr[i]+"</li>";
+      }
+      else{
+        exportHTML += "<strong>"+splitArr[i]+"</strong><ul>";
+      }
+    }
+    exportHTML += "</ul></div>";
+    return exportHTML;
+  }
+
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Paysages Meloche</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <header>
-        <div className="logo">
-          <h2>Paysages Meloche</h2>
-        </div>
-        <div className="services">
-          <div id="paysagement">
-            <h3>Paysagement</h3>
-          </div>
-          <div id="pelouse">
-            <h3>Pelouse</h3>
-          </div>
-          <div id="deneigement">
-            <h3>Deneigement</h3>
-          </div>
-        </div>
-        <div className="login">
-          <button>Login</button>
-        </div>
-      </header>
       <main>
         <h2 className={styles.title}>New Quote</h2>
         <div className="container">
             <div id="error"></div>
           <div className="card mt-5">
-            <div>ITEMS</div>
-            <ul>
-            {items.map((item) => (
-                <li>
-                    {item[0]} - {item[1]}$
-                </li>
-            ))}
-            </ul>
             <div className="card-body">
-              {/* <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Visit Id:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="visitId"
-                  name="visitId"
-                />
-              </div> */}
-              {/* <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>User Id:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="userId"
-                  name="userId"
-                />
-              </div> */}
-              {/* <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Project Id:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="projectId"
-                  name="projectId"
-                />
-              </div> */}
-              {/* <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Employees:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="employees"
-                  name="employees"
-                />
-              </div> */}
 
-              <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Item Name:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="itemName"
-                  name="itemName"
-                />
-              </div>
-
-              <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Price:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="price"
-                  name="price"
-                />
-              </div>
-
-              <div className="form-group mt-3">
-                <button className={styles.submitbutton}>
-                {/* <button type="submit" className={styles.submitbutton}> */}
-                  Add Item
-                </button>
-              </div>
+    <form onSubmit={handleSubmit}>
+        <div id="error" hidden></div>
+        <input
+        type="text"
+        id='itemName'
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Add Item"
+        />
+        <input
+        type="text"
+        id='itemPrice'
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        placeholder="Price"
+        />
+        <button type='submit'>Add Item</button>
+    </form>
             </div>
+            <div id="itemTable" hidden>
+              ITEMS
+            <table>
+              <tr>
+                <th>Description</th>
+                <th>Price</th>
+              </tr>
+            {items.map((item) => (
+                <tr>
+                  <td>{SplitName(item.name)}</td>
+                  <td>{item.price}$</td>
+                </tr>
+            ))}
+            </table>
+            </div>
+
+          <form action="/api/quote/newQuote" method="POST">
+            <input name="userID" value="24" hidden/>
+            <input name="projectID" value="24" hidden/>
+            <input name="items" value={JSON.stringify(pairs)} hidden/>
+            <button type="submit">Submit Invoice</button>
+          </form>
           </div>
         </div>
       </main>
-
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
 
       <style jsx>{`
         header {

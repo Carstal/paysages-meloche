@@ -1,4 +1,4 @@
-import TestPage from "../../components/TestPage";
+import TestPage from "../../components/quoteTest/TestPage";
 
 export default function Home(){
     return <TestPage/>;
