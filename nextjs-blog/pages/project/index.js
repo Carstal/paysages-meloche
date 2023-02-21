@@ -266,7 +266,7 @@ export const getServerSideProps = withPageAuthRequired({
 
     const data = JSON.parse(JSON.stringify(post));
 
-    console.log(data);
+    // console.log(data);
 
     return { props: { data } };
   },

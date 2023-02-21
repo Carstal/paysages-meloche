@@ -68,26 +68,26 @@ export async function getProjectByProjectId(id) {
   }
 }
 
-export async function updateProjectByProjectId(id) {
+export async function updateProjectQuoteByProjectId(quote_update) {
   const client = await clientPromise;
 
-  const intId = parseInt(vis.visit_id);
+  const intId = parseInt(quote_update.project_id);
   const result = await client
-    .db("ECPVisitDummy")
-    .collection("DummyVisits")
-    .findOne({ visit_id: intId });
+    .db("FinalProject")
+    .collection("Project")
+    .findOne({ project_id: intId });
 
   if (result) {
     const update = await client
-      .db("ECPVisitDummy")
-      .collection("DummyVisits")
-      .updateOne({ visit_id: intId },
-        { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
+      .db("FinalProject")
+      .collection("Project")
+      .updateOne({ project_id: intId },
+        { $set:{quote_id: quote_update.quote_id}});
 
     const newResult = await client
-      .db("ECPVisitDummy")
-      .collection("DummyVisits")
-      .findOne({ visit_id: intId });
+      .db("FinalProject")
+      .collection("Project")
+      .findOne({ project_id: intId });
 
     return newResult;
   } else {

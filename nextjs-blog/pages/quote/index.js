@@ -1,50 +1,25 @@
 import styles from "../../styles/Home.module.css";
+import Head from "next/head";
 import React, { useState } from 'react';
 import { parseBody } from "next/dist/server/api-utils/node";
 
 import NavDynamic from "../../components/website/NavDynamic";
 import Footer from '../../components/website/Footer';
 
-export const getServerSideProps = withPageAuthRequired({
-  returnTo: "/index",
-  async getServerSideProps(ctx) {
-    const session = await getSession(ctx.req, ctx.res);
-    let data = null;
-    let project_id = null
-    let user_id = null
+export async function getServerSideProps(context) {
+  let data = null;
+  // let project_id = null
+  // let user_id = null
 
-    if (context.req.method === "POST") {
-    const body = await parseBody(ctx.req, '1mb');
-    // console.log(body);
+  if (context.req.method === "POST") {
+    const body = await parseBody(context.req, '1mb');
+    console.log(body);
 
     data = body;
-    }
-    // const projectId = ctx.params.id;
-    // const api = 'http://localhost:3000/api/project/';
-    // const url = api + projectId;
-    // console.log(url);
-    // const res = await fetch(url);
+  }
 
-    // const data = await res.json();
-
-    // console.log(data)
-    return { props: {data} };
-  },
-});
-// export async function getServerSideProps(context) {
-//   let data = null;
-//   let project_id = null
-//   let user_id = null
-
-//   if (context.req.method === "POST") {
-//     const body = await parseBody(context.req, '1mb');
-//     console.log(body);
-
-//     data = body;
-//   }
-
-//   return { props: { data }};
-// }
+  return { props: { data }};
+}
 
 export default function Home({ data }) {
   const [name, setName] = useState('');
@@ -59,9 +34,9 @@ export default function Home({ data }) {
   setItems([...items, { name, price }]);
   };
 
-  const deleteItem = (id) => {
-  setItems(items.filter((item) => item.id !== id));
-  };
+  // const deleteItem = (id) => {
+  // setItems(items.filter((item) => item.id !== id));
+  // };
 
   const pairs = {}
   items.forEach((item)=>(
@@ -100,24 +75,28 @@ export default function Home({ data }) {
       document.getElementById("error").style.display = "block";
   }
   };
-  function SplitName(text){
-    const splitArr = text.split("-");
-    var exportHTML = "<div>";
-    for(let i = 0; i < splitArr.length; i++){
-      if(i > 0){
-        exportHTML += "<li>"+splitArr[i]+"</li>";
-      }
-      else{
-        exportHTML += "<strong>"+splitArr[i]+"</strong><ul>";
-      }
-    }
-    exportHTML += "</ul></div>";
-    return exportHTML;
-  }
+  // function SplitName(text){
+  //   const splitArr = text.split("-");
+  //   var exportHTML = "<div>";
+  //   for(let i = 0; i < splitArr.length; i++){
+  //     if(i > 0){
+  //       exportHTML += "<li>"+splitArr[i]+"</li>";
+  //     }
+  //     else{
+  //       exportHTML += "<strong>"+splitArr[i]+"</strong><ul>";
+  //     }
+  //   }
+  //   exportHTML += "</ul></div>";
+  //   return exportHTML;
+  // }
 
   return (
     <div className={styles.container}>
-      <NavDynamic/>
+      <Head>
+        <title>Paysages Meloche</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <NavDynamic />
       <main>
         <h2 className={styles.title}>New Quote</h2>
         <div className="container">
@@ -153,7 +132,7 @@ export default function Home({ data }) {
               </tr>
             {items.map((item) => (
                 <tr>
-                  <td>{SplitName(item.name)}</td>
+                  <td>{item.name}</td>
                   <td>{item.price}$</td>
                 </tr>
             ))}
@@ -169,7 +148,8 @@ export default function Home({ data }) {
           </div>
         </div>
       </main>
-      <Footer/>
+
+      <Footer />
 
       <style jsx>{`
         header {

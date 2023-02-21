@@ -1,9 +1,9 @@
 //Quote Service
 //Implements all CRUD Operations relating to quotes to mongoDB
 import clientPromise from "../../../lib/mongodb";
-import { updateProjectByProjectId } from "../project/project_service";
+import { updateProjectQuoteByProjectId } from "../project/project_service";
 
-//Add Visit
+//Add Quote
 export async function createQuote(quote) {
     const client = await clientPromise;
     const project_id = quote.project_id;
@@ -14,6 +14,8 @@ export async function createQuote(quote) {
     .db("FinalProject")
     .collection("Quote")
     .insertOne(quote);
+
+    const updateProject = await updateProjectQuoteByProjectId(project_update);
 
     return result;
 }
