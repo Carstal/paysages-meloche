@@ -46,4 +46,5 @@ export const TRANSLATIONS_EN = {
   footer2: "Champlain College ECP Final Project 2022-2023",
   export: "Export Calendar",
   contact: "Contact Us",
+  visits: "All Visits",
 };
