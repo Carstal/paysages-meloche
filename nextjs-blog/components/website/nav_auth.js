@@ -49,6 +49,8 @@ const nav_auth = (user) => {
     );
   }
 
+  const [showDropdown, setShowDropdown] = useState(false);
+
   //if authorized but not admin
   var components = (
     <div>
@@ -171,7 +173,11 @@ const nav_auth = (user) => {
             </a>
           </div>
           <div className="services">
-            <div id="projects">
+            <div
+              id="projects"
+              onMouseEnter={() => setShowDropdown(true)}
+              onMouseLeave={() => setShowDropdown(false)}
+            >
               <a
                 href="/project"
                 style={{
@@ -181,6 +187,37 @@ const nav_auth = (user) => {
               >
                 <h3>{t("navProject")}</h3>
               </a>
+              {showDropdown && (
+                <div className="dropdown">
+                  <a
+                    href="/project"
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
+                    <p className="link">{t("navProject")}</p>
+                  </a>
+                  <a
+                    href="/project/submission"
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
+                    <p className="link">{t("ProjectSubmissionTitle")}</p>
+                  </a>
+                  <a
+                    href="/visit"
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
+                    <p className="link">{t("visits")}</p>
+                  </a>
+                </div>
+              )}
             </div>
             <div id="calendar">
               <a
@@ -247,6 +284,33 @@ const nav_auth = (user) => {
             display: flex;
             justify-content: center;
             width: 60vw;
+          }
+          #projects {
+            position: relative;
+          }
+
+          .link {
+            color: white;
+            text-decoration: none !important;
+          }
+
+          .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 5vw;
+            display: flex;
+            flex-direction: column;
+            background-color: #222222;
+            z-index: 1;
+          }
+
+          .dropdown .link {
+            padding: 8px 16px;
+            margin: 0px;
+          }
+
+          .dropdown .link:hover {
+            background-color: #00b45d;
           }
         `}</style>
       </div>

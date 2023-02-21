@@ -46,4 +46,5 @@ export const TRANSLATIONS_FR = {
   footer2: "Cégep Champlain St-Lambert ECP Projet Final 2022-2023",
   export: "Exporter",
   contact: "Contactez-Nous",
+  visits: "Rendez-Vous",
 };
