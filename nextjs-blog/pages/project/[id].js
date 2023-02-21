@@ -6,25 +6,25 @@ import styles from "../../styles/Home.module.css";
 import Profile from "../profile/index";
 import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
-import VisitCardView from '../../components/visit/VisitCardView';
+import VisitCardView from "../../components/visit/VisitCardView";
 
 import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
+import Footer from "../../components/website/Footer";
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/index",
   async getServerSideProps(ctx) {
     const session = await getSession(ctx.req, ctx.res);
     const projectId = ctx.params.id;
-    const api = 'http://localhost:3000/api/project/';
+    const api = "https://paysages-meloche.vercel.app/api/project/";
     const url = api + projectId;
     // console.log(url);
     const res = await fetch(url);
 
     const data = await res.json();
 
-    console.log(data)
-    return { props: {data} };
+    console.log(data);
+    return { props: { data } };
   },
 });
 
@@ -44,55 +44,64 @@ export default function DisplayProject({ data }) {
         <h1 className={styles.title}>Project Details</h1>
         <div className="container">
           <div className="card mt-5">
-                <div>
-                  <div>Project</div>
-                  <div>{project.project_id}</div>
-                </div>
-                <div>
-                  <div>User</div>
-                  <div>{project.user_id}</div>
-                </div>
-                <div>
-                  <div>Address</div>
-                  <div>{project.address}</div>
-                </div>
-                <div>
-                  <div>Length</div>
-                  <div>{dimensions[0]}</div>
-                </div>
-                <div>
-                  <div>Width</div>
-                  <div>{dimensions[0]}</div>
-                </div>
-                <div>
-                  <div>Description</div>
-                  <div>{project.description}</div>
-                </div>
+            <div>
+              <div>Project</div>
+              <div>{project.project_id}</div>
+            </div>
+            <div>
+              <div>User</div>
+              <div>{project.user_id}</div>
+            </div>
+            <div>
+              <div>Address</div>
+              <div>{project.address}</div>
+            </div>
+            <div>
+              <div>Length</div>
+              <div>{dimensions[0]}</div>
+            </div>
+            <div>
+              <div>Width</div>
+              <div>{dimensions[0]}</div>
+            </div>
+            <div>
+              <div>Description</div>
+              <div>{project.description}</div>
+            </div>
           </div>
 
-        <h3 className={styles.title}>Visits</h3>
-        {/* <VisitCardView visits={visits}/> */}
-        <div className="addBtnDiv">
-          <form action="/visit/add" method="POST">
-          <input type="hidden" className="form-control" defaultValue={project.project_id} id="projectId" name="projectId" />
-          <input type="hidden" className="form-control" defaultValue={project.user_id} id="userId" name="userId" />
-          <button
-            className="addBtn"
-            type="submit"
-          >
-            Add Visit
-          </button>
-          </form>
-        </div>
-        <h3 className={styles.title}>Quote</h3>
+          <h3 className={styles.title}>Visits</h3>
+          {/* <VisitCardView visits={visits}/> */}
+          <div className="addBtnDiv">
+            <form action="/visit/add" method="POST">
+              <input
+                type="hidden"
+                className="form-control"
+                defaultValue={project.project_id}
+                id="projectId"
+                name="projectId"
+              />
+              <input
+                type="hidden"
+                className="form-control"
+                defaultValue={project.user_id}
+                id="userId"
+                name="userId"
+              />
+              <button className="addBtn" type="submit">
+                Add Visit
+              </button>
+            </form>
+          </div>
+          <h3 className={styles.title}>Quote</h3>
 
-        <h3 className={styles.title}>Invoice</h3>
-        {/* <VisitCardView visits={visits}/> */}
+          <h3 className={styles.title}>Invoice</h3>
+          {/* <VisitCardView visits={visits}/> */}
           {/* <p className={styles.description}>Currently Under Maintenance</p> */}
         </div>
       </main>
 
-      <Footer/>
+      <Footer />
 
       <style jsx>{`
         header {

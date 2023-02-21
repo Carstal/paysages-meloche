@@ -54,7 +54,7 @@ const nav_auth = (user) => {
     <div>
       <header>
         <div className="logo">
-          <Link
+          <a
             href="/"
             style={{
               textDecoration: "none",
@@ -63,11 +63,11 @@ const nav_auth = (user) => {
           >
             {/* <Image src={meloche} alt="/" /> */}
             <h3>Paysages Meloche</h3>
-          </Link>
+          </a>
         </div>
         <div className="services">
           <div id="service">
-            <Link
+            <a
               href="/services"
               style={{
                 textDecoration: "none",
@@ -75,10 +75,10 @@ const nav_auth = (user) => {
               }}
             >
               <h3>Services</h3>
-            </Link>
+            </a>
           </div>
           <div id="contact">
-            <Link
+            <a
               href="/"
               style={{
                 textDecoration: "none",
@@ -86,10 +86,10 @@ const nav_auth = (user) => {
               }}
             >
               <h3>Contact</h3>
-            </Link>
+            </a>
           </div>
           <div id="projects">
-            <Link
+            <a
               href="/project"
               style={{
                 textDecoration: "none",
@@ -97,10 +97,10 @@ const nav_auth = (user) => {
               }}
             >
               <h3>{t("navProject")}</h3>
-            </Link>
+            </a>
           </div>
           <div id="calendar">
-            <Link
+            <a
               href="/calendar"
               style={{
                 textDecoration: "none",
@@ -108,12 +108,12 @@ const nav_auth = (user) => {
               }}
             >
               <h3>{t("calendar")}</h3>
-            </Link>
+            </a>
           </div>
         </div>
-        <Link href="/profile/info">
+        <a href="/profile/info">
           <img className={styles.profile} src={user.picture} alt={user.name} />
-        </Link>
+        </a>
         {Profile()}
         {lang}
       </header>
@@ -159,7 +159,7 @@ const nav_auth = (user) => {
       <div>
         <header>
           <div className="logo">
-            <Link
+            <a
               href="/"
               style={{
                 textDecoration: "none",
@@ -168,11 +168,11 @@ const nav_auth = (user) => {
             >
               {/* <Image src={meloche} alt="/"/> */}
               <h3>Paysages Meloche</h3>
-            </Link>
+            </a>
           </div>
           <div className="services">
             <div id="projects">
-              <Link
+              <a
                 href="/project"
                 style={{
                   textDecoration: "none",
@@ -180,10 +180,10 @@ const nav_auth = (user) => {
                 }}
               >
                 <h3>{t("navProject")}</h3>
-              </Link>
+              </a>
             </div>
             <div id="calendar">
-              <Link
+              <a
                 href="/calendar"
                 style={{
                   textDecoration: "none",
@@ -191,10 +191,10 @@ const nav_auth = (user) => {
                 }}
               >
                 <h3>{t("calendar")}</h3>
-              </Link>
+              </a>
             </div>
             <div id="users">
-              <Link
+              <a
                 href="/admin"
                 style={{
                   textDecoration: "none",
@@ -202,16 +202,16 @@ const nav_auth = (user) => {
                 }}
               >
                 <h3>{t("AllUsers")}</h3>
-              </Link>
+              </a>
             </div>
           </div>
-          <Link href="/profile/info">
+          <a href="/profile/info">
             <img
               className={styles.profile}
               src={user.picture}
               alt={user.name}
             />
-          </Link>
+          </a>
           {Profile()}
           {lang}
         </header>
