@@ -23,7 +23,7 @@ export const getServerSideProps = withPageAuthRequired({
     const userId = ctx.params.id;
     var visits = null;
     try {
-      const api = "http://localhost:3000/api/visit/user/";
+      const api = "https://paysages-meloche.vercel.app/api/visit/user/";
       const url = api + userId;
       const res = await fetch(url);
       const visits = await res.json();
