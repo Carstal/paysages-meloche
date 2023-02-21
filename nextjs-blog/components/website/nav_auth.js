@@ -297,7 +297,7 @@ const nav_auth = (user) => {
           .dropdown {
             position: absolute;
             top: 100%;
-            left: 30%;
+            left: 5vw;
             display: flex;
             flex-direction: column;
             background-color: #222222;
