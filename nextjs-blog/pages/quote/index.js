@@ -27,8 +27,8 @@ export default function Home({ data }) {
 
   const [items, setItems] = useState([]);
 
-  const user_id = data.userId
-  const project_id = data.projectId
+  const user_id = data.userId;
+  const project_id = data.projectId;
 
   const addItem = (name, price) => {
   setItems([...items, { name, price }]);
@@ -54,7 +54,7 @@ export default function Home({ data }) {
       addItem(name,parsedPrice);
       setName('');
       setPrice('');
-      document.getElementById("itemTable").style.display = "block";
+      // document.getElementById("itemTable").style.display = "block";
   }
   else{
       var errMsg = "Invalid entry: <ul>";
@@ -92,11 +92,11 @@ export default function Home({ data }) {
 
   return (
     <div className={styles.container}>
-      <Head>
+      {/* <Head>
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavDynamic />
+      <NavDynamic /> */}
       <main>
         <h2 className={styles.title}>New Quote</h2>
         <div className="container">
@@ -123,7 +123,7 @@ export default function Home({ data }) {
         <button type='submit'>Add Item</button>
     </form>
             </div>
-            <div id="itemTable" hidden>
+            <div id="itemTable">
               ITEMS
             <table>
               <tr>
@@ -149,7 +149,7 @@ export default function Home({ data }) {
         </div>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
 
       <style jsx>{`
         header {
