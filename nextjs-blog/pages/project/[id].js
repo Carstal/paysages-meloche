@@ -19,20 +19,19 @@ export const getServerSideProps = withPageAuthRequired({
     const api = 'http://localhost:3000/api/project/';
     const url = api + projectId;
     // console.log(url);
-    const res = await fetch(url);
+    const projectRes = await fetch(url);
+    const project = await projectRes.json();
 
-    const data = await res.json();
-
-    console.log(data)
-    return { props: {data} };
+    // console.log(data)
+    return { props: {project} };
   },
 });
 
-export default function DisplayProject({ data }) {
+export default function DisplayProject({ project }) {
   const router = useRouter();
-  const project = data.project;
-  const dimensions = project.dimensions;
-  const visits = project.visits;
+  const currentProject = project.project;
+  const dimensions = currentProject.dimensions;
+  const visits = currentProject.visits;
   return (
     <div className={styles.container}>
       <Head>
@@ -46,15 +45,15 @@ export default function DisplayProject({ data }) {
           <div className="card mt-5">
                 <div>
                   <div>Project</div>
-                  <div>{project.project_id}</div>
+                  <div>{currentProject.project_id}</div>
                 </div>
                 <div>
                   <div>User</div>
-                  <div>{project.user_id}</div>
+                  <div>{currentProject.user_id}</div>
                 </div>
                 <div>
                   <div>Address</div>
-                  <div>{project.address}</div>
+                  <div>{currentProject.address}</div>
                 </div>
                 <div>
                   <div>Length</div>
@@ -66,7 +65,7 @@ export default function DisplayProject({ data }) {
                 </div>
                 <div>
                   <div>Description</div>
-                  <div>{project.description}</div>
+                  <div>{currentProject.description}</div>
                 </div>
           </div>
 
@@ -85,6 +84,18 @@ export default function DisplayProject({ data }) {
           </form>
         </div>
         <h3 className={styles.title}>Quote</h3>
+        <div className="addBtnDiv">
+          <form action="/quote" method="POST">
+          <input type="hidden" className="form-control" defaultValue={project.project_id} id="projectId" name="projectId" />
+          <input type="hidden" className="form-control" defaultValue={project.user_id} id="userId" name="userId" />
+          <button
+            className="addBtn"
+            type="submit"
+          >
+            Create Quote
+          </button>
+          </form>
+        </div>
 
         <h3 className={styles.title}>Invoice</h3>
         {/* <VisitCardView visits={visits}/> */}

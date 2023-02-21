@@ -48,7 +48,7 @@ export async function deleteVisitById(id) {
 //Update Visit
 export async function updateVisitInfo(vis) {
   const client = await clientPromise;
-  // console.log("----SERVICE UpdateVisit STARTED-----");
+
   const intId = parseInt(vis.visit_id);
   const result = await client
     .db("ECPVisitDummy")
@@ -56,27 +56,19 @@ export async function updateVisitInfo(vis) {
     .findOne({ visit_id: intId });
 
   if (result) {
-    // console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
-    // console.log(result);
     const update = await client
       .db("ECPVisitDummy")
       .collection("DummyVisits")
       .updateOne({ visit_id: intId },
         { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
-        // { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
-    // console.log(`Listing updated`);
-    // console.log(update);
-    // console.log("find by id");
+
     const newResult = await client
       .db("ECPVisitDummy")
       .collection("DummyVisits")
       .findOne({ visit_id: intId });
-    // console.log(newResult);
 
     return newResult;
   } else {
-    // console.log("No listing with matching id");
-
     return null;
   }
 }

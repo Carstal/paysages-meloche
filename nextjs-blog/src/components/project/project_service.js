@@ -62,15 +62,50 @@ export async function getProjectByProjectId(id) {
     .findOne({ project_id: intId });
 
   if (result) {
-    // console.log(`Found a listing in connection with visit id: '${id}'`);
-    // console.log(result);
-
     return result;
   } else {
-    // console.log("none");
-
     return null;
   }
+}
+
+export async function updateProjectByProjectId(id) {
+  const client = await clientPromise;
+
+  const intId = parseInt(vis.visit_id);
+  const result = await client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .findOne({ visit_id: intId });
+
+  if (result) {
+    const update = await client
+      .db("ECPVisitDummy")
+      .collection("DummyVisits")
+      .updateOne({ visit_id: intId },
+        { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
+
+    const newResult = await client
+      .db("ECPVisitDummy")
+      .collection("DummyVisits")
+      .findOne({ visit_id: intId });
+
+    return newResult;
+  } else {
+    return null;
+  }
+  // const client = await clientPromise;
+
+  // const intId = parseInt(id);
+  // const result = await client
+  //   .db("FinalProject")
+  //   .collection("Project")
+  //   .findOne({ project_id: intId });
+
+  // if (result) {
+  //   return result;
+  // } else {
+  //   return null;
+  // }
 }
 
 export async function getNewProjectId(){

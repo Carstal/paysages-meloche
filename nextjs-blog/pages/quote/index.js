@@ -1,11 +1,59 @@
 import styles from "../../styles/Home.module.css";
 import React, { useState } from 'react';
+import { parseBody } from "next/dist/server/api-utils/node";
 
-export default function Home() {
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
+
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: "/index",
+  async getServerSideProps(ctx) {
+    const session = await getSession(ctx.req, ctx.res);
+    let data = null;
+    let project_id = null
+    let user_id = null
+
+    if (context.req.method === "POST") {
+    const body = await parseBody(ctx.req, '1mb');
+    // console.log(body);
+
+    data = body;
+    }
+    // const projectId = ctx.params.id;
+    // const api = 'http://localhost:3000/api/project/';
+    // const url = api + projectId;
+    // console.log(url);
+    // const res = await fetch(url);
+
+    // const data = await res.json();
+
+    // console.log(data)
+    return { props: {data} };
+  },
+});
+// export async function getServerSideProps(context) {
+//   let data = null;
+//   let project_id = null
+//   let user_id = null
+
+//   if (context.req.method === "POST") {
+//     const body = await parseBody(context.req, '1mb');
+//     console.log(body);
+
+//     data = body;
+//   }
+
+//   return { props: { data }};
+// }
+
+export default function Home({ data }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
 
   const [items, setItems] = useState([]);
+
+  const user_id = data.userId
+  const project_id = data.projectId
 
   const addItem = (name, price) => {
   setItems([...items, { name, price }]);
@@ -69,6 +117,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <NavDynamic/>
       <main>
         <h2 className={styles.title}>New Quote</h2>
         <div className="container">
@@ -112,14 +161,15 @@ export default function Home() {
             </div>
 
           <form action="/api/quote/newQuote" method="POST">
-            <input name="userID" value="24" hidden/>
-            <input name="projectID" value="24" hidden/>
+            <input name="userID" value={user_id} hidden/>
+            <input name="projectID" value={project_id} hidden/>
             <input name="items" value={JSON.stringify(pairs)} hidden/>
             <button type="submit">Submit Invoice</button>
           </form>
           </div>
         </div>
       </main>
+      <Footer/>
 
       <style jsx>{`
         header {
