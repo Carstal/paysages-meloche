@@ -161,6 +161,21 @@ export default function Home({ visits }) {
           align-items: center;
           justify-content: center;
         }
+        .filter-container {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 20px;
+        }
+
+        .filter-item {
+          display: flex;
+          align-items: center;
+          margin: 20px;
+        }
+
+        .filter-item label {
+          margin-right: 10px;
+        }
         .editBtn {
           height: 50%;
           width: 60%;
