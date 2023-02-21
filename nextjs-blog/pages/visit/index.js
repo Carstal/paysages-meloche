@@ -4,20 +4,37 @@ import { useRouter } from "next/router";
 import moment from "moment";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
 import VisitTable from "../../components/visit/VisitTable";
 import VisitCardView from "../../components/visit/VisitCardView";
 import NavDynamic from "../../components/website/NavDynamic";
 import Footer from "../../components/website/Footer";
+import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
+import clientPromise from "../../lib/mongodb";
 
-export async function getServerSideProps() {
-  const res = await fetch("https://paysages-meloche.vercel.app/api/visit");
-  const visits = await res.json();
-  // console.log("--------VISITS----------");
-  // console.log(visits[data]);
+export const getServerSideProps = withPageAuthRequired({
+  returnTo: "/",
+  async getServerSideProps(ctx) {
+    const client = await clientPromise;
+    const db = client.db("FinalProject");
+    const session = await getSession(ctx.req, ctx.res);
 
-  return { props: { visits } };
-}
+    const roles = session.user.userRoles;
+
+    if (roles == "Admin") {
+      const res = await fetch("https://paysages-meloche.vercel.app/api/visit");
+      const visits = await res.json();
+      return { props: { visits } };
+    } else {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/access_denied",
+        },
+        props: {},
+      };
+    }
+  },
+});
 
 export default function Home({ visits }) {
   const { t } = useTranslation();
@@ -79,7 +96,10 @@ export default function Home({ visits }) {
             />
           </div>
         </div>
-        <VisitCardView visits={filteredEvents} />
+        <div style={{ height: "350px", overflowY: "auto" }}>
+          <VisitCardView visits={filteredEvents} />
+        </div>
+
         {/* <VisitTable visits={visits}/> */}
 
         {/* <div id="root"></div>
