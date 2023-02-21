@@ -24,7 +24,7 @@ export const getServerSideProps = withPageAuthRequired({
     const roles = session.user.userRoles;
 
     if (roles == "Admin") {
-      const res = await fetch("/api/visit");
+      const res = await fetch("https://paysages-meloche.vercel.app/api/visit");
       const visits = await res.json();
       return { props: { visits } };
     } else {
