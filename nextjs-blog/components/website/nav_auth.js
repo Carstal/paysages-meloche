@@ -85,12 +85,12 @@ const nav_auth = (user) => {
                 color: "white",
               }}
             >
-              <h3>Contact</h3>
+              <h3>{t("contact")}</h3>
             </a>
           </div>
           <div id="projects">
             <a
-              href="/project"
+              href="/project/submission"
               style={{
                 textDecoration: "none",
                 color: "white",

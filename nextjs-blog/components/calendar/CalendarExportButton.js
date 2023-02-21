@@ -2,8 +2,11 @@ import React from "react";
 import { CSVLink } from "react-csv";
 import styles from "../../styles/Home.module.css";
 import { DateTime } from "luxon";
+import { useTranslation } from "react-i18next";
+import "../../src/Translation/i18n";
 
 const CalendarExportButton = ({ events }) => {
+  const { t } = useTranslation();
   const headers = [
     { label: "Subject", key: "title" },
     { label: "Start Date", key: "start_date" },
@@ -37,7 +40,7 @@ const CalendarExportButton = ({ events }) => {
         textDecoration: "none",
       }}
     >
-      <p>Export Calendar</p>
+      <p>{t("export")}</p>
     </CSVLink>
   );
 };

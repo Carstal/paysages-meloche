@@ -42,4 +42,8 @@ export const TRANSLATIONS_EN = {
   endD: "End Date",
   login: "Log in",
   logout: "Log out",
+  footer1: "Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton",
+  footer2: "Champlain College ECP Final Project 2022-2023",
+  export: "Export Calendar",
+  contact: "Contact Us",
 };

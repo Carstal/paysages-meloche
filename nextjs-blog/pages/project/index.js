@@ -257,17 +257,21 @@ export const getServerSideProps = withPageAuthRequired({
     const db = client.db("FinalProject");
     const session = await getSession(ctx.req, ctx.res);
 
-    //Works with findOne
+    const roles = session.user.userRoles;
 
-    const post = await db.collection("Project").find({}).toArray();
-    // access the user session
-
-    //console.log(post)
-
-    const data = JSON.parse(JSON.stringify(post));
-
-    console.log(data);
-
-    return { props: { data } };
+    if (roles == "Admin") {
+      const post = await db.collection("Project").find({}).toArray();
+      const data = JSON.parse(JSON.stringify(post));
+      console.log(data);
+      return { props: { data } };
+    } else {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/access_denied",
+        },
+        props: {},
+      };
+    }
   },
 });

@@ -74,7 +74,7 @@ const nav_no_auth = () => {
                 color: "white",
               }}
             >
-              <h3>Contact</h3>
+              <h3>{t("contact")}</h3>
             </a>
           </div>
         </div>

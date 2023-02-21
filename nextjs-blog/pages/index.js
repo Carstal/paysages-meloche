@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import NavDynamic from "../components/website/NavDynamic";
 import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
+import Footer from "../components/website/Footer";
 
 export default function Home({}) {
   const router = useRouter();
@@ -22,13 +23,7 @@ export default function Home({}) {
         <p className={styles.description}>Currently Under Maintenance</p>
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         header {
