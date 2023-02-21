@@ -2,25 +2,24 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 import moment from "moment";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import VisitTable from "../../components/visit/VisitTable";
 import VisitCardView from "../../components/visit/VisitCardView";
 import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
-
+import Footer from "../../components/website/Footer";
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/visit");
+  const res = await fetch("https://paysages-meloche.vercel.app/api/visit");
   const visits = await res.json();
   // console.log("--------VISITS----------");
   // console.log(visits[data]);
 
-  return { props: { visits }};
+  return { props: { visits } };
 }
 
-export default function Home({visits}) {
+export default function Home({ visits }) {
   const { t } = useTranslation();
   var [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
@@ -43,7 +42,9 @@ export default function Home({visits}) {
             (startDate
               ? moment(event.start_date).isSameOrAfter(moment(startDate))
               : true) &&
-            (endDate ? moment(event.end_date).isSameOrBefore(moment(endDate)) : true)
+            (endDate
+              ? moment(event.end_date).isSameOrBefore(moment(endDate))
+              : true)
           );
         })
       );
@@ -78,7 +79,7 @@ export default function Home({visits}) {
             />
           </div>
         </div>
-        <VisitCardView visits={filteredEvents}/>
+        <VisitCardView visits={filteredEvents} />
         {/* <VisitTable visits={visits}/> */}
 
         {/* <div id="root"></div>
@@ -313,7 +314,7 @@ export default function Home({visits}) {
 }
 
 // function editVisit(){
-  // const id = visit.visit_id;
+// const id = visit.visit_id;
 //   const id = 1;
 //   const url = "http://localhost:3000/visit/"+id;
 
