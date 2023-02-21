@@ -3,24 +3,24 @@
 
 import clientPromise from "../../../lib/mongodb";
 
-const Visit = require("./Visit");
+const Visit = require("./visit");
 
 //Add Visit
 export async function addVisit(vis) {
-//   const data = {
-//     // visit_id: getNewVisitID(client),
-//     visit_id: vis.visit_id,
-//     project_id: vis.project_id,
-//     employee_ids: vis.employee_ids,
-//     start_date: vis.start_date,
-//     end_date: vis.end_date
-//   };
-const client = await clientPromise;
+  //   const data = {
+  //     // visit_id: getNewVisitID(client),
+  //     visit_id: vis.visit_id,
+  //     project_id: vis.project_id,
+  //     employee_ids: vis.employee_ids,
+  //     start_date: vis.start_date,
+  //     end_date: vis.end_date
+  //   };
+  const client = await clientPromise;
 
   const result = await client
-  .db("ECPVisitDummy")
-  .collection("DummyVisits")
-  .insertOne(vis);
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .insertOne(vis);
 
   // console.log(
   //   `New listing created with the following id: ${result.insertedId}`
@@ -61,9 +61,17 @@ export async function updateVisitInfo(vis) {
     const update = await client
       .db("ECPVisitDummy")
       .collection("DummyVisits")
-      .updateOne({ visit_id: intId },
-        { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
-        // { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
+      .updateOne(
+        { visit_id: intId },
+        {
+          $set: {
+            employee_ids: vis.employee_ids,
+            start_date: vis.start_date,
+            end_date: vis.end_date,
+          },
+        }
+      );
+    // { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
     // console.log(`Listing updated`);
     // console.log(update);
     // console.log("find by id");
@@ -116,10 +124,8 @@ export async function getVisitsByUserId(id) {
   const results = cursor.toArray();
 
   if (results) {
-
     return results;
   } else {
-
     return null;
   }
 }
@@ -136,10 +142,8 @@ export async function getVisitsByEmpId(id) {
   const results = cursor.toArray();
 
   if (results) {
-
     return results;
   } else {
-
     return null;
   }
 }
@@ -210,13 +214,17 @@ export async function getAllVisits() {
 //   }
 // }
 
-export async function getNewVisitId(){
+export async function getNewVisitId() {
   var newId = 0;
   try {
     const client = await clientPromise;
     const db = client.db("ECPVisitDummy");
 
-    const greatestVisits = await db.collection("DummyVisits").find().sort({"visit_id":-1}).toArray();
+    const greatestVisits = await db
+      .collection("DummyVisits")
+      .find()
+      .sort({ visit_id: -1 })
+      .toArray();
     const greatestId = greatestVisits[0].visit_id;
 
     // console.log('-----GreatestID-----');
@@ -240,5 +248,5 @@ module.exports = {
   getVisitsByUserId,
   updateVisitInfo,
   deleteVisitById,
-  getNewVisitId
-}
+  getNewVisitId,
+};
