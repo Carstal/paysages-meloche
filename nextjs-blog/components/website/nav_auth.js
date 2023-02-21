@@ -189,13 +189,31 @@ const nav_auth = (user) => {
               </a>
               {showDropdown && (
                 <div className="dropdown">
-                  <a href="/project">
+                  <a
+                    href="/project"
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
                     <p className="link">{t("navProject")}</p>
                   </a>
-                  <a href="/project/submission">
+                  <a
+                    href="/project/submission"
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
                     <p className="link">{t("ProjectSubmissionTitle")}</p>
                   </a>
-                  <a href="/visit">
+                  <a
+                    href="/visit"
+                    style={{
+                      textDecoration: "none",
+                      color: "white",
+                    }}
+                  >
                     <p className="link">{t("visits")}</p>
                   </a>
                 </div>
