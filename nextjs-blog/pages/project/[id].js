@@ -7,7 +7,7 @@ import Profile from "../profile/index";
 import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import MiniVisitCardView from '../../components/visit/MiniVisitCardView';
-// import { MiniVisitCard } from '../../components/visit/MiniVisitCard';
+import QuoteDisplay from "../../components/quote/QuoteDisplay";
 
 import NavDynamic from "../../components/website/NavDynamic";
 import Footer from '../../components/website/Footer';
@@ -107,8 +107,9 @@ export default function DisplayProject({ project }) {
           </form>
         </div>
         <h3 className={styles.title}>Quote</h3>
-        <div id="quoteCard">
-          Quote Id:{projectQuote.quote_id}
+        <QuoteDisplay quote={projectQuote} project={currentProject}/>
+        {/* <div id="quoteCard"> */}
+          {/* Quote Id:{projectQuote.quote_id}
         </div>
         <div id="quoteForm">
           <form action="/quote" method="POST">
@@ -127,11 +128,11 @@ export default function DisplayProject({ project }) {
             Create Quote
           </button>
           </form>
-        </div>
+        </div> */}
 
         <h3 className={styles.title}>Invoice</h3>
         {/* TODO: Invoice LMAO */}
-        <div id="invoiceCard">
+        {/* <div id="invoiceCard">
           Invoice Id:{projectQuote.invoice_id}
         </div>
         <div id="invoiceForm">
@@ -155,7 +156,7 @@ export default function DisplayProject({ project }) {
             Create Invoice
           </button>
           </form>
-        </div>
+        </div> */}
         </div>
       </main>
 
