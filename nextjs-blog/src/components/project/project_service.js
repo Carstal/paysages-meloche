@@ -4,11 +4,11 @@ import clientPromise from "../../../lib/mongodb";
 import { getVisitsByProjectId } from "../visit/visit_service";
 // import Project from "./project";
 
-const Project = require("./Project");
+const Project = require("./project");
 
-export async function createProject (project_data) {
+export async function createProject(project_data) {
   try {
-    const project_id  = await getNewProjectId();
+    const project_id = await getNewProjectId();
     // console.log('-----New Project ID-----');
     // console.log(project_id)
 
@@ -24,7 +24,7 @@ export async function createProject (project_data) {
     //   [project_data.length, project_data.width],
     //   project_data.description);
 
-  const newProject = {
+    const newProject = {
       project_id: project_id,
       user_id: project_data.userId,
       address: project_data.address,
@@ -33,22 +33,21 @@ export async function createProject (project_data) {
       status: "Awaiting Approval",
       description: project_data.description,
       quote_id: 0,
-      visits:[],
+      visits: [],
       start_date: new Date(),
       end_date: new Date(),
-      invoice_id: 0
-  };
+      invoice_id: 0,
+    };
 
     const client = await clientPromise;
     const db = client.db("FinalProject");
 
-    const create = await db.collection("Project").insertOne(newProject)
-
+    const create = await db.collection("Project").insertOne(newProject);
   } catch (e) {
     console.error(e);
     throw new Error(e).message;
   }
-  return null
+  return null;
 }
 
 //Get Project by project_Id
@@ -169,13 +168,17 @@ export async function updateProjectVisitsByProjectId(visit_update) {
   }
 }
 
-export async function getNewProjectId(){
+export async function getNewProjectId() {
   var newId = 0;
   try {
     const client = await clientPromise;
     const db = client.db("FinalProject");
 
-    const greatestProjects = await db.collection("Project").find().sort({"project_id":-1}).toArray();
+    const greatestProjects = await db
+      .collection("Project")
+      .find()
+      .sort({ project_id: -1 })
+      .toArray();
     const greatestId = greatestProjects[0].project_id;
 
     // console.log('-----GreatestID-----');

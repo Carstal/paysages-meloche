@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
 import i18n from "i18next";
 import NavDynamic from "../components/website/NavDynamic";
+import Footer from "../components/website/Footer";
+import Link from "next/link";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -21,18 +23,21 @@ export default function Home() {
         <h1 className={styles.title}>{t("EmailV")}</h1>
         <br></br>
         <br></br>
-        <button class={styles.loginbutton}>
-          <a href="/api/auth/login">{t("TryAgain")}</a>
-        </button>
+        <div style={{ textAlign: "center" }}>
+          <Link
+            href="/api/auth/login"
+            style={{
+              textDecoration: "none",
+              padding: "20px 50px",
+            }}
+            class={styles.loginbutton}
+          >
+            {t("TryAgain")}
+          </Link>
+        </div>
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         header {

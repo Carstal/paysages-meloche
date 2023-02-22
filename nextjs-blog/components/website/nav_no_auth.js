@@ -43,7 +43,7 @@ const nav_no_auth = () => {
     <div>
       <header>
         <div className="logo">
-          <Link
+          <a
             href="/"
             style={{
               textDecoration: "none",
@@ -52,11 +52,11 @@ const nav_no_auth = () => {
           >
             {/* <Image src={meloche} alt="/" /> */}
             <h3>Paysages Meloche</h3>
-          </Link>
+          </a>
         </div>
         <div className="services">
           <div id="services">
-            <Link
+            <a
               href="/services"
               style={{
                 textDecoration: "none",
@@ -64,18 +64,18 @@ const nav_no_auth = () => {
               }}
             >
               <h3>Services</h3>
-            </Link>
+            </a>
           </div>
           <div id="contact">
-            <Link
+            <a
               href="/"
               style={{
                 textDecoration: "none",
                 color: "white",
               }}
             >
-              <h3>Contact</h3>
-            </Link>
+              <h3>{t("contact")}</h3>
+            </a>
           </div>
         </div>
         {Profile()}

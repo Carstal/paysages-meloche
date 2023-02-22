@@ -14,14 +14,14 @@ import InvoiceDisplay from "../../components/invoice/InvoiceDisplay";
 import VisitProjectForm from "../../components/visit/VisitProjectForm";
 
 import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
+import Footer from "../../components/website/Footer";
 
 export const getServerSideProps = withPageAuthRequired({
   returnTo: "/index",
   async getServerSideProps(ctx) {
     const session = await getSession(ctx.req, ctx.res);
     const projectId = ctx.params.id;
-    const api = 'http://localhost:3000/api/project/';
+    const api = "https://paysages-meloche.vercel.app/api/project/";
     const url = api + projectId;
     // console.log(url);
     const projectRes = await fetch(url);
@@ -82,6 +82,7 @@ export default function DisplayProject({ project }) {
                 </div>
               </div>
               </div>
+
           </div>
         <div className={styles.projectVisits}>
         <h3 className={styles.title}>{t("visitsTitle")}</h3>
@@ -107,7 +108,7 @@ export default function DisplayProject({ project }) {
         </div>
       </main>
 
-      <Footer/>
+      <Footer />
 
       <style jsx>{`
         .addBtnDiv{

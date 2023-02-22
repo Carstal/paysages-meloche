@@ -10,7 +10,7 @@ import '../../src/Translation/i18n';
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
 import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
+import Footer from "../../components/website/Footer";
 
 export default function DisplayProject({ data }) {
   const router = useRouter();
@@ -272,6 +272,19 @@ export const getServerSideProps = withPageAuthRequired({
 
     // console.log(data);
 
-    return { props: { data } };
+    if (roles == "Admin") {
+      const post = await db.collection("Project").find({}).toArray();
+      const data = JSON.parse(JSON.stringify(post));
+      console.log(data);
+      return { props: { data } };
+    } else {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/access_denied",
+        },
+        props: {},
+      };
+    }
   },
 });

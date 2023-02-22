@@ -6,6 +6,7 @@ import NavDynamic from "../components/website/NavDynamic";
 import Footer from "../components/website/Footer";
 import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
+import Footer from "../components/website/Footer";
 
 export default function Home({}) {
   const router = useRouter();

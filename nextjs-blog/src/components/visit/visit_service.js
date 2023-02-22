@@ -4,7 +4,7 @@
 import clientPromise from "../../../lib/mongodb";
 import { updateProjectVisitsByProjectId } from "../project/project_service";
 
-const Visit = require("./Visit");
+const Visit = require("./visit");
 
 //Add Visit
 export async function addVisit(vis) {
@@ -20,9 +20,9 @@ export async function addVisit(vis) {
   const client = await clientPromise;
 
   const result = await client
-  .db("ECPVisitDummy")
-  .collection("DummyVisits")
-  .insertOne(vis);
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .insertOne(vis);
 
   const updateProject = await updateProjectVisitsByProjectId(project_update);
   // console.log(
@@ -64,6 +64,7 @@ export async function updateVisitInfo(vis) {
       .collection("DummyVisits")
       .updateOne({ visit_id: intId },
         { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
+
 
     const newResult = await client
       .db("ECPVisitDummy")
@@ -109,10 +110,8 @@ export async function getVisitsByUserId(id) {
   const results = cursor.toArray();
 
   if (results) {
-
     return results;
   } else {
-
     return null;
   }
 }
@@ -129,10 +128,8 @@ export async function getVisitsByEmpId(id) {
   const results = cursor.toArray();
 
   if (results) {
-
     return results;
   } else {
-
     return null;
   }
 }
@@ -201,13 +198,17 @@ export async function getAllVisits() {
 //   }
 // }
 
-export async function getNewVisitId(){
+export async function getNewVisitId() {
   var newId = 0;
   try {
     const client = await clientPromise;
     const db = client.db("ECPVisitDummy");
 
-    const greatestVisits = await db.collection("DummyVisits").find().sort({"visit_id":-1}).toArray();
+    const greatestVisits = await db
+      .collection("DummyVisits")
+      .find()
+      .sort({ visit_id: -1 })
+      .toArray();
     const greatestId = greatestVisits[0].visit_id;
 
     // console.log('-----GreatestID-----');

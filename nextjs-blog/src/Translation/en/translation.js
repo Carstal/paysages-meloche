@@ -72,4 +72,9 @@ export const TRANSLATIONS_EN = {
   Plantation:"Planting",
   Excavation:"Mini-Excavation",
   DeneigementTrottoirsCommerciaux:"Commercial Sidewalk Snow Cleaning",
+  footer1: "Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton",
+  footer2: "Champlain College ECP Final Project 2022-2023",
+  export: "Export Calendar",
+  contact: "Contact Us",
+  visits: "All",
 };
