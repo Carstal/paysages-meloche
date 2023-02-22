@@ -54,6 +54,7 @@ export default function Home({ visits }) {
       allVisits.push({
         title: "Project " + visit.project_id,
         visit: visit.visit_id,
+        project: visit.project_id,
         start: new Date(visit.start_date),
         end: new Date(visit.end_date),
       })
@@ -68,8 +69,8 @@ export default function Home({ visits }) {
   const handleSelectVisit = useCallback(
     (event) =>
       router.push({
-        pathname: "https://paysages-meloche.vercel.app/visit/[id]",
-        query: { id: event.visit },
+        pathname: "https://paysages-meloche.vercel.app/project/[id]",
+        query: { id: event.project },
       }),
     []
   );
