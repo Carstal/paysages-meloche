@@ -1,5 +1,4 @@
 import { updateClient } from "../../../src/components/client/client_service";
-// const Client = require("../../../src/components/client/client");
 
 export default async function handler(req, res) {
   var body = req.body;
