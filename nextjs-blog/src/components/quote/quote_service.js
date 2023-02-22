@@ -35,22 +35,20 @@ export async function getQuoteByProjectId(id) {
     }
 }
 
-// export async function getProjectByProjectId(id) {
-//     const client = await clientPromise;
-//     // console.log("----SERVICE - ID Provided-----");
-//     // console.log(id);
-//     const intId = parseInt(id);
-//     const result = await client
-//       .db("FinalProject")
-//       .collection("Project")
-//       .findOne({ project_id: intId });
+export async function getQuoteByQuoteId(id) {
+    const client = await clientPromise;
+    const intId = parseInt(id);
+    const result = await client
+        .db("FinalProject")
+        .collection("Quote")
+        .findOne({ quote_id: intId });
 
-//     if (result) {
-//       return result;
-//     } else {
-//       return null;
-//     }
-//   }
+    if (result) {
+        return result;
+    } else {
+        return null;
+    }
+}
 
 export async function getNewQuoteId(){
     var newId = 0;
@@ -75,5 +73,6 @@ export async function getNewQuoteId(){
 module.exports = {
     createQuote,
     getNewQuoteId,
-    getQuoteByProjectId
+    getQuoteByProjectId,
+    getQuoteByQuoteId
 }

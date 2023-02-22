@@ -75,9 +75,13 @@ export default function Project({user}){
               <div className="form-group mb-3">
                 <label className="mb-2"><strong>{t("ProjectType")}</strong></label>
                 <select name="service" id="service" type="text" className="form-control" required>
-                  <option value="Landscaping">Landscaping</option>
-                  <option value="Paving">Paving</option>
-                  <option value="Maintenance">Maintenance</option>
+                  <option value="Pave">Pave</option>
+                  <option value="Muret">Muret</option>
+                  <option value="Terrassement">Terrassement</option>
+                  <option value="Gazon">Gazon</option>
+                  <option value="Plantation">Plantation</option>
+                  <option value="Mini-Excavation">Mini-Excavation</option>
+                  <option value="DeneigementCommerciaux">Deneigement Trottoirs Commerciaux</option>
                 </select>
               </div>
 
