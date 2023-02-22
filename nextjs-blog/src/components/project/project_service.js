@@ -1,6 +1,7 @@
 //Project Service
 //Implements all CRUD Operations relating to projects to mongoDB
 import clientPromise from "../../../lib/mongodb";
+import { getVisitsByProjectId } from "../visit/visit_service";
 // import Project from "./project";
 
 const Project = require("./project");
@@ -61,13 +62,108 @@ export async function getProjectByProjectId(id) {
     .findOne({ project_id: intId });
 
   if (result) {
-    // console.log(`Found a listing in connection with visit id: '${id}'`);
-    // console.log(result);
-
     return result;
   } else {
-    // console.log("none");
+    return null;
+  }
+}
 
+export async function updateProjectInvoiceByProjectId(visit_update) {
+  const client = await clientPromise;
+
+  const intId = parseInt(visit_update.project_id);
+  const result = await client
+    .db("FinalProject")
+    .collection("Project")
+    .findOne({ project_id: intId });
+
+  if (result) {
+    const update = await client
+      .db("FinalProject")
+      .collection("Project")
+      .updateOne({ project_id: intId },
+        { $set:{invoice_id: visit_update.invoice_id}});
+
+    const newResult = await client
+      .db("FinalProject")
+      .collection("Project")
+      .findOne({ project_id: intId });
+
+    return newResult;
+  } else {
+    return null;
+  }
+}
+
+export async function updateProjectQuoteByProjectId(visit_update) {
+  const client = await clientPromise;
+
+  const intId = parseInt(visit_update.project_id);
+  const result = await client
+    .db("FinalProject")
+    .collection("Project")
+    .findOne({ project_id: intId });
+
+  if (result) {
+    const update = await client
+      .db("FinalProject")
+      .collection("Project")
+      .updateOne({ project_id: intId },
+        { $set:{quote_id: visit_update.quote_id}});
+
+    const newResult = await client
+      .db("FinalProject")
+      .collection("Project")
+      .findOne({ project_id: intId });
+
+    return newResult;
+  } else {
+    return null;
+  }
+}
+
+export async function updateProjectVisitsByProjectId(visit_update) {
+  const client = await clientPromise;
+  // console.log(visit_update)
+  const project_id = visit_update.project_id
+  const start_date = visit_update.start_date
+  const end_date = visit_update.end_date
+  const intId = parseInt(project_id);
+  const result = await client
+    .db("FinalProject")
+    .collection("Project")
+    .findOne({ project_id: intId });
+
+  if (result) {
+    const visits = await getVisitsByProjectId(intId);
+    var earliestDate = visits[0].start_date
+    var latestDate = visits[0].end_date
+    var visitIds = []
+    visits.forEach((visit) =>{
+      if(visit.start_date < earliestDate){
+        earliestDate = visit.start_date
+      }
+      if(visit.end_date > latestDate){
+        latestDate = visit.end_date
+      }
+      visitIds.push(visit.visit_id)
+    })
+
+    console.log(visitIds)
+
+    const update = await client
+      .db("FinalProject")
+      .collection("Project")
+      .updateOne({ project_id: intId },
+        { $set:{visits: visitIds, start_date: earliestDate, end_date: latestDate}});
+
+    const newResult = await client
+      .db("FinalProject")
+      .collection("Project")
+      .findOne({ project_id: intId });
+
+    return newResult;
+  } else {
     return null;
   }
 }

@@ -1,47 +1,60 @@
 import styles from "../../styles/Home.module.css";
 import Head from "next/head";
 import React, { useState } from 'react';
-import { parseBody } from "next/dist/server/api-utils/node";
+// import { parseBody } from "next/dist/server/api-utils/node";
+import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
 import NavDynamic from "../../components/website/NavDynamic";
 import Footer from '../../components/website/Footer';
 
-export async function getServerSideProps(context) {
-  let data = null;
-  // let project_id = null
-  // let user_id = null
+export const getServerSideProps = withPageAuthRequired({
+    returnTo: "/index",
+    async getServerSideProps(ctx) {
+        const session = await getSession(ctx.req, ctx.res);
+        const quoteId = ctx.params.id;
+        const api = 'http://localhost:3000/api/quote/';
+        const url = api + quoteId;
+      // console.log(url);
+        const quoteRes = await fetch(url);
+        const quote = await quoteRes.json();
 
-  if (context.req.method === "POST") {
-    const body = await parseBody(context.req, '1mb');
-    console.log(body);
+    //   console.log(quote)
+        return { props: {quote} };
+    },
+});
 
-    data = body;
-  }
+export default function Home({ quote }) {
+  const user_id = quote.user_id
+  const project_id = quote.project_id
+  const jsonItems = quote.items
 
-  return { props: { data }};
-}
+//   TODO: JSON to array to initialize items list for quote edit
+  const jsonToArr = (json) =>{
+    var tempArr = [];
+    for(var i in json){
+        console.log(i)
+        var el = i
+        tempArr.push(el)
+    }
+    return tempArr;
+  };
 
-export default function Home({ data }) {
-  const user_id = data.userId
-  const project_id = data.projectId
+  const quoteItems = jsonToArr(jsonItems)
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(quoteItems);
 
   const addItem = (name, price) => {
   setItems([...items, { name, price }]);
   };
 
-  // var total = 0.00;
-
-  // function addSum(){
-  //   total = 0.00;
-  //   items.forEach((item)=>(
-  //     total += item.price
-  //   ));
-  // }
+  for(var i in jsonItems){
+    console.log(i)
+    console.log(jsonItems[i])
+    addItem(i,parseFloat(jsonItems[i]).toFixed(2));
+  }
 
   const pairs = {}
   items.forEach((item)=>(
@@ -54,14 +67,10 @@ export default function Home({ data }) {
   const subName = document.getElementById('itemName').value;
   const subPrice = document.getElementById('itemPrice').value;
   if (name.length > 0 && isNaN(parsedPrice) != true && parsedPrice >= 0){
-      // const parsedPrice = parseFloat(price).toFixed(2);
       document.getElementById("error").style.display="none";
       addItem(name,parsedPrice);
-      // addSum();
-      // total += parsedPrice;
       setName('');
       setPrice('');
-      document.getElementById("itemTable").style.display = "block";
   }
   else{
       var errMsg = "Invalid entry: <ul>";
@@ -128,7 +137,7 @@ export default function Home({ data }) {
                     <button type='submit'>Add Item</button>
                   </form>
             </div>
-            <div id="itemTable" hidden>
+            <div id="itemTable">
               ITEMS
             <table>
               <tr>
@@ -149,7 +158,7 @@ export default function Home({ data }) {
             <div className="card-body">
               {/* <h4>User Id: {user_id}</h4> */}
               {/* <h4>Project Id: {project_id}</h4> */}
-              <form action="/api/quote/newQuote" method="POST">
+              <form action="/api/quote/editQuote" method="POST">
                 <input type="hidden" name="userID" defaultValue={user_id} />
                 <input type="hidden" name="projectID" defaultValue={project_id} />
                 <input type="hidden" name="items" value={JSON.stringify(pairs)} />

@@ -58,19 +58,10 @@ export default function Project({ user }) {
         <h1 className={styles.title}>{t("ProjectSubmissionTitle")}</h1>
         <div className="container">
           <div className="card mt-5">
-            <div>User ID: {user_id}</div>
-            <form
-              className="card-body"
-              action="/api/project/submission"
-              method="POST"
-            >
-              <input
-                type="hidden"
-                className="form-control"
-                defaultValue={user_id}
-                id="userId"
-                name="userId"
-              />
+            {/* <div>User ID: {user_id}</div> */}
+            <form className="card-body" action="/api/project/submission" method="POST">
+              <input type="hidden" className="form-control" defaultValue={user_id} id="userId" name="userId" />
+
 
               <div className="form-group mb-3">
                 <label className="mb-2">
@@ -86,19 +77,17 @@ export default function Project({ user }) {
               </div>
 
               <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>{t("ProjectType")}</strong>
-                </label>
-                <select
-                  name="service"
-                  id="service"
-                  type="text"
-                  className="form-control"
-                  required
-                >
-                  <option value="Landscaping">Landscaping</option>
-                  <option value="Paving">Paving</option>
-                  <option value="Maintenance">Maintenance</option>
+                <label className="mb-2"><strong>{t("ProjectType")}</strong></label>
+                <select name="service" id="service" type="text" className="form-control" required>
+                  <option value="Pavé-Unis">{t("Pave")}</option>
+                  <option value="Muret">{t("Muret")}</option>
+                  <option value="Terrassement">{t("Terrassement")}</option>
+                  <option value="Gazon">{t("Gazon")}</option>
+                  <option value="Plantation">{t("Plantation")}</option>
+                  <option value="Mini-Excavation">{t("Excavation")}</option>
+                  <option value="Deneigement Trottoirs Commerciaux">
+                  {t("DeneigementTrottoirsCommerciaux")}</option>
+
                 </select>
               </div>
 

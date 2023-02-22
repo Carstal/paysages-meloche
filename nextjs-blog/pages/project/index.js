@@ -4,6 +4,8 @@ import clientPromise from "../../lib/mongodb";
 // import Profile from '../profile';
 import Profile from "../profile/index";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import '../../src/Translation/i18n';
 
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 
@@ -12,6 +14,7 @@ import Footer from "../../components/website/Footer";
 
 export default function DisplayProject({ data }) {
   const router = useRouter();
+  const { t } = useTranslation();
   return (
     <div className={styles.container}>
       <Head>
@@ -20,14 +23,14 @@ export default function DisplayProject({ data }) {
       </Head>
       <NavDynamic />
       <main>
-        <h1 className={styles.title}>Project Proposal</h1>
+        <h1 className={styles.title}>{t("ProjectsTitle")}</h1>
         <div className="containers">
           <div className="card mt-5">
             <div className="center-col">
               <table>
                 <tr>
-                  <th>Project Type</th>
-                  <th>Description</th>
+                  <th>{t("ProjectType")}</th>
+                  <th>{t("ProjectDescription")}</th>
                 </tr>
                 {data.map((project, key) => {
                   return (
@@ -49,19 +52,19 @@ export default function DisplayProject({ data }) {
             </div>
           </div>
 
-          <div className="addBtnDiv">
-            <button
-              className="addBtn"
-              name="addProject"
-              onClick={() =>
-                router.push({
-                  pathname: "/project/submission",
-                })
-              }
-            >
-              Add Project
-            </button>
-          </div>
+        <div className="addBtnDiv">
+          <button
+            className="addBtn"
+            name="addProject"
+            onClick={() =>
+              router.push({
+                pathname: "/project/submission",
+              })
+            }
+          >
+            {t("AddProject")}
+          </button>
+        </div>
         </div>
       </main>
 
@@ -74,6 +77,7 @@ export default function DisplayProject({ data }) {
   width: 50%;
   align-items: center;
   justify-content: center;
+  margin:auto;
 }
 .addBtn {
   height: 100px;
@@ -257,7 +261,16 @@ export const getServerSideProps = withPageAuthRequired({
     const db = client.db("FinalProject");
     const session = await getSession(ctx.req, ctx.res);
 
-    const roles = session.user.userRoles;
+    //Works with findOne
+
+    const post = await db.collection("Project").find({}).toArray();
+    // access the user session
+
+    //console.log(post)
+
+    const data = JSON.parse(JSON.stringify(post));
+
+    // console.log(data);
 
     if (roles == "Admin") {
       const post = await db.collection("Project").find({}).toArray();

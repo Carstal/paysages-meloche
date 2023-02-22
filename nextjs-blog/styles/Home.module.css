@@ -230,3 +230,41 @@
   background: #222222;
   color: #FFFFFF;
 }
+
+.serviceDescription {
+  width:70%;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+.missionStatement{
+  width:40%;
+  line-height: 1.5;
+  font-size: 1.25rem;
+}
+
+.projectQuote{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.projectInvoice{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.projectDetails{
+  display: flex;
+  flex-direction: row;
+}
+.projectDetails div{
+  padding-right: 20px;
+}
+.quoteDisplay{
+  margin: auto;
+}
+.invoiceDisplay{
+  margin: auto;
+}

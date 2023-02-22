@@ -1,16 +1,10 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import { getSession } from "@auth0/nextjs-auth0";
-import { useRouter } from "next/router";
-import NavDynamic from "../components/website/NavDynamic";
-import Footer from "../components/website/Footer";
-import { useTranslation } from "react-i18next";
-import "../src/Translation/i18n";
-import Footer from "../components/website/Footer";
+import Head from 'next/head'
+import styles from '../../styles/Home.module.css';
 
-export default function Home({}) {
-  const router = useRouter();
-  const { t } = useTranslation();
+import NavDynamic from "../../components/website/NavDynamic";
+import Footer from '../../components/website/Footer';
+
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -19,18 +13,15 @@ export default function Home({}) {
       </Head>
       <NavDynamic />
       <main>
-        <h1 className={styles.title}>Paysages Meloche</h1>
+        <h1 className={styles.title}>
+          Murets
+        </h1>
 
-        <p className={styles.missionStatement}>
-          Paysages Meloche est une entreprise d’aménagement paysager
-          qui œuvre dans la région de Salaberry-de-Valleyfield.
-          <br/>
-          Depuis 2012, l’équipe dynamique de Paysages Meloche réalise
-          les projets de leurs clients avec un service personnalisé
-          et un soucis du détail.
-          <br/>
-          Notre équipe saura répondre à vos besoins
-          et vous conseiller avec professionnalisme et expertise.
+        <p className={styles.serviceDescription}>
+          Pour des plates-bandes à rendre jaloux votre voisinage,
+          optez pour la fabrication de muret qui s'harmonisent à votre demeure.
+          Les travaux de qualité offerts par Paysages Meloche,
+          offriront une plus-value à votre domicile pour plusieurs années.
         </p>
       </main>
 
@@ -44,9 +35,8 @@ export default function Home({}) {
           align-items: center;
           justify-content: center;
           background: #222222;
-          color: #ffffff;
+          color: #FFFFFF;
         }
-
         .services {
           display: flex;
           flex-direction: row;
@@ -57,32 +47,32 @@ export default function Home({}) {
           display: flex;
           justify-content: center;
           width: 18vw;
-          cursor: "pointer";
+          cursor: 'pointer';
         }
         .services div :hover {
           background-colour: red;
         }
-        .logo {
+        .logo{
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .login {
+        .login{
           display: flex;
           justify-content: center;
           width: 15vw;
         }
-        .services {
+        .services{
           display: flex;
           justify-content: center;
           width: 60vw;
         }
-        .login button {
+        .login button{
           height: 7vh;
           width: 10vw;
-          background: #00b45d;
+          background: #00B45D;
           border-radius: 40px;
-          color: #ffffff;
+          color: #FFFFFF;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
@@ -96,7 +86,7 @@ export default function Home({}) {
           justify-content: center;
           align-items: center;
           background: #333333;
-          color: #ffffff;
+          color: #FFFFFF;
           width: 100vw;
         }
         footer {
@@ -107,7 +97,7 @@ export default function Home({}) {
           justify-content: center;
           align-items: center;
           background: #222222;
-          color: #ffffff;
+          color: #FFFFFF;
         }
         footer img {
           margin-left: 0.5rem;
@@ -143,30 +133,5 @@ export default function Home({}) {
         }
       `}</style>
     </div>
-  );
-}
-
-export async function getServerSideProps(ctx) {
-  //get session info
-  const session = await getSession(ctx.req, ctx.res);
-  var firstLogin = "";
-  //if the session was ever found, get its firstlogin variable
-  try {
-    firstLogin = session.user.firstlogin;
-    if (firstLogin == "true") {
-      //if it is the user's first login, redirect to the user info screen
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/profile/create",
-        },
-        props: {},
-      };
-    }
-  } catch {
-    console.log("An error occured");
-  }
-  return {
-    props: {},
-  };
+  )
 }

@@ -2,19 +2,21 @@
 //Implements all CRUD Operations relating to visits to mongoDB
 
 import clientPromise from "../../../lib/mongodb";
+import { updateProjectVisitsByProjectId } from "../project/project_service";
 
 const Visit = require("./visit");
 
 //Add Visit
 export async function addVisit(vis) {
-  //   const data = {
-  //     // visit_id: getNewVisitID(client),
-  //     visit_id: vis.visit_id,
-  //     project_id: vis.project_id,
-  //     employee_ids: vis.employee_ids,
-  //     start_date: vis.start_date,
-  //     end_date: vis.end_date
-  //   };
+//   const data = {
+//     // visit_id: getNewVisitID(client),
+//     visit_id: vis.visit_id,
+//     project_id: vis.project_id,
+//     employee_ids: vis.employee_ids,
+//     start_date: vis.start_date,
+//     end_date: vis.end_date
+//   };
+  const project_update = vis
   const client = await clientPromise;
 
   const result = await client
@@ -22,6 +24,7 @@ export async function addVisit(vis) {
     .collection("DummyVisits")
     .insertOne(vis);
 
+  const updateProject = await updateProjectVisitsByProjectId(project_update);
   // console.log(
   //   `New listing created with the following id: ${result.insertedId}`
   // );
@@ -48,7 +51,7 @@ export async function deleteVisitById(id) {
 //Update Visit
 export async function updateVisitInfo(vis) {
   const client = await clientPromise;
-  // console.log("----SERVICE UpdateVisit STARTED-----");
+
   const intId = parseInt(vis.visit_id);
   const result = await client
     .db("ECPVisitDummy")
@@ -56,35 +59,20 @@ export async function updateVisitInfo(vis) {
     .findOne({ visit_id: intId });
 
   if (result) {
-    // console.log(`Found a listing in connection with the id: '${vis.visit_id}'`);
-    // console.log(result);
     const update = await client
       .db("ECPVisitDummy")
       .collection("DummyVisits")
-      .updateOne(
-        { visit_id: intId },
-        {
-          $set: {
-            employee_ids: vis.employee_ids,
-            start_date: vis.start_date,
-            end_date: vis.end_date,
-          },
-        }
-      );
-    // { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
-    // console.log(`Listing updated`);
-    // console.log(update);
-    // console.log("find by id");
+      .updateOne({ visit_id: intId },
+        { $set:{employee_ids: vis.employee_ids, start_date: vis.start_date, end_date: vis.end_date}});
+
+
     const newResult = await client
       .db("ECPVisitDummy")
       .collection("DummyVisits")
       .findOne({ visit_id: intId });
-    // console.log(newResult);
 
     return newResult;
   } else {
-    // console.log("No listing with matching id");
-
     return null;
   }
 }
@@ -103,11 +91,9 @@ export async function getVisitByVisitId(id) {
   if (result) {
     // console.log(`Found a listing in connection with visit id: '${id}'`);
     // console.log(result);
-
     return result;
   } else {
     // console.log("none");
-
     return null;
   }
 }
@@ -148,26 +134,26 @@ export async function getVisitsByEmpId(id) {
   }
 }
 
-//Get Visits by project_id
-// export function getVisitsByProjectId(id) {
-//   const cursor = client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .find({ project_id: id });
+// Get Visits by project_id
+export async function getVisitsByProjectId(id) {
+  const client = await clientPromise;
+  const intId = parseInt(id);
+  const cursor = client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .find({ project_id: intId });
 
-//   const results = cursor.toArray();
+  const results = cursor.toArray();
 
-//   if (results) {
-//     console.log(`Found listing(s) in connection with project id: '${id}'`);
-//     console.log(results);
-
-//     return results;
-//   } else {
-//     console.log("none");
-
-//     return null;
-//   }
-// }
+  if (results) {
+    // console.log(`Found listing(s) in connection with project id: '${id}'`);
+    // console.log(results);
+    return results;
+  } else {
+    // console.log("none");
+    return null;
+  }
+}
 
 //Get all Visits
 //TODO:TEST FOR GET ALL
@@ -179,13 +165,11 @@ export async function getAllVisits() {
     .find();
   const results = cursor.toArray();
   if (results) {
-    console.log("Returning all listings in db");
-    console.log(results);
-
+    // console.log("Returning all listings in db");
+    // console.log(results);
     return results;
   } else {
     // console.log("No listings received");
-
     return null;
   }
 }
@@ -249,4 +233,5 @@ module.exports = {
   updateVisitInfo,
   deleteVisitById,
   getNewVisitId,
-};
+  getVisitsByProjectId
+}

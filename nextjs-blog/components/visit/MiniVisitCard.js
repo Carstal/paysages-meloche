@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import '../../src/Translation/i18n';
 
-const VisitCard = ({visit}) => {
+const MiniVisitCard = ({visit}) => {
     const router = useRouter()
     const { t } = useTranslation()
     function formatEmployees(emp_ids){
@@ -26,10 +26,17 @@ const VisitCard = ({visit}) => {
       return formattedDate;
     }
     return (
-            <div className="visit">
+            <div className="visit"
+            value={visit.visit_id}
+            onClick={() =>
+              router.push({
+                pathname: "/visit/[id]",
+                query: { id: visit.visit_id },
+              })
+            }>
               <div className="info">
                 <div className="vrRow">
-                  {t("visitID")} {visit.visit_id} {t("ProjectID")} {visit.project_id}
+                  {t("visitID")} {visit.visit_id}
                 </div>
                 <div className="empRow">
                   {t("employees")} {formatEmployees(visit.employee_ids)}
@@ -40,21 +47,6 @@ const VisitCard = ({visit}) => {
                 <div className="endRow">
                   {t("endDate")} {formatDate(visit.end_date)}
                 </div>
-              </div>
-              <div className="editBtnDiv">
-                <button
-                  className="editBtn"
-                  name="edit"
-                  value={visit.visit_id}
-                  onClick={() =>
-                    router.push({
-                      pathname: "/visit/[id]",
-                      query: { id: visit.visit_id },
-                    })
-                  }
-                >
-                  Edit
-                </button>
               </div>
 
       <style jsx>{`
@@ -74,10 +66,10 @@ const VisitCard = ({visit}) => {
         .visit {
           display: flex;
           height: 12vh;
-          width: 40vw;
+          width: 20vw;
           background-color: #ffffff;
           color: #111111;
-          flex-direction: row;
+          flex-direction: column;
           border-radius: 25px;
           margin: 15px;
         }
@@ -86,7 +78,7 @@ const VisitCard = ({visit}) => {
           padding-top: 10px;
           display: flex;
           flex-direction: column;
-          width: 50%;
+          width: 100%;
         }
         .info div {
           font-weight: bold;
@@ -94,7 +86,7 @@ const VisitCard = ({visit}) => {
         }
         .editBtnDiv {
           display: flex;
-          width: 50%;
+          width: 100%;
           align-items: center;
           justify-content: center;
         }
@@ -269,4 +261,4 @@ const VisitCard = ({visit}) => {
             </div>
     )}
 
-export default VisitCard;
+export default MiniVisitCard;

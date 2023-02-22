@@ -3,15 +3,15 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import '../../src/Translation/i18n';
 
-const VisitCard = ({visit}) => {
+const QuoteCard = ({quote}) => {
     const router = useRouter()
-    const { t } = useTranslation()
-    function formatEmployees(emp_ids){
-      var formattedEmployees = ""
-      const employees = emp_ids.map((emp) =>
-        formattedEmployees = formattedEmployees + " " + emp
-      );
-      return formattedEmployees;
+    const { t } = useTranslation();
+    const quoteItems = quote.items;
+    var total = 0
+    var count = 0
+    for(var i in quoteItems){
+      total += parseFloat(quoteItems[i])
+      count++
     }
     function formatDate(date){
       let newDate = new Date(date);
@@ -26,36 +26,28 @@ const VisitCard = ({visit}) => {
       return formattedDate;
     }
     return (
-            <div className="visit">
-              <div className="info">
+        <div className="quote"
+            value={quote.quote_id}
+            onClick={() =>
+                router.push({
+                    pathname: "/quote/[id]",
+                    query: { id: quote.quote_id },
+                })
+        }>
+            <div className="info">
                 <div className="vrRow">
-                  {t("visitID")} {visit.visit_id} {t("ProjectID")} {visit.project_id}
-                </div>
-                <div className="empRow">
-                  {t("employees")} {formatEmployees(visit.employee_ids)}
+                    {t("quoteID")} {quote.quote_id}
                 </div>
                 <div className="startRow">
-                  {t("startDate")} {formatDate(visit.start_date)}
+                    {t("dateCreated")} {formatDate(quote.date_created)}
                 </div>
-                <div className="endRow">
-                  {t("endDate")} {formatDate(visit.end_date)}
+                <div className="totalPrice">
+                    {t("totalPrice")} {total}$
                 </div>
-              </div>
-              <div className="editBtnDiv">
-                <button
-                  className="editBtn"
-                  name="edit"
-                  value={visit.visit_id}
-                  onClick={() =>
-                    router.push({
-                      pathname: "/visit/[id]",
-                      query: { id: visit.visit_id },
-                    })
-                  }
-                >
-                  Edit
-                </button>
-              </div>
+                <div className="totalCount">
+                    {t("totalCount")} {count}
+                </div>
+            </div>
 
       <style jsx>{`
         header {
@@ -71,13 +63,13 @@ const VisitCard = ({visit}) => {
           display: flex;
           flex-direction: column;
         }
-        .visit {
+        .quote {
           display: flex;
           height: 12vh;
-          width: 40vw;
+          width: 20vw;
           background-color: #ffffff;
           color: #111111;
-          flex-direction: row;
+          flex-direction: column;
           border-radius: 25px;
           margin: 15px;
         }
@@ -86,7 +78,7 @@ const VisitCard = ({visit}) => {
           padding-top: 10px;
           display: flex;
           flex-direction: column;
-          width: 50%;
+          width: 100%;
         }
         .info div {
           font-weight: bold;
@@ -94,7 +86,7 @@ const VisitCard = ({visit}) => {
         }
         .editBtnDiv {
           display: flex;
-          width: 50%;
+          width: 100%;
           align-items: center;
           justify-content: center;
         }
@@ -269,4 +261,4 @@ const VisitCard = ({visit}) => {
             </div>
     )}
 
-export default VisitCard;
+export default QuoteCard;

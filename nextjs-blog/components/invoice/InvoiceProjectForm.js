@@ -3,59 +3,30 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import '../../src/Translation/i18n';
 
-const VisitCard = ({visit}) => {
-    const router = useRouter()
-    const { t } = useTranslation()
-    function formatEmployees(emp_ids){
-      var formattedEmployees = ""
-      const employees = emp_ids.map((emp) =>
-        formattedEmployees = formattedEmployees + " " + emp
-      );
-      return formattedEmployees;
-    }
-    function formatDate(date){
-      let newDate = new Date(date);
-      let dd = newDate.getDate()+1;
-      let mm = newDate.getMonth()+1;
-      const yyyy = newDate.getFullYear();
-
-      if (dd < 10) dd = '0' + dd;
-      if (mm < 10) mm = '0' + mm;
-      const formattedDate = yyyy + '-' + mm + '-' + dd;
-
-      return formattedDate;
-    }
+const InvoiceProjectForm = ({project}) => {
+  const { t } = useTranslation();
     return (
-            <div className="visit">
-              <div className="info">
-                <div className="vrRow">
-                  {t("visitID")} {visit.visit_id} {t("ProjectID")} {visit.project_id}
-                </div>
-                <div className="empRow">
-                  {t("employees")} {formatEmployees(visit.employee_ids)}
-                </div>
-                <div className="startRow">
-                  {t("startDate")} {formatDate(visit.start_date)}
-                </div>
-                <div className="endRow">
-                  {t("endDate")} {formatDate(visit.end_date)}
-                </div>
-              </div>
-              <div className="editBtnDiv">
-                <button
-                  className="editBtn"
-                  name="edit"
-                  value={visit.visit_id}
-                  onClick={() =>
-                    router.push({
-                      pathname: "/visit/[id]",
-                      query: { id: visit.visit_id },
-                    })
-                  }
-                >
-                  Edit
-                </button>
-              </div>
+        <div id="invoiceForm">
+          <form action="/invoice" method="POST">
+          <input type="hidden"
+          className="form-control"
+          defaultValue={project.project_id}
+          id="projectId" name="projectId" />
+          <input type="hidden"
+          className="form-control"
+          defaultValue={project.user_id}
+          id="userId" name="userId" />
+          <input type="hidden"
+          className="form-control"
+          defaultValue={project.quote_id}
+          id="quoteId" name="quoteId" />
+          <button
+            className="addBtn"
+            type="submit"
+          >
+            {t("createInvoice")}
+          </button>
+          </form>
 
       <style jsx>{`
         header {
@@ -71,13 +42,13 @@ const VisitCard = ({visit}) => {
           display: flex;
           flex-direction: column;
         }
-        .visit {
+        .quote {
           display: flex;
           height: 12vh;
-          width: 40vw;
+          width: 20vw;
           background-color: #ffffff;
           color: #111111;
-          flex-direction: row;
+          flex-direction: column;
           border-radius: 25px;
           margin: 15px;
         }
@@ -86,7 +57,7 @@ const VisitCard = ({visit}) => {
           padding-top: 10px;
           display: flex;
           flex-direction: column;
-          width: 50%;
+          width: 100%;
         }
         .info div {
           font-weight: bold;
@@ -94,7 +65,7 @@ const VisitCard = ({visit}) => {
         }
         .editBtnDiv {
           display: flex;
-          width: 50%;
+          width: 100%;
           align-items: center;
           justify-content: center;
         }
@@ -269,4 +240,4 @@ const VisitCard = ({visit}) => {
             </div>
     )}
 
-export default VisitCard;
+export default InvoiceProjectForm;

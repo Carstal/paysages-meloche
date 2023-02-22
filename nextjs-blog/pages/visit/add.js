@@ -8,8 +8,9 @@ import Footer from '../../components/website/Footer';
 
 export async function getServerSideProps(context) {
   let data = null;
-  let project_id = null
-  let user_id = null
+  // let project_id = null
+  // let user_id = null
+
   if (context.req.method === "POST") {
     const body = await parseBody(context.req, '1mb');
     console.log(body);
@@ -17,18 +18,10 @@ export async function getServerSideProps(context) {
     data = body;
   }
 
-  // console.log(data);
-  // console.log(project_id);
-  // console.log(user_id);
-
   return { props: { data }};
 }
 
-export default function Home({data}) {
-  // const router = useRouter()
-  // const body = JSON.parse(req.body)
-  // const body = req.body
-  // console.log(body)
+export default function Home({ data }) {
   const user_id = data.userId
   const project_id = data.projectId
   return (
@@ -43,39 +36,19 @@ export default function Home({data}) {
         <div className="container">
           <div className="card mt-5">
             <form className="card-body" action="/api/visit/add" method="POST">
-              {/* <div className="form-group mb-3">
-                <label className="mb-2">
-                  <strong>Visit Id:</strong>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="visitId"
-                  name="visitId"
-                />
-              </div> */}
-              {/* <div className="form-group mb-3"> */}
-                {/* <label className="mb-2">
-                  <strong>User Id:</strong>
-                </label> */}
                 <input
                   type="hidden"
                   id="userId"
                   name="userId"
                   defaultValue={user_id}
                 />
-              {/* </div> */}
-              {/* <div className="form-group mb-3"> */}
-                {/* <label className="mb-2">
-                  <strong>Project Id:</strong>
-                </label> */}
                 <input
                   type="hidden"
                   id="projectId"
                   name="projectId"
                   defaultValue={project_id}
                 />
-              {/* </div> */}
+
               <div className="form-group mb-3">
                 <label className="mb-2">
                   <strong>Employees:</strong>
