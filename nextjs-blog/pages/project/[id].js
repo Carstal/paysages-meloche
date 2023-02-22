@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import MiniVisitCardView from '../../components/visit/MiniVisitCardView';
 import QuoteDisplay from "../../components/quote/QuoteDisplay";
+import InvoiceDisplay from "../../components/invoice/InvoiceDisplay";
 
 import NavDynamic from "../../components/website/NavDynamic";
 import Footer from '../../components/website/Footer';
@@ -31,16 +32,9 @@ export const getServerSideProps = withPageAuthRequired({
 export default function DisplayProject({ project }) {
   const router = useRouter();
   const currentProject = project.project;
-  // if(currentProject.quote_id != 0){
-  //   document.getElementById("quoteForm").style.display = "none";
-  //   document.getElementById("quoteCard").style.display = "block";
-  // }
-  // if(currentProject.invoice_id != 0){
-  //   document.getElementById("invoiceForm").style.display = "none";
-  //   document.getElementById("invoiceCard").style.display = "block";
-  // }
-  const projectQuote = project.quote
-  const projectVisits = project.visits
+  const projectQuote = project.quote;
+  const projectInvoice = project.invoice;
+  const projectVisits = project.visits;
   const dimensions = currentProject.dimensions;
   const visits = currentProject.visits;
   return (
@@ -108,55 +102,10 @@ export default function DisplayProject({ project }) {
         </div>
         <h3 className={styles.title}>Quote</h3>
         <QuoteDisplay quote={projectQuote} project={currentProject}/>
-        {/* <div id="quoteCard"> */}
-          {/* Quote Id:{projectQuote.quote_id}
-        </div>
-        <div id="quoteForm">
-          <form action="/quote" method="POST">
-          <input type="hidden"
-          className="form-control"
-          defaultValue={currentProject.project_id}
-          id="projectId" name="projectId" />
-          <input type="hidden"
-          className="form-control"
-          defaultValue={currentProject.user_id}
-          id="userId" name="userId" />
-          <button
-            className="addBtn"
-            type="submit"
-          >
-            Create Quote
-          </button>
-          </form>
-        </div> */}
 
         <h3 className={styles.title}>Invoice</h3>
-        {/* TODO: Invoice LMAO */}
-        {/* <div id="invoiceCard">
-          Invoice Id:{projectQuote.invoice_id}
-        </div>
-        <div id="invoiceForm">
-          <form action="/invoice" method="POST">
-          <input type="hidden"
-          className="form-control"
-          defaultValue={currentProject.project_id}
-          id="projectId" name="projectId" />
-          <input type="hidden"
-          className="form-control"
-          defaultValue={currentProject.user_id}
-          id="userId" name="userId" />
-          <input type="hidden"
-          className="form-control"
-          defaultValue={currentProject.invoice_id}
-          id="invoiceId" name="invoiceId" />
-          <button
-            className="addBtn"
-            type="submit"
-          >
-            Create Invoice
-          </button>
-          </form>
-        </div> */}
+        <InvoiceDisplay invoice={projectInvoice} project={currentProject}/>
+
         </div>
       </main>
 
