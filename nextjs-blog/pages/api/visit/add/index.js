@@ -32,6 +32,7 @@ export default async function handler(req, res) {
 
     //res.status(200).json({ data: `${body.first_name} ${body.last_name}` })
 
+    const url = '/project/'+data.projectId
     // res.status(200).json({visit});
-    res.redirect('../../../visit');
+    res.redirect(url);
 }
