@@ -14,14 +14,14 @@ export default function Home() {
       <NavDynamic />
       <main>
         <h1 className={styles.title}>
-          Pavé-unis
+          Murets
         </h1>
 
         <p className={styles.serviceDescription}>
-          De la terrasse au stationnement, laissez Paysages Meloche s’occuper de vos projets de pavé-uni.
-          L’équipe d’expérience procédera à la construction de votre terrasse, vos trottoirs ou
-          vos stationnements avec professionnalisme. Profitez d’un projet clé en main avec
-          la garantie de travaux de qualité.
+          Pour des plates-bandes à rendre jaloux votre voisinage,
+          optez pour la fabrication de muret qui s'harmonisent à votre demeure.
+          Les travaux de qualité offerts par Paysages Meloche,
+          offriront une plus-value à votre domicile pour plusieurs années.
         </p>
       </main>
 
