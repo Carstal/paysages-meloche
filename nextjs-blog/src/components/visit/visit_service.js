@@ -87,11 +87,9 @@ export async function getVisitByVisitId(id) {
   if (result) {
     // console.log(`Found a listing in connection with visit id: '${id}'`);
     // console.log(result);
-
     return result;
   } else {
     // console.log("none");
-
     return null;
   }
 }
@@ -136,26 +134,26 @@ export async function getVisitsByEmpId(id) {
   }
 }
 
-//Get Visits by project_id
-// export function getVisitsByProjectId(id) {
-//   const cursor = client
-//     .db("ECP-CalendarDummy")
-//     .collection("dummy-calendar")
-//     .find({ project_id: id });
+// Get Visits by project_id
+export async function getVisitsByProjectId(id) {
+  const client = await clientPromise;
+  const intId = parseInt(id);
+  const cursor = client
+    .db("ECPVisitDummy")
+    .collection("DummyVisits")
+    .find({ project_id: intId });
 
-//   const results = cursor.toArray();
+  const results = cursor.toArray();
 
-//   if (results) {
-//     console.log(`Found listing(s) in connection with project id: '${id}'`);
-//     console.log(results);
-
-//     return results;
-//   } else {
-//     console.log("none");
-
-//     return null;
-//   }
-// }
+  if (results) {
+    // console.log(`Found listing(s) in connection with project id: '${id}'`);
+    // console.log(results);
+    return results;
+  } else {
+    // console.log("none");
+    return null;
+  }
+}
 
 //Get all Visits
 //TODO:TEST FOR GET ALL
@@ -167,13 +165,11 @@ export async function getAllVisits() {
     .find();
   const results = cursor.toArray();
   if (results) {
-    console.log("Returning all listings in db");
-    console.log(results);
-
+    // console.log("Returning all listings in db");
+    // console.log(results);
     return results;
   } else {
     // console.log("No listings received");
-
     return null;
   }
 }
@@ -232,5 +228,6 @@ module.exports = {
   getVisitsByUserId,
   updateVisitInfo,
   deleteVisitById,
-  getNewVisitId
+  getNewVisitId,
+  getVisitsByProjectId
 }

@@ -20,6 +20,38 @@ export async function createQuote(quote) {
     return result;
 }
 
+export async function getQuoteByProjectId(id) {
+    const client = await clientPromise;
+    const intId = parseInt(id);
+    const result = await client
+        .db("FinalProject")
+        .collection("Quote")
+        .findOne({ project_id: intId });
+
+    if (result) {
+        return result;
+    } else {
+        return null;
+    }
+}
+
+// export async function getProjectByProjectId(id) {
+//     const client = await clientPromise;
+//     // console.log("----SERVICE - ID Provided-----");
+//     // console.log(id);
+//     const intId = parseInt(id);
+//     const result = await client
+//       .db("FinalProject")
+//       .collection("Project")
+//       .findOne({ project_id: intId });
+
+//     if (result) {
+//       return result;
+//     } else {
+//       return null;
+//     }
+//   }
+
 export async function getNewQuoteId(){
     var newId = 0;
     try {
@@ -28,9 +60,6 @@ export async function getNewQuoteId(){
 
         const greatestQuotes = await db.collection("Quote").find().sort({"quote_id":-1}).toArray();
         const greatestId = greatestQuotes[0].quote_id;
-
-      // console.log('-----GreatestID-----');
-      // console.log(greatestId)
 
         newId = greatestId + 1;
 
@@ -45,5 +74,6 @@ export async function getNewQuoteId(){
 
 module.exports = {
     createQuote,
-    getNewQuoteId
+    getNewQuoteId,
+    getQuoteByProjectId
 }

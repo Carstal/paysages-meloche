@@ -34,6 +34,15 @@ export default function Home({ data }) {
   setItems([...items, { name, price }]);
   };
 
+  var total = 0.00;
+
+  function addSum(){
+    total = 0.00;
+    items.forEach((item)=>(
+      total += item.price
+    ));
+  }
+
   const pairs = {}
   items.forEach((item)=>(
       pairs[item.name] = item.price
@@ -48,9 +57,11 @@ export default function Home({ data }) {
       // const parsedPrice = parseFloat(price).toFixed(2);
       document.getElementById("error").style.display="none";
       addItem(name,parsedPrice);
+      addSum();
+      // total += parsedPrice;
       setName('');
       setPrice('');
-      // document.getElementById("itemTable").style.display = "block";
+      document.getElementById("itemTable").style.display = "block";
   }
   else{
       var errMsg = "Invalid entry: <ul>";
@@ -117,7 +128,7 @@ export default function Home({ data }) {
                     <button type='submit'>Add Item</button>
                   </form>
             </div>
-            {/* <div id="itemTable" hidden>
+            <div id="itemTable" hidden>
               ITEMS
             <table>
               <tr>
@@ -131,11 +142,12 @@ export default function Home({ data }) {
                 </tr>
             ))}
             </table>
-            </div> */}
+            Total: {total} $
+            </div>
 
             <div className="card-body">
-              <h4>User Id: {user_id}</h4>
-              <h4>Project Id: {project_id}</h4>
+              {/* <h4>User Id: {user_id}</h4> */}
+              {/* <h4>Project Id: {project_id}</h4> */}
               <form action="/api/quote/newQuote" method="POST">
                 <input type="hidden" name="userID" defaultValue={user_id} />
                 <input type="hidden" name="projectID" defaultValue={project_id} />
