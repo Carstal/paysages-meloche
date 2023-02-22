@@ -6,7 +6,6 @@ import NavDynamic from "../components/website/NavDynamic";
 import Footer from "../components/website/Footer";
 import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
-import Footer from "../components/website/Footer";
 
 export default function Home({}) {
   const router = useRouter();
@@ -22,15 +21,15 @@ export default function Home({}) {
         <h1 className={styles.title}>Paysages Meloche</h1>
 
         <p className={styles.missionStatement}>
-          Paysages Meloche est une entreprise d’aménagement paysager
-          qui œuvre dans la région de Salaberry-de-Valleyfield.
-          <br/>
-          Depuis 2012, l’équipe dynamique de Paysages Meloche réalise
-          les projets de leurs clients avec un service personnalisé
-          et un soucis du détail.
-          <br/>
-          Notre équipe saura répondre à vos besoins
-          et vous conseiller avec professionnalisme et expertise.
+          Paysages Meloche est une entreprise d’aménagement paysager qui œuvre
+          dans la région de Salaberry-de-Valleyfield.
+          <br />
+          Depuis 2012, l’équipe dynamique de Paysages Meloche réalise les
+          projets de leurs clients avec un service personnalisé et un soucis du
+          détail.
+          <br />
+          Notre équipe saura répondre à vos besoins et vous conseiller avec
+          professionnalisme et expertise.
         </p>
       </main>
 
