@@ -34,14 +34,14 @@ export default function Home({ data }) {
   setItems([...items, { name, price }]);
   };
 
-  var total = 0.00;
+  // var total = 0.00;
 
-  function addSum(){
-    total = 0.00;
-    items.forEach((item)=>(
-      total += item.price
-    ));
-  }
+  // function addSum(){
+  //   total = 0.00;
+  //   items.forEach((item)=>(
+  //     total += item.price
+  //   ));
+  // }
 
   const pairs = {}
   items.forEach((item)=>(
@@ -57,7 +57,7 @@ export default function Home({ data }) {
       // const parsedPrice = parseFloat(price).toFixed(2);
       document.getElementById("error").style.display="none";
       addItem(name,parsedPrice);
-      addSum();
+      // addSum();
       // total += parsedPrice;
       setName('');
       setPrice('');
@@ -142,7 +142,8 @@ export default function Home({ data }) {
                 </tr>
             ))}
             </table>
-            Total: {total} $
+            {/* TODO: Fix total */}
+            Total: MOnneys $
             </div>
 
             <div className="card-body">

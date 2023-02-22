@@ -6,8 +6,8 @@ import styles from "../../styles/Home.module.css";
 import Profile from "../profile/index";
 import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
-import VisitCardView from '../../components/visit/VisitCardView';
-import { MiniVisitCard } from '../../components/visit/MiniVisitCard';
+import MiniVisitCardView from '../../components/visit/MiniVisitCardView';
+// import { MiniVisitCard } from '../../components/visit/MiniVisitCard';
 
 import NavDynamic from "../../components/website/NavDynamic";
 import Footer from '../../components/website/Footer';
@@ -31,14 +31,14 @@ export const getServerSideProps = withPageAuthRequired({
 export default function DisplayProject({ project }) {
   const router = useRouter();
   const currentProject = project.project;
-  if(currentProject.quote_id != 0){
-    document.getElementById("quoteForm").style.display = "none";
-    document.getElementById("quoteCard").style.display = "block";
-  }
-  if(currentProject.invoice_id != 0){
-    document.getElementById("invoiceForm").style.display = "none";
-    document.getElementById("invoiceCard").style.display = "block";
-  }
+  // if(currentProject.quote_id != 0){
+  //   document.getElementById("quoteForm").style.display = "none";
+  //   document.getElementById("quoteCard").style.display = "block";
+  // }
+  // if(currentProject.invoice_id != 0){
+  //   document.getElementById("invoiceForm").style.display = "none";
+  //   document.getElementById("invoiceCard").style.display = "block";
+  // }
   const projectQuote = project.quote
   const projectVisits = project.visits
   const dimensions = currentProject.dimensions;
@@ -81,13 +81,13 @@ export default function DisplayProject({ project }) {
           </div>
 
         <h3 className={styles.title}>Visits</h3>
-        {/* <VisitCardView visits={visits}/> */}
-        {projectVisits.map((visit)=>(
+        <MiniVisitCardView visits={projectVisits}/>
+        {/* {projectVisits.map((visit)=>(
           // <MiniVisitCard visit={visit}/>
           <div>
             Visit ID: {visit.visit_id}
           </div>
-        ))}
+        ))} */}
         <div className="addBtnDiv">
           <form action="/visit/add" method="POST">
           <input type="hidden"
@@ -107,7 +107,7 @@ export default function DisplayProject({ project }) {
           </form>
         </div>
         <h3 className={styles.title}>Quote</h3>
-        <div id="quoteCard" hidden>
+        <div id="quoteCard">
           Quote Id:{projectQuote.quote_id}
         </div>
         <div id="quoteForm">
@@ -131,11 +131,11 @@ export default function DisplayProject({ project }) {
 
         <h3 className={styles.title}>Invoice</h3>
         {/* TODO: Invoice LMAO */}
-        <div id="invoiceCard" hidden>
-          Quote Id:{projectQuote.quote_id}
+        <div id="invoiceCard">
+          Invoice Id:{projectQuote.invoice_id}
         </div>
         <div id="invoiceForm">
-          <form action="/quote" method="POST">
+          <form action="/invoice" method="POST">
           <input type="hidden"
           className="form-control"
           defaultValue={currentProject.project_id}
@@ -144,6 +144,10 @@ export default function DisplayProject({ project }) {
           className="form-control"
           defaultValue={currentProject.user_id}
           id="userId" name="userId" />
+          <input type="hidden"
+          className="form-control"
+          defaultValue={currentProject.invoice_id}
+          id="invoiceId" name="invoiceId" />
           <button
             className="addBtn"
             type="submit"

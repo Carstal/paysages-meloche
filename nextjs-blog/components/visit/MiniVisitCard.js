@@ -23,7 +23,14 @@ const MiniVisitCard = ({visit}) => {
       return formattedDate;
     }
     return (
-            <div className="visit">
+            <div className="visit"
+            value={visit.visit_id}
+            onClick={() =>
+              router.push({
+                pathname: "/visit/[id]",
+                query: { id: visit.visit_id },
+              })
+            }>
               <div className="info">
                 <div className="vrRow">
                   Visit:{visit.visit_id}
@@ -37,21 +44,6 @@ const MiniVisitCard = ({visit}) => {
                 <div className="endRow">
                   End Date: {formatDate(visit.end_date)}
                 </div>
-              </div>
-              <div className="editBtnDiv">
-                <button
-                  className="editBtn"
-                  name="edit"
-                  value={visit.visit_id}
-                  onClick={() =>
-                    router.push({
-                      pathname: "/visit/[id]",
-                      query: { id: visit.visit_id },
-                    })
-                  }
-                >
-                  Edit
-                </button>
               </div>
 
       <style jsx>{`
@@ -70,7 +62,7 @@ const MiniVisitCard = ({visit}) => {
         }
         .visit {
           display: flex;
-          height: 6vh;
+          height: 12vh;
           width: 20vw;
           background-color: #ffffff;
           color: #111111;
@@ -83,7 +75,7 @@ const MiniVisitCard = ({visit}) => {
           padding-top: 10px;
           display: flex;
           flex-direction: column;
-          width: 50%;
+          width: 100%;
         }
         .info div {
           font-weight: bold;
@@ -91,7 +83,7 @@ const MiniVisitCard = ({visit}) => {
         }
         .editBtnDiv {
           display: flex;
-          width: 50%;
+          width: 100%;
           align-items: center;
           justify-content: center;
         }
