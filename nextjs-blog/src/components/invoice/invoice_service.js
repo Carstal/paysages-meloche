@@ -7,9 +7,10 @@ import { updateProjectInvoiceByProjectId } from "../project/project_service";
 //Add Invoice
 export async function createInvoice(invoice) {
     const client = await clientPromise;
-    const project_id = quote.project_id;
-    const quote_id = quote.quote_id;
-    const project_update = {project_id, quote_id}
+    const project_id = invoice.project_id;
+    const quote_id = invoice.quote_id;
+    const invoice_id = invoice.invoice_id;
+    const project_update = {project_id, invoice_id}
 
     const result = await client
     .db("FinalProject")

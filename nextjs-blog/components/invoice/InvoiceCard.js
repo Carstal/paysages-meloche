@@ -3,6 +3,13 @@ import { useRouter } from "next/router";
 
 const InvoiceCard = ({invoice}) => {
     const router = useRouter()
+    const invoiceItems = invoice.items
+    var total = 0
+    var count = 0
+    for(var i in invoiceItems){
+      total += parseFloat(invoiceItems[i])
+      count++
+    }
     function formatDate(date){
       let newDate = new Date(date);
       let dd = newDate.getDate()+1;
@@ -29,7 +36,13 @@ const InvoiceCard = ({invoice}) => {
                     Invoice:{invoice.invoice_id}
                 </div>
                 <div className="startRow">
-                    Date Created: {formatDate(quote.date_created)}
+                    Date Created: {formatDate(invoice.date_created)}
+                </div>
+                <div className="totalPrice">
+                    Total Price: {total}$
+                </div>
+                <div className="totalCount">
+                    Item Count: {count}
                 </div>
             </div>
 

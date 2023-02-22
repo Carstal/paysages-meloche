@@ -69,6 +69,33 @@ export async function getProjectByProjectId(id) {
   }
 }
 
+export async function updateProjectInvoiceByProjectId(visit_update) {
+  const client = await clientPromise;
+
+  const intId = parseInt(visit_update.project_id);
+  const result = await client
+    .db("FinalProject")
+    .collection("Project")
+    .findOne({ project_id: intId });
+
+  if (result) {
+    const update = await client
+      .db("FinalProject")
+      .collection("Project")
+      .updateOne({ project_id: intId },
+        { $set:{invoice_id: visit_update.invoice_id}});
+
+    const newResult = await client
+      .db("FinalProject")
+      .collection("Project")
+      .findOne({ project_id: intId });
+
+    return newResult;
+  } else {
+    return null;
+  }
+}
+
 export async function updateProjectQuoteByProjectId(visit_update) {
   const client = await clientPromise;
 

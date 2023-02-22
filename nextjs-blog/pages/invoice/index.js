@@ -28,6 +28,7 @@ export default function Home({ data }) {
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [total, setTotal] = useState(0);
 
   const [items, setItems] = useState([]);
 
@@ -35,7 +36,16 @@ export default function Home({ data }) {
   setItems([...items, { name, price }]);
   };
 
-  // var total = 0.00;
+
+  // var sum = 0
+
+  const calcSum = (price) => {
+    var sum = 0
+    for(var i in items){
+      sum += items[i][1]
+    }
+    setTotal(sum)
+  };
 
   // function addSum(){
   //   total = 0.00;
@@ -59,6 +69,7 @@ export default function Home({ data }) {
       document.getElementById("error").style.display="none";
       addItem(name,parsedPrice);
       // addSum();
+      calcSum(items);
       // total += parsedPrice;
       setName('');
       setPrice('');
@@ -106,7 +117,7 @@ export default function Home({ data }) {
       </Head>
       <NavDynamic />
       <main>
-        <h2 className={styles.title}>New Quote</h2>
+        <h2 className={styles.title}>New Invoice</h2>
         <div className="container">
           <div className="card mt-5">
             <div className="card-body">
@@ -144,7 +155,7 @@ export default function Home({ data }) {
             ))}
             </table>
             {/* TODO: Fix total */}
-            Total: MOnneys $
+            Total: {parseFloat(total).toFixed(2)} $
             </div>
 
             <div className="card-body">
