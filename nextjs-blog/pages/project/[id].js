@@ -6,6 +6,8 @@ import styles from "../../styles/Home.module.css";
 import Profile from "../profile/index";
 import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
+import { useTranslation } from "react-i18next";
+import '../../src/Translation/i18n';
 import MiniVisitCardView from '../../components/visit/MiniVisitCardView';
 import QuoteDisplay from "../../components/quote/QuoteDisplay";
 import InvoiceDisplay from "../../components/invoice/InvoiceDisplay";
@@ -31,6 +33,7 @@ export const getServerSideProps = withPageAuthRequired({
 
 export default function DisplayProject({ project }) {
   const router = useRouter();
+  const { t } = useTranslation();
   const currentProject = project.project;
   const projectQuote = project.quote;
   const projectInvoice = project.invoice;
@@ -45,36 +48,36 @@ export default function DisplayProject({ project }) {
       </Head>
       <NavDynamic />
       <main>
-        <h1 className={styles.title}>Project Details</h1>
+        <h1 className={styles.title}>{t("ProjectDetails")}</h1>
         <div className="container">
           <div className="card mt-5">
                 <div>
-                  <div>Project</div>
+                  <div>{t("ProjectID")}</div>
                   <div>{currentProject.project_id}</div>
                 </div>
                 <div>
-                  <div>User</div>
+                  <div>{t("UserID")}</div>
                   <div>{currentProject.user_id}</div>
                 </div>
                 <div>
-                  <div>Address</div>
+                  <div>{t("Address")}</div>
                   <div>{currentProject.address}</div>
                 </div>
                 <div>
-                  <div>Length</div>
+                  <div>{t("Size1")}</div>
                   <div>{dimensions[0]}</div>
                 </div>
                 <div>
-                  <div>Width</div>
+                  <div>{t("Size2")}</div>
                   <div>{dimensions[0]}</div>
                 </div>
                 <div>
-                  <div>Description</div>
+                  <div>{t("ClientDescription")}</div>
                   <div>{currentProject.description}</div>
                 </div>
           </div>
 
-        <h3 className={styles.title}>Visits</h3>
+        <h3 className={styles.title}>{t("visitsTitle")}</h3>
         <MiniVisitCardView visits={projectVisits}/>
         {/* {projectVisits.map((visit)=>(
           // <MiniVisitCard visit={visit}/>
@@ -96,14 +99,14 @@ export default function DisplayProject({ project }) {
             className="addBtn"
             type="submit"
           >
-            Add Visit
+            {t("AddVisit")}
           </button>
           </form>
         </div>
-        <h3 className={styles.title}>Quote</h3>
+        <h3 className={styles.title}>{t("quoteTitle")}</h3>
         <QuoteDisplay quote={projectQuote} project={currentProject}/>
 
-        <h3 className={styles.title}>Invoice</h3>
+        <h3 className={styles.title}>{t("invoiceTitle")}</h3>
         <InvoiceDisplay invoice={projectInvoice} project={currentProject}/>
 
         </div>
