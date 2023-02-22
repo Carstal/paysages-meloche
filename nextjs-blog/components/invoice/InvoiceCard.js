@@ -1,8 +1,11 @@
 import React from 'react';
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import '../../src/Translation/i18n';
 
 const InvoiceCard = ({invoice}) => {
     const router = useRouter()
+    const { t } = useTranslation();
     const invoiceItems = invoice.items
     var total = 0
     var count = 0
@@ -33,16 +36,16 @@ const InvoiceCard = ({invoice}) => {
         }>
             <div className="info">
                 <div className="vrRow">
-                    Invoice:{invoice.invoice_id}
+                    {t("invoiceID")} {invoice.invoice_id}
                 </div>
                 <div className="startRow">
-                    Date Created: {formatDate(invoice.date_created)}
+                    {t("dateCreated")} {formatDate(invoice.date_created)}
                 </div>
                 <div className="totalPrice">
-                    Total Price: {total}$
+                    {t("totalPrice")} {total}$
                 </div>
                 <div className="totalCount">
-                    Item Count: {count}
+                    {t("totalCount")} {count}
                 </div>
             </div>
 

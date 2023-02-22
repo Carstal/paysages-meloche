@@ -103,11 +103,16 @@ export default function DisplayProject({ project }) {
           </button>
           </form>
         </div>
+
+        <div className={styles.projectQuote}>
         <h3 className={styles.title}>{t("quoteTitle")}</h3>
         <QuoteDisplay quote={projectQuote} project={currentProject}/>
+        </div>
 
+        <div className={styles.projectInvoice}>
         <h3 className={styles.title}>{t("invoiceTitle")}</h3>
         <InvoiceDisplay invoice={projectInvoice} project={currentProject}/>
+        </div>
 
         </div>
       </main>

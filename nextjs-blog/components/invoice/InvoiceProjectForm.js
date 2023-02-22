@@ -1,7 +1,10 @@
 import React from 'react';
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import '../../src/Translation/i18n';
 
 const InvoiceProjectForm = ({project}) => {
+  const { t } = useTranslation();
     return (
         <div id="invoiceForm">
           <form action="/invoice" method="POST">
@@ -21,7 +24,7 @@ const InvoiceProjectForm = ({project}) => {
             className="addBtn"
             type="submit"
           >
-            Create Invoice
+            {t("createInvoice")}
           </button>
           </form>
 

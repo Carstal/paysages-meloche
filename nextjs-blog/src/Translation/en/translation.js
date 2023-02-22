@@ -53,8 +53,11 @@ export const TRANSLATIONS_EN = {
   AddVisit:"Add Visit",
   quoteTitle:"Quote",
   quoteID:"Quote ID:",
+  invoiceID:"Invoice ID:",
   dateCreated:"Date Created:",
   totalPrice:"Total Price:",
   totalCount:"Item Count:",
   invoiceTitle:"Invoice",
+  createQuote:"Create Quote",
+  createInvoice:"Create Invoice",
 };

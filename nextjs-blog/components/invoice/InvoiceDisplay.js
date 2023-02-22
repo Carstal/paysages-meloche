@@ -7,7 +7,7 @@ const InvoiceDisplay = ({invoice,project}) => {
     if(project.quote_id == 0){
         return null
     }
-    else if(invoice != null){
+    if(invoice != null){
         return (
             <InvoiceCard invoice={invoice}/>
         )
