@@ -3,6 +3,13 @@ import { useRouter } from "next/router";
 
 const QuoteCard = ({quote}) => {
     const router = useRouter()
+    const quoteItems = quote.items;
+    var total = 0
+    var count = 0
+    for(var i in quoteItems){
+      total += parseFloat(quoteItems[i])
+      count++
+    }
     function formatDate(date){
       let newDate = new Date(date);
       let dd = newDate.getDate()+1;
@@ -30,6 +37,12 @@ const QuoteCard = ({quote}) => {
                 </div>
                 <div className="startRow">
                     Date Created: {formatDate(quote.date_created)}
+                </div>
+                <div className="totalPrice">
+                    Total Price: {total}$
+                </div>
+                <div className="totalCount">
+                    Item Count: {count}
                 </div>
             </div>
 

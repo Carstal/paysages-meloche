@@ -15,8 +15,8 @@ const InvoiceProjectForm = ({project}) => {
           id="userId" name="userId" />
           <input type="hidden"
           className="form-control"
-          defaultValue={project.invoice_id}
-          id="invoiceId" name="invoiceId" />
+          defaultValue={project.quote_id}
+          id="quoteId" name="quoteId" />
           <button
             className="addBtn"
             type="submit"

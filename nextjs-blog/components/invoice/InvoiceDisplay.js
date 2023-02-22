@@ -4,7 +4,10 @@ import InvoiceCard from './InvoiceCard';
 import InvoiceProjectForm from './InvoiceProjectForm';
 
 const InvoiceDisplay = ({invoice,project}) => {
-    if(invoice != null){
+    if(project.quote_id == 0){
+        return null
+    }
+    else if(invoice != null){
         return (
             <InvoiceCard invoice={invoice}/>
         )
