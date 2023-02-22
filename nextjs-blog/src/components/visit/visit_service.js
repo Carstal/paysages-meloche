@@ -2,6 +2,7 @@
 //Implements all CRUD Operations relating to visits to mongoDB
 
 import clientPromise from "../../../lib/mongodb";
+import { updateProjectVisitsByProjectId } from "../project/project_service";
 
 const Visit = require("./Visit");
 
@@ -15,13 +16,15 @@ export async function addVisit(vis) {
 //     start_date: vis.start_date,
 //     end_date: vis.end_date
 //   };
-const client = await clientPromise;
+  const project_update = vis
+  const client = await clientPromise;
 
   const result = await client
   .db("ECPVisitDummy")
   .collection("DummyVisits")
   .insertOne(vis);
 
+  const updateProject = await updateProjectVisitsByProjectId(project_update);
   // console.log(
   //   `New listing created with the following id: ${result.insertedId}`
   // );
