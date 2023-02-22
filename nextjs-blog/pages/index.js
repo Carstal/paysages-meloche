@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css";
 import { getSession } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
 import NavDynamic from "../components/website/NavDynamic";
+import Footer from "../components/website/Footer";
 import { useTranslation } from "react-i18next";
 import "../src/Translation/i18n";
 
@@ -19,16 +20,20 @@ export default function Home({}) {
       <main>
         <h1 className={styles.title}>Paysages Meloche</h1>
 
-        <p className={styles.description}>Currently Under Maintenance</p>
+        <p className={styles.missionStatement}>
+          Paysages Meloche est une entreprise d’aménagement paysager
+          qui œuvre dans la région de Salaberry-de-Valleyfield.
+          <br/>
+          Depuis 2012, l’équipe dynamique de Paysages Meloche réalise
+          les projets de leurs clients avec un service personnalisé
+          et un soucis du détail.
+          <br/>
+          Notre équipe saura répondre à vos besoins
+          et vous conseiller avec professionnalisme et expertise.
+        </p>
       </main>
 
-      <footer>
-        <p>
-          Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
-          <br />
-          Champlain College ECP Final Project 2022-2023
-        </p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         header {

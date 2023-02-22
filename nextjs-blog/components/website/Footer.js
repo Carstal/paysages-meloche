@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <footer>
             <p>
-            Created By Carlo Staltari, Mohaned Bouzaidi & Yan Burton
+            Created By Carlo Staltari & Yan Burton
             <br />
             Champlain College ECP Final Project 2022-2023
             </p>
