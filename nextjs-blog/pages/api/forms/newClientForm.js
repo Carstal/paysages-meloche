@@ -3,8 +3,6 @@ import { updateClient } from "../../../src/components/client/client_service";
 
 export default async function handler(req, res) {
   var body = req.body;
-
-  //map to object if necessary later
   const updated = await updateClient(body);
 
   res.redirect(
