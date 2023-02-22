@@ -1,95 +1,20 @@
-import Head from "next/head";
-import styles from "../../styles/Home.module.css";
-// import clientPromise from "../../lib/mongodb";
-// import Profile from '../profile';
-// var mongoose = require('mongoose');
-import Profile from "../profile/index";
+import React from 'react';
 import { useRouter } from "next/router";
-import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { useTranslation } from "react-i18next";
 import '../../src/Translation/i18n';
-import MiniVisitCardView from '../../components/visit/MiniVisitCardView';
-import QuoteDisplay from "../../components/quote/QuoteDisplay";
-import InvoiceDisplay from "../../components/invoice/InvoiceDisplay";
-import VisitProjectForm from "../../components/visit/VisitProjectForm";
 
-import NavDynamic from "../../components/website/NavDynamic";
-import Footer from '../../components/website/Footer';
-
-export const getServerSideProps = withPageAuthRequired({
-  returnTo: "/index",
-  async getServerSideProps(ctx) {
-    const session = await getSession(ctx.req, ctx.res);
-    const projectId = ctx.params.id;
-    const api = 'http://localhost:3000/api/project/';
-    const url = api + projectId;
-    // console.log(url);
-    const projectRes = await fetch(url);
-    const project = await projectRes.json();
-
-    // console.log(data)
-    return { props: {project} };
-  },
-});
-
-export default function DisplayProject({ project }) {
-  const router = useRouter();
-  const { t } = useTranslation();
-  const currentProject = project.project;
-  const projectQuote = project.quote;
-  const projectInvoice = project.invoice;
-  const projectVisits = project.visits;
-  const dimensions = currentProject.dimensions;
-  const visits = currentProject.visits;
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Projects</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <NavDynamic />
-      <main>
-        <h1 className={styles.title}>{t("ProjectDetails")}</h1>
-        <div className="container">
-          <div className="card mt-5">
-                <div>
-                  <div>{t("ProjectID")}</div>
-                  <div>{currentProject.project_id}</div>
-                </div>
-                <div>
-                  <div>{t("UserID")}</div>
-                  <div>{currentProject.user_id}</div>
-                </div>
-                <div>
-                  <div>{t("Address")}</div>
-                  <div>{currentProject.address}</div>
-                </div>
-                <div>
-                  <div>{t("Size1")}</div>
-                  <div>{dimensions[0]}</div>
-                </div>
-                <div>
-                  <div>{t("Size2")}</div>
-                  <div>{dimensions[0]}</div>
-                </div>
-                <div>
-                  <div>{t("ClientDescription")}</div>
-                  <div>{currentProject.description}</div>
-                </div>
-          </div>
-        <div className={styles.projectVisits}>
-        <h3 className={styles.title}>{t("visitsTitle")}</h3>
-        <MiniVisitCardView visits={projectVisits}/>
-        <VisitProjectForm project={currentProject}/>
-        {/* <div className="addBtnDiv">
+const VisitProjectForm = ({project}) => {
+    const { t } = useTranslation();
+    return (
+        <div className="addBtnDiv">
           <form action="/visit/add" method="POST">
           <input type="hidden"
           className="form-control"
-          defaultValue={currentProject.project_id}
+          defaultValue={project.project_id}
           id="projectId" name="projectId" />
           <input type="hidden"
           className="form-control"
-          defaultValue={currentProject.user_id}
+          defaultValue={project.user_id}
           id="userId" name="userId" />
           <button
             className="addBtn"
@@ -98,25 +23,8 @@ export default function DisplayProject({ project }) {
             {t("AddVisit")}
           </button>
           </form>
-        </div> */}
-        </div>
 
-        <div className={styles.projectQuote}>
-        <h3 className={styles.title}>{t("quoteTitle")}</h3>
-        <QuoteDisplay quote={projectQuote} project={currentProject}/>
-        </div>
-
-        <div className={styles.projectInvoice}>
-        <h3 className={styles.title}>{t("invoiceTitle")}</h3>
-        <InvoiceDisplay invoice={projectInvoice} project={currentProject}/>
-        </div>
-
-        </div>
-      </main>
-
-      <Footer/>
-
-      <style jsx>{`
+          <style jsx>{`
         .addBtnDiv{
           display:flex;
           justify-content:center;
@@ -262,5 +170,6 @@ export default function DisplayProject({ project }) {
         }
       `}</style>
     </div>
-  );
-}
+    )}
+
+export default VisitProjectForm;

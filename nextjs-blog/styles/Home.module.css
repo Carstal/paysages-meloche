@@ -241,3 +241,16 @@
   line-height: 1.5;
   font-size: 1.25rem;
 }
+
+.projectQuote{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.projectInvoice{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
