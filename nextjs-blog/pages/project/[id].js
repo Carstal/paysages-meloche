@@ -73,8 +73,14 @@ export default function DisplayProject({ project }) {
         {/* <VisitCardView visits={visits}/> */}
         <div className="addBtnDiv">
           <form action="/visit/add" method="POST">
-          <input type="hidden" className="form-control" defaultValue={project.project_id} id="projectId" name="projectId" />
-          <input type="hidden" className="form-control" defaultValue={project.user_id} id="userId" name="userId" />
+          <input type="hidden"
+          className="form-control"
+          defaultValue={currentProject.project_id}
+          id="projectId" name="projectId" />
+          <input type="hidden"
+          className="form-control"
+          defaultValue={currentProject.user_id}
+          id="userId" name="userId" />
           <button
             className="addBtn"
             type="submit"
@@ -86,8 +92,14 @@ export default function DisplayProject({ project }) {
         <h3 className={styles.title}>Quote</h3>
         <div className="addBtnDiv">
           <form action="/quote" method="POST">
-          <input type="hidden" className="form-control" defaultValue={project.project_id} id="projectId" name="projectId" />
-          <input type="hidden" className="form-control" defaultValue={project.user_id} id="userId" name="userId" />
+          <input type="hidden"
+          className="form-control"
+          defaultValue={currentProject.project_id}
+          id="projectId" name="projectId" />
+          <input type="hidden"
+          className="form-control"
+          defaultValue={currentProject.user_id}
+          id="userId" name="userId" />
           <button
             className="addBtn"
             type="submit"
@@ -98,8 +110,7 @@ export default function DisplayProject({ project }) {
         </div>
 
         <h3 className={styles.title}>Invoice</h3>
-        {/* <VisitCardView visits={visits}/> */}
-          {/* <p className={styles.description}>Currently Under Maintenance</p> */}
+        {/* TODO: Invoice LMAO */}
         </div>
       </main>
 

@@ -22,21 +22,17 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home({ data }) {
+  const user_id = data.userId
+  const project_id = data.projectId
+
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
 
   const [items, setItems] = useState([]);
 
-  const user_id = data.userId;
-  const project_id = data.projectId;
-
   const addItem = (name, price) => {
   setItems([...items, { name, price }]);
   };
-
-  // const deleteItem = (id) => {
-  // setItems(items.filter((item) => item.id !== id));
-  // };
 
   const pairs = {}
   items.forEach((item)=>(
@@ -92,38 +88,36 @@ export default function Home({ data }) {
 
   return (
     <div className={styles.container}>
-      {/* <Head>
+      <Head>
         <title>Paysages Meloche</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavDynamic /> */}
+      <NavDynamic />
       <main>
         <h2 className={styles.title}>New Quote</h2>
         <div className="container">
-            <div id="error"></div>
           <div className="card mt-5">
             <div className="card-body">
-
-    <form onSubmit={handleSubmit}>
-        <div id="error" hidden></div>
-        <input
-        type="text"
-        id='itemName'
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Add Item"
-        />
-        <input
-        type="text"
-        id='itemPrice'
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        placeholder="Price"
-        />
-        <button type='submit'>Add Item</button>
-    </form>
+                <div id="error" hidden></div>
+                  <form onSubmit={handleSubmit}>
+                    <input
+                    type="text"
+                    id='itemName'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Add Item"
+                    />
+                    <input
+                    type="text"
+                    id='itemPrice'
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    placeholder="Price"
+                    />
+                    <button type='submit'>Add Item</button>
+                  </form>
             </div>
-            <div id="itemTable">
+            {/* <div id="itemTable" hidden>
               ITEMS
             <table>
               <tr>
@@ -137,19 +131,23 @@ export default function Home({ data }) {
                 </tr>
             ))}
             </table>
-            </div>
+            </div> */}
 
-          <form action="/api/quote/newQuote" method="POST">
-            <input name="userID" value={user_id} hidden/>
-            <input name="projectID" value={project_id} hidden/>
-            <input name="items" value={JSON.stringify(pairs)} hidden/>
-            <button type="submit">Submit Invoice</button>
-          </form>
-          </div>
+            <div className="card-body">
+              <h4>User Id: {user_id}</h4>
+              <h4>Project Id: {project_id}</h4>
+              <form action="/api/quote/newQuote" method="POST">
+                <input type="hidden" name="userID" defaultValue={user_id} />
+                <input type="hidden" name="projectID" defaultValue={project_id} />
+                <input type="hidden" name="items" value={JSON.stringify(pairs)} />
+                <button type="submit">Submit Invoice</button>
+              </form>
+            </div>
+        </div>
         </div>
       </main>
 
-      {/* <Footer /> */}
+      <Footer />
 
       <style jsx>{`
         header {
