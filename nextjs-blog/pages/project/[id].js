@@ -52,6 +52,8 @@ export default function DisplayProject({ project }) {
         <h1 className={styles.title}>{t("ProjectDetails")}</h1>
         <div className="container">
           <div className="card mt-5">
+            <div className={styles.projectDetails}>
+            <div>
                 <div>
                   <div>{t("ProjectID")}</div>
                   <div>{currentProject.project_id}</div>
@@ -64,6 +66,8 @@ export default function DisplayProject({ project }) {
                   <div>{t("Address")}</div>
                   <div>{currentProject.address}</div>
                 </div>
+            </div>
+            <div>
                 <div>
                   <div>{t("Size1")}</div>
                   <div>{dimensions[0]}</div>
@@ -76,39 +80,28 @@ export default function DisplayProject({ project }) {
                   <div>{t("ClientDescription")}</div>
                   <div>{currentProject.description}</div>
                 </div>
+              </div>
+              </div>
           </div>
         <div className={styles.projectVisits}>
         <h3 className={styles.title}>{t("visitsTitle")}</h3>
         <MiniVisitCardView visits={projectVisits}/>
         <VisitProjectForm project={currentProject}/>
-        {/* <div className="addBtnDiv">
-          <form action="/visit/add" method="POST">
-          <input type="hidden"
-          className="form-control"
-          defaultValue={currentProject.project_id}
-          id="projectId" name="projectId" />
-          <input type="hidden"
-          className="form-control"
-          defaultValue={currentProject.user_id}
-          id="userId" name="userId" />
-          <button
-            className="addBtn"
-            type="submit"
-          >
-            {t("AddVisit")}
-          </button>
-          </form>
-        </div> */}
+
         </div>
 
         <div className={styles.projectQuote}>
         <h3 className={styles.title}>{t("quoteTitle")}</h3>
-        <QuoteDisplay quote={projectQuote} project={currentProject}/>
+        <div className={styles.quoteDisplay}>
+          <QuoteDisplay quote={projectQuote} project={currentProject}/>
+        </div>
         </div>
 
         <div className={styles.projectInvoice}>
         <h3 className={styles.title}>{t("invoiceTitle")}</h3>
-        <InvoiceDisplay invoice={projectInvoice} project={currentProject}/>
+        <div className={styles.invoiceDisplay}>
+          <InvoiceDisplay invoice={projectInvoice} project={currentProject}/>
+        </div>
         </div>
 
         </div>

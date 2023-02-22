@@ -1,8 +1,11 @@
 import React from 'react';
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import '../../src/Translation/i18n';
 
 const MiniVisitCard = ({visit}) => {
     const router = useRouter()
+    const { t } = useTranslation()
     function formatEmployees(emp_ids){
       var formattedEmployees = ""
       const employees = emp_ids.map((emp) =>
@@ -33,16 +36,16 @@ const MiniVisitCard = ({visit}) => {
             }>
               <div className="info">
                 <div className="vrRow">
-                  Visit:{visit.visit_id}
+                  {t("visitID")} {visit.visit_id}
                 </div>
                 <div className="empRow">
-                  Employee(s): {formatEmployees(visit.employee_ids)}
+                  {t("employees")} {formatEmployees(visit.employee_ids)}
                 </div>
                 <div className="startRow">
-                  Start Date: {formatDate(visit.start_date)}
+                  {t("startDate")} {formatDate(visit.start_date)}
                 </div>
                 <div className="endRow">
-                  End Date: {formatDate(visit.end_date)}
+                  {t("endDate")} {formatDate(visit.end_date)}
                 </div>
               </div>
 

@@ -62,7 +62,7 @@ export default function DisplayProject({ data }) {
               })
             }
           >
-            Add Project
+            {t("AddProject")}
           </button>
         </div>
         </div>
@@ -77,6 +77,7 @@ export default function DisplayProject({ data }) {
   width: 50%;
   align-items: center;
   justify-content: center;
+  margin:auto;
 }
 .addBtn {
   height: 100px;
