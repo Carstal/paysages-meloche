@@ -1,8 +1,11 @@
 import React from 'react';
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import '../../src/Translation/i18n';
 
 const QuoteCard = ({quote}) => {
     const router = useRouter()
+    const { t } = useTranslation();
     const quoteItems = quote.items;
     var total = 0
     var count = 0
@@ -33,16 +36,16 @@ const QuoteCard = ({quote}) => {
         }>
             <div className="info">
                 <div className="vrRow">
-                    Quote:{quote.quote_id}
+                    {t("quoteID")} {quote.quote_id}
                 </div>
                 <div className="startRow">
-                    Date Created: {formatDate(quote.date_created)}
+                    {t("dateCreated")} {formatDate(quote.date_created)}
                 </div>
                 <div className="totalPrice">
-                    Total Price: {total}$
+                    {t("totalPrice")} {total}$
                 </div>
                 <div className="totalCount">
-                    Item Count: {count}
+                    {t("totalCount")} {count}
                 </div>
             </div>
 

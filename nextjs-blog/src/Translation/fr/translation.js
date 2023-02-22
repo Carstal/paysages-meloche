@@ -53,4 +53,8 @@ export const TRANSLATIONS_FR = {
   AddVisit:"Nouvelle Visite",
   quoteTitle:"Estimation",
   invoiceTitle:"Facture",
+  quoteID:"Identifiant d'estimation:",
+  dateCreated:"Date Créé:",
+  totalPrice:"Prix Total:",
+  totalCount:"Compte d'items:",
 };

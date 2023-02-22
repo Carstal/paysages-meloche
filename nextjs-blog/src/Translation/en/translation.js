@@ -52,5 +52,9 @@ export const TRANSLATIONS_EN = {
   visitsTitle:"Visits",
   AddVisit:"Add Visit",
   quoteTitle:"Quote",
+  quoteID:"Quote ID:",
+  dateCreated:"Date Created:",
+  totalPrice:"Total Price:",
+  totalCount:"Item Count:",
   invoiceTitle:"Invoice",
 };
