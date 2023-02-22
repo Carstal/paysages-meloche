@@ -8,6 +8,6 @@ export default async function handler(req, res) {
   const updated = await updateClient(body);
 
   res.redirect(
-    "https://paysages-meloche.vercel.app/api/auth/logout?returnTo=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Flogin"
+    "https://paysages-meloche.vercel.app/api/auth/logout?returnTo=https%3A%2F%2Fpaysages-meloche.vercel.app%2Fapi%2Fauth%2Flogin"
   );
 }
