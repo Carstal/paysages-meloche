@@ -16,7 +16,8 @@ export const getServerSideProps = withPageAuthRequired({
   returnTo: "/project/submission",
   async getServerSideProps(ctx) {
     const session = await getSession(ctx.req, ctx.res);
-    const email = session.user.name;
+    const email = session.user.email;
+    console.log(email);
     // access the user session
     // const user = await getUserByEmail(session.user.name);
     const api = "https://paysages-meloche.vercel.app/api/user/";
@@ -24,8 +25,8 @@ export const getServerSideProps = withPageAuthRequired({
     const res = await fetch(url);
     const user = await res.json();
 
-    // console.log("------FE USER RECEIVED-----")
-    // console.log(user);
+    console.log("------FE USER RECEIVED-----");
+    console.log(user);
     // const newProject = await getNewProjectId();
 
     return { props: { user } };
@@ -59,9 +60,18 @@ export default function Project({ user }) {
         <div className="container">
           <div className="card mt-5">
             {/* <div>User ID: {user_id}</div> */}
-            <form className="card-body" action="/api/project/submission" method="POST">
-              <input type="hidden" className="form-control" defaultValue={user_id} id="userId" name="userId" />
-
+            <form
+              className="card-body"
+              action="/api/project/submission"
+              method="POST"
+            >
+              <input
+                type="hidden"
+                className="form-control"
+                defaultValue={user_id}
+                id="userId"
+                name="userId"
+              />
 
               <div className="form-group mb-3">
                 <label className="mb-2">
@@ -77,8 +87,16 @@ export default function Project({ user }) {
               </div>
 
               <div className="form-group mb-3">
-                <label className="mb-2"><strong>{t("ProjectType")}</strong></label>
-                <select name="service" id="service" type="text" className="form-control" required>
+                <label className="mb-2">
+                  <strong>{t("ProjectType")}</strong>
+                </label>
+                <select
+                  name="service"
+                  id="service"
+                  type="text"
+                  className="form-control"
+                  required
+                >
                   <option value="Pavé-Unis">{t("Pave")}</option>
                   <option value="Muret">{t("Muret")}</option>
                   <option value="Terrassement">{t("Terrassement")}</option>
@@ -86,8 +104,8 @@ export default function Project({ user }) {
                   <option value="Plantation">{t("Plantation")}</option>
                   <option value="Mini-Excavation">{t("Excavation")}</option>
                   <option value="Deneigement Trottoirs Commerciaux">
-                  {t("DeneigementTrottoirsCommerciaux")}</option>
-
+                    {t("DeneigementTrottoirsCommerciaux")}
+                  </option>
                 </select>
               </div>
 
