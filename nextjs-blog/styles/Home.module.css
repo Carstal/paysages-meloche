@@ -229,3 +229,9 @@
   background: #222222;
   color: #FFFFFF;
 }
+
+.serviceDescription {
+  width:70%;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}

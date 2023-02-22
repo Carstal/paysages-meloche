@@ -9,9 +9,10 @@ export default async function handler(req,res){
     const project = await getProjectByProjectId(project_id);
     const quote = await getQuoteByProjectId(project_id);
     const visits = await getVisitsByProjectId(project_id);
+    // TODO: Add Invoice
 
     const allInfo = {project, quote, visits};
-    console.log(allInfo);
+    // console.log(allInfo);
 
     res.status(200).json({project, quote, visits});
 }
