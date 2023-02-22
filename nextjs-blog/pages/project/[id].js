@@ -7,8 +7,8 @@ import Profile from "../profile/index";
 import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import { useTranslation } from "react-i18next";
-import '../../src/Translation/i18n';
-import MiniVisitCardView from '../../components/visit/MiniVisitCardView';
+import "../../src/Translation/i18n";
+import MiniVisitCardView from "../../components/visit/MiniVisitCardView";
 import QuoteDisplay from "../../components/quote/QuoteDisplay";
 import InvoiceDisplay from "../../components/invoice/InvoiceDisplay";
 import VisitProjectForm from "../../components/visit/VisitProjectForm";
@@ -28,7 +28,7 @@ export const getServerSideProps = withPageAuthRequired({
     const project = await projectRes.json();
 
     // console.log(data)
-    return { props: {project} };
+    return { props: { project } };
   },
 });
 
@@ -53,7 +53,7 @@ export default function DisplayProject({ project }) {
         <div className="container">
           <div className="card mt-5">
             <div className={styles.projectDetails}>
-            <div>
+              <div>
                 <div>
                   <div>{t("ProjectID")}</div>
                   <div>{currentProject.project_id}</div>
@@ -66,8 +66,12 @@ export default function DisplayProject({ project }) {
                   <div>{t("Address")}</div>
                   <div>{currentProject.address}</div>
                 </div>
-            </div>
-            <div>
+                <div>
+                  <div>{t("startDate")}</div>
+                  <div>{currentProject.start_date}</div>
+                </div>
+              </div>
+              <div>
                 <div>
                   <div>{t("Size1")}</div>
                   <div>{dimensions[0]}</div>
@@ -80,40 +84,44 @@ export default function DisplayProject({ project }) {
                   <div>{t("ClientDescription")}</div>
                   <div>{currentProject.description}</div>
                 </div>
+                <div>
+                  <div>{t("endDate")}</div>
+                  <div>{currentProject.end_date}</div>
+                </div>
               </div>
-              </div>
-
+            </div>
           </div>
-        <div className={styles.projectVisits}>
-        <h3 className={styles.title}>{t("visitsTitle")}</h3>
-        <MiniVisitCardView visits={projectVisits}/>
-        <VisitProjectForm project={currentProject}/>
+          <div className={styles.projectVisits}>
+            <h3 className={styles.title}>{t("visitsTitle")}</h3>
+            <MiniVisitCardView visits={projectVisits} />
+            <VisitProjectForm project={currentProject} />
+          </div>
 
-        </div>
+          <div className={styles.projectQuote}>
+            <h3 className={styles.title}>{t("quoteTitle")}</h3>
+            <div className={styles.quoteDisplay}>
+              <QuoteDisplay quote={projectQuote} project={currentProject} />
+            </div>
+          </div>
 
-        <div className={styles.projectQuote}>
-        <h3 className={styles.title}>{t("quoteTitle")}</h3>
-        <div className={styles.quoteDisplay}>
-          <QuoteDisplay quote={projectQuote} project={currentProject}/>
-        </div>
-        </div>
-
-        <div className={styles.projectInvoice}>
-        <h3 className={styles.title}>{t("invoiceTitle")}</h3>
-        <div className={styles.invoiceDisplay}>
-          <InvoiceDisplay invoice={projectInvoice} project={currentProject}/>
-        </div>
-        </div>
-
+          <div className={styles.projectInvoice}>
+            <h3 className={styles.title}>{t("invoiceTitle")}</h3>
+            <div className={styles.invoiceDisplay}>
+              <InvoiceDisplay
+                invoice={projectInvoice}
+                project={currentProject}
+              />
+            </div>
+          </div>
         </div>
       </main>
 
       <Footer />
 
       <style jsx>{`
-        .addBtnDiv{
-          display:flex;
-          justify-content:center;
+        .addBtnDiv {
+          display: flex;
+          justify-content: center;
         }
         header {
           width: 100vw;
