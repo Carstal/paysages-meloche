@@ -34,8 +34,8 @@ export const getServerSideProps = withPageAuthRequired({
 });
 
 export default function Project({ user }) {
-  const currentUser = user.user;
-  const user_id = currentUser.user_id;
+  // const currentUser = user.user;
+  const user_id = user.user_id;
   const [language, setLanguage] = useState("en");
 
   const { t } = useTranslation();
