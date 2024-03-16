@@ -1,6 +1,7 @@
 # Paysages Meloche
 External Client Project
-By Carlo Staltari and Yan Burton
+By Carlo Staltari and Yan Burton\
+![Paysage Meloche](https://github.com/Carstal/paysages-meloche/assets/43147122/f990a400-bdc7-446d-af7a-ff5bf85525da)
 
 # Summary
 Business management software for a landscaping company.
