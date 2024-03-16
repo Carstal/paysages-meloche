@@ -9,6 +9,31 @@ Our goal was to create useful tools for the management of the day-to-day busines
 # Tech Stack
 Next.js
 
+# Tools Created
+## Project Submission Form
+![image](https://github.com/Carstal/paysages-meloche/assets/43147122/05ffbb67-d2da-4ad4-a5fa-5eebcbe7802f)
+
+## Project Proposal List
+![image](https://github.com/Carstal/paysages-meloche/assets/43147122/60f068f8-2de1-470f-a8d6-bea657c62449)
+
+## Detailed Project Tracker
+![image](https://github.com/Carstal/paysages-meloche/assets/43147122/e85d8a4e-2b20-4e9f-8908-6f9e60ba5061)
+
+## Visit Creation Form
+![image](https://github.com/Carstal/paysages-meloche/assets/43147122/e2141080-2ac4-4a75-a0a0-d3bcf290e2a8)
+
+## Project & Visit Calendar
+![image](https://github.com/Carstal/paysages-meloche/assets/43147122/4d810f03-8410-4538-b957-9bb80b612364)
+
+## Client Calendar
+![image](https://github.com/Carstal/paysages-meloche/assets/43147122/044e40ae-d37a-42df-a54a-52d61f3a254c)
+
+## Client Creator
+![image](https://github.com/Carstal/paysages-meloche/assets/43147122/1546564f-392a-4780-8d50-3b78f0f7e429)
+
+## Client List
+![image](https://github.com/Carstal/paysages-meloche/assets/43147122/372b3ca0-95d3-4492-bf6d-1586321b3020)
+
 # Lessons Learned & Things I Would Change
 ## Project Planning
 A lot of components were identified and worked on, but I think limiting the number of components and focusing on the quality and functions of the products delivered would have been a better choice in the long run for this project.
